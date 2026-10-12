@@ -1,0 +1,8 @@
+# SketchUp maakt een reservekopie bij elke keer bewaren
+*.skb
+# Windows-rommel
+Thumbs.db
+desktop.ini
+~$*
+# eigen instellingen van Claude op een computer
+.claude/settings.local.json

@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<title>Bibliotheek Eeklo · spel</title>
+<link rel="stylesheet" href="gebouw/gebouw.css?v=20261011">
+</head>
+<body>
+<!-- Hier bouwt de gekozen laag haar scherm. Het gebouw (3D-beeld, stick, zoomknoppen) zet zichzelf eronder. -->
+<div id="laag"></div>
+
+<!-- 1. de basis: het gebouw -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+<script src="gebouw/gebouw-data.js?v=20261011"></script>
+<script src="gebouw/gebouw.js?v=20261011"></script>
+
+<!-- 2. de lijst van lagen en het laden van de gekozen laag -->
+<script src="lagen/lijst.js?v=20261011"></script>
+<script>
+(() => {
+  const VERSIE = '20261011';   // hoger zetten als je iets wijzigt en de browser het oude toont
+  const lijst = window.LAGEN || {};
+  const vraag = new URLSearchParams(location.search).get('laag');
+  const sleutel = lijst[vraag] ? vraag : (Object.keys(lijst).find(k => lijst[k].standaard) || Object.keys(lijst)[0]);
+  const laag = lijst[sleutel];
+  if (!laag) { document.getElementById('laag').textContent = 'Geen laag gevonden in lagen/lijst.js.'; return; }
+
+  (laag.css || []).forEach(f => {
+    const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = laag.map + f + '?v=' + VERSIE;
+    document.head.appendChild(l);
+  });
+  // de scripts na elkaar laden, in de volgorde van de lijst
+  (laag.scripts || []).reduce((vorige, f) => vorige.then(() => new Promise((ok, mis) => {
+    const s = document.createElement('script'); s.src = laag.map + f + '?v=' + VERSIE;
+    s.onload = ok; s.onerror = () => mis(new Error('Kon ' + laag.map + f + ' niet laden'));
+    document.body.appendChild(s);
+  })), Promise.resolve()).catch(e => { document.getElementById('laag').textContent = e.message; console.error(e); });
+})();
+</script>
+</body>
+</html>

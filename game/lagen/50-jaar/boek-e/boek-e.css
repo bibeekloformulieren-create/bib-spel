@@ -1,0 +1,31 @@
+/* Animaties van Boek-E. Werkt samen met boek-e.js */
+.boek-e { width: 100%; height: auto; overflow: visible; }
+
+.boek-e .be-romp,
+.boek-e .be-hoofd { animation: be-zweven 3.2s ease-in-out infinite; transform-box: fill-box; transform-origin: center bottom; }
+.boek-e .be-hoofd { animation-delay: -.25s; }
+.boek-e .be-ogen  { animation: be-knipperen 5s infinite; transform-box: fill-box; transform-origin: center; }
+
+@keyframes be-zweven   { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+@keyframes be-knipperen { 0%,93%,100% { transform: scaleY(1); } 96% { transform: scaleY(.08); } }
+
+/* stappen: lichaam wipt, benen wisselen */
+.boek-e--lopen .be-romp,
+.boek-e--lopen .be-hoofd { animation: be-stap 0.7s ease-in-out infinite; }
+.boek-e--lopen .be-been  { transform-box: fill-box; transform-origin: center top; animation: be-been 0.7s ease-in-out infinite; }
+.boek-e--lopen .be-been-r { animation-delay: -.35s; }
+
+@keyframes be-stap { 0%,100% { transform: translateY(0) rotate(-1.5deg); } 50% { transform: translateY(-7px) rotate(1.5deg); } }
+@keyframes be-been { 0%,100% { transform: rotate(14deg); } 50% { transform: rotate(-14deg); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .boek-e * { animation: none !important; }
+}
+
+/* zwaaien: de opgeheven arm draait heen en weer rond de schouder */
+.boek-e--zwaaien .be-zwaaiarm { transform-box: view-box; transform-origin: 286px 300px; animation: be-zwaai 0.9s ease-in-out infinite alternate; }
+@keyframes be-zwaai { from { transform: rotate(28deg); } to { transform: rotate(52deg); } }
+
+/* knikken: kop zakt drie keer even naar voren en komt terug */
+.boek-e--knikken .be-knik { transform-box: fill-box; transform-origin: center bottom; animation: be-knik 0.6s ease-in-out 3; }
+@keyframes be-knik { 0%,100% { transform: translateY(0) rotate(0); } 40% { transform: translateY(13px) rotate(3deg); } 70% { transform: translateY(2px) rotate(0); } }
