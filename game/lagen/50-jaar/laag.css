@@ -43,14 +43,14 @@
 
 /* fiche: kijk, raad, leer */
 .kaart.fiche { padding:0; display:flex; flex-direction:column; overflow:hidden; height:min(760px, calc(100dvh - 24px)); }
-.balk { display:flex; align-items:center; gap:8px; padding:10px 12px; border-bottom:2px solid var(--lijn); background:#fff; }
+.balk { display:flex; align-items:center; gap:8px; padding:10px 12px; border-bottom:2px solid var(--lijn); background:var(--papier); }
 .stappen { flex:1; display:flex; gap:6px; }
-.stap { flex:1; border:2px solid var(--lijn); background:#fff; border-radius:999px; padding:6px 4px; font-weight:700; font-size:.9rem; color:#6d6354; }
-.stap.actief { background:var(--petrol); border-color:var(--petrol); color:#fff; }
+.stap { flex:1; border:2px solid var(--lijn); background:var(--papier); border-radius:999px; padding:6px 4px; font-weight:700; font-size:.9rem; color:#6d6354; }
+.stap.actief { background:var(--oranje); border-color:var(--oranje); color:#fff; }
 .stap[disabled] { opacity:.45; cursor:default; }
 .sluit { border:0; background:#eee7d8; border-radius:50%; width:40px; height:40px; font-size:1.4rem; line-height:1; }
 .inhoud { flex:1; overflow:auto; padding:16px 18px 20px; touch-action:pan-y; }
-.voet { padding:12px 16px; border-top:2px solid var(--lijn); background:#fff; display:flex; gap:10px; }
+.voet { padding:12px 16px; border-top:2px solid var(--lijn); background:var(--papier); display:flex; gap:10px; }
 .voet .groot { flex:1; }
 .kopregel { display:flex; align-items:center; gap:10px; font-size:.85rem; color:#6d6354; }
 .cat { display:inline-block; color:#fff; font-weight:700; border-radius:999px; padding:2px 12px; font-size:.82rem; }
@@ -58,20 +58,19 @@
 .boekregel .bk { flex:0 0 70px; }
 .boekregel .zeg { flex:1; background:#fff; border:2px solid var(--lijn); border-radius:14px; padding:8px 12px; }
 .beelden { display:grid; grid-template-columns:repeat(auto-fit, minmax(210px,1fr)); gap:10px; margin:12px 0; }
-.beelden figure { margin:0; background:#fff; border-radius:12px; overflow:hidden; border:2px solid var(--lijn); }
+.beelden figure { margin:0; background:var(--papier); border-radius:12px; overflow:hidden; border:2px solid var(--lijn); }
 .beelden img { display:block; width:100%; height:190px; object-fit:cover; background:#ddd; }
 .beelden figcaption { padding:6px 10px; font-size:.85rem; color:#4d4639; }
 .punten { margin:12px 0; padding:0; list-style:none; }
-.punten li { background:#fff; border-left:6px solid var(--petrol); border-radius:8px; padding:10px 14px; margin:8px 0; font-size:1.05rem; }
-.punten.leer li { border-left-color:var(--oranje); }
+.punten li { background:var(--papier); border-left:6px solid var(--oranje); border-radius:8px; padding:10px 14px; margin:8px 0; font-size:1.05rem; }
 .kijkbox { background:#fff3e8; border:2px dashed var(--oranje); border-radius:12px; padding:10px 14px; font-weight:700; margin:12px 0; }
 .vraag { font-weight:700; font-size:1.15rem; margin:8px 0; }
 .tijdlijn { list-style:none; margin:12px 0; padding:0; }
-.tijdlijn li { display:flex; gap:12px; align-items:center; background:#fff; border-radius:10px; padding:8px 12px; margin:6px 0; }
+.tijdlijn li { display:flex; gap:12px; align-items:center; background:var(--papier); border-radius:10px; padding:8px 12px; margin:6px 0; }
 .tijdlijn b { flex:0 0 auto; min-width:78px; text-align:center; background:var(--petrol); color:#fff; border-radius:999px; padding:2px 10px; }
 .goedbanner { background:#e6f4ea; color:#1f5f35; border-radius:12px; padding:10px 14px; font-weight:700; margin:8px 0; }
 
-.knop { display:block; width:100%; text-align:left; border:2px solid #d6cdbb; background:#fff; border-radius:12px; padding:13px 14px; margin:8px 0; }
+.knop { display:block; width:100%; text-align:left; border:2px solid var(--lijn); background:var(--papier); border-radius:12px; padding:13px 14px; margin:8px 0; }
 .knop.gekozen { border-color:var(--petrol); background:#e5f1f2; }
 .knop.goed { border-color:var(--goed); background:#e6f4ea; }
 .knop.fout { border-color:#c0392b; background:#fbe9e7; }

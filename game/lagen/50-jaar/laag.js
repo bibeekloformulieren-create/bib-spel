@@ -30,7 +30,6 @@
     </div>
     <div class="scherm" id="schermIntro" hidden><div class="kaart" id="kaartIntro"></div></div>
     <div class="scherm" id="schermFiche" hidden><div class="kaart fiche" id="kaartFiche"></div></div>
-    <div class="scherm" id="schermFotos" hidden><div class="kaart" id="kaartFotos"></div></div>
     <div class="scherm" id="schermOverzicht" hidden><div class="kaart" id="kaartOverzicht"></div></div>
     <div class="scherm" id="schermEinde" hidden><div class="kaart" id="kaartEinde"></div></div>`;
 
@@ -75,6 +74,8 @@
 
   /* ---------- fiches in de zaal ---------- */
   const ficheObj = [];                     // { data, groep, pos, kaart, straal }
+  /* Aanhaakpunt voor de tentoonstelling (map tentoonstelling): modus 'spel' of 'tentoonstelling'. In de tentoonstelling zijn de fiches weg. */
+  const Laag50 = window.Laag50 = { modus: 'spel', fiches: ficheObj, ververs() { ficheObj.forEach(zetUiterlijk); }, klaar: null };
 
   /* Waar ligt fiche f? Een punt "fiche-N" in het model wint; anders de plekken uit opdrachten.js. */
   function plek(f) {
@@ -141,7 +142,7 @@
   }
 
   function zetUiterlijk(o) {
-    o.groep.visible = !gevonden.has(o.data.id);
+    o.groep.visible = !gevonden.has(o.data.id) && Laag50.modus === 'spel';
   }
 
   const hint = () => {
@@ -151,6 +152,7 @@
 
   /* ---------- de dichtstbijzijnde fiche: knop en pijl ---------- */
   function bijwerkenNabijheid() {
+    if (Laag50.modus !== 'spel') { dichtbij = null; $('actie').hidden = true; return; }
     const speler = G.speler;
     let dichtste = null, afstand = 1e9;
     ficheObj.forEach(o => {
@@ -377,49 +379,6 @@
     }
   }
 
-  /* ---------- oude foto's bekijken (los van het spel) ---------- */
-  function toonFotos(startIndex) {
-    const lijst = D.fotos || [], groepen = D.fotoGroepen || {};
-    const kaart = $('kaartFotos'), scherm = $('schermFotos');
-    G.pauze = true; $('actie').hidden = true; dichtbij = null; boeke.stil();
-    scherm.hidden = false;
-
-    const sluit = () => { scherm.hidden = true; G.pauze = false; };
-    const raster = () => {
-      let html = `<div class="balk" style="margin:-20px -20px 12px;border-radius:18px 18px 0 0">
-          <strong style="flex:1;padding-left:6px">Oude foto's</strong>
-          <button class="sluit" id="fSpel" aria-label="Terug naar het spel">×</button></div>
-        <p class="klein">Tik op een foto om ze groter te zien. Het spel wacht tot je terug bent.</p>`;
-      Object.keys(groepen).forEach(g => {
-        const in_g = lijst.map((f, i) => ({ f, i })).filter(x => x.f.groep === g);
-        if (!in_g.length) return;
-        html += `<h2 style="margin-top:14px">${esc(groepen[g])}</h2><div class="fotoraster">` +
-          in_g.map(x => `<button class="fotoknop" data-i="${x.i}"><img src="${bron(x.f.src)}" alt="${esc(x.f.onderschrift)}" loading="lazy"></button>`).join('') + `</div>`;
-      });
-      html += `<button class="groot" id="fSpel2" style="width:100%;margin-top:14px">Terug naar het spel</button>`;
-      kaart.innerHTML = html;
-      $('fSpel').onclick = sluit; $('fSpel2').onclick = sluit;
-      kaart.querySelectorAll('.fotoknop').forEach(b => { b.onclick = () => groot(+b.dataset.i); });
-      kaart.scrollTop = 0;
-    };
-    const groot = i => {
-      i = (i + lijst.length) % lijst.length;
-      const f = lijst[i];
-      kaart.innerHTML = `
-        <div class="balk" style="margin:-20px -20px 12px;border-radius:18px 18px 0 0">
-          <button class="licht" id="fTerug" style="padding:8px 14px">Alle foto's</button>
-          <span style="flex:1;text-align:center" class="klein">${i + 1} van ${lijst.length}</span>
-          <button class="sluit" id="fSpel" aria-label="Terug naar het spel">×</button></div>
-        <img class="fotogroot" src="${bron(f.src)}" alt="${esc(f.onderschrift)}">
-        <p style="font-size:1.05rem">${esc(f.onderschrift)}</p>
-        <div class="rij"><button class="licht" id="fVorig">‹ Vorige</button><button class="licht" id="fVolgend">Volgende ›</button></div>`;
-      $('fTerug').onclick = raster; $('fSpel').onclick = sluit;
-      $('fVorig').onclick = () => groot(i - 1); $('fVolgend').onclick = () => groot(i + 1);
-      kaart.scrollTop = 0;
-    };
-    if (typeof startIndex === 'number') groot(startIndex); else raster();
-  }
-
   /* ---------- overzicht van alle fiches ---------- */
   function toonOverzicht() {
     G.pauze = true; $('actie').hidden = true; dichtbij = null;
@@ -547,7 +506,6 @@
     ficheObj.forEach(o => { if (o.groep.visible) { o.kaart.rotation.y = t * 1.4; o.kaart.position.y = 1.15 + Math.sin(t * 2 + o.data.id) * 0.06; } });
     bijwerkenNabijheid();
   });
-  G.knop("Oude foto's", () => { if (!G.pauze) toonFotos(); }, 'fotoknop');
   G.zetAvatar(maakKaders());
 
   /* Test (adres met ?test): bibTest.ga(3) springt naar fiche 3; bibTest.bereik meldt welke fiches te bereiken zijn. */
@@ -558,7 +516,7 @@
   }
 
   telOp(); boeke.toon('neutraal');
-  G.start().then(() => {
+  Laag50.klaar = G.start().then(() => {
     plaatsFiches();
     if (G.echt && D.panelenInZaal) plaatsPanelen();
     beginSpel();

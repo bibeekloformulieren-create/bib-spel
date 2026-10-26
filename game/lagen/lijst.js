@@ -21,15 +21,8 @@ window.LAGEN = {
     naam: '50 jaar bib Eeklo (Boek-E en de acht fiches)',
     map: 'lagen/50-jaar/',
     standaard: true,
-    css: ['boek-e/boek-e.css', 'laag.css'],
-    scripts: ['boek-e/boek-e.js', 'opdrachten.js', 'fiches-laden.js', 'laag.js']
-  },
-
-  'tentoonstelling': {
-    naam: 'Tentoonstelling: de negen panelen van 50 jaar bib',
-    map: 'lagen/tentoonstelling/',
-    css: ['laag.css'],
-    scripts: ['panelen.js', 'laag.js']
+    css: ['boek-e/boek-e.css', 'laag.css', 'tentoonstelling/tentoonstelling.css'],
+    scripts: ['boek-e/boek-e.js', 'opdrachten.js', 'fiches-laden.js', 'laag.js', 'tentoonstelling/panelen.js', 'tentoonstelling/tentoonstelling.js']
   },
 
   '_sjabloon': {
