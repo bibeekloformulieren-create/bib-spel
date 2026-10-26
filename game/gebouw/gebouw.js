@@ -37,9 +37,14 @@
   scene.fog = new THREE.Fog(0xe9e2d4, 16, 46);
   const camera = new THREE.PerspectiveCamera(72, 1, 0.05, 140);
   camera.rotation.order = 'YXZ';
-  scene.add(new THREE.HemisphereLight(0xffffff, 0xe6e2da, 1.0));
-  scene.add(new THREE.AmbientLight(0xffffff, 0.25));
-  const zon = new THREE.DirectionalLight(0xffffff, 0.3); zon.position.set(4, 8, 3); scene.add(zon);
+  /* Licht: zacht licht van boven en van opzij, met echte schaduwen rond het poppetje. Dat geeft diepte aan het gebouw en de meubels. */
+  renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  scene.add(new THREE.HemisphereLight(0xffffff, 0xb9b2a6, 0.62));
+  scene.add(new THREE.AmbientLight(0xffffff, 0.12));
+  const zon = new THREE.DirectionalLight(0xfff6e8, 0.72); zon.position.set(5, 11, 3.5);
+  zon.castShadow = true; zon.shadow.mapSize.set(2048, 2048); zon.shadow.bias = -0.0004; zon.shadow.normalBias = 0.03;
+  Object.assign(zon.shadow.camera, { left: -11, right: 11, top: 11, bottom: -11, near: 1, far: 40 });
+  scene.add(zon, zon.target);
 
   const colliders = [];
   const speler = { x: 0, y: 1.6, z: 7.8, yaw: 0, pitch: 0, hoogte: 0.6, afstand: 5.2 * (C.spelerSchaal || 1) };   // y = oogpunt; hoogte = camerahoek achter de speler
@@ -115,7 +120,7 @@
 
   /* Vloer en plafond: het model heeft ze niet. Kleuren staan in gebouw-data.js bij "look". */
   const LOOK = Object.assign({
-    vloerTegel: '#5f5753', vloerVoeg: '#c4beb5', vloerGlad: '#8d8f93', vloerTegelLicht: '#d9cabd', vloerVoegLicht: '#b9aea3', tapijt: '#9a9ca1', vloerTegelGroot: '#4f4d4e', vloerVoegGroot: '#2b2a2a',
+    vloerTegel: '#5f5753', vloerVoeg: '#c4beb5', vloerGlad: '#8d8f93', vloerTegelLicht: '#d9cabd', vloerVoegLicht: '#b9aea3', tapijt: '#9a9ca1', vloerTegelGroot: '#4f4d4e', vloerVoegGroot: '#2b2a2a', vloerTegelKlein: '#9a8a84', vloerVoegKlein: '#463f3c', vloerLoper: '#5d6166',
     plafondLat: '#d7c6a0', plafondSpleet: '#4a4338'
   }, C.look || {});
   let plafondMesh = null;
@@ -136,7 +141,7 @@
     const midX = (G.xmin + G.xmax) / 2, midZ = (G.zmin + G.zmax) / 2;
     const vlak = (x0, x1, z0, z1, tex, y) => {
       const m = new THREE.Mesh(new THREE.PlaneGeometry(x1 - x0, z1 - z0), new THREE.MeshLambertMaterial({ map: tex, polygonOffset: true, polygonOffsetFactor: -y * 1000, polygonOffsetUnits: -1 }));
-      m.rotation.x = -Math.PI / 2; m.position.set((x0 + x1) / 2, y, (z0 + z1) / 2); scene.add(m);
+      m.rotation.x = -Math.PI / 2; m.position.set((x0 + x1) / 2, y, (z0 + z1) / 2); m.receiveShadow = true; scene.add(m);
     };
     const tegelTex = (kleur, voeg, rx, rz) => canvasTexture(c => {
       c.fillStyle = voeg; c.fillRect(0, 0, 128, 128);
@@ -144,6 +149,8 @@
       [[1, 1], [65, 1], [1, 65], [65, 65]].forEach(([x, y]) => c.fillRect(x, y, 62, 62));
     }, rx / 0.4, rz / 0.4, Math.PI / 4);
     const soorten = {
+      'tegel-klein':  (rx, rz) => canvasTexture(c => { c.fillStyle = LOOK.vloerVoegKlein; c.fillRect(0, 0, 128, 128); c.fillStyle = LOOK.vloerTegelKlein; c.fillRect(3, 3, 122, 122); for (let i = 0; i < 300; i++) { c.fillStyle = Math.random() < 0.5 ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.05)'; c.fillRect(3 + Math.random() * 120, 3 + Math.random() * 120, 2, 2); } }, rx / 0.2, rz / 0.2),
+      'loper':        (rx, rz) => canvasTexture(c => { c.fillStyle = LOOK.vloerLoper; c.fillRect(0, 0, 128, 128); for (let i = 0; i < 300; i++) { c.fillStyle = Math.random() < 0.5 ? 'rgba(255,255,255,0.04)' : 'rgba(0,0,0,0.05)'; c.fillRect(Math.random() * 126, Math.random() * 126, 2, 2); } }, 1, 1),
       'tegel-groot':  (rx, rz) => canvasTexture(c => { c.fillStyle = LOOK.vloerVoegGroot; c.fillRect(0, 0, 128, 128); c.fillStyle = LOOK.vloerTegelGroot; c.fillRect(2, 2, 124, 124); for (let i = 0; i < 500; i++) { c.fillStyle = Math.random() < 0.5 ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.06)'; c.fillRect(2 + Math.random() * 122, 2 + Math.random() * 122, 2, 2); } }, rx / 0.6, rz / 0.6),
       'glad':         (rx, rz) => canvasTexture(c => { c.fillStyle = LOOK.vloerGlad; c.fillRect(0, 0, 128, 128); }, 1, 1),
       'tegel-donker': (rx, rz) => tegelTex(LOOK.vloerTegel, LOOK.vloerVoeg, rx, rz),
@@ -255,8 +262,8 @@
 
   /* ---------- meubels: uit gebouw-data.js bij "meubels" (fauteuil, poef, tafel-rond, tafel-hoog, tafel, stoel, kruk, plant) ---------- */
   function plaatsMeubels() {
-    const mat = k => new THREE.MeshLambertMaterial({ color: k });
-    const zwart = mat(0x1b1b1d);
+    const mat = k => new THREE.MeshStandardMaterial({ color: k, roughness: 0.72, metalness: 0.0 });
+    const zwart = new THREE.MeshStandardMaterial({ color: 0x1d1e21, roughness: 0.42, metalness: 0.35 });
     const doos = (g, b, h, d, x, y, z, m) => { const o = new THREE.Mesh(new THREE.BoxGeometry(b, h, d), m); o.position.set(x, y, z); g.add(o); return o; };
     const cyl = (g, r, h, x, y, z, m, r2) => { const o = new THREE.Mesh(new THREE.CylinderGeometry(r2 === undefined ? r : r2, r, h, 20), m); o.position.set(x, y, z); g.add(o); return o; };
     /* hulpjes: een gebogen schaal (rugleuning), een stijl-pootje */
@@ -343,6 +350,81 @@
         lat(g, -0.15, 0.3, 0.17, 0.15, 0.3, 0.17, 0.01, zwart);                                  // voetensteun
         return { g, box: [0.36, 0.95, 0.5] };
       },
+      /* Rek met beuken zijkanten, planken en losse dvd's, boeken of spellen (textuur: "dvd", "boeken" of "spel"). Kijkt naar +z. */
+      rek(m, mt) {
+        const g = new THREE.Group(), L = mt.lengte || 2, H = mt.hoogte || 1.85, D = mt.diep || 0.4, t = 0.025, soort = mt.textuur || 'dvd';
+        const hout = mat(0xd6b27a), wit = mat(0xf1eee8);
+        doos(g, t, H, D, -L / 2 + t / 2, H / 2, 0, hout); doos(g, t, H, D, L / 2 - t / 2, H / 2, 0, hout);       // zijkanten
+        doos(g, L - 2 * t, H - 0.1, 0.012, 0, 0.1 + (H - 0.1) / 2, -D / 2 + 0.006, wit);                           // achterwand
+        doos(g, L, t, D, 0, H - t / 2, 0, hout); doos(g, L - 2 * t, 0.1, D - 0.02, 0, 0.05, -0.01, hout);          // bovenplank en plint
+        const rijen = Math.max(2, Math.round((H - 0.1) / (soort === 'spel' ? 0.38 : 0.31))), hr = (H - 0.1 - t) / rijen;
+        for (let r = 1; r < rijen; r++) doos(g, L - 2 * t, 0.02, D - 0.02, 0, 0.1 + r * hr, -0.01, hout);       // legplanken
+        let sd = 7; for (let c = 0; c < (mt.naam || '').length; c++) sd = (sd * 31 + mt.naam.charCodeAt(c)) % 2147483647;
+        const rnd = () => { sd = (sd * 16807) % 2147483647; return sd / 2147483647; };
+        const paletten = {
+          dvd:    [0x1f2328, 0x2b3a4a, 0x4a2c2c, 0xd9d9d9, 0x355c7d, 0x6c5b7b, 0x222222, 0x8a8f98, 0x7a1f1f, 0x1c4a3a],
+          boeken: [0xc0392b, 0xe8b339, 0x3b7a8c, 0x7d5ba6, 0xf2efe6, 0x3e6fb0, 0xe07b2b, 0x4d8f5a, 0xd98aa8, 0xa9b7b0],
+          spel:   [0xd9601f, 0x0b5d68, 0xe8b339, 0xc0392b, 0xf2efe6, 0x3e6fb0]
+        };
+        const pal = (paletten[soort] || paletten.boeken).map(h => new THREE.Color(h));
+        const lijst = [];
+        for (let r = 0; r < rijen; r++) {
+          const y0 = 0.1 + r * hr + 0.01, vrij = hr - 0.03;
+          let x = -L / 2 + t + 0.012;
+          while (x < L / 2 - t - 0.03) {
+            let b, h, d;
+            if (soort === 'dvd') { b = 0.0145; h = Math.min(vrij, 0.185 + rnd() * 0.01); d = 0.135; }
+            else if (soort === 'spel') { b = 0.05 + rnd() * 0.05; h = Math.min(vrij, 0.26 + rnd() * 0.02); d = 0.28; }
+            else { b = 0.018 + rnd() * 0.03; h = Math.min(vrij, 0.17 + rnd() * 0.1); d = 0.17 + rnd() * 0.05; }
+            if (x + b > L / 2 - t - 0.01) break;
+            if (rnd() > 0.04) lijst.push([x + b / 2, y0 + h / 2, D / 2 - 0.035 - d / 2, b * 0.94, h, d, pal[Math.floor(rnd() * pal.length)]]);
+            x += b + (soort === 'dvd' ? 0.0015 : 0.002);
+          }
+        }
+        const im = new THREE.InstancedMesh(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshStandardMaterial({ roughness: 0.55, metalness: 0 }), lijst.length);
+        const mx = new THREE.Matrix4();
+        lijst.forEach(([x, y, z, b, h, d, k], i) => { mx.makeScale(b, h, d).setPosition(x, y, z); im.setMatrixAt(i, mx); im.setColorAt(i, k); });
+        im.instanceMatrix.needsUpdate = true; if (im.instanceColor) im.instanceColor.needsUpdate = true;
+        g.add(im);
+        return { g, box: [L, H, D] };
+      },
+      /* Toren van witte kubussen met rode binnenkant, om en om links en rechts open (met draadhoudertjes voor dvd's). Kijkt naar +z. */
+      rodetoren(m, mt) {
+        const g = new THREE.Group(), n = mt.vakken || 5, h = 0.4, w = 0.55, d = 0.4, crème = mat(0xf2ede2), rood = mat(0xb3281f);
+        for (let i = 0; i < n; i++) {
+          const y = h * i + h / 2;
+          doos(g, w, h - 0.01, d, 0, y, 0, crème);
+          const x = (i % 2 ? 1 : -1) * w * 0.25;
+          const v = new THREE.Mesh(new THREE.PlaneGeometry(w * 0.46, h - 0.07), rood); v.position.set(x, y, d / 2 + 0.002); g.add(v);
+          lat(g, x - 0.06, y - 0.12, d / 2 - 0.03, x - 0.02, y + 0.08, d / 2 - 0.12, 0.004, mat(0xeeeeee)); lat(g, x + 0.04, y - 0.12, d / 2 - 0.03, x + 0.08, y + 0.08, d / 2 - 0.12, 0.004, mat(0xeeeeee));
+        }
+        return { g, box: [w, n * h, d] };
+      },
+      /* Witte schuine standaard voor tijdschriften en brochures. De schuine kant kijkt naar +z. */
+      tijdschriftrek(m, mt) {
+        const g = new THREE.Group(), L = mt.lengte || 1.3, D = 0.5, H = mt.hoogte || 1.15, v0 = 0.25, wit = mat(0xf6f4ee);
+        const zijkant = new THREE.Shape(); zijkant.moveTo(-D / 2, 0); zijkant.lineTo(D / 2, 0); zijkant.lineTo(D / 2, H); zijkant.lineTo(-D / 2, v0); zijkant.closePath();
+        const zm = new THREE.MeshLambertMaterial({ color: 0xf6f4ee, side: THREE.DoubleSide });
+        [-1, 1].forEach(k => { const o = new THREE.Mesh(new THREE.ShapeGeometry(zijkant), zm); o.rotation.y = Math.PI / 2; o.position.x = k * L / 2; g.add(o); });
+        const hoek = Math.atan2(H - v0, D), lang = Math.hypot(D, H - v0);
+        const plaat = doos(g, L, 0.03, lang, 0, (H + v0) / 2, 0, wit); plaat.rotation.x = hoek;
+        const kleuren = [0x2e3a4a, 0x44546a, 0x1f2a36, 0x6b7a8f, 0x9aa7b4];
+        for (let i = 0; i < Math.round(L / 0.2); i++) { const b = doos(g, 0.17, 0.012, 0.3, -L / 2 + 0.12 + i * 0.2, (H + v0) / 2 + 0.02, 0.04, mat(kleuren[i % 5])); b.rotation.x = hoek; }
+        return { g, box: [L, H, D] };
+      },
+      /* Witte paneelradiator. Kijkt naar +z. */
+      radiator(m, mt) {
+        const g = new THREE.Group(), L = mt.lengte || 1.0, wit = mat(0xf4f4f1);
+        doos(g, L, 0.55, 0.07, 0, 0.4, 0, wit);
+        for (let i = 0; i < Math.round(L / 0.06); i++) doos(g, 0.012, 0.5, 0.012, -L / 2 + 0.05 + i * 0.06, 0.4, 0.04, mat(0xdcdcd8));
+        return { g, box: [L, 0.7, 0.1] };
+      },
+      /* Witte vuilnisbak met groen deksel */
+      vuilbak(m, mt) {
+        const g = new THREE.Group();
+        doos(g, 0.34, 0.62, 0.34, 0, 0.31, 0, mat(0xf3f2ee)); doos(g, 0.36, 0.05, 0.36, 0, 0.645, 0, mat(mt.kleur || 0x4fae5a));
+        return { g, box: [0.36, 0.67, 0.36] };
+      },
       /* Ficus: zwarte pot, dunne kromme stam, veel kleine donkergroene bladpakketjes */
       plant(m, mt) {
         const g = new THREE.Group(), h = mt.hoogte || 2.3;
@@ -369,76 +451,172 @@
     function zetItem(it) {
       const mt = it.mt, rot = draai[mt.kijkt || 'zuid'] || 0;
       it.g.rotation.y = rot; it.g.position.set(mt.x, 0, mt.z);
-      let [bx, by, bz] = it.box; if (mt.soort === 'fauteuil' || mt.soort === 'tafel-hoog' || mt.soort === 'tafel') { if (Math.abs(Math.sin(rot)) > 0.5) [bx, bz] = [bz, bx]; }
+      let [bx, by, bz] = it.box; if (Math.abs(Math.sin(rot)) > 0.5) [bx, bz] = [bz, bx];   // een kwartslag gedraaid: breedte en diepte wisselen
       it.bot.geometry.dispose(); it.bot.geometry = new THREE.BoxGeometry(bx, by, bz);
       it.bot.position.set(mt.x, by / 2, mt.z);
       it.bot.userData.bb = null; meubelCache = null; nabij = []; nabijX = 1e9;     // botsingsgegevens opnieuw berekenen
     }
-    (C.meubels || []).forEach(orig => {
-      const maak = bouw[orig.soort]; if (!maak) return;
+    const verwijderd = new Set(Object.keys(bewaard).filter(n => bewaard[n] && bewaard[n].weg));
+    const voegToe = orig => {
+      const maak = bouw[orig.soort]; if (!maak || verwijderd.has(orig.naam)) return null;
       const mt = Object.assign({}, orig, bewaard[orig.naam] || {});
       const { g, box } = maak(mt, mt);
-      g.userData.meubel = mt.naam || mt.soort;
+      g.userData.meubel = mt.naam || mt.soort; g.traverse(o => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; } });
       scene.add(g);
       const bot = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshBasicMaterial({ visible: false }));
       scene.add(bot); colliders.push(bot);
       const it = { mt, g, box, bot }; items.push(it); zetItem(it);
-    });
-    if (bewerk) meubelsVerplaatsen(items, zetItem);
+      return it;
+    };
+    const herbouw = it => {
+      scene.remove(it.g);
+      const r = bouw[it.mt.soort](it.mt, it.mt);
+      it.g = r.g; it.box = r.box; it.g.userData.meubel = it.mt.naam || it.mt.soort; it.g.traverse(o => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; } }); scene.add(it.g); zetItem(it);
+    };
+    (C.meubels || []).forEach(voegToe);
+    /* kopieen die in &bewerk gemaakt zijn (alleen in deze browser, tot Claude ze in gebouw-data.js zet) */
+    Object.keys(bewaard).forEach(n => { const b = bewaard[n]; if (b && b.kopieVan && !(C.meubels || []).some(m => m.naam === n)) voegToe(Object.assign({}, b, { naam: n })); });
+    if (bewerk) meubelsVerplaatsen(items, zetItem, verwijderd, voegToe, herbouw);
   }
 
-  /* ---------- meubels zelf verplaatsen: voeg &bewerk toe aan het adres ----------
-     Klik een meubel en sleep het; R draait het; "Kopieer plekken" geeft de lijst om aan Claude te geven.
-     De plekken blijven bewaard in deze browser (alleen met &bewerk) tot Claude ze in gebouw-data.js heeft gezet. */
-  function meubelsVerplaatsen(items, zetItem) {
+  /* ---------- meubels en onderdelen van het model zelf verplaatsen of verwijderen: voeg &bewerk toe aan het adres ----------
+     Klik iets aan en sleep het; R draait een meubel; "Verwijder" (of de Delete-toets) haalt het weg; "Kopieer plekken" geeft de lijst voor Claude.
+     De wijzigingen blijven bewaard in deze browser (alleen met &bewerk) tot Claude ze in gebouw-data.js heeft gezet. */
+  function meubelsVerplaatsen(items, zetItem, verwijderd, voegToe, herbouw) {
     const draaiVolgorde = ['zuid', 'west', 'noord', 'oost'];
-    let gekozen = null, sleep = null, boven = false;
+    let gekozen = null, sleep = null, boven = false;   // gekozen: { it } (meubel) of { o } (onderdeel van het model)
     const kader = new THREE.BoxHelper(new THREE.Object3D(), 0xff9a1f); kader.visible = false; scene.add(kader);
     const paneel = document.createElement('div');
     paneel.style.cssText = 'position:fixed;left:50%;bottom:10px;transform:translateX(-50%);z-index:60;background:rgba(30,30,34,.88);color:#fff;font:14px system-ui,sans-serif;padding:8px 10px;border-radius:10px;display:flex;gap:6px;align-items:center;flex-wrap:wrap;max-width:96vw;justify-content:center';
     const knop = (tekst, fn) => { const b = document.createElement('button'); b.textContent = tekst; b.style.cssText = 'font:inherit;padding:6px 10px;border-radius:8px;border:0;background:#f4f1ea;color:#222;cursor:pointer'; b.addEventListener('click', fn); b.addEventListener('pointerdown', e => e.stopPropagation()); paneel.appendChild(b); return b; };
     const tekst = document.createElement('span'); tekst.style.cssText = 'margin-right:6px'; paneel.appendChild(tekst);
     const meld = t => { tekst.textContent = t; };
-    meld('Meubels verplaatsen: klik een meubel en sleep het.');
-    const bewaar = () => { try { const o = {}; items.forEach(it => { o[it.mt.naam] = { x: +it.mt.x.toFixed(2), z: +it.mt.z.toFixed(2), kijkt: it.mt.kijkt || 'zuid' }; }); localStorage.setItem('bibMeubelPlekken', JSON.stringify(o)); } catch (e) {} };
-    const kies = it => { gekozen = it; if (it) { kader.setFromObject(it.g); kader.visible = true; meld(it.mt.naam + ' (sleep, of druk op R om te draaien)'); } else kader.visible = false; };
-    const draai = () => { if (!gekozen) return; const k = gekozen.mt.kijkt || 'zuid'; gekozen.mt.kijkt = draaiVolgorde[(draaiVolgorde.indexOf(k) + 1) % 4]; zetItem(gekozen); kader.setFromObject(gekozen.g); bewaar(); };
+    meld('Klik een meubel of onderdeel van het gebouw en sleep het.');
+    const ververs = () => { meubelCache = null; nabij = []; nabijX = 1e9; };
+    const bewaar = () => { try {
+      const o = {}; items.forEach(it => { o[it.mt.naam] = it.mt.kopieVan ? Object.assign({}, it.mt) : Object.assign({ x: +it.mt.x.toFixed(2), z: +it.mt.z.toFixed(2), kijkt: it.mt.kijkt || 'zuid' }, it.mt.lengte ? { lengte: +it.mt.lengte.toFixed(2) } : {}); });
+      verwijderd.forEach(n => { o[n] = { weg: true }; });
+      localStorage.setItem('bibMeubelPlekken', JSON.stringify(o));
+      localStorage.setItem('bibModelAanpassingen', JSON.stringify(modelStaat));
+    } catch (e) {} };
+    const knoopVan = k => k ? (k.it ? k.it.g : k.o.c) : null;
+    const kies = k => { gekozen = k; if (k) { kader.setFromObject(knoopVan(k)); kader.visible = true; meld((k.it ? k.it.mt.naam : k.o.sleutel.split('@')[0] || 'onderdeel') + (k.it ? ' (sleep; R = draaien)' : ' (onderdeel van het gebouw; sleep of verwijder)')); } else kader.visible = false; };
+    const draai = () => { if (!gekozen || !gekozen.it) return; const m = gekozen.it.mt, k = m.kijkt || 'zuid'; m.kijkt = draaiVolgorde[(draaiVolgorde.indexOf(k) + 1) % 4]; zetItem(gekozen.it); kader.setFromObject(gekozen.it.g); bewaar(); };
+    const zetModel = o => { const st = modelStaat[o.sleutel] || (modelStaat[o.sleutel] = { dx: 0, dz: 0 }); o.c.position.x = o.basis.x + st.dx; o.c.position.z = o.basis.z + st.dz; o.c.updateMatrixWorld(true); o.c.traverse(m => { m.userData.bb = null; }); ververs(); };
+    const verwijder = () => {
+      if (!gekozen) return;
+      if (gekozen.it) { const it = gekozen.it; scene.remove(it.g, it.bot); const i = colliders.indexOf(it.bot); if (i >= 0) colliders.splice(i, 1); items.splice(items.indexOf(it), 1); verwijderd.add(it.mt.naam); }
+      else { const o = gekozen.o; o.c.traverse(m => { const i = colliders.indexOf(m); if (i >= 0) colliders.splice(i, 1); }); o.c.parent.remove(o.c); o.weg = true; (modelStaat[o.sleutel] || (modelStaat[o.sleutel] = { dx: 0, dz: 0 })).weg = true; }
+      ververs(); kies(null); meld('Verwijderd. ("Alles terugzetten" haalt het terug.)'); bewaar();
+    };
     knop('Draai (R)', draai);
+    knop('Verwijder', verwijder);
+    const kopieer = () => {
+      if (!gekozen) { meld('Klik eerst een meubel aan om te kopiëren.'); return; }
+      if (!gekozen.it) { meld('Onderdelen van het gebouw kun je verplaatsen en verwijderen, maar niet kopiëren.'); return; }
+      const bron = gekozen.it.mt, basis = (bron.kopieVan || bron.naam).replace(/ kopie \d+$/, '');
+      const namen = new Set(items.map(it => it.mt.naam).concat([...verwijderd], (C.meubels || []).map(m => m.naam)));
+      let k = 1; while (namen.has(basis + ' kopie ' + k)) k++;
+      const nieuw = voegToe(Object.assign({}, bron, { naam: basis + ' kopie ' + k, kopieVan: bron.kopieVan || bron.naam, x: bron.x + 0.5, z: bron.z + 0.5 }));
+      if (nieuw) { kies({ it: nieuw }); bewaar(); meld(nieuw.mt.naam + ' gemaakt: sleep hem naar de juiste plek.'); }
+    };
+    knop('Kopieer (K)', kopieer);
+    const LENGTES = { rek: 2, 'tafel-hoog': 2.4, tafel: 1.6, tijdschriftrek: 1.3, radiator: 1.0 };   // meubels die je korter of langer kunt maken
+    const lengte = delta => {
+      if (!gekozen || !gekozen.it) { meld('Klik eerst een rek of tafel aan.'); return; }
+      const mt = gekozen.it.mt; if (!LENGTES[mt.soort]) { meld('Dit meubel kun je niet korter of langer maken.'); return; }
+      mt.lengte = Math.max(0.3, Math.min(8, Math.round(((mt.lengte || LENGTES[mt.soort]) + delta) * 20) / 20));
+      herbouw(gekozen.it); kader.setFromObject(gekozen.it.g); bewaar(); meld(mt.naam + ': ' + mt.lengte.toFixed(2) + ' m lang');
+    };
+    knop('Korter ([)', () => lengte(-0.1)); knop('Langer (])', () => lengte(0.1));
+    const zetBoven = () => { testCam = boven ? { fov: 55, p: [speler.x, 11.5, speler.z + 0.7], t: [speler.x, 0, speler.z] } : null; };
+    setInterval(() => { if (boven) zetBoven(); }, 100);   // het overzicht volgt het poppetje: loop naar een andere ruimte en je ziet die van boven
     const bovenKnop = knop('Van boven kijken', () => {
       boven = !boven; bovenKnop.textContent = boven ? 'Terug naar lopen' : 'Van boven kijken';
-      testCam = boven ? { fov: 55, p: [-9.1, 11.5, -17.2], t: [-9.1, 0, -17.9] } : null;
+      zetBoven();
     });
-    knop('Kopieer plekken', () => {
-      const uit = items.map(it => it.mt.naam + ': x ' + it.mt.x.toFixed(2) + ', z ' + it.mt.z.toFixed(2) + ', kijkt ' + (it.mt.kijkt || 'zuid')).join('\n');
+    knop('Kopieer lijst voor Claude', () => {
+      const regels = items.map(it => it.mt.naam + ': x ' + it.mt.x.toFixed(2) + ', z ' + it.mt.z.toFixed(2) + ', kijkt ' + (it.mt.kijkt || 'zuid') + (it.mt.lengte && LENGTES[it.mt.soort] ? ', lengte ' + it.mt.lengte.toFixed(2) : '') + (it.mt.kopieVan ? ' (kopie van ' + it.mt.kopieVan + ')' : ''));
+      verwijderd.forEach(n => regels.push(n + ': WEG'));
+      Object.keys(modelStaat).forEach(k => { const st = modelStaat[k]; if (st.weg) regels.push('gebouw ' + k + ': WEG'); else if (st.dx || st.dz) regels.push('gebouw ' + k + ': dx ' + (st.dx || 0).toFixed(2) + ', dz ' + (st.dz || 0).toFixed(2)); });
+      const uit = regels.join('\n');
       const klaar = () => meld('Gekopieerd! Plak het nu in het gesprek met Claude.');
       const val = () => { const t = document.createElement('textarea'); t.value = uit; t.style.cssText = 'width:90vw;height:40vh'; paneel.appendChild(t); t.select(); meld('Kopieer deze tekst (Ctrl+C) en plak hem bij Claude.'); };
       if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(uit).then(klaar, val); else val();
     });
-    knop('Alles terugzetten', () => { try { localStorage.removeItem('bibMeubelPlekken'); } catch (e) {} location.reload(); });
+    knop('Alles terugzetten', () => { try { localStorage.removeItem('bibMeubelPlekken'); localStorage.removeItem('bibModelAanpassingen'); } catch (e) {} location.reload(); });
     document.body.appendChild(paneel);
-    window.addEventListener('keydown', e => { if (e.code === 'KeyR') draai(); });
+    window.addEventListener('keydown', e => { if (e.code === 'KeyR') draai(); if (e.code === 'Delete') verwijder(); if (e.code === 'KeyK') kopieer(); if (e.code === 'BracketLeft') lengte(-0.1); if (e.code === 'BracketRight') lengte(0.1); });
 
     const vlak = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0), pt = new THREE.Vector3(), ray = new THREE.Raycaster();
     const wijs = e => { const r = canvas.getBoundingClientRect(); ray.setFromCamera(new THREE.Vector2(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1), camera); return ray; };
+    const zichtbaar = o => { for (let p = o; p; p = p.parent) if (!p.visible) return false; return true; };
     canvas.addEventListener('pointerdown', e => {
-      const treffer = wijs(e).intersectObjects(items.map(it => it.g), true)[0];
-      if (!treffer) { kies(null); return; }          // niets geraakt: gewoon rondkijken of lopen
-      let o = treffer.object; while (o.parent && !items.some(it => it.g === o)) o = o.parent;
-      const it = items.find(x => x.g === o); if (!it) return;
+      const doel = items.map(it => it.g); if (modelWortel) doel.push(modelWortel);
+      const treffer = wijs(e).intersectObjects(doel, true).filter(h => zichtbaar(h.object))[0];
+      let k = null;
+      if (treffer) {
+        for (let o = treffer.object; o && !k; o = o.parent) {
+          const it = items.find(x => x.g === o); if (it) { k = { it }; break; }
+          const mo = modelOnderdelen.find(x => x.c === o && !x.weg); if (mo) k = { o: mo };
+        }
+      }
+      if (!k && wijs(e).ray.intersectPlane(vlak, pt)) {   // dunne wandjes en kastjes van het model zijn van boven nauwelijks te raken: kijk ook naar de plek op de vloer
+        let beste = null, kleinste = 1e9;
+        modelOnderdelen.forEach(o => {
+          if (o.weg) return; const b = new THREE.Box3().setFromObject(o.c), a = (b.max.x - b.min.x + 0.3) * (b.max.z - b.min.z + 0.3);
+          if (a < 2.5 && b.max.y > 0.3 && pt.x > b.min.x - 0.15 && pt.x < b.max.x + 0.15 && pt.z > b.min.z - 0.15 && pt.z < b.max.z + 0.15 && a < kleinste) { beste = o; kleinste = a; }
+        });
+        if (beste) k = { o: beste };
+      }
+      if (!k) { kies(null); return; }               // niets (aan te passen) geraakt: gewoon rondkijken of lopen
       e.stopImmediatePropagation(); e.preventDefault();
-      kies(it); canvas.setPointerCapture(e.pointerId);
-      const r = wijs(e); const raak = r.ray.intersectPlane(vlak, pt) ? pt.clone() : null;
-      sleep = { id: e.pointerId, dx: raak ? it.mt.x - raak.x : 0, dz: raak ? it.mt.z - raak.z : 0 };
+      kies(k); canvas.setPointerCapture(e.pointerId);
+      const raak = wijs(e).ray.intersectPlane(vlak, pt) ? pt.clone() : null;
+      if (k.it) sleep = { id: e.pointerId, dx: raak ? k.it.mt.x - raak.x : 0, dz: raak ? k.it.mt.z - raak.z : 0 };
+      else { const st = modelStaat[k.o.sleutel] || { dx: 0, dz: 0 }; sleep = { id: e.pointerId, dx: raak ? (st.dx || 0) - raak.x : 0, dz: raak ? (st.dz || 0) - raak.z : 0 }; }
     }, true);
     canvas.addEventListener('pointermove', e => {
-      if (!sleep || e.pointerId !== sleep.id) return;
+      if (!sleep || e.pointerId !== sleep.id || !gekozen) return;
       e.stopImmediatePropagation();
       if (!wijs(e).ray.intersectPlane(vlak, pt)) return;
-      gekozen.mt.x = Math.round((pt.x + sleep.dx) * 20) / 20; gekozen.mt.z = Math.round((pt.z + sleep.dz) * 20) / 20;   // stapjes van 5 cm
-      zetItem(gekozen); kader.setFromObject(gekozen.g);
+      const nx = Math.round((pt.x + sleep.dx) * 20) / 20, nz = Math.round((pt.z + sleep.dz) * 20) / 20;   // stapjes van 5 cm
+      if (gekozen.it) { gekozen.it.mt.x = nx; gekozen.it.mt.z = nz; zetItem(gekozen.it); }
+      else { const st = modelStaat[gekozen.o.sleutel] || (modelStaat[gekozen.o.sleutel] = { dx: 0, dz: 0 }); st.dx = nx; st.dz = nz; zetModel(gekozen.o); }
+      kader.setFromObject(knoopVan(gekozen));
     }, true);
     const los = e => { if (sleep && e.pointerId === sleep.id) { e.stopImmediatePropagation(); sleep = null; bewaar(); } };
     canvas.addEventListener('pointerup', los, true); canvas.addEventListener('pointercancel', los, true);
+  }
+
+  /* ---------- onderdelen van het model (kastjes, tafels, ...) verwijderen of verplaatsen ----------
+     In gebouw-data.js bij "modelAanpassingen": { onderdeel: "naam@x,z", weg: true }  of  { onderdeel: "naam@x,z", dx: 0.3, dz: -0.1 }.
+     Met &bewerk kun je ze zelf aanklikken, slepen en verwijderen. */
+  const modelOnderdelen = [];            // { sleutel, c, basis }
+  const modelStaat = {};                 // sleutel -> { dx, dz, weg }: het verschil met het oorspronkelijke model
+  let modelWortel = null;
+  function modelAanpassen(wortel) {
+    modelWortel = wortel;
+    let houder = null;
+    for (let rij = [wortel]; rij.length && !houder;) { const o = rij.shift(); if (!o.isMesh && o.children.length >= 10) houder = o; else rij.push(...o.children); }   // het hoogste knooppunt met veel onderdelen
+    if (!houder) return;
+    const G = MODEL.grens;
+    let lokaal = {};
+    if (/[?&]bewerk/.test(location.search)) { try { lokaal = JSON.parse(localStorage.getItem('bibModelAanpassingen') || '{}'); } catch (e) { lokaal = {}; } }
+    (C.modelAanpassingen || []).forEach(a => { modelStaat[a.onderdeel] = { dx: a.dx || 0, dz: a.dz || 0, weg: !!a.weg }; });
+    Object.keys(lokaal).forEach(k => { modelStaat[k] = lokaal[k]; });
+    houder.children.slice().forEach(c => {
+      const b = new THREE.Box3().setFromObject(c); if (b.isEmpty()) return;
+      const m = b.getCenter(new THREE.Vector3()), z = b.getSize(new THREE.Vector3());
+      const sleutel = (c.name || 'onderdeel') + '@' + m.x.toFixed(1) + ',' + m.z.toFixed(1);
+      const klein = z.x < 4 && z.z < 4 && z.y > 0.1 && m.x > G.xmin && m.x < G.xmax && m.z > G.zmin && m.z < G.zmax;
+      if (!klein) return;
+      const o = { sleutel, c, basis: { x: c.position.x, z: c.position.z } };
+      const st = modelStaat[sleutel];
+      if (st && st.weg) { c.parent.remove(c); o.weg = true; }
+      else if (st) { c.position.x = o.basis.x + (st.dx || 0); c.position.z = o.basis.z + (st.dz || 0); }
+      modelOnderdelen.push(o);
+    });
   }
 
   /* Het model laden. Geeft een belofte terug die klaar is als het gebouw er staat (echt model of tijdelijke zaal). */
@@ -450,6 +628,7 @@
       new THREE.GLTFLoader().load(MODEL.url, gltf => {
         const wortel = gltf.scene; wortel.scale.setScalar(MODEL.schaal); scene.add(wortel);
         wortel.updateMatrixWorld(true);
+        modelAanpassen(wortel); wortel.updateMatrixWorld(true);
         const G = MODEL.grens; let startPunt = null;
         const weg = [];
         wortel.traverse(o => {
@@ -475,6 +654,7 @@
             color: mat.color ? mat.color.clone() : 0xdddddd, map: mat.map || null, side: THREE.DoubleSide,
             transparent: !!mat.transparent, opacity: mat.opacity === undefined ? 1 : mat.opacity
           });
+          if (!glas) { o.castShadow = true; o.receiveShadow = true; }
           const bb = new THREE.Box3().setFromObject(o), c = bb.getCenter(new THREE.Vector3());
           if (c.x < G.xmin || c.x > G.xmax || c.z < G.zmin || c.z > G.zmax) { weg.push(o); return; }   // losse voorwerpen buiten het gebouw
           // alleen de ingangsdeur is doorloopbaar; het andere glas blijft een wand
@@ -729,6 +909,7 @@
       camera.position.set(speler.x, speler.y - 1.6 * (1 - PS), speler.z);
       camera.rotation.set(speler.pitch, speler.yaw, 0);
     }
+    zon.target.position.set(speler.x, 0, speler.z); zon.position.set(speler.x + 5, 11, speler.z + 3.5);   // de schaduwen volgen het poppetje
     haken.frame.forEach(f => f(dt, t));
   }
 
@@ -819,6 +1000,7 @@
       vrijheid(x, z) { let min = 3; const o = new THREE.Vector3(x, 0.9, z); for (let i = 0; i < 16; i++) { const a = i / 16 * Math.PI * 2; straal.set(o, new THREE.Vector3(Math.cos(a), 0, Math.sin(a))); straal.far = 3; const h = straal.intersectObjects(colliders, false)[0]; if (h && h.distance < min) min = h.distance; } return +min.toFixed(2); },
       toets(code, aan) { window.dispatchEvent(new KeyboardEvent(aan ? 'keydown' : 'keyup', { code })); },
       richt(yaw) { speler.yaw = yaw; ziel = null; },
+      onderdelen() { return modelOnderdelen.map(o => o.sleutel + (o.weg ? ' (weg)' : '')); },
       plek() { return { x: speler.x, z: speler.z, colliders: colliders.length }; },
       stap(sec) { for (let i = 0; i < sec * 60; i++) { testTijd += 1 / 60; bijwerken(1 / 60, testTijd); } return this.toestand(); },
       toestand() { return { x: +speler.x.toFixed(2), z: +speler.z.toFixed(2), ziel, loopt, weergave, avatarZichtbaar: avatar.visible, kaders: kaders.length }; }

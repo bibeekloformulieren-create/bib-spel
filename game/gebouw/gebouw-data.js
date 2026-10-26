@@ -40,7 +40,8 @@ window.GEBOUWDATA = {
     /* Vloerzones. Overal is de vloer glad grijs, behalve in deze vakken.
        type: "tegel-donker", "tegel-licht", "tapijt" of "glad".  x: [van, tot]  z: [van, tot] */
     zones: [
-      { naam: "dvd-gang", type: "tegel-donker", x: [-11.0, -6.5], z: [-27.0, -21.6] },
+      { naam: "dvd-gang", type: "tegel-klein", x: [-11.0, -7.0], z: [-27.0, -21.6] },
+      { naam: "loper naar de glazen zaal", type: "loper", x: [-9.8, -8.5], z: [-26.8, -21.6] },
       { naam: "digipunt", type: "tegel-licht",  x: [-8.5, -3.5],  z: [-31.5, -27.0] },
       { naam: "koffiehoek", type: "tapijt",     x: [-7.6, -1.9],  z: [-37.4, -31.8] },
       { naam: "glazen zaal", type: "tegel-groot", x: [-12.2, -6.0], z: [-21.6, -15.6] }
@@ -57,18 +58,18 @@ window.GEBOUWDATA = {
     { naam: "kubuskast koffiehoek 2", soort: "kubus", x: -2.45, z: -34.95, lengte: 1.3, hoogte: 1.6, kijkt: "west" }
   ],
 
-  /* Meubels (stoelen, tafels, planten). soort: "fauteuil", "poef", "tafel-rond", "tafel-hoog", "tafel" (werktafel), "stoel", "kruk" of "plant".
+  /* Meubels (stoelen, tafels, planten). soort: "rek" (textuur dvd/boeken/spel), "rodetoren", "tijdschriftrek", "radiator", "vuilbak", "fauteuil", "poef", "tafel-rond", "tafel-hoog", "tafel" (werktafel), "stoel", "kruk" of "plant".
      kijkt: waar de voorkant naartoe wijst (bij een fauteuil: waar je naar kijkt als je erin zit).  kleur: "0xRRGGBB" (niet verplicht).
      Glazen zaal (veranda): nagebouwd naar een foto; zithoek rechts (west) als je de zaal in kijkt, hoge tafel over de hele breedte achteraan (zuid). */
   meubels: [
     /* hoge tafel over de hele breedte langs het zuidglas, 6 zwarte krukken op 1 m van elkaar */
-    { naam: "hoge tafel", soort: "tafel-hoog", x: -9.1, z: -15.95, lengte: 5.9 },
-    { naam: "kruk 1", soort: "kruk", x: -6.6, z: -16.5, kijkt: "zuid" },
-    { naam: "kruk 2", soort: "kruk", x: -7.6, z: -16.5, kijkt: "zuid" },
-    { naam: "kruk 3", soort: "kruk", x: -8.6, z: -16.5, kijkt: "zuid" },
-    { naam: "kruk 4", soort: "kruk", x: -9.6, z: -16.5, kijkt: "zuid" },
-    { naam: "kruk 5", soort: "kruk", x: -10.6, z: -16.5, kijkt: "zuid" },
-    { naam: "kruk 6", soort: "kruk", x: -11.6, z: -16.5, kijkt: "zuid" },
+    { naam: "hoge tafel", soort: "tafel-hoog", x: -8.2, z: -15.95, lengte: 5.9 },
+    { naam: "kruk 1", soort: "kruk", x: -6.75, z: -16.5, kijkt: "zuid" },
+    { naam: "kruk 2", soort: "kruk", x: -7.41, z: -16.5, kijkt: "zuid" },
+    { naam: "kruk 3", soort: "kruk", x: -8.07, z: -16.5, kijkt: "zuid" },
+    { naam: "kruk 4", soort: "kruk", x: -8.73, z: -16.5, kijkt: "zuid" },
+    { naam: "kruk 5", soort: "kruk", x: -9.39, z: -16.5, kijkt: "zuid" },
+    { naam: "kruk 6", soort: "kruk", x: -10.05, z: -16.5, kijkt: "zuid" },
     /* zithoek in de westhoek: blauwe fauteuil tegen het glas, ficus erachter */
     { naam: "fauteuil blauw", soort: "fauteuil", x: -11.2, z: -17.75, kijkt: "noord", kleur: 0x1f6f7a },
     { naam: "ficus",          soort: "plant",    x: -11.9, z: -18.3,  hoogte: 2.3 },
@@ -78,6 +79,18 @@ window.GEBOUWDATA = {
     { naam: "poef 1", soort: "poef", x: -11.5, z: -19.1 },
     { naam: "poef 2", soort: "poef", x: -10.55, z: -18.15 },
     { naam: "poef 3", soort: "poef", x: -10.45, z: -20.5 },
+    /* gang naar de glazen zaal (dvd-gang): dvd-rekken aan de oostkant, hoge kasten aan de westkant, rode toren, raamnissen met radiatoren.
+       Plekken door de gebruiker zelf gezet met &bewerk. */
+    { naam: "dvd-rek oost",     soort: "rek", textuur: "dvd", x: -7.85, z: -25.6, lengte: 1.7, hoogte: 1.85, kijkt: "west" },
+    { naam: "dvd-rek oost kopie 2",     soort: "rek", textuur: "dvd", x: -7.85, z: -27.3, lengte: 1.7, hoogte: 1.85, kijkt: "west" },
+    { naam: "rode toren",        soort: "rodetoren", x: -9.4, z: -27.95, kijkt: "noord" },
+    { naam: "hoge kast west",  soort: "rek", textuur: "boeken", x: -10.8, z: -25.95, lengte: 1, hoogte: 2.1, kijkt: "oost" },
+    { naam: "hoge kast west kopie 2",  soort: "rek", textuur: "boeken", x: -10.8, z: -26.95, lengte: 1, hoogte: 2.1, kijkt: "oost" },
+    { naam: "hoge kast west kopie 1",  soort: "rek", textuur: "boeken", x: -10.8, z: -24.95, lengte: 1, hoogte: 2.1, kijkt: "oost" },
+    { naam: "radiator links",    soort: "radiator", x: -10.02, z: -22.5, lengte: 1, kijkt: "oost" },
+    { naam: "radiator rechts",   soort: "radiator", x: -8.33,  z: -22.5, lengte: 1, kijkt: "west" },
+    { naam: "vuilbak 1",         soort: "vuilbak", x: -8.5, z: -23.2 },
+    { naam: "vuilbak 2",         soort: "vuilbak", x: -8.5, z: -22.75, kleur: 0x4aa6d8 },
     /* drie werktafels (1,6 x 0,8 m): twee met de lange kanten tegen elkaar (samen 1,6 x 1,6 m) en een derde dwars aan het uiteinde, met 8 witte stoelen */
     { naam: "werktafel 1", soort: "tafel", x: -7.15, z: -19.65, lengte: 1.6, breed: 0.8, kijkt: "oost" },
     { naam: "werktafel 2", soort: "tafel", x: -7.55, z: -18.5, lengte: 1.6, breed: 0.8, kijkt: "zuid" },
@@ -94,8 +107,17 @@ window.GEBOUWDATA = {
 
 
 
+  /* Losse onderdelen van het SketchUp-model verwijderen of verschuiven (bv. een kastje dat er niet hoort).
+     Voorbeelden:  { onderdeel: "Dvd_Kast_(Jaan)@-8.1,-26.6", weg: true }   of   { onderdeel: "naam@x,z", dx: 0.3, dz: -0.1 }
+     De naam met plek krijg je van "Kopieer lijst voor Claude" in de verplaatsmodus (&bewerk). */
+  modelAanpassingen: [
+    { onderdeel: "Dvd_Kast_(Jaan)@-8.1,-26.6", weg: true }   // dun wit kastpaneel in het model dat dwars door een rek liep
+  ],
+
   /* Ramen in de gevel (het model heeft geen ramen). onder = hoogte van de vensterbank. */
   ramen: [
+    { x: -10.07, z: -22.5, breed: 1.3, hoog: 1.5, onder: 0.9, kijkt: "oost" },   // gang naar de glazen zaal, links
+    { x: -8.28,  z: -22.5, breed: 1.3, hoog: 1.5, onder: 0.9, kijkt: "west" },   // en rechts
     { x: -6.7, z: -37.38, breed: 1.8, hoog: 2.2, onder: 0.9, kijkt: "zuid" },
     { x: -4.3, z: -37.38, breed: 1.8, hoog: 2.2, onder: 0.9, kijkt: "zuid" }
   ],
