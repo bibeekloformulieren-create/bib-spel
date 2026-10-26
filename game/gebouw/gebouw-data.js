@@ -128,9 +128,10 @@ window.GEBOUWDATA = {
     { naam: "kubuskast koffiehoek 2", soort: "kubuskast", x: -2.45, z: -34.95, lengte: 1.3, hoogte: 1.7, kijkt: "west", tijdschriften: true },
     { naam: "kubuskast tijdschriften west", soort: "kubuskast", x: -5.5, z: -36.15, lengte: 3.4, hoogte: 1.7, kijkt: "oost", tijdschriften: true },
     /* uitleen en balie: details op de witte blokken uit het model (y = hoogte van het blad) */
-    { naam: "pc uitleen 1", soort: "pcplek", x: -9.6, z: -32.55, y: 0.95, kijkt: "noord" },
-    { naam: "pc uitleen 2", soort: "pcplek", x: -8.8, z: -32.55, y: 0.95, kijkt: "noord" },
-    { naam: "boeken uitleen", soort: "boekenstapel", x: -9.95, z: -32.4, y: 0.95 },
+    { naam: "uitleentoog", soort: "toog", x: -9.25, z: -33.05, lengte: 1.83, diep: 0.82, hoogte: 1.0, kijkt: "zuid" },
+    { naam: "pc uitleen 1", soort: "pcplek", x: -9.6, z: -32.9, y: 1.0, kijkt: "noord" },
+    { naam: "pc uitleen 2", soort: "pcplek", x: -8.8, z: -32.9, y: 1.0, kijkt: "noord" },
+    { naam: "boeken uitleen", soort: "boekenstapel", x: -9.95, z: -32.8, y: 1.0 },
     { naam: "pc balie 1", soort: "pcplek", x: -10.2, z: -35.95, y: 1.2, kijkt: "noord" },
     { naam: "pc balie 2", soort: "pcplek", x: -8.8, z: -35.95, y: 1.2, kijkt: "noord" },
     { naam: "rolkast folders", soort: "rolkast", x: -7.5, z: -32.6, kijkt: "zuid" },
@@ -185,6 +186,11 @@ window.GEBOUWDATA = {
     { onderdeel: "Component#101@-4.5,-35.6", weg: true },
     { onderdeel: "Geom3D_5@-3.7,-33.4", dx: -1.05, dz: -0.55 }
     // eerste: dun wit kastpaneel in het model dat dwars door een rek liep
+  ],
+
+  /* Stukken uit een groot model-onderdeel knippen, om ze daarna als meubel na te bouwen (alle driehoeken helemaal binnen het vak). */
+  modelUitsnijden: [
+    { mesh: "Geom3D_6", x: [-10.3, -8.2], z: [-33.6, -32.5], y: [-0.01, 1.3] }   // het witte blok van de uitleentoog (is nu een meubel)
   ],
 
   /* Ramen in de gevel (het model heeft geen ramen). onder = hoogte van de vensterbank. */

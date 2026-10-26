@@ -44,3 +44,4 @@ Heb je iets nodig van de lagen, of verander je iets aan `window.Gebouw` waar een
 | 26-10-2026 | Claude | De drie kubuskasten van de tijdschriftenhoek zijn nu meubels (soort kubuskast): je kunt ze verslepen, draaien, korter/langer maken en verwijderen. |
 | 26-10-2026 | Claude | Kubuskast tijdschriften west verplaatst naar x -5.5, z -36.15 (jouw lijst). |
 | 26-10-2026 | Claude | Balie en uitleen: pc-plekken, boekenstapel, rolkast met folderhouder, kapstok, rode mandjes en hangende tv erbij (plaatsen geschat; zelf te verslepen). Meubels hebben nu een optionele hoogte y. |
+| 26-10-2026 | Claude | Het witte blok van de uitleentoog is uit het model geknipt en een meubel geworden ('uitleentoog', soort toog): verslepen, draaien, korter/langer, verwijderen kan nu. Nieuwe optie modelUitsnijden in gebouw-data.js. |

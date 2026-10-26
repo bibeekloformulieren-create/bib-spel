@@ -430,6 +430,12 @@
         k.position.y = H / 2; g.add(k);
         return { g, box: [L, H, D] };
       },
+      /* Wit blok (toog, kast of balie): effen witte doos. Kijkt naar +z. lengte = breedte, diep = diepte, hoogte. */
+      toog(m, mt) {
+        const L = mt.lengte || 1.8, D = mt.diep || 0.82, H = mt.hoogte || 1.0, g = new THREE.Group();
+        doos(g, L, H, D, 0, H / 2, 0, mat(mt.kleur || 0xf3f1ec));
+        return { g, box: [L, H, D] };
+      },
       /* Pc-plek op een balie: flatscreen met voet, toetsenbord en muis. Scherm kijkt naar +z (zet y = hoogte van de balie). */
       pcplek(m, mt) {
         const g = new THREE.Group(), zw = mat(0x16171a), gr = mat(0xdadbdd);
@@ -715,7 +721,7 @@
       if (nieuw) { kies({ it: nieuw }); bewaar(); meld(nieuw.mt.naam + ' gemaakt: sleep hem naar de juiste plek.'); }
     };
     knop('Kopieer (K)', kopieer);
-    const LENGTES = { kubuskast: 1.7, rek: 2, 'tafel-hoog': 2.4, tafel: 1.6, tijdschriftrek: 1.3, radiator: 1.0 };   // meubels die je korter of langer kunt maken
+    const LENGTES = { toog: 1.8, kubuskast: 1.7, rek: 2, 'tafel-hoog': 2.4, tafel: 1.6, tijdschriftrek: 1.3, radiator: 1.0 };   // meubels die je korter of langer kunt maken
     const lengte = delta => {
       if (!gekozen || !gekozen.it) { meld('Klik eerst een rek of tafel aan.'); return; }
       const mt = gekozen.it.mt; if (!LENGTES[mt.soort]) { meld('Dit meubel kun je niet korter of langer maken.'); return; }
@@ -865,6 +871,24 @@
         const wortel = gltf.scene; wortel.scale.setScalar(MODEL.schaal); scene.add(wortel);
         wortel.updateMatrixWorld(true);
         modelAanpassen(wortel); wortel.updateMatrixWorld(true);
+        /* Stukken uit een groot model-onderdeel knippen (bv. een wit blok dat je daarna als meubel nabouwt): alle driehoeken die helemaal binnen het vak vallen */
+        (C.modelUitsnijden || []).forEach(u => {
+          wortel.traverse(o => {
+            if (!o.isMesh || o.name !== u.mesh) return;
+            const geo = o.geometry, pos = geo.attributes.position, idx = geo.index, v = new THREE.Vector3(), bb = new THREE.Box3();
+            const binnen = i => { v.fromBufferAttribute(pos, i).applyMatrix4(o.matrixWorld); return v.x >= u.x[0] && v.x <= u.x[1] && v.z >= u.z[0] && v.z <= u.z[1] && v.y >= (u.y ? u.y[0] : -1) && v.y <= (u.y ? u.y[1] : 9); };
+            const n = idx ? idx.count : pos.count, houd = [];
+            for (let t = 0; t < n; t += 3) {
+              const a = idx ? idx.getX(t) : t, b = idx ? idx.getX(t + 1) : t + 1, c = idx ? idx.getX(t + 2) : t + 2;
+              if (binnen(a) && binnen(b) && binnen(c)) { [a, b, c].forEach(i => { v.fromBufferAttribute(pos, i).applyMatrix4(o.matrixWorld); bb.expandByPoint(v); }); }
+              else houd.push(a, b, c);
+            }
+            if (idx) geo.setIndex(houd);
+            else { const nieuw = new THREE.BufferGeometry(); Object.keys(geo.attributes).forEach(k => { const at = geo.attributes[k], sz = at.itemSize, arr = new at.array.constructor(houd.length * sz); houd.forEach((i, j) => { for (let q = 0; q < sz; q++) arr[j * sz + q] = at.array[i * sz + q]; }); nieuw.setAttribute(k, new THREE.BufferAttribute(arr, sz, at.normalized)); }); o.geometry = nieuw; }
+            if (!bb.isEmpty()) console.log('uitgesneden uit ' + u.mesh + ':', bb.min.toArray().map(x => +x.toFixed(2)), bb.max.toArray().map(x => +x.toFixed(2)));
+            window.__uitgesneden = bb.isEmpty() ? null : [bb.min.toArray(), bb.max.toArray()];
+          });
+        });
         const G = MODEL.grens; let startPunt = null;
         const weg = [];
         wortel.traverse(o => {
