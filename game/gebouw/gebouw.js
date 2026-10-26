@@ -42,13 +42,14 @@
   const zon = new THREE.DirectionalLight(0xffffff, 0.3); zon.position.set(4, 8, 3); scene.add(zon);
 
   const colliders = [];
-  const speler = { x: 0, y: 1.6, z: 7.8, yaw: 0, pitch: 0, hoogte: 0.6, afstand: 5.2 };   // y = oogpunt; hoogte = camerahoek achter de speler
+  const speler = { x: 0, y: 1.6, z: 7.8, yaw: 0, pitch: 0, hoogte: 0.6, afstand: 5.2 * (C.spelerSchaal || 1) };   // y = oogpunt; hoogte = camerahoek achter de speler
 
   /* De speler als poppetje in de zaal. Het uiterlijk (3 loopbeeldjes) komt van de laag: Gebouw.zetAvatar. */
   let weergave = 'derde';                  // 'derde' = je ziet het poppetje, 'eerste' = door zijn ogen
   const avatar = new THREE.Sprite(new THREE.SpriteMaterial({ transparent: true, depthWrite: false }));
-  avatar.scale.set(1.25, 1.5, 1); avatar.center.set(0.5, 0.02);
-  const avatarSchaduw = new THREE.Mesh(new THREE.CircleGeometry(0.42, 24), new THREE.MeshBasicMaterial({ color: 0x000000, transparent: true, opacity: 0.22, depthWrite: false }));
+  const PS = C.spelerSchaal || 1;   // hoe groot de speler is ten opzichte van het gebouw (kleiner = het gebouw voelt groter)
+  avatar.scale.set(1.25 * PS, 1.5 * PS, 1); avatar.center.set(0.5, 0.02);
+  const avatarSchaduw = new THREE.Mesh(new THREE.CircleGeometry(0.42 * PS, 24), new THREE.MeshBasicMaterial({ color: 0x000000, transparent: true, opacity: 0.22, depthWrite: false }));
   avatarSchaduw.rotation.x = -Math.PI / 2;
   const doel = new THREE.Mesh(new THREE.RingGeometry(0.16, 0.24, 28), new THREE.MeshBasicMaterial({ color: 0xd9601f, side: THREE.DoubleSide }));
   doel.rotation.x = -Math.PI / 2; doel.visible = false;
@@ -114,7 +115,7 @@
 
   /* Vloer en plafond: het model heeft ze niet. Kleuren staan in gebouw-data.js bij "look". */
   const LOOK = Object.assign({
-    vloerTegel: '#5f5753', vloerVoeg: '#c4beb5', vloerGlad: '#8d8f93', vloerTegelLicht: '#d9cabd', vloerVoegLicht: '#b9aea3', tapijt: '#9a9ca1',
+    vloerTegel: '#5f5753', vloerVoeg: '#c4beb5', vloerGlad: '#8d8f93', vloerTegelLicht: '#d9cabd', vloerVoegLicht: '#b9aea3', tapijt: '#9a9ca1', vloerTegelGroot: '#4f4d4e', vloerVoegGroot: '#2b2a2a',
     plafondLat: '#d7c6a0', plafondSpleet: '#4a4338'
   }, C.look || {});
   let plafondMesh = null;
@@ -143,6 +144,7 @@
       [[1, 1], [65, 1], [1, 65], [65, 65]].forEach(([x, y]) => c.fillRect(x, y, 62, 62));
     }, rx / 0.4, rz / 0.4, Math.PI / 4);
     const soorten = {
+      'tegel-groot':  (rx, rz) => canvasTexture(c => { c.fillStyle = LOOK.vloerVoegGroot; c.fillRect(0, 0, 128, 128); c.fillStyle = LOOK.vloerTegelGroot; c.fillRect(2, 2, 124, 124); for (let i = 0; i < 500; i++) { c.fillStyle = Math.random() < 0.5 ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.06)'; c.fillRect(2 + Math.random() * 122, 2 + Math.random() * 122, 2, 2); } }, rx / 0.6, rz / 0.6),
       'glad':         (rx, rz) => canvasTexture(c => { c.fillStyle = LOOK.vloerGlad; c.fillRect(0, 0, 128, 128); }, 1, 1),
       'tegel-donker': (rx, rz) => tegelTex(LOOK.vloerTegel, LOOK.vloerVoeg, rx, rz),
       'tegel-licht':  (rx, rz) => tegelTex(LOOK.vloerTegelLicht, LOOK.vloerVoegLicht, rx, rz),
@@ -251,6 +253,194 @@
     });
   }
 
+  /* ---------- meubels: uit gebouw-data.js bij "meubels" (fauteuil, poef, tafel-rond, tafel-hoog, tafel, stoel, kruk, plant) ---------- */
+  function plaatsMeubels() {
+    const mat = k => new THREE.MeshLambertMaterial({ color: k });
+    const zwart = mat(0x1b1b1d);
+    const doos = (g, b, h, d, x, y, z, m) => { const o = new THREE.Mesh(new THREE.BoxGeometry(b, h, d), m); o.position.set(x, y, z); g.add(o); return o; };
+    const cyl = (g, r, h, x, y, z, m, r2) => { const o = new THREE.Mesh(new THREE.CylinderGeometry(r2 === undefined ? r : r2, r, h, 20), m); o.position.set(x, y, z); g.add(o); return o; };
+    /* hulpjes: een gebogen schaal (rugleuning), een stijl-pootje */
+    const boog = (g, r, h, x, y, z, midden, lengte, m) => {   // deel van een cilinder; midden = hoek (rad.) waar de boog het midden heeft (0 = +z, PI = -z)
+      const o = new THREE.Mesh(new THREE.CylinderGeometry(r, r, h, 20, 1, true, midden - lengte / 2, lengte), m);
+      m.side = THREE.DoubleSide; o.position.set(x, y, z); g.add(o); return o;
+    };
+    const lat = (g, x0, y0, z0, x1, y1, z1, dik, m) => {       // een dunne staaf van punt 0 naar punt 1
+      const a = new THREE.Vector3(x0, y0, z0), b = new THREE.Vector3(x1, y1, z1), d = b.clone().sub(a);
+      const o = new THREE.Mesh(new THREE.CylinderGeometry(dik, dik, d.length(), 6), m);
+      o.position.copy(a).addScaledVector(d, 0.5);
+      o.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), d.normalize()); g.add(o); return o;
+    };
+    const bouw = {
+      /* Fauteuil met ronde schaal en een draadframe (zoals de fauteuils in de zaal). Kijkt naar +z. */
+      fauteuil(m, mt) {
+        const g = new THREE.Group(), stof = mat(mt.kleur || 0xc98a1a);
+        cyl(g, 0.36, 0.16, 0, 0.4, 0.02, stof, 0.33);                                         // zitkussen
+        boog(g, 0.39, 0.42, 0, 0.62, 0.0, Math.PI, Math.PI * 1.25, stof);                     // schaal: rug en leuningen
+        boog(g, 0.375, 0.42, 0, 0.62, 0.0, Math.PI, Math.PI * 1.25, stof);
+        [-0.25, 0.25].forEach(x => {                                                            // draadframe (slee)
+          lat(g, x, 0.03, -0.32, x, 0.03, 0.34, 0.012, zwart);
+          lat(g, x, 0.03, 0.34, x, 0.3, 0.3, 0.012, zwart);
+          lat(g, x, 0.03, -0.32, x, 0.3, -0.2, 0.012, zwart);
+        });
+        lat(g, -0.25, 0.03, 0.0, 0.25, 0.03, 0.0, 0.01, zwart);
+        return { g, box: [0.78, 0.9, 0.78] };
+      },
+      /* Poef: een ronde ton met een leren lusje */
+      poef(m, mt) {
+        const g = new THREE.Group(), leer = mat(mt.kleur || 0x6b3a44);
+        const pts = [[0, 0], [0.19, 0], [0.215, 0.08], [0.23, 0.22], [0.215, 0.38], [0.19, 0.45], [0, 0.45]].map(([r, y]) => new THREE.Vector2(r, y));
+        g.add(new THREE.Mesh(new THREE.LatheGeometry(pts, 20), leer));
+        doos(g, 0.05, 0.015, 0.12, 0.17, 0.43, 0, mat(0x2b1d1f));                              // lusje
+        return { g, box: [0.46, 0.45, 0.46] };
+      },
+      /* Ronde salontafel: donkere plaat op een ring van zwart draad */
+      'tafel-rond'(m, mt) {
+        const g = new THREE.Group(), r = (mt.breed || 0.6) / 2;
+        cyl(g, r, 0.025, 0, 0.44, 0, mat(mt.kleur || 0x30343a));
+        [0.02, 0.4].forEach(y => { const t = new THREE.Mesh(new THREE.TorusGeometry(r - 0.04, 0.007, 6, 28), zwart); t.rotation.x = Math.PI / 2; t.position.y = y; g.add(t); });
+        for (let i = 0; i < 4; i++) { const a = i * Math.PI / 2 + Math.PI / 4, x = Math.cos(a) * (r - 0.04), z = Math.sin(a) * (r - 0.04); lat(g, x, 0.02, z, x, 0.42, z, 0.007, zwart); }
+        return { g, box: [r * 2, 0.46, r * 2] };
+      },
+      /* Hoge tafel langs het glas: lichte plaat, donkere pootjes met voetplaat (om de 2 m één) */
+      'tafel-hoog'(m, mt) {
+        const g = new THREE.Group(), L = mt.lengte || 2.4, plaat = mat(mt.kleur || 0xdcc59c), donker = mat(0x2a2c30);
+        doos(g, L, 0.035, 0.62, 0, 1.04, 0, plaat);
+        doos(g, L, 0.03, 0.03, 0, 1.0, 0.3, donker);
+        const n = Math.max(2, Math.round(L / 2) + 1);
+        for (let i = 0; i < n; i++) { const x = -L / 2 + 0.25 + i * (L - 0.5) / (n - 1); doos(g, 0.06, 1.02, 0.06, x, 0.51, 0, donker); doos(g, 0.4, 0.02, 0.3, x, 0.01, 0, donker); }
+        return { g, box: [L, 1.07, 0.62] };
+      },
+      /* Werktafel: lichte houten plaat, donkergrijze T-poten met wieltjes (klaptafel) */
+      tafel(m, mt) {
+        const g = new THREE.Group(), L = mt.lengte || 1.6, B = mt.breed || 0.8, H = mt.hoogte || 0.74, donker = mat(0x3e4146);
+        doos(g, L, 0.03, B, 0, H - 0.015, 0, mat(mt.kleur || 0xdcc8a4));
+        doos(g, L - 0.1, 0.07, 0.04, 0, H - 0.065, 0, donker);                               // ligger onder de plaat
+        [-L / 2 + 0.3, L / 2 - 0.3].forEach(x => {
+          doos(g, 0.07, H - 0.1, 0.07, x, (H - 0.1) / 2 + 0.05, 0, donker);
+          doos(g, 0.06, 0.04, B - 0.1, x, 0.06, 0, donker);
+          [-1, 1].forEach(k => cyl(g, 0.03, 0.04, x, 0.02, k * (B / 2 - 0.08), zwart));
+        });
+        return { g, box: [L, H, B] };
+      },
+      /* Witte schaalstoel met houten, schuin uitstaande poten. Kijkt naar +z. */
+      stoel(m, mt) {
+        const g = new THREE.Group(), schaal = mat(mt.kleur || 0xe9e6df), hout = mat(0xcaa56b);
+        doos(g, 0.44, 0.035, 0.42, 0, 0.46, 0, schaal);
+        boog(g, 0.25, 0.3, 0, 0.67, -0.05, Math.PI, Math.PI * 0.8, schaal);                     // gebogen rug
+        [[-1, -1], [1, -1], [-1, 1], [1, 1]].forEach(([a, b]) => lat(g, a * 0.13, 0.45, b * 0.12, a * 0.2, 0.0, b * 0.2, 0.018, hout));
+        return { g, box: [0.5, 0.9, 0.5] };
+      },
+      /* Hoge zwarte kruk: plastic schaal, draadframe met voetensteun. Kijkt naar +z. */
+      kruk(m, mt) {
+        const g = new THREE.Group();
+        cyl(g, 0.17, 0.035, 0, 0.75, 0, zwart, 0.16);
+        boog(g, 0.18, 0.22, 0, 0.9, -0.03, Math.PI, Math.PI * 0.9, zwart);                      // rug
+        [-0.15, 0.15].forEach(x => {
+          lat(g, x, 0.01, -0.28, x, 0.01, 0.2, 0.01, zwart);                                    // slee op de vloer
+          lat(g, x, 0.01, 0.2, x, 0.74, 0.14, 0.01, zwart);
+          lat(g, x, 0.01, -0.28, x, 0.74, -0.13, 0.01, zwart);
+        });
+        lat(g, -0.15, 0.3, 0.17, 0.15, 0.3, 0.17, 0.01, zwart);                                  // voetensteun
+        return { g, box: [0.36, 0.95, 0.5] };
+      },
+      /* Ficus: zwarte pot, dunne kromme stam, veel kleine donkergroene bladpakketjes */
+      plant(m, mt) {
+        const g = new THREE.Group(), h = mt.hoogte || 2.3;
+        cyl(g, 0.2, 0.36, 0, 0.18, 0, mat(0x24262a), 0.17);
+        const stam = mat(0x5b4a39);
+        lat(g, 0, 0.3, 0, 0.05, h * 0.5, 0.02, 0.025, stam); lat(g, 0.05, h * 0.5, 0.02, -0.02, h * 0.8, 0, 0.018, stam);
+        let sd = 11; const rnd = () => { sd = (sd * 16807) % 2147483647; return sd / 2147483647; };
+        const kleuren = [0x2d4630, 0x35523a, 0x273d2a, 0x3e5e40].map(mat);
+        for (let i = 0; i < 60; i++) {
+          const t = 0.35 + rnd() * 0.65, hoek = rnd() * Math.PI * 2, br = 0.2 + 0.4 * (1 - Math.abs(t - 0.6) * 1.6);
+          const o = new THREE.Mesh(new THREE.IcosahedronGeometry(0.13 + rnd() * 0.12, 1), kleuren[i % 4]);
+          o.scale.set(1, 0.7, 1);
+          o.position.set(Math.cos(hoek) * br * (0.5 + rnd() * 0.7), h * t, Math.sin(hoek) * br * (0.5 + rnd() * 0.7)); g.add(o);
+        }
+        return { g, box: [0.55, h, 0.55] };
+      }
+    };
+    const draai = { zuid: 0, noord: Math.PI, oost: Math.PI / 2, west: -Math.PI / 2 };
+    const bewerk = /[?&]bewerk/.test(location.search);
+    let bewaard = {};
+    if (bewerk) { try { bewaard = JSON.parse(localStorage.getItem('bibMeubelPlekken') || '{}'); } catch (e) { bewaard = {}; } }
+    const items = [];
+    /* zet groep en botsingsblok op de plek en richting van het meubel */
+    function zetItem(it) {
+      const mt = it.mt, rot = draai[mt.kijkt || 'zuid'] || 0;
+      it.g.rotation.y = rot; it.g.position.set(mt.x, 0, mt.z);
+      let [bx, by, bz] = it.box; if (mt.soort === 'fauteuil' || mt.soort === 'tafel-hoog' || mt.soort === 'tafel') { if (Math.abs(Math.sin(rot)) > 0.5) [bx, bz] = [bz, bx]; }
+      it.bot.geometry.dispose(); it.bot.geometry = new THREE.BoxGeometry(bx, by, bz);
+      it.bot.position.set(mt.x, by / 2, mt.z);
+      it.bot.userData.bb = null; meubelCache = null; nabij = []; nabijX = 1e9;     // botsingsgegevens opnieuw berekenen
+    }
+    (C.meubels || []).forEach(orig => {
+      const maak = bouw[orig.soort]; if (!maak) return;
+      const mt = Object.assign({}, orig, bewaard[orig.naam] || {});
+      const { g, box } = maak(mt, mt);
+      g.userData.meubel = mt.naam || mt.soort;
+      scene.add(g);
+      const bot = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshBasicMaterial({ visible: false }));
+      scene.add(bot); colliders.push(bot);
+      const it = { mt, g, box, bot }; items.push(it); zetItem(it);
+    });
+    if (bewerk) meubelsVerplaatsen(items, zetItem);
+  }
+
+  /* ---------- meubels zelf verplaatsen: voeg &bewerk toe aan het adres ----------
+     Klik een meubel en sleep het; R draait het; "Kopieer plekken" geeft de lijst om aan Claude te geven.
+     De plekken blijven bewaard in deze browser (alleen met &bewerk) tot Claude ze in gebouw-data.js heeft gezet. */
+  function meubelsVerplaatsen(items, zetItem) {
+    const draaiVolgorde = ['zuid', 'west', 'noord', 'oost'];
+    let gekozen = null, sleep = null, boven = false;
+    const kader = new THREE.BoxHelper(new THREE.Object3D(), 0xff9a1f); kader.visible = false; scene.add(kader);
+    const paneel = document.createElement('div');
+    paneel.style.cssText = 'position:fixed;left:50%;bottom:10px;transform:translateX(-50%);z-index:60;background:rgba(30,30,34,.88);color:#fff;font:14px system-ui,sans-serif;padding:8px 10px;border-radius:10px;display:flex;gap:6px;align-items:center;flex-wrap:wrap;max-width:96vw;justify-content:center';
+    const knop = (tekst, fn) => { const b = document.createElement('button'); b.textContent = tekst; b.style.cssText = 'font:inherit;padding:6px 10px;border-radius:8px;border:0;background:#f4f1ea;color:#222;cursor:pointer'; b.addEventListener('click', fn); b.addEventListener('pointerdown', e => e.stopPropagation()); paneel.appendChild(b); return b; };
+    const tekst = document.createElement('span'); tekst.style.cssText = 'margin-right:6px'; paneel.appendChild(tekst);
+    const meld = t => { tekst.textContent = t; };
+    meld('Meubels verplaatsen: klik een meubel en sleep het.');
+    const bewaar = () => { try { const o = {}; items.forEach(it => { o[it.mt.naam] = { x: +it.mt.x.toFixed(2), z: +it.mt.z.toFixed(2), kijkt: it.mt.kijkt || 'zuid' }; }); localStorage.setItem('bibMeubelPlekken', JSON.stringify(o)); } catch (e) {} };
+    const kies = it => { gekozen = it; if (it) { kader.setFromObject(it.g); kader.visible = true; meld(it.mt.naam + ' (sleep, of druk op R om te draaien)'); } else kader.visible = false; };
+    const draai = () => { if (!gekozen) return; const k = gekozen.mt.kijkt || 'zuid'; gekozen.mt.kijkt = draaiVolgorde[(draaiVolgorde.indexOf(k) + 1) % 4]; zetItem(gekozen); kader.setFromObject(gekozen.g); bewaar(); };
+    knop('Draai (R)', draai);
+    const bovenKnop = knop('Van boven kijken', () => {
+      boven = !boven; bovenKnop.textContent = boven ? 'Terug naar lopen' : 'Van boven kijken';
+      testCam = boven ? { fov: 55, p: [-9.1, 11.5, -17.2], t: [-9.1, 0, -17.9] } : null;
+    });
+    knop('Kopieer plekken', () => {
+      const uit = items.map(it => it.mt.naam + ': x ' + it.mt.x.toFixed(2) + ', z ' + it.mt.z.toFixed(2) + ', kijkt ' + (it.mt.kijkt || 'zuid')).join('\n');
+      const klaar = () => meld('Gekopieerd! Plak het nu in het gesprek met Claude.');
+      const val = () => { const t = document.createElement('textarea'); t.value = uit; t.style.cssText = 'width:90vw;height:40vh'; paneel.appendChild(t); t.select(); meld('Kopieer deze tekst (Ctrl+C) en plak hem bij Claude.'); };
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(uit).then(klaar, val); else val();
+    });
+    knop('Alles terugzetten', () => { try { localStorage.removeItem('bibMeubelPlekken'); } catch (e) {} location.reload(); });
+    document.body.appendChild(paneel);
+    window.addEventListener('keydown', e => { if (e.code === 'KeyR') draai(); });
+
+    const vlak = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0), pt = new THREE.Vector3(), ray = new THREE.Raycaster();
+    const wijs = e => { const r = canvas.getBoundingClientRect(); ray.setFromCamera(new THREE.Vector2(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1), camera); return ray; };
+    canvas.addEventListener('pointerdown', e => {
+      const treffer = wijs(e).intersectObjects(items.map(it => it.g), true)[0];
+      if (!treffer) { kies(null); return; }          // niets geraakt: gewoon rondkijken of lopen
+      let o = treffer.object; while (o.parent && !items.some(it => it.g === o)) o = o.parent;
+      const it = items.find(x => x.g === o); if (!it) return;
+      e.stopImmediatePropagation(); e.preventDefault();
+      kies(it); canvas.setPointerCapture(e.pointerId);
+      const r = wijs(e); const raak = r.ray.intersectPlane(vlak, pt) ? pt.clone() : null;
+      sleep = { id: e.pointerId, dx: raak ? it.mt.x - raak.x : 0, dz: raak ? it.mt.z - raak.z : 0 };
+    }, true);
+    canvas.addEventListener('pointermove', e => {
+      if (!sleep || e.pointerId !== sleep.id) return;
+      e.stopImmediatePropagation();
+      if (!wijs(e).ray.intersectPlane(vlak, pt)) return;
+      gekozen.mt.x = Math.round((pt.x + sleep.dx) * 20) / 20; gekozen.mt.z = Math.round((pt.z + sleep.dz) * 20) / 20;   // stapjes van 5 cm
+      zetItem(gekozen); kader.setFromObject(gekozen.g);
+    }, true);
+    const los = e => { if (sleep && e.pointerId === sleep.id) { e.stopImmediatePropagation(); sleep = null; bewaar(); } };
+    canvas.addEventListener('pointerup', los, true); canvas.addEventListener('pointercancel', los, true);
+  }
+
   /* Het model laden. Geeft een belofte terug die klaar is als het gebouw er staat (echt model of tijdelijke zaal). */
   let modelGeladen = false;
   function laadModel() {
@@ -296,6 +486,7 @@
 
         bouwVloerEnPlafond(G);   // het model heeft geen vloer of plafond
         plaatsRekken();          // en geen rekken
+        plaatsMeubels();         // en geen stoelen, tafels, planten
         plaatsDecor();           // en geen ramen in de gevel
         scene.background = new THREE.Color(0xcfd8dc); scene.fog = new THREE.Fog(0xcfd8dc, 20, 70);
 
@@ -377,7 +568,7 @@
   }
   let ziel = null;
 
-  const zoom = delta => { speler.afstand = Math.max(2.4, Math.min(10, speler.afstand + delta)); };
+  const zoom = delta => { speler.afstand = Math.max(2.4 * PS, Math.min(10 * PS, speler.afstand + delta * PS)); };
   canvas.addEventListener('wheel', e => { e.preventDefault(); zoom(e.deltaY * 0.004); }, { passive: false });
   window.addEventListener('keydown', e => { if (e.code === 'Equal' || e.code === 'NumpadAdd') zoom(-0.6); if (e.code === 'Minus' || e.code === 'NumpadSubtract') zoom(0.6); });
 
@@ -453,7 +644,7 @@
   }
 
   /* ---------- wandelen en camera ---------- */
-  let loopt = false, afstGlad = 5.2, aGlad = 0.6;
+  let loopt = false, afstGlad = 5.2 * (C.spelerSchaal || 1), aGlad = 0.6;
   const vel = { x: 0, z: 0 };
   const klok = new THREE.Clock();
   function lus() {
@@ -476,13 +667,13 @@
       if (l > 0.05) {
         ziel = null; doel.visible = false;
         if (l > 1) { ix /= l; iz /= l; }
-        const s = 2.1;
+        const s = 2.1 * PS;
         vx = (-Math.sin(speler.yaw) * iz + Math.cos(speler.yaw) * ix) * s;
         vz = (-Math.cos(speler.yaw) * iz - Math.sin(speler.yaw) * ix) * s;
       } else if (ziel) {
         const dx = ziel.x - speler.x, dz = ziel.z - speler.z, d = Math.hypot(dx, dz);
         if (d < 0.12) { ziel = null; doel.visible = false; }
-        else { const s = Math.min(2.1, d * 4); vx = dx / d * s; vz = dz / d * s; }
+        else { const s = Math.min(2.1 * PS, d * 4 * PS); vx = dx / d * s; vz = dz / d * s; }
       }
       // vloeiend optrekken en afremmen (voorkomt schokkerige beweging)
       vel.x += (vx - vel.x) * Math.min(1, dt * 9); vel.z += (vz - vel.z) * Math.min(1, dt * 9);
@@ -513,7 +704,7 @@
     else if (weergave === 'derde') {
       /* Camera achter het poppetje. Staat er iets tussen (zuil, muur)? Dan komt de camera hoger, zodat je erover heen kijkt,
          in plaats van er vlak voor te gaan hangen. Pas als dat niet kan, komt hij dichterbij. */
-      const kop = new THREE.Vector3(speler.x, vloerY + 1.2, speler.z);
+      const kop = new THREE.Vector3(speler.x, vloerY + 1.2 * PS, speler.z);
       verversNabij();
       const richtingVoor = a => { const ca = Math.cos(a); return new THREE.Vector3(Math.sin(speler.yaw) * ca, Math.sin(a), Math.cos(speler.yaw) * ca); };
       const vrij = (a, afst) => {
@@ -535,7 +726,7 @@
       camera.position.copy(kop).addScaledVector(richtingVoor(aGlad), afstGlad);
       camera.lookAt(kop.x, kop.y - 0.05, kop.z);
     } else {
-      camera.position.set(speler.x, speler.y, speler.z);
+      camera.position.set(speler.x, speler.y - 1.6 * (1 - PS), speler.z);
       camera.rotation.set(speler.pitch, speler.yaw, 0);
     }
     haken.frame.forEach(f => f(dt, t));
@@ -591,6 +782,12 @@
      Gebouw: blok, bereik, meshes, camera, zet, vrijheid, toets, richt, plek, stap, toestand.
      Een laag mag er eigen dingen bij zetten (de laag 50-jaar voegt ga(nummer) toe). */
   if (/[?&]test/.test(location.search)) {
+    /* Plaatsbalkje links onderaan: x, z en kijkrichting, zodat een screenshot meteen zegt waar het genomen is. */
+    const plaatsLabel = document.createElement('div');
+    plaatsLabel.style.cssText = 'position:fixed;left:8px;bottom:8px;z-index:50;padding:3px 8px;background:rgba(0,0,0,.6);color:#fff;font:12px monospace;border-radius:4px;pointer-events:none';
+    document.body.appendChild(plaatsLabel);
+    const kompas = ['noord', 'west', 'zuid', 'oost'];
+    setInterval(() => { const g = Math.round((((-speler.yaw * 180 / Math.PI) % 360) + 360) % 360); plaatsLabel.textContent = 'x ' + speler.x.toFixed(1) + '  z ' + speler.z.toFixed(1) + '  kijkt ' + kompas[Math.round(((((speler.yaw % (2*Math.PI)) + 2*Math.PI) % (2*Math.PI)) / (Math.PI/2))) % 4]; }, 200);
     window.bibTest = {
       blok(x, z, dx, dz, far) { const l = Math.hypot(dx, dz); straal.set(new THREE.Vector3(x, 0.9, z), new THREE.Vector3(dx / l, 0, dz / l)); straal.far = far || 8; const h = straal.intersectObjects(colliders, false)[0]; if (!h) return null; const o = h.object, b = new THREE.Box3().setFromObject(o); return { afstand: +h.distance.toFixed(2), naam: o.name || (o.parent && o.parent.name) || '-', kleur: o.material.color ? o.material.color.getHexString() : null, opac: o.material.opacity, min: b.min.toArray().map(v => +v.toFixed(1)), max: b.max.toArray().map(v => +v.toFixed(1)) }; },
       /* Welke plekken zijn te bereiken vanaf (x0, z0)? Geef optioneel `punten` mee: { naam: [x, z] }. */

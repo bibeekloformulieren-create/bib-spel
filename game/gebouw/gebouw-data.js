@@ -10,6 +10,10 @@ window.GEBOUWDATA = {
   /* Het model uit SketchUp (SimLab-export): meters, Y omhoog, geen vloer. */
   model: { url: 'model/bib.glb', schaal: 1 },
 
+  /* Hoe groot de speler is ten opzichte van het gebouw. 1 = echte menselijke maat; kleiner (bv. 0.8) laat het gebouw groter voelen.
+     Past poppetje, wandelsnelheid, oogpunt en cameraafstand aan; het gebouw zelf en alle plaatsen blijven ongewijzigd. */
+  spelerSchaal: 0.8,
+
   /* Alles buiten dit vak (losse voorwerpen) wordt verborgen, en je kunt er niet buiten wandelen. */
   grens: { xmin: -15.6, xmax: 1.2, zmin: -38.2, zmax: -13.4 },
 
@@ -36,9 +40,10 @@ window.GEBOUWDATA = {
     /* Vloerzones. Overal is de vloer glad grijs, behalve in deze vakken.
        type: "tegel-donker", "tegel-licht", "tapijt" of "glad".  x: [van, tot]  z: [van, tot] */
     zones: [
-      { naam: "dvd-gang", type: "tegel-donker", x: [-11.0, -6.5], z: [-27.0, -17.0] },
+      { naam: "dvd-gang", type: "tegel-donker", x: [-11.0, -6.5], z: [-27.0, -21.6] },
       { naam: "digipunt", type: "tegel-licht",  x: [-8.5, -3.5],  z: [-31.5, -27.0] },
-      { naam: "koffiehoek", type: "tapijt",     x: [-7.6, -1.9],  z: [-37.4, -31.8] }
+      { naam: "koffiehoek", type: "tapijt",     x: [-7.6, -1.9],  z: [-37.4, -31.8] },
+      { naam: "glazen zaal", type: "tegel-groot", x: [-12.2, -6.0], z: [-21.6, -15.6] }
     ]
   },
 
@@ -51,6 +56,43 @@ window.GEBOUWDATA = {
     { naam: "kubuskast koffiehoek 1", soort: "kubus", x: -2.45, z: -36.45, lengte: 1.7, hoogte: 2.0, kijkt: "west" },
     { naam: "kubuskast koffiehoek 2", soort: "kubus", x: -2.45, z: -34.95, lengte: 1.3, hoogte: 1.6, kijkt: "west" }
   ],
+
+  /* Meubels (stoelen, tafels, planten). soort: "fauteuil", "poef", "tafel-rond", "tafel-hoog", "tafel" (werktafel), "stoel", "kruk" of "plant".
+     kijkt: waar de voorkant naartoe wijst (bij een fauteuil: waar je naar kijkt als je erin zit).  kleur: "0xRRGGBB" (niet verplicht).
+     Glazen zaal (veranda): nagebouwd naar een foto; zithoek rechts (west) als je de zaal in kijkt, hoge tafel over de hele breedte achteraan (zuid). */
+  meubels: [
+    /* hoge tafel over de hele breedte langs het zuidglas, 6 zwarte krukken op 1 m van elkaar */
+    { naam: "hoge tafel", soort: "tafel-hoog", x: -9.1, z: -15.95, lengte: 5.9 },
+    { naam: "kruk 1", soort: "kruk", x: -6.6, z: -16.5, kijkt: "zuid" },
+    { naam: "kruk 2", soort: "kruk", x: -7.6, z: -16.5, kijkt: "zuid" },
+    { naam: "kruk 3", soort: "kruk", x: -8.6, z: -16.5, kijkt: "zuid" },
+    { naam: "kruk 4", soort: "kruk", x: -9.6, z: -16.5, kijkt: "zuid" },
+    { naam: "kruk 5", soort: "kruk", x: -10.6, z: -16.5, kijkt: "zuid" },
+    { naam: "kruk 6", soort: "kruk", x: -11.6, z: -16.5, kijkt: "zuid" },
+    /* zithoek in de westhoek: blauwe fauteuil tegen het glas, ficus erachter */
+    { naam: "fauteuil blauw", soort: "fauteuil", x: -11.2, z: -17.75, kijkt: "noord", kleur: 0x1f6f7a },
+    { naam: "ficus",          soort: "plant",    x: -11.9, z: -18.3,  hoogte: 2.3 },
+    { naam: "fauteuil oker",  soort: "fauteuil", x: -9.85, z: -19.4,  kijkt: "west",  kleur: 0xc98a1a },
+    { naam: "fauteuil roest", soort: "fauteuil", x: -11.5, z: -20.55,  kijkt: "oost",  kleur: 0xb4502f },
+    { naam: "salontafel",     soort: "tafel-rond", x: -10.8, z: -19.8, breed: 0.6 },
+    { naam: "poef 1", soort: "poef", x: -11.5, z: -19.1 },
+    { naam: "poef 2", soort: "poef", x: -10.55, z: -18.15 },
+    { naam: "poef 3", soort: "poef", x: -10.45, z: -20.5 },
+    /* drie werktafels (1,6 x 0,8 m): twee met de lange kanten tegen elkaar (samen 1,6 x 1,6 m) en een derde dwars aan het uiteinde, met 8 witte stoelen */
+    { naam: "werktafel 1", soort: "tafel", x: -7.15, z: -19.65, lengte: 1.6, breed: 0.8, kijkt: "oost" },
+    { naam: "werktafel 2", soort: "tafel", x: -7.55, z: -18.5, lengte: 1.6, breed: 0.8, kijkt: "zuid" },
+    { naam: "werktafel 3", soort: "tafel", x: -7.95, z: -19.65, lengte: 1.6, breed: 0.8, kijkt: "west" },
+    { naam: "stoel w1", soort: "stoel", x: -8.5, z: -20, kijkt: "oost" },
+    { naam: "stoel w2", soort: "stoel", x: -8.5, z: -19.3, kijkt: "oost" },
+    { naam: "stoel w3", soort: "stoel", x: -7.95, z: -17.85, kijkt: "noord" },
+    { naam: "stoel o1", soort: "stoel", x: -6.6, z: -20, kijkt: "west" },
+    { naam: "stoel o2", soort: "stoel", x: -6.6, z: -19.25, kijkt: "west" },
+    { naam: "stoel o3", soort: "stoel", x: -7.1, z: -17.85, kijkt: "noord" },
+    { naam: "stoel n1", soort: "stoel", x: -8, z: -20.65, kijkt: "zuid" },
+    { naam: "stoel n2", soort: "stoel", x: -7.15, z: -20.7, kijkt: "zuid" }
+  ],
+
+
 
   /* Ramen in de gevel (het model heeft geen ramen). onder = hoogte van de vensterbank. */
   ramen: [
