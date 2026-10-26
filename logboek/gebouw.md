@@ -42,3 +42,4 @@ Heb je iets nodig van de lagen, of verander je iets aan `window.Gebouw` waar een
 | 26-10-2026 | Claude | Tijdschriftenhoek: groen tapijt, drie kubuskasten met tijdschriften (West erbij, oost lager), ronde houten cafetafel met plantje en 4 roze schaalstoelen; oude witte kast en bruine tafel uit het model weg. |
 | 26-10-2026 | Claude | Tijdschriftenhoek: tafel en stoelen op jouw plek gezet; onderdeel Geom3D_5 verschoven (dx -1.05, dz -0.55). |
 | 26-10-2026 | Claude | De drie kubuskasten van de tijdschriftenhoek zijn nu meubels (soort kubuskast): je kunt ze verslepen, draaien, korter/langer maken en verwijderen. |
+| 26-10-2026 | Claude | Kubuskast tijdschriften west verplaatst naar x -5.5, z -36.15 (jouw lijst). |

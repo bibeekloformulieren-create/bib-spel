@@ -126,7 +126,7 @@ window.GEBOUWDATA = {
     /* tijdschriftenhoek: ronde houten tafel voor de ramen met 4 roze schaalstoelen */
     { naam: "kubuskast koffiehoek 1", soort: "kubuskast", x: -2.45, z: -36.45, lengte: 1.7, hoogte: 1.7, kijkt: "west", tijdschriften: true },
     { naam: "kubuskast koffiehoek 2", soort: "kubuskast", x: -2.45, z: -34.95, lengte: 1.3, hoogte: 1.7, kijkt: "west", tijdschriften: true },
-    { naam: "kubuskast tijdschriften west", soort: "kubuskast", x: -7.35, z: -35.5, lengte: 3.4, hoogte: 1.7, kijkt: "oost", tijdschriften: true },
+    { naam: "kubuskast tijdschriften west", soort: "kubuskast", x: -5.5, z: -36.15, lengte: 3.4, hoogte: 1.7, kijkt: "oost", tijdschriften: true },
     { naam: "cafetafel", soort: "cafetafel", x: -4.2, z: -36.15, breed: 0.9, hoek: 62.5 },
     { naam: "schaalstoel nw", soort: "schaalstoel", x: -4.75, z: -36.65, hoek: 64.5 },
     { naam: "schaalstoel no", soort: "schaalstoel", x: -3.55, z: -36.65, hoek: 315 },
