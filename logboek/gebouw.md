@@ -27,3 +27,6 @@ Heb je iets nodig van de lagen, of verander je iets aan `window.Gebouw` waar een
 | 26-10-2026 | Claude | Digipunt: vloer nu roze-bruine tegels op de punt met grijze voegen, zoals op de foto. |
 | 26-10-2026 | Claude | Digipunt: de twee bureaugroepen zijn uit het model gehaald (modelAanpassingen) en nagebouwd als meubels: witte bureaus rond een stroomzuil, roze stoelen, laptops. Nieuwe meubeltypes `zuil` en `laptop` in gebouw.js. Vloerkleur digipunt aangepast. `window.Gebouw` niet gewijzigd. |
 | 26-10-2026 | Claude | Digipunt: bureaus, stoelen en laptops zoals de gebruiker ze verplaatst en verwijderd heeft (groep 1 behalve twee stoelen weg, groep 2 aangepast, zuilen weg). |
+| 26-10-2026 | Claude | Kleuterhoek (lange zaal oost) nagebouwd: houten vloer (`parket`), oranje wandpanelen, groene bladeren aan de muur, lage rekken op wieltjes, hoge boekenkast, witte boekenbakken, witte kast. Nieuwe meubeltypes `paneel`, `blad`, `laagrek`, `boekenbak`, `kast` in gebouw.js. Alle 8 fiches bereikbaar. `window.Gebouw` niet gewijzigd. |
+| 26-10-2026 | Claude | Kleuterhoek: lage rekken gevuld met prentenboeken; oranje wandpanelen tonen alleen de binnenkant; noordpaneel ingekort. |
+| 26-10-2026 | Claude | Kleuterhoek: houten vloer over het hele grijze deel tot het digipunt (z -31,8); het oranje noordpaneel (de "extra muur") is weggehaald omdat de zaal daar open is. |

@@ -44,6 +44,7 @@ window.GEBOUWDATA = {
       { naam: "loper naar de glazen zaal", type: "loper", x: [-9.8, -8.5], z: [-26.8, -21.6] },
       { naam: "digipunt", type: "tegel-licht",  x: [-8.5, -3.5],  z: [-31.5, -27.0] },
       { naam: "koffiehoek", type: "tapijt",     x: [-7.6, -1.9],  z: [-37.4, -31.8] },
+      { naam: "kleuterhoek", type: "parket", x: [-3.45, 0.0], z: [-31.8, -18.1] },
       { naam: "glazen zaal", type: "tegel-groot", x: [-12.2, -6.0], z: [-21.6, -15.6] }
     ]
   },
@@ -119,6 +120,27 @@ window.GEBOUWDATA = {
     { naam: "digipunt 2 bureau o2", soort: "tafel", x: -4.7, z: -28.0, lengte: 0.9, breed: 0.5, kleur: 0xf4f2ee, kijkt: "noord" },
     { naam: "digipunt 2 stoel o2", soort: "stoel", x: -5.95, z: -27.6, kleur: 0xd9aaa4, kijkt: "noord" },
     { naam: "digipunt 2 laptop o2", soort: "laptop", x: -4.7, z: -28.0, kijkt: "zuid", hoogte: 0.75 },
+    /* kleuterhoek: lange smalle zaal in het oosten. Oranje muur links (oost), ramen rechts (west), houten vloer, groene bladeren, lage rekken op wieltjes, witte boekenbakken */
+    { naam: "oranje muur oost", soort: "paneel", x: -0.1, z: -22.4, lengte: 8.4, hoogte: 2.8, kijkt: "west", kleur: 0xe8960c },
+    { naam: "blad 1", soort: "blad", x: -0.18, z: -19.0, lengte: 1.5, hoogte: 2.5, kijkt: "west" },
+    { naam: "blad 2", soort: "blad", x: -0.18, z: -20.2, lengte: 1.3, hoogte: 2.35, kijkt: "west" },
+    { naam: "blad 3", soort: "blad", x: -0.18, z: -21.3, lengte: 1.2, hoogte: 2.45, kijkt: "west" },
+    { naam: "blad 4", soort: "blad", x: -0.18, z: -22.4, lengte: 1.0, hoogte: 2.4, kijkt: "west" },
+    { naam: "blad 5", soort: "blad", x: -0.18, z: -23.4, lengte: 1.1, hoogte: 2.5, kijkt: "west" },
+    { naam: "blad 6", soort: "blad", x: -0.18, z: -24.4, lengte: 0.9, hoogte: 2.45, kijkt: "west" },
+    { naam: "blad 7", soort: "blad", x: -0.18, z: -25.3, lengte: 0.8, hoogte: 2.4, kijkt: "west" },
+    { naam: "blad 8", soort: "blad", x: -0.18, z: -18.5, lengte: 1.6, hoogte: 2.55, kijkt: "west" },
+    { naam: "laag rek oost 1", soort: "laagrek", x: -0.45, z: -19.6, lengte: 0.95, kijkt: "west" },
+    { naam: "laag rek oost 2", soort: "laagrek", x: -0.45, z: -20.6, lengte: 0.95, kijkt: "west" },
+    { naam: "laag rek oost 3", soort: "laagrek", x: -0.45, z: -21.6, lengte: 0.95, kijkt: "west" },
+    { naam: "laag rek oost 4", soort: "laagrek", x: -0.45, z: -22.6, lengte: 0.95, kijkt: "west" },
+    { naam: "hoge boekenkast einde", soort: "rek", textuur: "boeken", x: -0.45, z: -24.6, lengte: 1.6, hoogte: 1.9, kijkt: "west" },
+    { naam: "boekenbak 1", soort: "boekenbak", x: -1.4, z: -19.4, kijkt: "oost" },
+    { naam: "boekenbak 2", soort: "boekenbak", x: -1.45, z: -20.3, kijkt: "oost" },
+    { naam: "boekenbak 3", soort: "boekenbak", x: -1.5, z: -21.2, kijkt: "oost" },
+    { naam: "boekenbak 4", soort: "boekenbak", x: -1.55, z: -22.1, kijkt: "oost" },
+    { naam: "boekenbak 5", soort: "boekenbak", x: -1.6, z: -23.0, kijkt: "oost" },
+    { naam: "witte kast ramen", soort: "kast", x: -2.75, z: -24.4, lengte: 1.3, kijkt: "oost" }
   ],
 
 

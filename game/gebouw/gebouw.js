@@ -153,6 +153,7 @@
       'loper':        (rx, rz) => canvasTexture(c => { c.fillStyle = LOOK.vloerLoper; c.fillRect(0, 0, 128, 128); for (let i = 0; i < 300; i++) { c.fillStyle = Math.random() < 0.5 ? 'rgba(255,255,255,0.04)' : 'rgba(0,0,0,0.05)'; c.fillRect(Math.random() * 126, Math.random() * 126, 2, 2); } }, 1, 1),
       'tegel-groot':  (rx, rz) => canvasTexture(c => { c.fillStyle = LOOK.vloerVoegGroot; c.fillRect(0, 0, 128, 128); c.fillStyle = LOOK.vloerTegelGroot; c.fillRect(2, 2, 124, 124); for (let i = 0; i < 500; i++) { c.fillStyle = Math.random() < 0.5 ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.06)'; c.fillRect(2 + Math.random() * 122, 2 + Math.random() * 122, 2, 2); } }, rx / 0.6, rz / 0.6),
       'glad':         (rx, rz) => canvasTexture(c => { c.fillStyle = LOOK.vloerGlad; c.fillRect(0, 0, 128, 128); }, 1, 1),
+      'parket':       (rx, rz) => canvasTexture(c => { const k = [0xb08f62, 0xa5845a, 0xb99a6e, 0xaa8a5d]; for (let i = 0; i < 4; i++) { c.fillStyle = '#' + k[(i * 3 + 1) % 4].toString(16); c.fillRect(i * 32, 0, 32, 128); c.fillStyle = 'rgba(70,45,20,0.35)'; c.fillRect(i * 32, 0, 1.5, 128); for (let j = 0; j < 40; j++) { c.fillStyle = Math.random() < 0.5 ? 'rgba(255,255,255,0.07)' : 'rgba(60,35,10,0.07)'; c.fillRect(i * 32 + Math.random() * 30, Math.random() * 128, 1.5, 6 + Math.random() * 14); } c.fillStyle = 'rgba(70,45,20,0.3)'; c.fillRect(i * 32, (i * 53) % 128, 32, 1.5); } }, rx / 0.48, rz / 1.0),
       'tegel-donker': (rx, rz) => tegelTex(LOOK.vloerTegel, LOOK.vloerVoeg, rx, rz),
       'tegel-licht':  (rx, rz) => tegelTex(LOOK.vloerTegelLicht, LOOK.vloerVoegLicht, rx, rz),
       'tapijt':       (rx, rz) => canvasTexture(c => { c.fillStyle = LOOK.tapijt; c.fillRect(0, 0, 128, 128); for (let i = 0; i < 700; i++) { c.fillStyle = Math.random() < 0.5 ? 'rgba(255,255,255,0.10)' : 'rgba(0,0,0,0.10)'; c.fillRect(Math.random() * 128, Math.random() * 128, 2, 2); } }, rx / 1.5, rz / 1.5)
@@ -336,6 +337,55 @@
         boog(g, 0.25, 0.3, 0, 0.67, -0.05, Math.PI, Math.PI * 0.8, schaal);                     // gebogen rug
         [[-1, -1], [1, -1], [-1, 1], [1, 1]].forEach(([a, b]) => lat(g, a * 0.13, 0.45, b * 0.12, a * 0.2, 0.0, b * 0.2, 0.018, hout));
         return { g, box: [0.5, 0.9, 0.5] };
+      },
+      /* Gekleurd wandpaneel (bv. oranje muur). lengte = breedte langs de muur. Kijkt naar +z. */
+      paneel(m, mt) {
+        const g = new THREE.Group(), L = mt.lengte || 2, H = mt.hoogte || 2.7;
+        const v = new THREE.Mesh(new THREE.PlaneGeometry(L, H), new THREE.MeshStandardMaterial({ color: mt.kleur || 0xe8960c, roughness: 0.9 })); v.position.y = H / 2; g.add(v);   // maar 1 kant: van buiten zie je niets
+        return { g, box: [0.02, 0.02, 0.02] };      // geen botsing: het paneel ligt tegen de muur
+      },
+      /* Groen blad aan het plafond (hangt aan de muur, wijst naar +z). hoogte = ophanghoogte. */
+      blad(m, mt) {
+        const g = new THREE.Group(), L = mt.lengte || 1.2, Y = mt.hoogte || 2.4, groen = mat(mt.kleur || 0x1f9a55);
+        const b = new THREE.Mesh(new THREE.SphereGeometry(0.5, 20, 10), groen); b.scale.set(0.36 * L, 0.03, L * 0.5);
+        b.position.set(0, Y, L * 0.5); b.rotation.x = 0.12; g.add(b);
+        return { g, box: [0.02, 0.02, 0.02] };
+      },
+      /* Laag open rek op wieltjes: beuken zijkanten, witte planken. Kijkt naar +z. */
+      laagrek(m, mt) {
+        const g = new THREE.Group(), L = mt.lengte || 1.0, H = mt.hoogte || 1.25, D = 0.38, t = 0.03, hout = mat(0xc8924a), wit = mat(0xf0eee8);
+        doos(g, t, H, D, -L / 2 + t / 2, 0.1 + H / 2, 0, hout); doos(g, t, H, D, L / 2 - t / 2, 0.1 + H / 2, 0, hout);
+        for (let r = 0; r < 4; r++) { const sch = new THREE.Group(); sch.position.set(0, 0.2 + r * (H - 0.2) / 3.4, 0); sch.rotation.x = -0.12; doos(sch, L - 2 * t, 0.02, D - 0.02, 0, 0, 0, wit); g.add(sch);
+          if (r < 3 || mt.vol !== false) {                                                       // prentenboeken: staan rechtop, naar voren geleund
+            const pal = [0xd9534f, 0x3b7ea1, 0xe8b339, 0x4d9a62, 0xf2efe6, 0xc66a9b, 0x7d5ba6, 0xe07b2b].map(h => new THREE.Color(h));
+            let sd = 11 + r * 17 + Math.round(Math.abs((mt.z || 0) * 100)); const rnd = () => { sd = (sd * 16807) % 2147483647; return sd / 2147483647; };
+            const lst = []; let x = -L / 2 + t + 0.015;
+            while (x < L / 2 - t - 0.04) { const b = 0.015 + rnd() * 0.025, h = 0.19 + rnd() * 0.07; if (rnd() > 0.06) lst.push([x + b / 2, 0.01 + h / 2, 0.0, b * 0.95, h, 0.2 + rnd() * 0.06, pal[Math.floor(rnd() * pal.length)]]); x += b + 0.003; }
+            const im = new THREE.InstancedMesh(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshStandardMaterial({ roughness: 0.6 }), lst.length), mx = new THREE.Matrix4();
+            lst.forEach(([x, y, z, bw, bh, bd, k], i) => { mx.makeScale(bw, bh, bd).setPosition(x, y, z); im.setMatrixAt(i, mx); im.setColorAt(i, k); });
+            im.instanceMatrix.needsUpdate = true; if (im.instanceColor) im.instanceColor.needsUpdate = true; sch.add(im);
+          }
+        }
+        doos(g, L - 2 * t, 0.9 * H, 0.01, 0, 0.1 + H / 2, -D / 2, mat(0x6d7077));
+        [[-1, -1], [1, -1], [-1, 1], [1, 1]].forEach(([a, b]) => cyl(g, 0.04, 0.05, a * (L / 2 - 0.06), 0.04, b * (D / 2 - 0.05), zwart));
+        return { g, box: [L, H + 0.1, D] };
+      },
+      /* Witte boekenbak op wieltjes, vol prentenboeken. Kijkt naar +z. */
+      boekenbak(m, mt) {
+        const g = new THREE.Group(), wit = mat(0xf4f2ee), B = 0.55, Hh = 0.68, D = 0.42;
+        doos(g, B, Hh, D, 0, 0.1 + Hh / 2, 0, wit);
+        doos(g, B - 0.04, 0.02, D - 0.04, 0, 0.1 + Hh - 0.01, 0, mat(0x2d2d2f));
+        const k = [0xd9534f, 0x3b7ea1, 0xe8b339, 0x4d9a62, 0xf2efe6, 0xc66a9b];
+        for (let i = 0; i < 9; i++) { const h = 0.2 + (i * 7 % 3) * 0.03; const bk = doos(g, 0.025, h, 0.28, -B / 2 + 0.06 + i * 0.052, 0.1 + Hh + h / 2 - 0.02, 0, mat(k[i % 6])); bk.rotation.z = (i % 3 - 1) * 0.12; }
+        [[-1, -1], [1, -1], [-1, 1], [1, 1]].forEach(([a, b]) => cyl(g, 0.04, 0.05, a * (B / 2 - 0.05), 0.04, b * (D / 2 - 0.05), zwart));
+        return { g, box: [B, Hh + 0.3, D] };
+      },
+      /* Hoge witte kast met open tijdschriftvakken. Kijkt naar +z. */
+      kast(m, mt) {
+        const g = new THREE.Group(), L = mt.lengte || 1.2, H = mt.hoogte || 1.9, D = 0.45, wit = mat(0xf2f0ea);
+        doos(g, L, H, D, 0, H / 2, 0, wit);
+        for (let r = 0; r < 6; r++) doos(g, L - 0.06, 0.012, 0.03, 0, 0.35 + r * 0.24, D / 2 + 0.01, mat([0x2b2b2b, 0xd9d4c8, 0x8a8f98][r % 3]));
+        return { g, box: [L, H, D] };
       },
       /* Witte stroomzuil tussen de bureaus (digipunt). */
       zuil(m, mt) {
