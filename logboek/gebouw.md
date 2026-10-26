@@ -37,3 +37,4 @@ Heb je iets nodig van de lagen, of verander je iets aan `window.Gebouw` waar een
 | 26-10-2026 | Claude | Koffiehoek nagebouwd naar foto: zwarte kast met laden en deuren, houten blad, twee zwarte planken, koffiemachine, waterkoker, bakstenen muur erachter (tegen de muur op z -30,0). Nieuw meubeltype `koffiebalie` en optie `steen` bij `paneel`. Alle 8 fiches bereikbaar. |
 | 26-10-2026 | Claude | Koffiehoek: baksteenmuur cappuccinobruin; koffietassen en glazen op de twee planken; twee witte muurvlakken naast de koffiehoek oranje (zelfde oranje als de kleuterhoek). |
 | 26-10-2026 | Claude | Koffiehoek: alle drie de muurvlakken effen cappuccinobruin (geen bakstenen, geen oranje). |
+| 26-10-2026 | Claude | Muurvlakken zelf kleuren: knop 'Muur verven' + kleurkiezer in bewerkmodus. Koffiehoek zuidmuur oranje en extra oranje muur in kleuterhoek uit jouw lijst verwerkt. |

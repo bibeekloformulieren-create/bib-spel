@@ -123,10 +123,11 @@ window.GEBOUWDATA = {
     /* koffiehoek (naar foto): zwarte kast met houten blad en koffiemachine tegen een oranje bakstenen muur, recht voor de plek x -3,0 z -28,6 */
     { naam: "baksteenmuur koffiehoek", soort: "paneel", kleur: 0xa07555, x: -2.5, z: -29.99, lengte: 2.2, hoogte: 2.5, kijkt: "zuid" },
     { naam: "muur koffiehoek rechts", soort: "paneel", x: -1.86, z: -29.45, lengte: 1.2, hoogte: 2.6, kijkt: "west", kleur: 0xa07555 },
-    { naam: "muur koffiehoek zuid", soort: "paneel", x: -1.08, z: -28.95, lengte: 1.5, hoogte: 2.6, kijkt: "zuid", kleur: 0xa07555 },
+    { naam: "muur koffiehoek zuid", soort: "paneel", x: -1.08, z: -28.95, lengte: 1.5, hoogte: 2.6, kijkt: "zuid", kleur: 0xe8960c },
     { naam: "koffiebalie", soort: "koffiebalie", x: -2.55, z: -29.7, lengte: 1.7, kijkt: "zuid" },
     /* kleuterhoek: lange smalle zaal in het oosten. Oranje muur links (oost), ramen rechts (west), houten vloer, groene bladeren, lage rekken op wieltjes, witte boekenbakken */
     { naam: "oranje muur oost", soort: "paneel", x: 0.05, z: -22.65, lengte: 8.4, hoogte: 2.8, kijkt: "west", kleur: 0xe8960c, hoek: 273.5 },
+    { naam: "oranje muur oost kopie 2", soort: "paneel", x: -0.1, z: -24.9, lengte: 8.4, hoogte: 2.8, kijkt: "west", kleur: 0xe8960c, hoek: 273.5 },
     { naam: "blad 1", soort: "blad", x: -0.18, z: -19.0, lengte: 1.5, hoogte: 2.5, kijkt: "west" },
     { naam: "blad 2", soort: "blad", x: -0.18, z: -20.2, lengte: 1.3, hoogte: 2.35, kijkt: "west" },
     { naam: "blad 3", soort: "blad", x: -0.18, z: -21.3, lengte: 1.2, hoogte: 2.45, kijkt: "west" },

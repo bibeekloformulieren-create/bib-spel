@@ -568,7 +568,7 @@
     };
     (C.meubels || []).forEach(voegToe);
     /* kopieen die in &bewerk gemaakt zijn (alleen in deze browser, tot Claude ze in gebouw-data.js zet) */
-    Object.keys(bewaard).forEach(n => { const b = bewaard[n]; if (b && b.kopieVan && !(C.meubels || []).some(m => m.naam === n)) voegToe(Object.assign({}, b, { naam: n })); });
+    Object.keys(bewaard).forEach(n => { const b = bewaard[n]; if (b && (b.kopieVan || b.nieuw) && !(C.meubels || []).some(m => m.naam === n)) voegToe(Object.assign({}, b, { naam: n })); });
     if (bewerk) meubelsVerplaatsen(items, zetItem, verwijderd, voegToe, herbouw);
   }
 
@@ -587,7 +587,7 @@
     meld('Klik een meubel of onderdeel van het gebouw en sleep het.');
     const ververs = () => { meubelCache = null; nabij = []; nabijX = 1e9; };
     const bewaar = () => { try {
-      const o = {}; items.forEach(it => { o[it.mt.naam] = it.mt.kopieVan ? Object.assign({}, it.mt) : Object.assign({ x: +it.mt.x.toFixed(2), z: +it.mt.z.toFixed(2), kijkt: it.mt.kijkt || 'zuid' }, it.mt.hoek != null ? { hoek: it.mt.hoek } : {}, it.mt.lengte ? { lengte: +it.mt.lengte.toFixed(2) } : {}); });
+      const o = {}; items.forEach(it => { o[it.mt.naam] = (it.mt.kopieVan || it.mt.nieuw) ? Object.assign({}, it.mt) : Object.assign({ x: +it.mt.x.toFixed(2), z: +it.mt.z.toFixed(2), kijkt: it.mt.kijkt || 'zuid' }, it.mt.kleur != null ? { kleur: it.mt.kleur } : {}, it.mt.soort === 'paneel' ? { lengte: it.mt.lengte, hoogte: it.mt.hoogte } : {}, it.mt.hoek != null ? { hoek: it.mt.hoek } : {}, it.mt.lengte && it.mt.soort !== 'paneel' ? { lengte: +it.mt.lengte.toFixed(2) } : {}); });
       verwijderd.forEach(n => { o[n] = { weg: true }; });
       localStorage.setItem('bibMeubelPlekken', JSON.stringify(o));
       localStorage.setItem('bibModelAanpassingen', JSON.stringify(modelStaat));
@@ -604,7 +604,7 @@
       knopG.position.set(it.mt.x + Math.sin(r) * afst, 0.35, it.mt.z + Math.cos(r) * afst); knopG.visible = true;
     };
     const knoopVan = k => k ? (k.it ? k.it.g : k.o.c) : null;
-    const kies = k => { gekozen = k; zetKnop(); if (k) { kader.setFromObject(knoopVan(k)); kader.visible = true; meld((k.it ? k.it.mt.naam : k.o.sleutel.split('@')[0] || 'onderdeel') + (k.it ? ' (sleep het meubel; draai met de oranje bol)' : ' (onderdeel van het gebouw; sleep of verwijder)')); } else kader.visible = false; };
+    const kies = k => { gekozen = k; zetKnop(); if (k && k.it && window.__kleurDoos && k.it.mt.kleur != null) window.__kleurDoos.value = '#' + (+k.it.mt.kleur).toString(16).padStart(6, '0'); if (k) { kader.setFromObject(knoopVan(k)); kader.visible = true; meld((k.it ? k.it.mt.naam : k.o.sleutel.split('@')[0] || 'onderdeel') + (k.it ? ' (sleep het meubel; draai met de oranje bol)' : ' (onderdeel van het gebouw; sleep of verwijder)')); } else kader.visible = false; };
     const draai = () => { if (!gekozen || !gekozen.it) return; const m = gekozen.it.mt, k = m.kijkt || 'zuid'; m.kijkt = draaiVolgorde[(draaiVolgorde.indexOf(k) + 1) % 4]; delete m.hoek; zetItem(gekozen.it); kader.setFromObject(gekozen.it.g); zetKnop(); bewaar(); };
     const zetModel = o => { const st = modelStaat[o.sleutel] || (modelStaat[o.sleutel] = { dx: 0, dz: 0 }); o.c.position.x = o.basis.x + st.dx; o.c.position.z = o.basis.z + st.dz; o.c.updateMatrixWorld(true); o.c.traverse(m => { m.userData.bb = null; }); ververs(); };
     const verwijder = () => {
@@ -641,8 +641,41 @@
       boven = !boven; bovenKnop.textContent = boven ? 'Terug naar lopen' : 'Van boven kijken';
       zetBoven();
     });
+    /* muurvlakken verven: klik "Muur verven", klik dan op een muur; er komt een gekleurd vlak voor. Met de kleurkiezer kun je elk gekozen vlak of meubel een andere kleur geven. */
+    let verven = false;
+    const kleurDoos = document.createElement('input'); kleurDoos.type = 'color'; kleurDoos.value = '#a07555'; kleurDoos.title = 'Kleur van het gekozen vlak of meubel';
+    window.__kleurDoos = kleurDoos; kleurDoos.style.cssText = 'width:44px;height:34px;border:0;border-radius:8px;background:#f4f1ea;cursor:pointer;vertical-align:middle';
+    kleurDoos.addEventListener('pointerdown', e => e.stopPropagation());
+    kleurDoos.addEventListener('input', () => {
+      if (!gekozen || !gekozen.it) { meld('Klik eerst een muurvlak of meubel aan, kies dan een kleur.'); return; }
+      gekozen.it.mt.kleur = parseInt(kleurDoos.value.slice(1), 16); herbouw(gekozen.it); kader.setFromObject(gekozen.it.g); zetKnop(); bewaar(); meld(gekozen.it.mt.naam + ': nieuwe kleur');
+    });
+    const kleurTekst = document.createElement('span'); kleurTekst.textContent = ' Kleur: '; kleurTekst.style.cssText = 'color:#fff;margin-left:6px'; paneel.appendChild(kleurTekst); paneel.appendChild(kleurDoos);
+    [['cappuccino', '#a07555'], ['oranje', '#e8960c'], ['wit', '#f1eee8']].forEach(([n, k]) => { const b = knop(n, () => { kleurDoos.value = k; kleurDoos.dispatchEvent(new Event('input')); }); b.style.borderLeft = '12px solid ' + k; });
+    const vervenKnop = knop('Muur verven', () => { verven = !verven; vervenKnop.textContent = verven ? 'Klik nu op een muur…' : 'Muur verven'; if (verven) meld('Klik op de muur die je wilt verven. Je kunt de kleur daarna veranderen.'); });
+    const verfAf = () => { verven = false; vervenKnop.textContent = 'Muur verven'; };
+    const muurRay = new THREE.Raycaster();
+    const verfMuur = e => {
+      if (!modelWortel) return;
+      const h = wijs(e).intersectObject(modelWortel, true).filter(x => zichtbaar(x.object))[0];
+      if (!h || !h.face) { meld('Daar is geen muur. Klik op een muur van het gebouw.'); return; }
+      const nrm = h.face.normal.clone().transformDirection(h.object.matrixWorld);
+      if (Math.abs(nrm.y) > 0.5) { meld('Dit is een vloer of plafond. Klik op een muur.'); return; }
+      nrm.y = 0; nrm.normalize();
+      const tang = new THREE.Vector3(-nrm.z, 0, nrm.x), p0 = h.point.clone();
+      const ok = (px, py, pz) => { muurRay.set(new THREE.Vector3(px + nrm.x * 0.25, py, pz + nrm.z * 0.25), new THREE.Vector3(-nrm.x, 0, -nrm.z)); muurRay.far = 0.5; const r = muurRay.intersectObject(modelWortel, true).filter(x => zichtbaar(x.object))[0]; return !!r && Math.abs(r.distance - 0.25) < 0.04; };
+      const meet = f => { let best = 0, fout = 0; for (let k = 1; k < 260 && fout < 7; k++) { if (f(k * 0.05)) { best = k * 0.05; fout = 0; } else fout++; } return best; };
+      const y0 = Math.max(0.3, Math.min(h.point.y, 2.5));
+      const s1 = meet(d => ok(p0.x + tang.x * d, y0, p0.z + tang.z * d)), s2 = meet(d => ok(p0.x - tang.x * d, y0, p0.z - tang.z * d));
+      const top = meet(d => ok(p0.x, y0 + d, p0.z)) + y0;
+      const breed = s1 + s2 + 0.05, mid = (s1 - s2) / 2;
+      let nm = 1; const namen = new Set(items.map(it => it.mt.naam).concat([...verwijderd])); while (namen.has('muur ' + nm)) nm++;
+      const gr = ((Math.round(Math.atan2(nrm.x, nrm.z) * 180 / Math.PI * 2) / 2) % 360 + 360) % 360;
+      const nieuw = voegToe({ naam: 'muur ' + nm, soort: 'paneel', nieuw: true, kleur: parseInt(kleurDoos.value.slice(1), 16), x: +(p0.x + tang.x * mid + nrm.x * 0.012).toFixed(2), z: +(p0.z + tang.z * mid + nrm.z * 0.012).toFixed(2), lengte: +breed.toFixed(2), hoogte: +Math.max(1, Math.min(top + 0.05, 5)).toFixed(2), hoek: gr, kijkt: ['zuid', 'oost', 'noord', 'west'][Math.round(gr / 90) % 4] });
+      if (nieuw) { kies({ it: nieuw }); bewaar(); meld('Muurvlak ' + nieuw.mt.naam + ' gemaakt (' + nieuw.mt.lengte.toFixed(1) + ' m breed). Kies een andere kleur met de kleurkiezer, of sleep/draai het vlak als het niet klopt.'); }
+    };
     knop('Kopieer lijst voor Claude', () => {
-      const regels = items.map(it => it.mt.naam + ': x ' + it.mt.x.toFixed(2) + ', z ' + it.mt.z.toFixed(2) + ', kijkt ' + (it.mt.kijkt || 'zuid') + (it.mt.hoek != null ? ', hoek ' + it.mt.hoek : '') + (it.mt.lengte && LENGTES[it.mt.soort] ? ', lengte ' + it.mt.lengte.toFixed(2) : '') + (it.mt.kopieVan ? ' (kopie van ' + it.mt.kopieVan + ')' : ''));
+      const regels = items.map(it => it.mt.naam + ': x ' + it.mt.x.toFixed(2) + ', z ' + it.mt.z.toFixed(2) + ', kijkt ' + (it.mt.kijkt || 'zuid') + (it.mt.hoek != null ? ', hoek ' + it.mt.hoek : '') + (it.mt.lengte && (LENGTES[it.mt.soort] || it.mt.soort === 'paneel') ? ', lengte ' + it.mt.lengte.toFixed(2) : '') + (it.mt.soort === 'paneel' && it.mt.hoogte ? ', hoogte ' + it.mt.hoogte.toFixed(2) : '') + (it.mt.kleur != null ? ', kleur 0x' + (+it.mt.kleur).toString(16).padStart(6, '0') : '') + (it.mt.nieuw ? ' (nieuw muurvlak)' : '') + (it.mt.kopieVan ? ' (kopie van ' + it.mt.kopieVan + ')' : ''));
       verwijderd.forEach(n => regels.push(n + ': WEG'));
       Object.keys(modelStaat).forEach(k => { const st = modelStaat[k]; if (st.weg) regels.push('gebouw ' + k + ': WEG'); else if (st.dx || st.dz) regels.push('gebouw ' + k + ': dx ' + (st.dx || 0).toFixed(2) + ', dz ' + (st.dz || 0).toFixed(2)); });
       const uit = regels.join('\n');
@@ -658,6 +691,7 @@
     const wijs = e => { const r = canvas.getBoundingClientRect(); ray.setFromCamera(new THREE.Vector2(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1), camera); return ray; };
     const zichtbaar = o => { for (let p = o; p; p = p.parent) if (!p.visible) return false; return true; };
     canvas.addEventListener('pointerdown', e => {
+      if (verven) { e.stopImmediatePropagation(); e.preventDefault(); verfAf(); verfMuur(e); return; }
       if (gekozen && gekozen.it && knopG.visible && wijs(e).intersectObject(knopBol, false).length) {   // aan de draaiknop gepakt
         e.stopImmediatePropagation(); e.preventDefault(); canvas.setPointerCapture(e.pointerId); sleep = { id: e.pointerId, draaien: true }; return;
       }
