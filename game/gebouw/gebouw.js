@@ -39,9 +39,9 @@
   camera.rotation.order = 'YXZ';
   /* Licht: zacht licht van boven en van opzij, met echte schaduwen rond het poppetje. Dat geeft diepte aan het gebouw en de meubels. */
   renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-  scene.add(new THREE.HemisphereLight(0xffffff, 0xb9b2a6, 0.62));
-  scene.add(new THREE.AmbientLight(0xffffff, 0.12));
-  const zon = new THREE.DirectionalLight(0xfff6e8, 0.72); zon.position.set(5, 11, 3.5);
+  scene.add(new THREE.HemisphereLight(0xfff1e0, 0xb3a798, 0.54));
+  scene.add(new THREE.AmbientLight(0xffeedb, 0.1));
+  const zon = new THREE.DirectionalLight(0xffe9d0, 0.6); zon.position.set(5, 11, 3.5);
   zon.castShadow = true; zon.shadow.mapSize.set(2048, 2048); zon.shadow.bias = -0.0004; zon.shadow.normalBias = 0.03;
   Object.assign(zon.shadow.camera, { left: -11, right: 11, top: 11, bottom: -11, near: 1, far: 40 });
   scene.add(zon, zon.target);
