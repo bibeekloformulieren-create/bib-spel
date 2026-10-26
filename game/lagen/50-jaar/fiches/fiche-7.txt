@@ -13,9 +13,9 @@ boeke-goed: Goed gesorteerd! Zo vindt elke lener zijn boek in een oogwenk.
 boeke-fout: Bijna. Kijk goed naar de beginletter van elke familienaam.
 
 [kijkpunten]
-- In een bib staan de boeken op alfabet, op de familienaam van de schrijver. Zo weet iedereen meteen waar te zoeken.
-- Vroeger werden urenlang boekkaartjes met de hand alfabetisch gesorteerd in fichebakken. Alles zelf, kaartje per kaartje.
-- Als je een boek uit het rek neemt, blijft er een gat. Een wijsneus houdt je plek vrij — zodat het rek geen slagveld wordt.
+- In een bib staan de boeken op alfabet, op de familienaam van de schrijver. Deze vier mensen speelden elk een rol in de bib: Willy Bultynck, Kenneth Himschoot, Brigitte Minne en Roger Verstraete.
+- Willy bouwde de vide zonder kraan. Kenneth was de eerste webmaster van Eeklo. Brigitte vertelde griezelverhalen. Roger was de allereerste bibliothecaris.
+- Kun jij hun namen op alfabet zetten, zoals hun boeken in het rek zouden staan?
 
 [beelden]
 img/gevulde-rekken.jpg | Elk boek op zijn vaste plek, op alfabet.

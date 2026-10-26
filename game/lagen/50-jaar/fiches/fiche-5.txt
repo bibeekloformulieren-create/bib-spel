@@ -15,8 +15,8 @@ boeke-fout: Bijna. Bereken: 4 boeken × 3 weken × 5 frank per week.
 uniek: nee
 
 [kijkpunten]
-- Vroeger moest je je boek op tijd terugbrengen. Te laat? Dan kreeg je een brief. Dan een aangetekende brief. Dan... de politie.
-- Echt! In de eerste jaren van de bib konden politieagenten aan je deur komen. Voor maar twee boeken.
+- Vroeger betaalde je een boete als je een boek te laat terugbracht: 5 frank per boek per week. Hoe meer boeken, hoe hoger de boete.
+- Betaalde je niet? Dan kreeg je een brief. Dan een aangetekende brief. Dan... de politie aan de deur. Echt!
 - Vandaag bestaat de boete niet meer. Je krijgt gewoon een vriendelijk berichtje.
 
 [beelden]

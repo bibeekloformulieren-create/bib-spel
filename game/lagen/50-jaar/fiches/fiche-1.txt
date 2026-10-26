@@ -13,9 +13,9 @@ boeke-goed: Klopt! De bib groeide steeds verder — van een kleine woonkamer tot
 boeke-fout: Bijna. Begin bij het allerkleinste pand en eindig bij dit jaar.
 
 [kijkpunten]
-- De allereerste bib paste in een gewoon woonhuis. Er was zo weinig plek dat de boeken soms op de vloer lagen.
-- Op winterse dagen sprongen er vonkjes van de metalen boekenrekken. En de trap naar boven kraakte zo hard dat bezoekers dachten dat ze erdoor zouden zakken.
-- Maar van bij de start was het een drukbezochte plek. Steeds meer bezoekers, steeds meer ruimte nodig — steeds meer bijbouwen.
+- In 1976 opende de eerste bib in een leegstaand woonhuis in de Molenstraat. Op winterse dagen sprongen er vonkjes van de metalen rekken.
+- In 1988 verhuisde ze naar een verbouwd herenhuis iets verderop: huis Van Brabandt. In 1995 kwamen er drie verdiepingen bij.
+- In 2006 werd er een glazen veranda gebouwd in de binnentuin. En in 2026 wordt het gelijkvloers helemaal opnieuw ingericht.
 
 [beelden]
 img/molenstraat.jpg | De Molenstraat in de beginjaren: fietsen tegen de gevel.

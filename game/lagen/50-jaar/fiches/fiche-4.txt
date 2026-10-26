@@ -15,9 +15,9 @@ boeke-fout: Niet helemaal. De takel mocht 950 kilo. Ze hesen 1.300 kilo. Wat is 
 uniek: nee
 
 [kijkpunten]
-- Aan dit gebouw kon geen kraan. Te smal, te druk. Alles moest met de hand, met touwen en een kleine takel.
-- Die takel was eigenlijk bedoeld om motorblokken uit auto's te tillen. Hij mocht officieel maar 950 kilo dragen.
-- Maar de bouwers hesen er soms veel meer mee. En niemand zei er iets van.
+- Aan dit gebouw kon geen kraan. Alles moest met de hand, met een kleine takel die eigenlijk voor auto's bedoeld was.
+- Die takel mocht officieel maar 950 kilo dragen. Maar het zwaarste stuk woog 1.300 kilo. Ze hesen het toch.
+- Hoeveel kilo méér dan de takel mocht? Dat is jouw berekening.
 
 [beelden]
 img/staalskelet.jpg | Het stalen skelet van de vide in aanbouw.
