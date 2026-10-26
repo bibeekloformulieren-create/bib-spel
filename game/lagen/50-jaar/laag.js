@@ -450,16 +450,55 @@
   /* ---------- begin en einde ---------- */
   function toonIntro() {
     const sch = $('schermIntro'), kaart = $('kaartIntro');
-    const houdingen = [['blij', 'zwaaien'], ['nadenken', 'lezen'], ['blij', 'wijzen'], ['knipoog', 'lezen']];
+    kaart.innerHTML = `
+      <div style="width:min(220px,60%);margin:0 auto">${BoekE.svg('blij', { pose: 'zwaaien' })}</div>
+      <h2 style="text-align:center">Hoi! Ik ben Boek-E.</h2>
+      <p style="font-size:1.1rem;text-align:center">${tekst(D.intro[0])}</p>
+      <p style="font-size:1.1rem;text-align:center">${tekst(D.intro[1])}</p>
+      <button class="knop groot" id="volgende" style="width:100%;margin-top:12px">Start</button>`;
+    sch.hidden = false;
+    $('volgende').onclick = () => { sch.hidden = true; startAutolopen(); };
+  }
+
+  function startAutolopen() {
+    const beginX = G.speler.x, beginZ = G.speler.z;
+    const doelX = -9, doelZ = -29.5;
+    const duur = 4500;
+    const yaw = Math.atan2(-(doelX - beginX), -(doelZ - beginZ));
+    const startMs = performance.now();
+    boeke.zeg('Volg me naar binnen!', 'blij', { pose: 'wijzen' }, duur);
+    let walkKlaar = false;
+    G.opFrame(() => {
+      if (walkKlaar) return;
+      const ms = performance.now() - startMs;
+      const p = Math.min(1, ms / duur);
+      const ease = p < 0.5 ? 2 * p * p : -1 + (4 - 2 * p) * p;
+      G.speler.x = beginX + (doelX - beginX) * ease;
+      G.speler.z = beginZ + (doelZ - beginZ) * ease;
+      G.speler.yaw = yaw;
+      if (p >= 1) { walkKlaar = true; toonUitleg(); }
+    });
+  }
+
+  function toonUitleg() {
+    const sch = $('schermIntro'), kaart = $('kaartIntro');
+    const stappen = [
+      { zin: 'Loop met de pijltjes of de joystick op het scherm. Tik ergens op de vloer om daarheen te lopen.', uitdr: 'neutraal', pose: 'wijzen' },
+      { zin: 'Kijk rond door op het scherm te slepen.', uitdr: 'neutraal', pose: 'lezen' },
+      { zin: tekst(D.intro[2]), uitdr: 'blij', pose: 'wijzen' },
+      { zin: tekst(D.intro[3]), uitdr: 'knipoog', pose: 'lezen' },
+    ];
     let i = 0;
     const toon = () => {
-      const [u, p] = houdingen[i];
+      const s = stappen[i];
       kaart.innerHTML = `
-        <div style="width:min(220px,60%);margin:0 auto">${BoekE.svg(u, { pose: p })}</div>
-        <p style="font-size:1.1rem;text-align:center">${tekst(D.intro[i])}</p>
-        <button class="knop groot" id="volgende">${i === D.intro.length - 1 ? 'Begin' : 'Volgende'}</button>
-        <p class="klein" style="text-align:center">${i + 1} van ${D.intro.length} · Stap vooruit met de stick (of WASD), kijk rond door te slepen.</p>`;
-      $('volgende').onclick = () => { if (i < D.intro.length - 1) { i++; toon(); } else { sch.hidden = true; G.pauze = false; boeke.zeg('Zoek de oranje lichtstralen.', 'neutraal', { pose: 'wijzen' }, 4500); } };
+        <div style="width:min(180px,50%);margin:0 auto">${BoekE.svg(s.uitdr, { pose: s.pose })}</div>
+        <p style="font-size:1.1rem;text-align:center">${esc(s.zin)}</p>
+        <button class="knop groot" id="uitlegVolgende" style="width:100%">${i === stappen.length - 1 ? 'Spelen!' : 'Verder'}</button>`;
+      $('uitlegVolgende').onclick = () => {
+        if (i < stappen.length - 1) { i++; toon(); }
+        else { sch.hidden = true; boeke.stil(); G.pauze = false; }
+      };
     };
     sch.hidden = false; toon();
   }
