@@ -1,0 +1,36 @@
+# FICHE 5: De weg van een boek
+# Uitleg om dit bestand aan te passen: zie HANDLEIDING.md in deze map. Regels die met # beginnen worden genegeerd.
+
+nummer: 5
+categorie: werking
+soort: volgorde
+titel: De weg van een boek
+waar: Bij de balie, of waar nieuwe boeken binnenkomen.
+plek: -7, 0.3
+bron: Paneel 5 - Zo werkt de bib (Spoor 3)
+tip: Eerst moet het boek er zijn. Daarna kan het gezocht en geleend worden. Op het eind is het versleten.
+boeke-goed: Kiezen, beschrijven, vinden, lenen, afvoeren. Zo reist een boek.
+boeke-fout: Net niet. Het boek moet er eerst zijn voor iemand het kan zoeken.
+
+[kijkpunten]
+- Een boek staat niet zomaar in het rek. Het heeft eerst een hele reis gemaakt.
+- Sommige stappen doet een medewerker, andere doe jij zelf.
+
+[beelden]
+img/beschrijven.jpg | Een medewerker beschrijft nieuwe boeken.
+img/wegzetten.jpg | Boeken terug op hun plaats zetten.
+
+[vraag]
+Zet de reis van een boek in de juiste volgorde.
+
+[antwoorden]
+Kiezen | De bib kiest het boek uit, samen met andere bibs
+Beschrijven | Het boek krijgt een beschrijving in de computer
+Vinden | Een lener zoekt het boek op de gsm of computer
+Lenen | De lener scant het boek zelf en neemt het mee
+Afvoeren | Is het boek versleten? Dan wordt het verkocht
+
+[leer]
+- Sinds 2016 kopen 14 bibliotheken in het Meetjesland samen boeken aan. Dat geeft korting.
+- Elk boek krijgt één beschrijving die voor heel Vlaanderen geldt. Zoek je een boek dat Eeklo niet heeft? Dan laat je het overkomen uit een andere bib.
+- Versleten boeken worden verkocht, onder meer op de donderdagmarkt. Met het geld worden lessen Nederlands betaald voor nieuwkomers.

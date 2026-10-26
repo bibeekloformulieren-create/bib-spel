@@ -1,0 +1,32 @@
+# SJABLOON: vraag met meerdere goede antwoorden
+# Zo gebruik je dit: kopieer dit bestand, geef de kopie de naam fiche-9.txt (of het eerstvolgende vrije nummer),
+# pas de tekst aan en zet bij  nummer:  hetzelfde nummer. Uitleg: HANDLEIDING.md.
+# Dit bestand zelf begint met een _ en wordt door het spel NIET gelezen.
+
+nummer: 9
+categorie: gebouw
+soort: meerdere
+titel: Titel van de fiche
+waar: Op welke plek in de bib hoort deze fiche?
+tip: Een hulpzin als het kind er niet uit komt.
+boeke-goed: Wat Boek-E zegt bij een goed antwoord.
+boeke-fout: Wat Boek-E zegt bij een fout antwoord.
+minimaal: 2
+
+[kijkpunten]
+- Eerste korte zin bij de foto's.
+
+[beelden]
+img/voorgevel.jpg | Onderschrift bij de foto.
+
+[vraag]
+Hier staat de vraag. Kies alle juiste antwoorden.
+
+[antwoorden]
+* Een juist antwoord (zet een * voor elk goed antwoord)
+* Nog een juist antwoord
+- Een fout antwoord
+- Nog een fout antwoord
+
+[leer]
+- Eerste "Wist je dat?"

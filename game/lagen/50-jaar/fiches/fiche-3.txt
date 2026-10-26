@@ -1,0 +1,36 @@
+# FICHE 3: De rode draad
+# Uitleg om dit bestand aan te passen: zie HANDLEIDING.md in deze map. Regels die met # beginnen worden genegeerd.
+
+nummer: 3
+categorie: gebouw
+soort: keuze
+titel: De rode draad
+waar: Op een plek waar je de ruitvorm ziet: schuine vloertegels of onder de vide.
+plek: -4, -6
+bron: Paneel 3 - De verbouwing, Opdracht 3
+zoek-opdracht: Zoek in de bib twee plekken waar je die vorm ziet. Kijk naar beneden en omhoog.
+tip: Een vierkant dat op een hoek staat.
+boeke-goed: Een ruit. Willy noemt die schuine lijnen de rode draad.
+boeke-fout: Nee. Denk aan een vierkant dat op een hoek staat.
+
+[kijkpunten]
+- Het hele gebouw is rond één vorm gebouwd. Je ziet hem op de foto's.
+- Ook de vloeren en het plafond liggen schuin, onder 45 graden.
+
+[beelden]
+img/bekisting-ruit.jpg | De bekisting van de vide tijdens de bouw.
+img/vide-plafond.jpg | De opening in het plafond.
+
+[vraag]
+Welke vorm is het?
+
+[antwoorden]
+- Een cirkel
+* Een ruit
+- Een driehoek
+- Een ster
+
+[leer]
+- De vloertegels liggen onder 45 graden. De plafonds hebben ook schuine lijnen.
+- Willy noemt die 45 graden de rode draad: je vindt ze in de vloer, het plafond, de vide en de gedenkplaat.
+- Wie goed zoekt, ziet de ruit ook terug in de vide.

@@ -1,0 +1,33 @@
+# SJABLOON: dingen in de juiste volgorde zetten
+# Zo gebruik je dit: kopieer dit bestand, geef de kopie de naam fiche-9.txt (of het eerstvolgende vrije nummer),
+# pas de tekst aan en zet bij  nummer:  hetzelfde nummer. Uitleg: HANDLEIDING.md.
+# Dit bestand zelf begint met een _ en wordt door het spel NIET gelezen.
+
+nummer: 9
+categorie: gebouw
+soort: volgorde
+titel: Titel van de fiche
+waar: Op welke plek in de bib hoort deze fiche?
+tip: Een hulpzin als het kind er niet uit komt.
+boeke-goed: Wat Boek-E zegt bij een goed antwoord.
+boeke-fout: Wat Boek-E zegt bij een fout antwoord.
+
+[kijkpunten]
+- Eerste korte zin bij de foto's.
+
+[beelden]
+img/voorgevel.jpg | Onderschrift bij de foto.
+
+[vraag]
+Zet dit in de juiste volgorde.
+
+[antwoorden]
+# Zet ze hier in de JUISTE volgorde. Het spel husselt ze zelf door elkaar.
+# Voor een tijdlijn: jaar | tekst. Zonder jaren: alleen de tekst (met een - ervoor).
+1976 | Het oudste
+1988 | Daarna
+1995 | Dan dit
+2026 | Het nieuwste
+
+[leer]
+- Eerste "Wist je dat?"

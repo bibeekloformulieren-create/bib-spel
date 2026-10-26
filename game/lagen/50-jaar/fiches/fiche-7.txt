@@ -1,0 +1,35 @@
+# FICHE 7: Waar stond dat boek?
+# Uitleg om dit bestand aan te passen: zie HANDLEIDING.md in deze map. Regels die met # beginnen worden genegeerd.
+
+nummer: 7
+categorie: werking
+soort: keuze
+titel: Waar stond dat boek?
+waar: Aan de trap. De jeugdafdeling is boven, dus de fiche ligt onderaan de trap.
+plek: 10, 5.5
+bron: Anekdotes bib medewerkers (Wijsneus, Bibliotheekstem)
+tip: Het klinkt als een slim iemand, maar het is een figuurtje.
+boeke-goed: Een wijsneus. Dan weet iedereen waar het boek hoort.
+boeke-fout: Nee. Het is een figuurtje dat in het rek staat tot het boek terug is.
+
+[kijkpunten]
+- In de bib staan duizenden boeken. Elk boek heeft zijn eigen plek.
+- Neem je er één uit het rek, dan blijft er een gat. Daar is een slim trucje voor.
+
+[beelden]
+img/gevulde-rekken.jpg | Elk boek heeft zijn plek.
+img/klasuitleen.jpg | Een klas kiest samen nieuwe boeken.
+
+[vraag]
+Wat zet je in de plaats van een boek dat je meeneemt?
+
+[antwoorden]
+* Een wijsneus
+- Een bladwijzer
+- Een sticker
+- Niets, dat is niet nodig
+
+[leer]
+- Op de jeugdafdeling ligt een doos met wijsneuzen. Neem je een boek, zet dan een wijsneus op de plek. Zo wordt het rek geen slagveld.
+- Een jongen deed dat zonder dat iemand het vroeg. De les van de rondleiding was goed aangekomen.
+- In de bib praat je zachtjes. Dat noemen kinderen de bibliotheekstem.

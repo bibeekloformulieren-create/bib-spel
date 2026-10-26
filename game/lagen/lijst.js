@@ -22,7 +22,7 @@ window.LAGEN = {
     map: 'lagen/50-jaar/',
     standaard: true,
     css: ['boek-e/boek-e.css', 'laag.css'],
-    scripts: ['boek-e/boek-e.js', 'opdrachten.js', 'laag.js']
+    scripts: ['boek-e/boek-e.js', 'opdrachten.js', 'fiches-laden.js', 'laag.js']
   },
 
   '_sjabloon': {

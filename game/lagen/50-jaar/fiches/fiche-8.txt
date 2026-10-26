@@ -1,0 +1,35 @@
+# FICHE 8: Wat kun je allemaal lenen?
+# Uitleg om dit bestand aan te passen: zie HANDLEIDING.md in deze map. Regels die met # beginnen worden genegeerd.
+
+nummer: 8
+categorie: werking
+soort: volgorde
+titel: Wat kun je allemaal lenen?
+waar: Bij de cd- en dvd-wand, of de zadenbib.
+plek: 0, -1
+bron: Paneel 5 tijdstrook; Brochure Deel 2-5
+tip: Cd's zijn het oudst. Streamen is het nieuwst.
+boeke-goed: Cd's, zaadjes, e-boeken, films. Mijn kast wordt steeds langer.
+boeke-fout: Bijna. Denk: wat bestond eerst, cd's of streamen?
+
+[kijkpunten]
+- Vroeger leende je alleen boeken en tijdschriften. Dat is lang geleden.
+- In vijftig jaar kwam er van alles bij. Sommige dingen zijn je misschien nooit opgevallen.
+
+[beelden]
+img/cd-bakken.jpg | De cd-bakken van de bib.
+img/zadenbib.jpg | De zadenbib: zaadjes lenen.
+
+[vraag]
+Wanneer kon je dit voor het eerst lenen? Zet ze van oud naar nieuw.
+
+[antwoorden]
+1996 | De eerste 2.000 cd's
+2014 | Zaadjes om te planten
+2020 | Gratis e-boeken
+2022 | Films streamen met Cinébib
+
+[leer]
+- In 1996 kon je ook een cd-i-speler lenen. Dat is een toestel waar bijna niemand meer van heeft gehoord.
+- Wie zaadjes leent, brengt na een jaar zaadjes van zijn eigen oogst terug.
+- Sinds 2024 heb je met één lidkaart toegang tot meer dan twintig bibliotheken en uitleenposten in het Meetjesland en tot meer dan 300.000 boeken. Boetes bestaan niet meer.

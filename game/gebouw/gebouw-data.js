@@ -43,7 +43,7 @@ window.GEBOUWDATA = {
       { naam: "dvd-gang", type: "tegel-klein", x: [-11.0, -7.0], z: [-27.0, -21.6] },
       { naam: "loper naar de glazen zaal", type: "loper", x: [-9.8, -8.5], z: [-26.8, -21.6] },
       { naam: "digipunt", type: "tegel-licht",  x: [-8.5, -3.5],  z: [-31.5, -27.0] },
-      { naam: "koffiehoek", type: "tapijt",     x: [-7.6, -1.9],  z: [-37.4, -31.8] },
+      { naam: "tijdschriftenhoek", type: "tapijt", x: [-5.8, -1.85], z: [-37.4, -31.8] },
       { naam: "kleuterhoek", type: "parket", x: [-3.45, 0.0], z: [-31.8, -18.1] },
       { naam: "glazen zaal", type: "tegel-groot", x: [-12.2, -6.0], z: [-21.6, -15.6] }
     ]

@@ -1,0 +1,35 @@
+# FICHE 4: Zonder kraan
+# Uitleg om dit bestand aan te passen: zie HANDLEIDING.md in deze map. Regels die met # beginnen worden genegeerd.
+
+nummer: 4
+categorie: gebouw
+soort: keuze
+titel: Zonder kraan
+waar: Onder of bij de vide (het stalen skelet).
+plek: 5, -5.8
+bron: Gesprek Willy Bultynck, Details bouw bibliotheek Eeklo
+tip: Het is meer dan wat de takel officieel kon, maar minder dan een vrachtwagen.
+boeke-goed: 1.300 kilo. Ongeveer een kleine auto, zonder kraan.
+boeke-fout: Dat klopt niet. Het is meer dan 950, maar veel minder dan een vrachtwagen.
+
+[kijkpunten]
+- Aan dit gebouw kon geen kraan. Alles moest met de hand, met een takel en met veel geduld.
+- De takel was gemaakt om motoren uit auto's te tillen. Hij mocht officieel 950 kilo dragen.
+
+[beelden]
+img/staalskelet.jpg | Het stalen skelet van de vide.
+img/vide-reling.jpg | De vide, klaar.
+
+[vraag]
+Hoeveel kilo hesen ze er in werkelijkheid mee, bij het zwaarste stuk?
+
+[antwoorden]
+- 500 kilo
+- 950 kilo
+* 1.300 kilo
+- 5.000 kilo
+
+[leer]
+- Het zwaarste stuk woog ongeveer 1.300 kilo: zo veel als een kleine auto.
+- Voor stenen en mortel gebruikten ze een fietswiel met een ketting.
+- De vloeren zijn gemaakt om 300 kilo per vierkante meter te dragen. Boeken zijn zwaar.

@@ -1,0 +1,35 @@
+# FICHE 2: Verborgen plekken
+# Uitleg om dit bestand aan te passen: zie HANDLEIDING.md in deze map. Regels die met # beginnen worden genegeerd.
+
+nummer: 2
+categorie: gebouw
+soort: keuze
+titel: Verborgen plekken
+waar: Bij de trap of de balie (de kruipkelder ligt eronder).
+plek: -9.5, 5.5
+bron: Gesprek Willy Bultynck, Details bouw bibliotheek Eeklo
+tip: De naam zegt hoe je erin moet: je moet kruipen.
+boeke-goed: Een kruipkelder. Onder je voeten, en niemand komt er nog in.
+boeke-fout: Nee. Denk aan iets onder de grond waar je op handen en voeten door moet.
+
+[kijkpunten]
+- In 1986 werd het oude herenhuis helemaal leeggehaald. Wie beneden stond, kon tot onder het dak kijken.
+- Willy Bultynck werkte mee aan de verbouwing. Hij kent de geheimen van het gebouw.
+
+[beelden]
+img/gestript.jpg | Het huis tijdens de verbouwing: alles eruit.
+img/zolder.jpg | De oude houten balken op de zolder bleven staan.
+
+[vraag]
+Onder het gelijkvloers is een ruimte waar niemand meer bij kan. Wat is het?
+
+[antwoorden]
+* Een kruipkelder
+- Een geheime lift
+- Een kamer achter de balie
+- Een zwembad
+
+[leer]
+- Onder het gelijkvloers ligt een kruipkelder. Je kunt er niet meer in.
+- Op de derde verdieping staat een valse wand. Erachter zie je nog de oude dakstructuur.
+- De oorspronkelijke muren lopen niet helemaal evenwijdig met de voorgevel. Extra muurtjes verbergen dat.

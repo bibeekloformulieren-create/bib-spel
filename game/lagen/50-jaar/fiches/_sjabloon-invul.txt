@@ -1,0 +1,31 @@
+# SJABLOON: invullen
+# Zo gebruik je dit: kopieer dit bestand, geef de kopie de naam fiche-9.txt (of het eerstvolgende vrije nummer),
+# pas de tekst aan en zet bij  nummer:  hetzelfde nummer. Uitleg: HANDLEIDING.md.
+# Dit bestand zelf begint met een _ en wordt door het spel NIET gelezen.
+
+nummer: 9
+categorie: gebouw
+soort: invul
+titel: Titel van de fiche
+waar: Op welke plek in de bib hoort deze fiche?
+tip: Een hulpzin als het kind er niet uit komt.
+boeke-goed: Wat Boek-E zegt bij een goed antwoord.
+boeke-fout: Wat Boek-E zegt bij een fout antwoord.
+uniek: nee
+
+[kijkpunten]
+- Eerste korte zin bij de foto's.
+
+[beelden]
+img/voorgevel.jpg | Onderschrift bij de foto.
+
+[vraag]
+Vul in.
+
+[velden]
+# label | goed antwoord / ander goed antwoord
+In welk jaar ging de bib open? | 1976
+Hoe heet de straat? | Molenstraat / de molenstraat
+
+[leer]
+- Eerste "Wist je dat?"

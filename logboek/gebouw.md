@@ -49,3 +49,4 @@ Heb je iets nodig van de lagen, of verander je iets aan `window.Gebouw` waar een
 | 26-10-2026 | Claude | Balie verder: twee ramen achter de balie, kopieermachine, twee antidiefstalpoortjes, lage kast met klok, folderrek en bureaustoel (geschatte plekken, zelf te verslepen). |
 | 26-10-2026 | Claude | Alle ramen zijn nu verplaatsbare meubels (soort raam, breedte met Korter/Langer). Witte bakstenen pilaar en UiTPAS-bordje erbij. Balie zelf was al verplaatsbaar als gebouwonderdeel. |
 | 26-10-2026 | Claude | Lijst van balie verwerkt: nieuwe plekken (kapstok, kopieermachine, kast met klok, bureaustoelen, pc's, ramen, uitpasbordje), pilaar, folderrek en mandjes weg, balie 0,3 m verschoven, extra dvd-rek en bureaustoel. |
+| 26-10-2026 | Claude | Vloer: het groene tapijt zit nu alleen nog in de tijdschriftenhoek (x -5,8 tot -1,85, z -37,4 tot -31,8); zone heet nu 'tijdschriftenhoek'. |

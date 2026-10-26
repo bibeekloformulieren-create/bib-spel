@@ -1,0 +1,37 @@
+# FICHE 1: Een huis dat meegroeide
+# Uitleg om dit bestand aan te passen: zie HANDLEIDING.md in deze map. Regels die met # beginnen worden genegeerd.
+
+nummer: 1
+categorie: gebouw
+soort: volgorde
+titel: Een huis dat meegroeide
+waar: Bij de voorgevel / ingang van de bib.
+plek: 0, 4
+bron: Brochure 50 jaar bib, Deel 1-3
+tip: Begin bij het kleine pand. Het nieuwste staat het laatst: dat is dit jaar.
+boeke-goed: Dat klopt. Elke keer was er meer plek nodig.
+boeke-fout: Net niet. Denk eerst aan het kleine pand en eindig bij dit jaar.
+
+[kijkpunten]
+- In het voorjaar van 1976 ging de bib open in een leegstaand pand in de Molenstraat 40.
+- Vier kleine bibliotheken waren één bib geworden. Het pand was een bescheiden plek met weinig ruimte.
+- Daarna groeide de bib mee: een nieuw huis, extra verdiepingen en een veranda.
+
+[beelden]
+img/molenstraat.jpg | De Molenstraat in de beginjaren: fietsen tegen de gevel.
+img/voorgevel.jpg | De voorgevel van de bib in de Molenstraat.
+
+[vraag]
+Zet de verhuizingen en uitbreidingen in de juiste volgorde.
+
+[antwoorden]
+1976 | De bib opent in een leegstaand pand in de Molenstraat 40
+1988 | Verhuizing naar het verbouwde huis Van Brabandt
+1995 | Drie nieuwe verdiepingen erbij
+2006 | Een glazen veranda in de binnentuin
+2026 | Het gelijkvloers wordt heringericht
+
+[leer]
+- Op zaterdag 20 februari 1988 gingen de deuren van het nieuwe gebouw open. Het was een verbouwd herenhuis: huis Van Brabandt.
+- De drie nieuwe verdiepingen van 1995 zijn samen 360 vierkante meter groot.
+- De veranda kreeg een groendak. In die tijd was dat een heel nieuw idee.
