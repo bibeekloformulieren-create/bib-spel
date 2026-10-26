@@ -1,0 +1,22 @@
+/* Laag tentoonstelling */
+.tt-actie{position:fixed;left:50%;bottom:calc(110px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:8;background:#0b5d68;color:#fff;border:0;border-radius:999px;padding:12px 22px;font-weight:700;font-size:1rem;box-shadow:0 4px 14px #0005}
+.tt-actie[hidden]{display:none}
+.tt-viewer{position:fixed;inset:0;z-index:30;background:#1c2a30;touch-action:none;overflow:hidden;user-select:none}
+.tt-viewer[hidden],.tt-lijst[hidden]{display:none}
+.tt-vlak{position:absolute;left:0;top:0;transform-origin:0 0;will-change:transform}
+.tt-vlak img{display:block;width:100%;height:100%;pointer-events:none}
+.tt-deel{position:absolute;border:2px solid transparent;border-radius:6px;cursor:zoom-in}
+.tt-viewer.toon .tt-deel{border-color:#ffb300aa;background:#ffb30018}
+.tt-deel:hover{border-color:#ffb300;background:#ffb30026}
+.tt-bar{position:absolute;left:0;right:0;top:0;display:flex;gap:8px;align-items:center;padding:10px 12px;background:linear-gradient(#000a,#0000);color:#fff;pointer-events:none}
+.tt-bar b{flex:1;font-size:1rem;text-shadow:0 1px 3px #000}
+.tt-bar button,.tt-lijst button{pointer-events:auto;background:#fbf7ef;border:0;border-radius:999px;padding:8px 14px;font-weight:700;font-size:.9rem;box-shadow:0 2px 8px #0004;cursor:pointer}
+.tt-onder{position:absolute;left:50%;transform:translateX(-50%);bottom:calc(14px + env(safe-area-inset-bottom));display:flex;gap:8px}
+.tt-onder button{background:#fbf7ef;border:0;border-radius:999px;padding:10px 16px;font-weight:700;font-size:1rem;box-shadow:0 2px 8px #0004;cursor:pointer}
+.tt-lijst{position:fixed;inset:0;z-index:29;background:#000a;display:flex;align-items:center;justify-content:center}
+.tt-doos{background:#fbf7ef;border-radius:16px;padding:18px;max-width:min(720px,94vw);max-height:88vh;overflow:auto}
+.tt-doos h2{margin:0 0 4px;color:#0b5d68}.tt-doos p{margin:0 0 12px;color:#555;font-size:.9rem}
+.tt-raster{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:12px}
+.tt-kaart{background:#fff;border-radius:10px;padding:6px;box-shadow:0 1px 5px #0003;text-align:center;font-size:.8rem}
+.tt-kaart img{width:100%;height:180px;object-fit:cover;object-position:top;border-radius:6px;display:block;margin-bottom:6px}
+.tt-kaart button{width:100%;margin-top:4px;padding:6px 8px;font-size:.78rem;box-shadow:none;border:1px solid #0b5d68;color:#0b5d68;background:#fff}

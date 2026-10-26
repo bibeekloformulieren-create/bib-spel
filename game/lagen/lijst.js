@@ -25,6 +25,13 @@ window.LAGEN = {
     scripts: ['boek-e/boek-e.js', 'opdrachten.js', 'fiches-laden.js', 'laag.js']
   },
 
+  'tentoonstelling': {
+    naam: 'Tentoonstelling: de negen panelen van 50 jaar bib',
+    map: 'lagen/tentoonstelling/',
+    css: ['laag.css'],
+    scripts: ['panelen.js', 'laag.js']
+  },
+
   '_sjabloon': {
     naam: 'Lege laag om mee te beginnen (alleen wandelen)',
     map: 'lagen/_sjabloon/',
