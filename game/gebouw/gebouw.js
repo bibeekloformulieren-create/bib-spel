@@ -430,6 +430,67 @@
         k.position.y = H / 2; g.add(k);
         return { g, box: [L, H, D] };
       },
+      /* Canon-kopieermachine: witte kast met laden, zwarte uitvoer, scanner met invoer en bedieningspaneel. Voorkant naar +z. */
+      kopieermachine(m, mt) {
+        const g = new THREE.Group(), wit = mat(0xeceae5), zw = mat(0x1f2023), gr = mat(0xc9c9c6);
+        doos(g, 0.62, 0.74, 0.7, 0, 0.37, 0, wit);
+        [0.1, 0.22, 0.34, 0.46].forEach(y => doos(g, 0.56, 0.012, 0.01, 0, y, 0.352, gr));
+        doos(g, 0.5, 0.14, 0.02, 0, 0.82, 0.34, zw);
+        doos(g, 0.64, 0.2, 0.68, 0, 0.9, -0.01, wit); doos(g, 0.66, 0.04, 0.62, 0, 1.02, -0.02, wit);
+        doos(g, 0.62, 0.09, 0.4, 0, 1.1, -0.1, wit);
+        const pn = doos(g, 0.24, 0.02, 0.15, 0.14, 1.06, 0.3, mat(0x3b3e44)); pn.rotation.x = -0.25;
+        return { g, box: [0.66, 1.2, 0.72] };
+      },
+      /* Antidiefstalpoortje: glazen paneel op een stalen voet met zwarte rand. Het paneel loopt langs z; voorkant naar +x/+z. */
+      poortje(m, mt) {
+        const g = new THREE.Group(), glas = new THREE.MeshStandardMaterial({ color: 0xcfe3ea, transparent: true, opacity: 0.28, roughness: 0.1 });
+        doos(g, 0.1, 0.12, 0.46, 0, 0.06, 0, new THREE.MeshStandardMaterial({ color: 0xa4a9af, metalness: 0.7, roughness: 0.35 }));
+        doos(g, 0.02, 1.4, 0.42, 0, 0.82, 0, glas);
+        [-0.21, 0.21].forEach(z => doos(g, 0.035, 1.4, 0.02, 0, 0.82, z, zwart));
+        doos(g, 0.04, 0.04, 0.1, 0, 1.52, 0, mat(0xc0392b));
+        return { g, box: [0.12, 1.5, 0.46] };
+      },
+      /* Lage witte kast met twee deurtjes, een klok en brievenbakjes bovenop. Voorkant naar +z. */
+      lagekast(m, mt) {
+        const L = mt.lengte || 0.95, H = mt.hoogte || 1.0, D = 0.4, g = new THREE.Group(), wit = mat(0xf4f3ef);
+        doos(g, L, H, D, 0, H / 2, 0, wit); doos(g, 0.006, H - 0.1, 0.01, 0, H / 2, D / 2 + 0.002, mat(0xcfcdc7));
+        [-0.05, 0.05].forEach(x => doos(g, 0.015, 0.05, 0.015, x, H * 0.55, D / 2 + 0.01, mat(0x9aa0a6)));
+        const kl = new THREE.Group(); kl.position.set(L * 0.15, H + 0.13, -D / 2 + 0.12); g.add(kl);
+        cyl(kl, 0.13, 0.04, 0, 0, 0, zwart); kl.children[0].rotation.x = Math.PI / 2; cyl(kl, 0.115, 0.045, 0, 0, 0, mat(0xf2f2ee)); kl.children[1].rotation.x = Math.PI / 2;
+        [0, 1, 2].forEach(i => doos(g, 0.3, 0.025, 0.24, -L * 0.28, H + 0.015 + i * 0.07, -D / 2 + 0.2, mat(0xd8c7a6)));
+        return { g, box: [L, H + 0.3, D] };
+      },
+      /* Bureaustoel: zwarte netstoel op sterrenpoot met wieltjes. Kijkt naar +z. */
+      bureaustoel(m, mt) {
+        const g = new THREE.Group(), zwm = mat(0x26272b);
+        cyl(g, 0.035, 0.3, 0, 0.28, 0, zwart);
+        for (let i = 0; i < 5; i++) { const a = i * Math.PI * 2 / 5, x = Math.sin(a) * 0.3, z = Math.cos(a) * 0.3; lat(g, 0, 0.1, 0, x, 0.07, z, 0.02, zwart); cyl(g, 0.028, 0.05, x, 0.03, z, zwart); }
+        doos(g, 0.46, 0.07, 0.45, 0, 0.46, 0, zwm); doos(g, 0.44, 0.5, 0.05, 0, 0.78, -0.22, zwm);
+        [-0.25, 0.25].forEach(x => doos(g, 0.03, 0.03, 0.3, x, 0.66, -0.04, zwm));
+        return { g, box: [0.6, 1.05, 0.6] };
+      },
+      /* Raam in een muur: kozijn met glas en rolgordijn. lengte = breedte, hoog = hoogte, onder = hoogte van de vensterbank. Zichtbaar vanaf de kant waar het naartoe kijkt. */
+      raam(m, mt) {
+        const B = mt.lengte || 1.3, Hh = mt.hoog || 2.2, g = new THREE.Group();
+        const v = new THREE.Mesh(new THREE.PlaneGeometry(B, Hh), new THREE.MeshLambertMaterial({ map: venster(B, Hh) }));
+        v.position.y = (mt.onder != null ? mt.onder : 0.9) + Hh / 2; g.add(v);
+        return { g, box: [0.02, 0.02, 0.02] };
+      },
+      /* Witgeschilderde bakstenen pilaar tot het plafond. */
+      pilaar(m, mt) {
+        const B = mt.lengte || 0.6, D = mt.diep || 0.5, Hh = mt.hoogte || 3.0, g = new THREE.Group();
+        const tx = canvasTexture(c => { c.fillStyle = '#f2f1ed'; c.fillRect(0, 0, 128, 128); c.fillStyle = '#dcdad3'; for (let r = 0; r < 8; r++) { c.fillRect(0, r * 16, 128, 2); for (let k = 0; k < 2; k++) c.fillRect(((r % 2) * 32 + k * 64) % 128, r * 16, 2, 16); } }, B / 0.5, Hh / 0.5);
+        const p = new THREE.Mesh(new THREE.BoxGeometry(B, Hh, D), new THREE.MeshLambertMaterial({ map: tx }));
+        p.position.y = Hh / 2; g.add(p);
+        return { g, box: [B, Hh, D] };
+      },
+      /* UiTPAS-standaardje: schuin bordje met blauw en oranje kaart. Zet y op de hoogte van het blad. */
+      uitpasbordje(m, mt) {
+        const g = new THREE.Group(), s = new THREE.Group(); s.rotation.x = -0.25; g.add(s);
+        doos(s, 0.24, 0.3, 0.012, 0, 0.17, 0, mat(0xe9f3f5)); doos(s, 0.22, 0.07, 0.014, 0, 0.27, 0.002, mat(0x2aa5c9)); doos(s, 0.22, 0.09, 0.014, 0, 0.1, 0.002, mat(0xf29a1e)); doos(s, 0.12, 0.05, 0.016, 0, 0.19, 0.003, mat(0x2b2f36));
+        doos(g, 0.2, 0.01, 0.1, 0, 0.005, -0.02, mat(0xdadada));
+        return { g, box: [0.02, 0.02, 0.02] };
+      },
       /* Wit blok (toog, kast of balie): effen witte doos. Kijkt naar +z. lengte = breedte, diep = diepte, hoogte. */
       toog(m, mt) {
         const L = mt.lengte || 1.8, D = mt.diep || 0.82, H = mt.hoogte || 1.0, g = new THREE.Group();
@@ -721,7 +782,7 @@
       if (nieuw) { kies({ it: nieuw }); bewaar(); meld(nieuw.mt.naam + ' gemaakt: sleep hem naar de juiste plek.'); }
     };
     knop('Kopieer (K)', kopieer);
-    const LENGTES = { toog: 1.8, kubuskast: 1.7, rek: 2, 'tafel-hoog': 2.4, tafel: 1.6, tijdschriftrek: 1.3, radiator: 1.0 };   // meubels die je korter of langer kunt maken
+    const LENGTES = { raam: 1.3, pilaar: 0.6, toog: 1.8, kubuskast: 1.7, rek: 2, 'tafel-hoog': 2.4, tafel: 1.6, tijdschriftrek: 1.3, radiator: 1.0 };   // meubels die je korter of langer kunt maken
     const lengte = delta => {
       if (!gekozen || !gekozen.it) { meld('Klik eerst een rek of tafel aan.'); return; }
       const mt = gekozen.it.mt; if (!LENGTES[mt.soort]) { meld('Dit meubel kun je niet korter of langer maken.'); return; }

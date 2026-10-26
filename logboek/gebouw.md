@@ -46,3 +46,6 @@ Heb je iets nodig van de lagen, of verander je iets aan `window.Gebouw` waar een
 | 26-10-2026 | Claude | Balie en uitleen: pc-plekken, boekenstapel, rolkast met folderhouder, kapstok, rode mandjes en hangende tv erbij (plaatsen geschat; zelf te verslepen). Meubels hebben nu een optionele hoogte y. |
 | 26-10-2026 | Claude | Het witte blok van de uitleentoog is uit het model geknipt en een meubel geworden ('uitleentoog', soort toog): verslepen, draaien, korter/langer, verwijderen kan nu. Nieuwe optie modelUitsnijden in gebouw-data.js. |
 | 26-10-2026 | Claude | Uitleen: tweede toog erbij, pc's en rolkast op jouw plek, boekenstapel weg (jouw lijst). |
+| 26-10-2026 | Claude | Balie verder: twee ramen achter de balie, kopieermachine, twee antidiefstalpoortjes, lage kast met klok, folderrek en bureaustoel (geschatte plekken, zelf te verslepen). |
+| 26-10-2026 | Claude | Alle ramen zijn nu verplaatsbare meubels (soort raam, breedte met Korter/Langer). Witte bakstenen pilaar en UiTPAS-bordje erbij. Balie zelf was al verplaatsbaar als gebouwonderdeel. |
+| 26-10-2026 | Claude | Lijst van balie verwerkt: nieuwe plekken (kapstok, kopieermachine, kast met klok, bureaustoelen, pc's, ramen, uitpasbordje), pilaar, folderrek en mandjes weg, balie 0,3 m verschoven, extra dvd-rek en bureaustoel. |

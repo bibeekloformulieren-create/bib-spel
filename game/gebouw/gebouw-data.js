@@ -84,6 +84,7 @@ window.GEBOUWDATA = {
     { naam: "dvd-rek oost",     soort: "rek", textuur: "dvd", x: -7.9, z: -25.25, lengte: 1.4, hoogte: 1.85, kijkt: "west" },
     { naam: "dvd-rek oost kopie 2",     soort: "rek", textuur: "dvd", x: -7.9, z: -26.6, lengte: 1.4, hoogte: 1.85, kijkt: "west" },
     { naam: "dvd-rek oost kopie 3",     soort: "rek", textuur: "dvd", x: -7.9, z: -28.0, lengte: 1.4, hoogte: 1.85, kijkt: "west" },
+    { naam: "dvd-rek oost kopie 1",     soort: "rek", textuur: "dvd", x: -7.75, z: -29.40, lengte: 0.60, hoogte: 1.85, kijkt: "noord"},
     { naam: "rode toren",        soort: "rodetoren", x: -9.5, z: -28.5, kijkt: "noord" },
     { naam: "hoge kast west",  soort: "rek", textuur: "boeken", x: -10.8, z: -25.95, lengte: 1, hoogte: 2.1, kijkt: "oost" },
     { naam: "hoge kast west kopie 2",  soort: "rek", textuur: "boeken", x: -10.8, z: -26.8, lengte: 1, hoogte: 2.1, kijkt: "oost" },
@@ -128,16 +129,30 @@ window.GEBOUWDATA = {
     { naam: "kubuskast koffiehoek 2", soort: "kubuskast", x: -2.45, z: -34.95, lengte: 1.3, hoogte: 1.7, kijkt: "west", tijdschriften: true },
     { naam: "kubuskast tijdschriften west", soort: "kubuskast", x: -5.5, z: -36.15, lengte: 3.4, hoogte: 1.7, kijkt: "oost", tijdschriften: true },
     /* uitleen en balie: details op de witte blokken uit het model (y = hoogte van het blad) */
-    { naam: "uitleentoog", soort: "toog", x: -8.65, z: -33.0, lengte: 1.25, diep: 0.82, hoogte: 1.0, kijkt: "zuid" },
-    { naam: "uitleentoog kopie 1", soort: "toog", x: -8.65, z: -32.2, lengte: 1.25, diep: 0.82, hoogte: 1.0, kijkt: "zuid" },
-    { naam: "pc uitleen 1", soort: "pcplek", x: -8.65, z: -32.25, y: 1.0, kijkt: "zuid" },
-    { naam: "pc uitleen 2", soort: "pcplek", x: -8.6, z: -32.85, y: 1.0, kijkt: "noord" },
-    { naam: "pc balie 1", soort: "pcplek", x: -10.2, z: -35.95, y: 1.2, kijkt: "noord" },
-    { naam: "pc balie 2", soort: "pcplek", x: -8.8, z: -35.95, y: 1.2, kijkt: "noord" },
-    { naam: "rolkast folders", soort: "rolkast", x: -7.75, z: -32.6, kijkt: "west" },
-    { naam: "kapstok", soort: "kapstok", x: -11.2, z: -29.6 },
-    { naam: "mandjes", soort: "mandjes", x: -11.7, z: -29.0, kijkt: "oost" },
-    { naam: "tv balie", soort: "tvhangend", x: -7.0, z: -34.3, kijkt: "zuid" },
+    { naam: "uitleentoog", soort: "toog", x: -8.65, z: -33.00, lengte: 1.25, diep: 0.82, hoogte: 1.0, kijkt: "zuid"},
+    { naam: "uitleentoog kopie 1", soort: "toog", x: -8.65, z: -32.20, lengte: 1.25, diep: 0.82, hoogte: 1.0, kijkt: "zuid"},
+    { naam: "pc uitleen 1", soort: "pcplek", x: -8.65, z: -32.25, y: 1.0, kijkt: "zuid"},
+    { naam: "pc uitleen 2", soort: "pcplek", x: -8.60, z: -32.85, y: 1.0, kijkt: "noord"},
+    { naam: "pc balie 1", soort: "pcplek", x: -9.60, z: -35.75, y: 1.2, kijkt: "noord"},
+    { naam: "pc balie 2", soort: "pcplek", x: -8.60, z: -35.75, y: 1.2, kijkt: "noord"},
+    { naam: "rolkast folders", soort: "rolkast", x: -7.75, z: -32.60, kijkt: "west"},
+    { naam: "kapstok", soort: "kapstok", x: -11.95, z: -31.30},
+    { naam: "tv balie", soort: "tvhangend", x: -7.00, z: -34.30, kijkt: "zuid"},
+    /* balie: kopieermachine, poortjes bij de ingang, lage kast met klok, folderrek en bureaustoel */
+    { naam: "kopieermachine", soort: "kopieermachine", x: -12.25, z: -35.25, kijkt: "oost", hoek: 93 },
+    { naam: "poortje 1", soort: "poortje", x: -11.15, z: -34.70, kijkt: "oost"},
+    { naam: "poortje 2", soort: "poortje", x: -11.15, z: -33.80, kijkt: "oost"},
+    { naam: "lage kast klok", soort: "lagekast", x: -12.20, z: -36.65, lengte: 0.95, kijkt: "oost"},
+    { naam: "bureaustoel balie", soort: "bureaustoel", x: -8.65, z: -36.70, kijkt: "zuid"},
+    { naam: "bureaustoel balie kopie 1", soort: "bureaustoel", x: -9.60, z: -36.60, kijkt: "zuid"},
+    /* ramen (verplaatsbaar): lengte = breedte, hoog = hoogte, onder = hoogte van de vensterbank */
+    { naam: "raam gang links", soort: "raam", x: -10.07, z: -22.50, lengte: 1.30, hoog: 1.5, onder: 0.9, kijkt: "oost"},
+    { naam: "raam gang rechts", soort: "raam", x: -8.28, z: -22.50, lengte: 1.30, hoog: 1.5, onder: 0.9, kijkt: "west"},
+    { naam: "raam tijdschriften 1", soort: "raam", x: -6.70, z: -37.38, lengte: 1.80, hoog: 2.2, onder: 0.9, kijkt: "zuid"},
+    { naam: "raam tijdschriften 2", soort: "raam", x: -4.30, z: -37.38, lengte: 1.80, hoog: 2.2, onder: 0.9, kijkt: "zuid"},
+    { naam: "raam balie 1", soort: "raam", x: -10.00, z: -37.38, lengte: 1.30, hoog: 2.2, onder: 0.9, kijkt: "zuid"},
+    { naam: "raam balie 2", soort: "raam", x: -8.40, z: -37.38, lengte: 1.30, hoog: 2.2, onder: 0.9, kijkt: "zuid"},
+    { naam: "uitpasbordje", soort: "uitpasbordje", x: -10.4, z: -35.8, y: 1.2, kijkt: "zuid", hoek: 329.5 },
     { naam: "cafetafel", soort: "cafetafel", x: -4.2, z: -36.15, breed: 0.9, hoek: 62.5 },
     { naam: "schaalstoel nw", soort: "schaalstoel", x: -4.75, z: -36.65, hoek: 64.5 },
     { naam: "schaalstoel no", soort: "schaalstoel", x: -3.55, z: -36.65, hoek: 315 },
@@ -179,6 +194,7 @@ window.GEBOUWDATA = {
      Voorbeelden:  { onderdeel: "Dvd_Kast_(Jaan)@-8.1,-26.6", weg: true }   of   { onderdeel: "naam@x,z", dx: 0.3, dz: -0.1 }
      De naam met plek krijg je van "Kopieer lijst voor Claude" in de verplaatsmodus (&bewerk). */
   modelAanpassingen: [
+    { onderdeel: "Balie@-9.5,-35.9", dx: 0.3, dz: -0.05 },
     { onderdeel: "Dvd_Kast_(Jaan)@-8.1,-26.6", weg: true },
     { onderdeel: "onderdeel@-5.2,-27.9", weg: true },   // bureaugroep digipunt (wordt nagebouwd)
     { onderdeel: "onderdeel@-6.9,-27.9", weg: true },   // bureaugroep digipunt (wordt nagebouwd)
@@ -194,12 +210,8 @@ window.GEBOUWDATA = {
   ],
 
   /* Ramen in de gevel (het model heeft geen ramen). onder = hoogte van de vensterbank. */
-  ramen: [
-    { x: -10.07, z: -22.5, breed: 1.3, hoog: 1.5, onder: 0.9, kijkt: "oost" },   // gang naar de glazen zaal, links
-    { x: -8.28,  z: -22.5, breed: 1.3, hoog: 1.5, onder: 0.9, kijkt: "west" },   // en rechts
-    { x: -6.7, z: -37.38, breed: 1.8, hoog: 2.2, onder: 0.9, kijkt: "zuid" },
-    { x: -4.3, z: -37.38, breed: 1.8, hoog: 2.2, onder: 0.9, kijkt: "zuid" }
-  ],
+  ramen: [],   // de ramen staan nu bij "meubels" (soort "raam"), zodat je ze kunt verplaatsen
+
 
   /* Gegokte rekken uit een eerdere versie. Worden NIET getoond; bewaard als geheugensteun
      tot de echte posities bekend zijn. Verplaats een rek naar "rekken" om het te tonen. */
