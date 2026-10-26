@@ -44,7 +44,13 @@ window.GEBOUWDATA = {
       { naam: "loper naar de glazen zaal", type: "loper", x: [-9.8, -8.5], z: [-26.8, -21.6] },
       { naam: "digipunt", type: "tegel-licht",  x: [-8.5, -3.5],  z: [-31.5, -27.0] },
       { naam: "tijdschriftenhoek", type: "tapijt", x: [-5.8, -1.85], z: [-37.4, -31.8] },
-      { naam: "kleuterhoek", type: "parket", x: [-3.45, 0.0], z: [-31.8, -18.1] },
+      /* kleuterhoek: de vloer loopt tot onder de muren (west: muur ligt noordelijk op x -3,6; oost: de schuine oranje muur) */
+      { naam: "kleuterhoek 1", type: "parket", x: [-3.45, 0.05], z: [-31.8, -27.0] },
+      { naam: "kleuterhoek 2", type: "parket", x: [-3.7, 0.05],  z: [-27.0, -24.0] },
+      { naam: "kleuterhoek 3", type: "parket", x: [-3.55, 0.05], z: [-24.0, -23.0] },
+      { naam: "kleuterhoek 4", type: "parket", x: [-3.45, 0.2],  z: [-23.0, -21.5] },
+      { naam: "kleuterhoek 5", type: "parket", x: [-3.45, 0.27], z: [-21.5, -20.0] },
+      { naam: "kleuterhoek 6", type: "parket", x: [-3.45, 0.36], z: [-20.0, -18.1] },
       { naam: "glazen zaal", type: "tegel-groot", x: [-12.2, -6.0], z: [-21.6, -15.6] }
     ]
   },
