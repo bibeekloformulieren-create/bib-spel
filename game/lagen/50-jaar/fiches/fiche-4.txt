@@ -3,33 +3,34 @@
 
 nummer: 4
 categorie: gebouw
-soort: keuze
+soort: invul
 titel: Zonder kraan
-waar: Onder of bij de vide (het stalen skelet).
+waar: Onder of bij de vide.
 plek: 5, -5.8
-bron: Gesprek Willy Bultynck, Details bouw bibliotheek Eeklo
-tip: Het is meer dan wat de takel officieel kon, maar minder dan een vrachtwagen.
-boeke-goed: 1.300 kilo. Ongeveer een kleine auto, zonder kraan.
-boeke-fout: Dat klopt niet. Het is meer dan 950, maar veel minder dan een vrachtwagen.
+bron: Gesprek Willy Bultynck, Paneel "Gebouwd voor boeken"
+zoek-opdracht: Zoek de vide. Kijk omhoog door de opening. Die stalen balken werden zonder kraan naar boven gehesen.
+tip: Trek 950 af van 1.300.
+boeke-goed: 350 kilo méér dan mocht! Zo zwaar als vijf volwassenen. Zonder kraan.
+boeke-fout: Niet helemaal. De takel mocht 950 kilo. Ze hesen 1.300 kilo. Wat is het verschil?
+uniek: nee
 
 [kijkpunten]
-- Aan dit gebouw kon geen kraan. Alles moest met de hand, met een takel en met veel geduld.
-- De takel was gemaakt om motoren uit auto's te tillen. Hij mocht officieel 950 kilo dragen.
+- Aan dit gebouw kon geen kraan. Te smal, te druk. Alles moest met de hand, met touwen en een kleine takel.
+- Die takel was eigenlijk bedoeld om motorblokken uit auto's te tillen. Hij mocht officieel maar 950 kilo dragen.
+- Maar de bouwers hesen er soms veel meer mee. En niemand zei er iets van.
 
 [beelden]
-img/staalskelet.jpg | Het stalen skelet van de vide.
+img/staalskelet.jpg | Het stalen skelet van de vide in aanbouw.
 img/vide-reling.jpg | De vide, klaar.
 
 [vraag]
-Hoeveel kilo hesen ze er in werkelijkheid mee, bij het zwaarste stuk?
+De takel mocht officieel 950 kilo. Het zwaarste stuk woog 1.300 kilo. Hoeveel kilo méér dan mocht?
 
-[antwoorden]
-- 500 kilo
-- 950 kilo
-* 1.300 kilo
-- 5.000 kilo
+[velden]
+Hoeveel kilo méér dan mocht? | 350
 
 [leer]
-- Het zwaarste stuk woog ongeveer 1.300 kilo: zo veel als een kleine auto.
-- Voor stenen en mortel gebruikten ze een fietswiel met een ketting.
-- De vloeren zijn gemaakt om 300 kilo per vierkante meter te dragen. Boeken zijn zwaar.
+- Het zwaarste stuk woog 1.300 kilo: zo zwaar als een kleine auto.
+- Voor stenen en mortel gebruikten ze een fietswiel met een ketting — als een zelfgemaakte liftje.
+- De vloeren zijn berekend op 500 kilo per vierkante meter. Boeken zijn namelijk heel zwaar.
+- Halverwege bleek dat sommige muren te zwak waren. De planning moest meteen omgegooid worden.

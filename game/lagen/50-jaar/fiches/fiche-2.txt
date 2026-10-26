@@ -5,20 +5,22 @@ nummer: 2
 categorie: gebouw
 soort: keuze
 titel: Verborgen plekken
-waar: Bij de trap of de balie (de kruipkelder ligt eronder).
+waar: Bij de trap of de lift.
 plek: -9.5, 5.5
-bron: Gesprek Willy Bultynck, Details bouw bibliotheek Eeklo
+bron: Gesprek Willy Bultynck, Paneel "Gebouwd voor boeken"
+zoek-opdracht: Neem de lift. Op hoeveel verdiepingen stopt hij?
 tip: De naam zegt hoe je erin moet: je moet kruipen.
-boeke-goed: Een kruipkelder. Onder je voeten, en niemand komt er nog in.
+boeke-goed: Een kruipkelder! Onder je voeten. En niemand komt er nog in.
 boeke-fout: Nee. Denk aan iets onder de grond waar je op handen en voeten door moet.
 
 [kijkpunten]
-- In 1986 werd het oude herenhuis helemaal leeggehaald. Wie beneden stond, kon tot onder het dak kijken.
-- Willy Bultynck werkte mee aan de verbouwing. Hij kent de geheimen van het gebouw.
+- Onder dit gebouw zit een geheime ruimte waar niemand meer bij kan.
+- Tijdens de verbouwing ging de bibliothecaris eens kijken in het nieuwe gebouw. Hij nam de nieuwe lift. En... de lift blokkeerde. Geroepen, maar niemand hoorde hem!
+- Gelukkig werd hij toch gemist. Gered, en veilig en hongerig naar huis.
 
 [beelden]
-img/gestript.jpg | Het huis tijdens de verbouwing: alles eruit.
-img/zolder.jpg | De oude houten balken op de zolder bleven staan.
+img/gestript.jpg | Het huis tijdens de verbouwing: bijna alles eruit.
+img/trap-tussenverdiep.jpg | De trap in de bib van vandaag.
 
 [vraag]
 Onder het gelijkvloers is een ruimte waar niemand meer bij kan. Wat is het?
@@ -32,4 +34,5 @@ Onder het gelijkvloers is een ruimte waar niemand meer bij kan. Wat is het?
 [leer]
 - Onder het gelijkvloers ligt een kruipkelder. Je kunt er niet meer in.
 - Op de derde verdieping staat een valse wand. Erachter zie je nog de oude dakstructuur.
-- De oorspronkelijke muren lopen niet helemaal evenwijdig met de voorgevel. Extra muurtjes verbergen dat.
+- De buitenmuren staan niet symmetrisch. Extra muurtjes verbergen dat — en de stukadoor moest op sommige plekken heel dik pleisteren.
+- De sleutel om mensen te bevrijden uit de lift hangt "werkloos aan zijn haak". Hij is maar één keer nodig geweest.

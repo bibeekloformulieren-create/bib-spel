@@ -1,36 +1,36 @@
-# FICHE 5: De weg van een boek
+# FICHE 5: De politie aan de deur
 # Uitleg om dit bestand aan te passen: zie HANDLEIDING.md in deze map. Regels die met # beginnen worden genegeerd.
 
 nummer: 5
 categorie: werking
-soort: volgorde
-titel: De weg van een boek
-waar: Bij de balie, of waar nieuwe boeken binnenkomen.
+soort: invul
+titel: De politie aan de deur
+waar: Bij de balie of de zelfuitleenbalie.
 plek: -7, 0.3
-bron: Paneel 5 - Zo werkt de bib (Spoor 3)
-tip: Eerst moet het boek er zijn. Daarna kan het gezocht en geleend worden. Op het eind is het versleten.
-boeke-goed: Kiezen, beschrijven, vinden, lenen, afvoeren. Zo reist een boek.
-boeke-fout: Net niet. Het boek moet er eerst zijn voor iemand het kan zoeken.
+bron: Paneel "Zo werkt de bibliotheek", brochure 50 jaar bib
+zoek-opdracht: Zoek de inleverbus. Hier gooi je boeken in als de bib dicht is. Vroeger liep de boete gewoon door.
+tip: Vermenigvuldig: boeken × weken × prijs per week.
+boeke-goed: 60 frank! En dan nog eens 300 frank als de politie moest langskomen.
+boeke-fout: Bijna. Bereken: 4 boeken × 3 weken × 5 frank per week.
+uniek: nee
 
 [kijkpunten]
-- Een boek staat niet zomaar in het rek. Het heeft eerst een hele reis gemaakt.
-- Sommige stappen doet een medewerker, andere doe jij zelf.
+- Vroeger moest je je boek op tijd terugbrengen. Te laat? Dan kreeg je een brief. Dan een aangetekende brief. Dan... de politie.
+- Echt! In de eerste jaren van de bib konden politieagenten aan je deur komen. Voor maar twee boeken.
+- Vandaag bestaat de boete niet meer. Je krijgt gewoon een vriendelijk berichtje.
 
 [beelden]
-img/beschrijven.jpg | Een medewerker beschrijft nieuwe boeken.
-img/wegzetten.jpg | Boeken terug op hun plaats zetten.
+img/balie-1988.jpg | De balie van de bib in 1988: stempels, kaartjes, een vertrouwd gezicht.
+img/afhaalpunt.jpg | Boeken ophalen aan de nooddeur, tijdens corona.
 
 [vraag]
-Zet de reis van een boek in de juiste volgorde.
+Bereken de boete! In 1983 kostte een boete 5 frank per boek per week. Je hebt 4 boeken geleend en brengt ze 3 weken te laat terug. Hoeveel frank betaal je?
 
-[antwoorden]
-Kiezen | De bib kiest het boek uit, samen met andere bibs
-Beschrijven | Het boek krijgt een beschrijving in de computer
-Vinden | Een lener zoekt het boek op de gsm of computer
-Lenen | De lener scant het boek zelf en neemt het mee
-Afvoeren | Is het boek versleten? Dan wordt het verkocht
+[velden]
+Hoeveel frank? | 60
 
 [leer]
-- Sinds 2016 kopen 14 bibliotheken in het Meetjesland samen boeken aan. Dat geeft korting.
-- Elk boek krijgt één beschrijving die voor heel Vlaanderen geldt. Zoek je een boek dat Eeklo niet heeft? Dan laat je het overkomen uit een andere bib.
-- Versleten boeken worden verkocht, onder meer op de donderdagmarkt. Met het geld worden lessen Nederlands betaald voor nieuwkomers.
+- In mei 1976 belde een politieagent aan bij een lener — voor twee boeken die zoekgeraakt waren bij de verhuizing.
+- Een politiebezoek kostte in 1983 bovenop de boete nog eens 300 frank extra.
+- Wie een boek niet op tijd terugbracht, kon na vier weken de politie aan de deur verwachten.
+- Sinds 27 februari 2024 zijn er helemaal geen boetes meer. Je krijgt gewoon een herinnering.

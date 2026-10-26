@@ -7,22 +7,23 @@ soort: keuze
 titel: De rode draad
 waar: Op een plek waar je de ruitvorm ziet: schuine vloertegels of onder de vide.
 plek: -4, -6
-bron: Paneel 3 - De verbouwing, Opdracht 3
-zoek-opdracht: Zoek in de bib twee plekken waar je die vorm ziet. Kijk naar beneden en omhoog.
-tip: Een vierkant dat op een hoek staat.
-boeke-goed: Een ruit. Willy noemt die schuine lijnen de rode draad.
-boeke-fout: Nee. Denk aan een vierkant dat op een hoek staat.
+bron: Paneel "Gebouwd voor boeken", gesprek Willy Bultynck
+zoek-opdracht: Speur als een detective: zoek in de bib minstens twee plekken waar je die vorm terugziet. Kijk naar beneden én omhoog.
+tip: Een vierkant dat op een hoek staat — als een diamant.
+boeke-goed: Een ruit! Willy verstopte hem overal. Zoek maar eens verder...
+boeke-fout: Nee. Denk aan een vierkant dat op een hoek staat, als een diamant.
 
 [kijkpunten]
-- Het hele gebouw is rond één vorm gebouwd. Je ziet hem op de foto's.
-- Ook de vloeren en het plafond liggen schuin, onder 45 graden.
+- Er zit een geheim in dit gebouw. Één vorm keert overal terug: in de vloer, het plafond, de vide en zelfs de gedenkplaat.
+- De man die dit gebouw verbouwde, Willy Bultynck, verstopte die vorm bewust overal. Hij noemt het zijn rode draad.
+- Kun jij hem vinden? Kijk goed naar de vloertegels onder je voeten.
 
 [beelden]
-img/bekisting-ruit.jpg | De bekisting van de vide tijdens de bouw.
-img/vide-plafond.jpg | De opening in het plafond.
+img/bekisting-ruit.jpg | De vide in aanbouw: de vorm is al zichtbaar.
+img/vide-plafond.jpg | Het schuine plafond rond de vide.
 
 [vraag]
-Welke vorm is het?
+Welke vorm is de rode draad?
 
 [antwoorden]
 - Een cirkel
@@ -33,4 +34,4 @@ Welke vorm is het?
 [leer]
 - De vloertegels liggen onder 45 graden. De plafonds hebben ook schuine lijnen.
 - Willy noemt die 45 graden de rode draad: je vindt ze in de vloer, het plafond, de vide en de gedenkplaat.
-- Wie goed zoekt, ziet de ruit ook terug in de vide.
+- "Aan de details ken je de vakmensen." Dat zei de bouwkundige tekenaar over het werk van Willy.

@@ -1,35 +1,36 @@
-# FICHE 7: Waar stond dat boek?
+# FICHE 7: Op alfabet
 # Uitleg om dit bestand aan te passen: zie HANDLEIDING.md in deze map. Regels die met # beginnen worden genegeerd.
 
 nummer: 7
 categorie: werking
-soort: keuze
-titel: Waar stond dat boek?
-waar: Aan de trap. De jeugdafdeling is boven, dus de fiche ligt onderaan de trap.
+soort: volgorde
+titel: Op alfabet
+waar: Aan de trap. De jeugdafdeling is boven.
 plek: 10, 5.5
-bron: Anekdotes bib medewerkers (Wijsneus, Bibliotheekstem)
-tip: Het klinkt als een slim iemand, maar het is een figuurtje.
-boeke-goed: Een wijsneus. Dan weet iedereen waar het boek hoort.
-boeke-fout: Nee. Het is een figuurtje dat in het rek staat tot het boek terug is.
+bron: Anekdotes bib medewerkers, brochure 50 jaar bib
+tip: Kijk naar de eerste letter van de familienaam.
+boeke-goed: Goed gesorteerd! Zo vindt elke lener zijn boek in een oogwenk.
+boeke-fout: Bijna. Kijk goed naar de beginletter van elke familienaam.
 
 [kijkpunten]
-- In de bib staan duizenden boeken. Elk boek heeft zijn eigen plek.
-- Neem je er één uit het rek, dan blijft er een gat. Daar is een slim trucje voor.
+- In een bib staan de boeken op alfabet, op de familienaam van de schrijver. Zo weet iedereen meteen waar te zoeken.
+- Vroeger werden urenlang boekkaartjes met de hand alfabetisch gesorteerd in fichebakken. Alles zelf, kaartje per kaartje.
+- Als je een boek uit het rek neemt, blijft er een gat. Een wijsneus houdt je plek vrij — zodat het rek geen slagveld wordt.
 
 [beelden]
-img/gevulde-rekken.jpg | Elk boek heeft zijn plek.
-img/klasuitleen.jpg | Een klas kiest samen nieuwe boeken.
+img/gevulde-rekken.jpg | Elk boek op zijn vaste plek, op alfabet.
+img/wegzetten.jpg | Boeken terugzetten na uitleen.
 
 [vraag]
-Wat zet je in de plaats van een boek dat je meeneemt?
+Zet deze mensen op alfabet, zoals hun boeken in het rek staan.
 
 [antwoorden]
-* Een wijsneus
-- Een bladwijzer
-- Een sticker
-- Niets, dat is niet nodig
+Bultynck | Willy Bultynck — bouwde de vide zonder kraan
+Himschoot | Kenneth Himschoot — eerste webmaster van Eeklo
+Minne | Brigitte Minne — vertelde griezelverhalen in de bib
+Verstraete | Roger Verstraete — de allereerste bibliothecaris
 
 [leer]
-- Op de jeugdafdeling ligt een doos met wijsneuzen. Neem je een boek, zet dan een wijsneus op de plek. Zo wordt het rek geen slagveld.
-- Een jongen deed dat zonder dat iemand het vroeg. De les van de rondleiding was goed aangekomen.
+- Op de jeugdafdeling ligt een doos met wijsneuzen. Neem je een boek, zet dan een wijsneus op de plek.
+- Een jongen deed dat vanzelf, zonder dat iemand het vroeg. De les van de rondleiding was goed aangekomen.
 - In de bib praat je zachtjes. Dat noemen kinderen de bibliotheekstem.
