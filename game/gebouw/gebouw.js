@@ -514,9 +514,9 @@
     const items = [];
     /* zet groep en botsingsblok op de plek en richting van het meubel */
     function zetItem(it) {
-      const mt = it.mt, rot = draai[mt.kijkt || 'zuid'] || 0;
-      it.g.rotation.y = rot; it.g.position.set(mt.x, 0, mt.z);
-      let [bx, by, bz] = it.box; if (Math.abs(Math.sin(rot)) > 0.5) [bx, bz] = [bz, bx];   // een kwartslag gedraaid: breedte en diepte wisselen
+      const mt = it.mt, rot = mt.hoek != null ? mt.hoek * Math.PI / 180 : (draai[mt.kijkt || 'zuid'] || 0);
+      it.rot = rot; it.g.rotation.y = rot; it.g.position.set(mt.x, 0, mt.z);
+      let [bx, by, bz] = it.box; const c = Math.abs(Math.cos(rot)), sn = Math.abs(Math.sin(rot)); [bx, bz] = [bx * c + bz * sn, bx * sn + bz * c];   // gedraaid: het botsingsblok wordt breder of dieper
       it.bot.geometry.dispose(); it.bot.geometry = new THREE.BoxGeometry(bx, by, bz);
       it.bot.position.set(mt.x, by / 2, mt.z);
       it.bot.userData.bb = null; meubelCache = null; nabij = []; nabijX = 1e9;     // botsingsgegevens opnieuw berekenen
@@ -559,14 +559,25 @@
     meld('Klik een meubel of onderdeel van het gebouw en sleep het.');
     const ververs = () => { meubelCache = null; nabij = []; nabijX = 1e9; };
     const bewaar = () => { try {
-      const o = {}; items.forEach(it => { o[it.mt.naam] = it.mt.kopieVan ? Object.assign({}, it.mt) : Object.assign({ x: +it.mt.x.toFixed(2), z: +it.mt.z.toFixed(2), kijkt: it.mt.kijkt || 'zuid' }, it.mt.lengte ? { lengte: +it.mt.lengte.toFixed(2) } : {}); });
+      const o = {}; items.forEach(it => { o[it.mt.naam] = it.mt.kopieVan ? Object.assign({}, it.mt) : Object.assign({ x: +it.mt.x.toFixed(2), z: +it.mt.z.toFixed(2), kijkt: it.mt.kijkt || 'zuid' }, it.mt.hoek != null ? { hoek: it.mt.hoek } : {}, it.mt.lengte ? { lengte: +it.mt.lengte.toFixed(2) } : {}); });
       verwijderd.forEach(n => { o[n] = { weg: true }; });
       localStorage.setItem('bibMeubelPlekken', JSON.stringify(o));
       localStorage.setItem('bibModelAanpassingen', JSON.stringify(modelStaat));
     } catch (e) {} };
+    /* draaiknop: oranje bol op een stokje voor het gekozen meubel; sleep hem rond het meubel om vrij te draaien (stapjes van 5 graden) */
+    const knopG = new THREE.Group(), knopBol = new THREE.Mesh(new THREE.SphereGeometry(0.14, 20, 14), new THREE.MeshBasicMaterial({ color: 0xff7a00, depthTest: false }));
+    knopBol.renderOrder = 999; knopBol.userData.draaiknop = true; knopG.add(knopBol);
+    const knopRing = new THREE.Mesh(new THREE.RingGeometry(0.17, 0.2, 24), new THREE.MeshBasicMaterial({ color: 0xffffff, depthTest: false, side: THREE.DoubleSide })); knopRing.rotation.x = -Math.PI / 2; knopRing.renderOrder = 998; knopG.add(knopRing);
+    knopG.visible = false; scene.add(knopG);
+    const hoekVan = it => it.rot || 0;
+    const zetKnop = () => {
+      if (!gekozen || !gekozen.it) { knopG.visible = false; return; }
+      const it = gekozen.it, r = hoekVan(it), afst = Math.max(it.box[0], it.box[2]) / 2 + 0.45;
+      knopG.position.set(it.mt.x + Math.sin(r) * afst, 0.35, it.mt.z + Math.cos(r) * afst); knopG.visible = true;
+    };
     const knoopVan = k => k ? (k.it ? k.it.g : k.o.c) : null;
-    const kies = k => { gekozen = k; if (k) { kader.setFromObject(knoopVan(k)); kader.visible = true; meld((k.it ? k.it.mt.naam : k.o.sleutel.split('@')[0] || 'onderdeel') + (k.it ? ' (sleep; R = draaien)' : ' (onderdeel van het gebouw; sleep of verwijder)')); } else kader.visible = false; };
-    const draai = () => { if (!gekozen || !gekozen.it) return; const m = gekozen.it.mt, k = m.kijkt || 'zuid'; m.kijkt = draaiVolgorde[(draaiVolgorde.indexOf(k) + 1) % 4]; zetItem(gekozen.it); kader.setFromObject(gekozen.it.g); bewaar(); };
+    const kies = k => { gekozen = k; zetKnop(); if (k) { kader.setFromObject(knoopVan(k)); kader.visible = true; meld((k.it ? k.it.mt.naam : k.o.sleutel.split('@')[0] || 'onderdeel') + (k.it ? ' (sleep het meubel; draai met de oranje bol)' : ' (onderdeel van het gebouw; sleep of verwijder)')); } else kader.visible = false; };
+    const draai = () => { if (!gekozen || !gekozen.it) return; const m = gekozen.it.mt, k = m.kijkt || 'zuid'; m.kijkt = draaiVolgorde[(draaiVolgorde.indexOf(k) + 1) % 4]; delete m.hoek; zetItem(gekozen.it); kader.setFromObject(gekozen.it.g); zetKnop(); bewaar(); };
     const zetModel = o => { const st = modelStaat[o.sleutel] || (modelStaat[o.sleutel] = { dx: 0, dz: 0 }); o.c.position.x = o.basis.x + st.dx; o.c.position.z = o.basis.z + st.dz; o.c.updateMatrixWorld(true); o.c.traverse(m => { m.userData.bb = null; }); ververs(); };
     const verwijder = () => {
       if (!gekozen) return;
@@ -575,6 +586,8 @@
       ververs(); kies(null); meld('Verwijderd. ("Alles terugzetten" haalt het terug.)'); bewaar();
     };
     knop('Draai (R)', draai);
+    const fijn = d => { if (!gekozen || !gekozen.it) { meld('Klik eerst een meubel aan.'); return; } const it = gekozen.it; let gr = (it.mt.hoek != null ? it.mt.hoek : Math.round(it.rot * 180 / Math.PI)) + d; gr = Math.round(((gr % 360) + 360) % 360 * 2) / 2; it.mt.hoek = gr; it.mt.kijkt = ['zuid', 'oost', 'noord', 'west'][Math.round(gr / 90) % 4]; zetItem(it); kader.setFromObject(it.g); zetKnop(); bewaar(); meld(it.mt.naam + ': ' + gr + ' graden'); };
+    knop('Fijn links (,)', () => fijn(-0.5)); knop('Fijn rechts (.)', () => fijn(0.5));
     knop('Verwijder', verwijder);
     const kopieer = () => {
       if (!gekozen) { meld('Klik eerst een meubel aan om te kopiëren.'); return; }
@@ -591,7 +604,7 @@
       if (!gekozen || !gekozen.it) { meld('Klik eerst een rek of tafel aan.'); return; }
       const mt = gekozen.it.mt; if (!LENGTES[mt.soort]) { meld('Dit meubel kun je niet korter of langer maken.'); return; }
       mt.lengte = Math.max(0.3, Math.min(8, Math.round(((mt.lengte || LENGTES[mt.soort]) + delta) * 20) / 20));
-      herbouw(gekozen.it); kader.setFromObject(gekozen.it.g); bewaar(); meld(mt.naam + ': ' + mt.lengte.toFixed(2) + ' m lang');
+      herbouw(gekozen.it); kader.setFromObject(gekozen.it.g); zetKnop(); bewaar(); meld(mt.naam + ': ' + mt.lengte.toFixed(2) + ' m lang');
     };
     knop('Korter ([)', () => lengte(-0.1)); knop('Langer (])', () => lengte(0.1));
     const zetBoven = () => { testCam = boven ? { fov: 55, p: [speler.x, 11.5, speler.z + 0.7], t: [speler.x, 0, speler.z] } : null; };
@@ -601,7 +614,7 @@
       zetBoven();
     });
     knop('Kopieer lijst voor Claude', () => {
-      const regels = items.map(it => it.mt.naam + ': x ' + it.mt.x.toFixed(2) + ', z ' + it.mt.z.toFixed(2) + ', kijkt ' + (it.mt.kijkt || 'zuid') + (it.mt.lengte && LENGTES[it.mt.soort] ? ', lengte ' + it.mt.lengte.toFixed(2) : '') + (it.mt.kopieVan ? ' (kopie van ' + it.mt.kopieVan + ')' : ''));
+      const regels = items.map(it => it.mt.naam + ': x ' + it.mt.x.toFixed(2) + ', z ' + it.mt.z.toFixed(2) + ', kijkt ' + (it.mt.kijkt || 'zuid') + (it.mt.hoek != null ? ', hoek ' + it.mt.hoek : '') + (it.mt.lengte && LENGTES[it.mt.soort] ? ', lengte ' + it.mt.lengte.toFixed(2) : '') + (it.mt.kopieVan ? ' (kopie van ' + it.mt.kopieVan + ')' : ''));
       verwijderd.forEach(n => regels.push(n + ': WEG'));
       Object.keys(modelStaat).forEach(k => { const st = modelStaat[k]; if (st.weg) regels.push('gebouw ' + k + ': WEG'); else if (st.dx || st.dz) regels.push('gebouw ' + k + ': dx ' + (st.dx || 0).toFixed(2) + ', dz ' + (st.dz || 0).toFixed(2)); });
       const uit = regels.join('\n');
@@ -611,12 +624,15 @@
     });
     knop('Alles terugzetten', () => { try { localStorage.removeItem('bibMeubelPlekken'); localStorage.removeItem('bibModelAanpassingen'); } catch (e) {} location.reload(); });
     document.body.appendChild(paneel);
-    window.addEventListener('keydown', e => { if (e.code === 'KeyR') draai(); if (e.code === 'Delete') verwijder(); if (e.code === 'KeyK') kopieer(); if (e.code === 'BracketLeft') lengte(-0.1); if (e.code === 'BracketRight') lengte(0.1); });
+    window.addEventListener('keydown', e => { if (e.code === 'KeyR') draai(); if (e.code === 'Comma') fijn(-0.5); if (e.code === 'Period') fijn(0.5); if (e.code === 'Delete') verwijder(); if (e.code === 'KeyK') kopieer(); if (e.code === 'BracketLeft') lengte(-0.1); if (e.code === 'BracketRight') lengte(0.1); });
 
     const vlak = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0), pt = new THREE.Vector3(), ray = new THREE.Raycaster();
     const wijs = e => { const r = canvas.getBoundingClientRect(); ray.setFromCamera(new THREE.Vector2(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1), camera); return ray; };
     const zichtbaar = o => { for (let p = o; p; p = p.parent) if (!p.visible) return false; return true; };
     canvas.addEventListener('pointerdown', e => {
+      if (gekozen && gekozen.it && knopG.visible && wijs(e).intersectObject(knopBol, false).length) {   // aan de draaiknop gepakt
+        e.stopImmediatePropagation(); e.preventDefault(); canvas.setPointerCapture(e.pointerId); sleep = { id: e.pointerId, draaien: true }; return;
+      }
       const doel = items.map(it => it.g); if (modelWortel) doel.push(modelWortel);
       const treffer = wijs(e).intersectObjects(doel, true).filter(h => zichtbaar(h.object))[0];
       let k = null;
@@ -645,10 +661,15 @@
       if (!sleep || e.pointerId !== sleep.id || !gekozen) return;
       e.stopImmediatePropagation();
       if (!wijs(e).ray.intersectPlane(vlak, pt)) return;
+      if (sleep.draaien) {
+        const it = gekozen.it; let gr = Math.round(Math.atan2(pt.x - it.mt.x, pt.z - it.mt.z) * 180 / Math.PI * 2) / 2; gr = ((gr % 360) + 360) % 360; const kw = Math.round(gr / 90) * 90; if (Math.abs(gr - kw) <= 1) gr = kw % 360;   // vlak bij een kwartslag klikt hij vast
+        it.mt.hoek = gr; it.mt.kijkt = ['zuid', 'oost', 'noord', 'west'][Math.round(gr / 90) % 4];
+        zetItem(it); kader.setFromObject(it.g); zetKnop(); meld(it.mt.naam + ': gedraaid op ' + gr + ' graden'); return;
+      }
       const nx = Math.round((pt.x + sleep.dx) * 20) / 20, nz = Math.round((pt.z + sleep.dz) * 20) / 20;   // stapjes van 5 cm
       if (gekozen.it) { gekozen.it.mt.x = nx; gekozen.it.mt.z = nz; zetItem(gekozen.it); }
       else { const st = modelStaat[gekozen.o.sleutel] || (modelStaat[gekozen.o.sleutel] = { dx: 0, dz: 0 }); st.dx = nx; st.dz = nz; zetModel(gekozen.o); }
-      kader.setFromObject(knoopVan(gekozen));
+      kader.setFromObject(knoopVan(gekozen)); zetKnop();
     }, true);
     const los = e => { if (sleep && e.pointerId === sleep.id) { e.stopImmediatePropagation(); sleep = null; bewaar(); } };
     canvas.addEventListener('pointerup', los, true); canvas.addEventListener('pointercancel', los, true);
