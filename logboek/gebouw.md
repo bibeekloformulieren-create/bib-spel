@@ -39,3 +39,5 @@ Heb je iets nodig van de lagen, of verander je iets aan `window.Gebouw` waar een
 | 26-10-2026 | Claude | Koffiehoek: alle drie de muurvlakken effen cappuccinobruin (geen bakstenen, geen oranje). |
 | 26-10-2026 | Claude | Muurvlakken zelf kleuren: knop 'Muur verven' + kleurkiezer in bewerkmodus. Koffiehoek zuidmuur oranje en extra oranje muur in kleuterhoek uit jouw lijst verwerkt. |
 | 26-10-2026 | Claude | Koffiehoek: bovenste plank alleen gelijke witte tassen, onderste plank alleen gelijke glazen, netjes in een rij. |
+| 26-10-2026 | Claude | Tijdschriftenhoek: groen tapijt, drie kubuskasten met tijdschriften (West erbij, oost lager), ronde houten cafetafel met plantje en 4 roze schaalstoelen; oude witte kast en bruine tafel uit het model weg. |
+| 26-10-2026 | Claude | Tijdschriftenhoek: tafel en stoelen op jouw plek gezet; onderdeel Geom3D_5 verschoven (dx -1.05, dz -0.55). |

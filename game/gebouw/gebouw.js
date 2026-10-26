@@ -156,7 +156,7 @@
       'parket':       (rx, rz) => canvasTexture(c => { const k = [0xb08f62, 0xa5845a, 0xb99a6e, 0xaa8a5d]; for (let i = 0; i < 4; i++) { c.fillStyle = '#' + k[(i * 3 + 1) % 4].toString(16); c.fillRect(i * 32, 0, 32, 128); c.fillStyle = 'rgba(70,45,20,0.35)'; c.fillRect(i * 32, 0, 1.5, 128); for (let j = 0; j < 40; j++) { c.fillStyle = Math.random() < 0.5 ? 'rgba(255,255,255,0.07)' : 'rgba(60,35,10,0.07)'; c.fillRect(i * 32 + Math.random() * 30, Math.random() * 128, 1.5, 6 + Math.random() * 14); } c.fillStyle = 'rgba(70,45,20,0.3)'; c.fillRect(i * 32, (i * 53) % 128, 32, 1.5); } }, rx / 0.48, rz / 1.0),
       'tegel-donker': (rx, rz) => tegelTex(LOOK.vloerTegel, LOOK.vloerVoeg, rx, rz),
       'tegel-licht':  (rx, rz) => tegelTex(LOOK.vloerTegelLicht, LOOK.vloerVoegLicht, rx, rz),
-      'tapijt':       (rx, rz) => canvasTexture(c => { c.fillStyle = LOOK.tapijt; c.fillRect(0, 0, 128, 128); for (let i = 0; i < 700; i++) { c.fillStyle = Math.random() < 0.5 ? 'rgba(255,255,255,0.10)' : 'rgba(0,0,0,0.10)'; c.fillRect(Math.random() * 128, Math.random() * 128, 2, 2); } }, rx / 1.5, rz / 1.5)
+      'tapijt':       (rx, rz) => canvasTexture(c => { c.fillStyle = LOOK.tapijt; c.fillRect(0, 0, 128, 128); for (let y = 0; y < 128; y += 8) { c.fillStyle = 'rgba(0,0,0,0.10)'; c.fillRect(0, y, 128, 2); } for (let i = 0; i < 700; i++) { c.fillStyle = Math.random() < 0.5 ? 'rgba(255,255,255,0.10)' : 'rgba(0,0,0,0.10)'; c.fillRect(Math.random() * 128, Math.random() * 128, 2, 2); } }, rx / 1.5, rz / 1.5)
     };
     // basis: overal gladde vloer; daarbovenop de zones met tegels
     vlak(G.xmin, G.xmax, G.zmin, G.zmax, soorten.glad(bw, bd), 0);
@@ -208,7 +208,7 @@
   }
 
   /* ---------- kubuskasten en ramen (uit gebouw-data.js: "rekken" en "ramen") ---------- */
-  function kubusTextuur(kol, rij) {
+  function kubusTextuur(kol, rij, tijdschriften) {
     const cv = document.createElement('canvas'); cv.width = 64 * kol; cv.height = 64 * rij;
     const c = cv.getContext('2d');
     c.fillStyle = '#d9b57c'; c.fillRect(0, 0, cv.width, cv.height);          // beuken kader
@@ -216,6 +216,11 @@
       c.fillStyle = '#f6f4ef'; c.fillRect(i * 64 + 4, j * 64 + 4, 56, 56);   // witte kubus
       c.fillStyle = '#e3dfd6'; c.fillRect(i * 64 + 4, j * 64 + 4, 56, 6);    // schaduw bovenrand
       c.fillStyle = '#ffffff'; c.fillRect(i * 64 + 12, j * 64 + 20, 40, 34); // opening
+      if (tijdschriften) {                                                         // tijdschriften in doorzichtige houders (de meeste vakjes)
+        const h = (i * 7 + j * 13 + i * j * 5) % 11, kl = ['#c0392b', '#e8b339', '#3b7a8c', '#7d5ba6', '#3e6fb0', '#e07b2b', '#4d8f5a', '#d98aa8', '#2f3a4a', '#a9b7b0'];
+        if (h < 9) { c.fillStyle = kl[h % 10]; c.fillRect(i * 64 + 18, j * 64 + 14, 28, 38); c.fillStyle = 'rgba(255,255,255,0.85)'; c.fillRect(i * 64 + 21, j * 64 + 18, 22, 5); c.fillStyle = 'rgba(255,255,255,0.35)'; c.fillRect(i * 64 + 21, j * 64 + 28, 14, 10); }
+        else { c.fillStyle = '#e8eef0'; c.fillRect(i * 64 + 14, j * 64 + 12, 36, 40); }
+      }
     }
     const t = new THREE.CanvasTexture(cv); t.anisotropy = 4;
     return t;
@@ -247,11 +252,11 @@
     const wit = new THREE.MeshLambertMaterial({ color: 0xf4f1ea });
     (C.rekken || []).forEach(r => {
       const len = r.lengte || 2, diep = 0.4, hoog = r.hoogte || 2.0;
-      const voor = new THREE.MeshLambertMaterial({ map: r.soort === 'kubus' ? kubusTextuur(Math.max(1, Math.round(len / 0.42)), Math.max(1, Math.round(hoog / 0.42))) : rugTextuur(r.soort, len) });
+      const voor = new THREE.MeshLambertMaterial({ map: r.soort === 'kubus' ? kubusTextuur(Math.max(1, Math.round(len / 0.42)), Math.max(1, Math.round(hoog / 0.42)), r.tijdschriften) : rugTextuur(r.soort, len) });
       const langsZ = r.kijkt === 'oost' || r.kijkt === 'west';
       const geo = langsZ ? new THREE.BoxGeometry(diep, hoog, len) : new THREE.BoxGeometry(len, hoog, diep);
       // volgorde van de zijden: +x, -x, +y, -y, +z, -z
-      const m = [wit, wit, hout, hout, wit, wit];
+      const m = [wit, wit, r.tijdschriften ? wit : hout, hout, wit, wit];
       const idx = { oost: 0, west: 1, zuid: 4, noord: 5 }[r.kijkt || 'zuid'];
       m[idx] = voor;
       const mesh = new THREE.Mesh(geo, m);
@@ -415,6 +420,30 @@
         for (let i = 0; i < n; i++) tas(x0 + i * 0.11, bord[1], zk, wit);
         for (let i = 0; i < n; i++) glasje(x0 + i * 0.11, bord[0], zk, 0.12);
         return { g, box: [L, 0.95, D] };
+      },
+      /* Ronde cafetafel: houten blad op een zwarte middenpoot met ronde voet, met een plantje. Kijkt naar +z. */
+      cafetafel(m, mt) {
+        const g = new THREE.Group(), r = (mt.breed || 0.9) / 2, hout = mat(mt.kleur || 0xdcb27c);
+        cyl(g, r, 0.03, 0, 0.735, 0, hout);
+        cyl(g, 0.04, 0.68, 0, 0.36, 0, zwart);
+        cyl(g, 0.27, 0.035, 0, 0.0175, 0, zwart, 0.2);
+        cyl(g, 0.06, 0.09, 0, 0.795, 0, mat(0x2b2d31), 0.05);                                       // potje
+        const blad = [0x3f6b3a, 0x4f7d45, 0x2f5a33].map(mat);
+        for (let i = 0; i < 9; i++) { const a = i * 0.7, b = new THREE.Mesh(new THREE.SphereGeometry(0.045, 8, 6), blad[i % 3]); b.scale.set(1, 0.6, 1); b.position.set(Math.cos(a) * 0.07, 0.86 + (i % 3) * 0.03, Math.sin(a) * 0.07); g.add(b); }
+        return { g, box: [r * 2, 0.8, r * 2] };
+      },
+      /* Schaalstoel: roze kuipzitting op een zwart sterrenpoot met wieltjes. Kijkt naar +z. */
+      schaalstoel(m, mt) {
+        const g = new THREE.Group(), roze = new THREE.MeshStandardMaterial({ color: mt.kleur || 0xe3b0a6, roughness: 0.8, side: THREE.DoubleSide });
+        cyl(g, 0.035, 0.34, 0, 0.23, 0, zwart);
+        for (let i = 0; i < 5; i++) {
+          const a = i * Math.PI * 2 / 5, x = Math.sin(a) * 0.28, z = Math.cos(a) * 0.28;
+          lat(g, 0, 0.09, 0, x, 0.07, z, 0.018, zwart); cyl(g, 0.026, 0.05, x, 0.03, z, zwart);
+        }
+        cyl(g, 0.24, 0.07, 0, 0.45, 0, roze);                                                         // zitting
+        const pts = [[0.25, 0.42], [0.29, 0.58], [0.32, 0.8]].map(([r, y]) => new THREE.Vector2(r, y));
+        g.add(new THREE.Mesh(new THREE.LatheGeometry(pts, 24, Math.PI * 0.2, Math.PI * 1.6), roze));   // rug en armleuningen
+        return { g, box: [0.6, 0.8, 0.6] };
       },
       /* Witte stroomzuil tussen de bureaus (digipunt). */
       zuil(m, mt) {

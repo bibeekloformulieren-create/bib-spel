@@ -33,7 +33,7 @@ window.GEBOUWDATA = {
     vloerTegel:    "#5f5753",   // de kleine donkere tegels (gang naar de veranda)
     vloerVoeg:     "#c4beb5",   // de voegen ertussen
     vloerGlad:     "#8d8f93",   // de gladde grijze vloer (inkom, balie)
-    vloerTegelLicht: "#a8857a", // roze-bruine tegels (o.a. bij het digipunt)
+    vloerTegelLicht: "#a8857a", tapijt: "#7a9680", // roze-bruine tegels (o.a. bij het digipunt)
     vloerVoegLicht:  "#7f8a8c",
     plafondLat:    "#d7c6a0",   // houten latten
     plafondSpleet: "#4a4338",
@@ -55,8 +55,9 @@ window.GEBOUWDATA = {
      lengte: in meter.  x en z: het midden.  hoogte: in meter (niet verplicht).
      De koffiehoek is nagebouwd uit de render en de plek van de witte kast bij de balie. */
   rekken: [
-    { naam: "kubuskast koffiehoek 1", soort: "kubus", x: -2.45, z: -36.45, lengte: 1.7, hoogte: 2.0, kijkt: "west" },
-    { naam: "kubuskast koffiehoek 2", soort: "kubus", x: -2.45, z: -34.95, lengte: 1.3, hoogte: 1.6, kijkt: "west" }
+    { naam: "kubuskast koffiehoek 1", soort: "kubus", x: -2.45, z: -36.45, lengte: 1.7, hoogte: 1.7, kijkt: "west", tijdschriften: true },
+    { naam: "kubuskast koffiehoek 2", soort: "kubus", x: -2.45, z: -34.95, lengte: 1.3, hoogte: 1.7, kijkt: "west", tijdschriften: true },
+    { naam: "kubuskast tijdschriften west", soort: "kubus", x: -7.35, z: -35.5, lengte: 3.4, hoogte: 1.7, kijkt: "oost", tijdschriften: true }
   ],
 
   /* Meubels (stoelen, tafels, planten). soort: "rek" (textuur dvd/boeken/spel), "rodetoren", "tijdschriftrek", "radiator", "vuilbak", "fauteuil", "poef", "tafel-rond", "tafel-hoog", "tafel" (werktafel), "stoel", "kruk" of "plant".
@@ -124,6 +125,12 @@ window.GEBOUWDATA = {
     { naam: "baksteenmuur koffiehoek", soort: "paneel", kleur: 0xa07555, x: -2.5, z: -29.99, lengte: 2.2, hoogte: 2.5, kijkt: "zuid" },
     { naam: "muur koffiehoek rechts", soort: "paneel", x: -1.86, z: -29.45, lengte: 1.2, hoogte: 2.6, kijkt: "west", kleur: 0xa07555 },
     { naam: "muur koffiehoek zuid", soort: "paneel", x: -1.08, z: -28.95, lengte: 1.5, hoogte: 2.6, kijkt: "zuid", kleur: 0xe8960c },
+    /* tijdschriftenhoek: ronde houten tafel voor de ramen met 4 roze schaalstoelen */
+    { naam: "cafetafel", soort: "cafetafel", x: -4.2, z: -36.15, breed: 0.9, hoek: 62.5 },
+    { naam: "schaalstoel nw", soort: "schaalstoel", x: -4.75, z: -36.65, hoek: 64.5 },
+    { naam: "schaalstoel no", soort: "schaalstoel", x: -3.55, z: -36.65, hoek: 315 },
+    { naam: "schaalstoel zw", soort: "schaalstoel", x: -4.75, z: -35.75, hoek: 135 },
+    { naam: "schaalstoel zo", soort: "schaalstoel", x: -3.6, z: -35.75, hoek: 210 },
     { naam: "koffiebalie", soort: "koffiebalie", x: -2.55, z: -29.7, lengte: 1.7, kijkt: "zuid" },
     /* kleuterhoek: lange smalle zaal in het oosten. Oranje muur links (oost), ramen rechts (west), houten vloer, groene bladeren, lage rekken op wieltjes, witte boekenbakken */
     { naam: "oranje muur oost", soort: "paneel", x: 0.05, z: -22.65, lengte: 8.4, hoogte: 2.8, kijkt: "west", kleur: 0xe8960c, hoek: 273.5 },
@@ -162,7 +169,10 @@ window.GEBOUWDATA = {
   modelAanpassingen: [
     { onderdeel: "Dvd_Kast_(Jaan)@-8.1,-26.6", weg: true },
     { onderdeel: "onderdeel@-5.2,-27.9", weg: true },   // bureaugroep digipunt (wordt nagebouwd)
-    { onderdeel: "onderdeel@-6.9,-27.9", weg: true }   // bureaugroep digipunt (wordt nagebouwd)
+    { onderdeel: "onderdeel@-6.9,-27.9", weg: true },   // bureaugroep digipunt (wordt nagebouwd)
+    { onderdeel: "Kast_Balie@-6.1,-36.2", weg: true },   // tijdschriftenhoek wordt nagebouwd
+    { onderdeel: "Component#101@-4.5,-35.6", weg: true },
+    { onderdeel: "Geom3D_5@-3.7,-33.4", dx: -1.05, dz: -0.55 }
     // eerste: dun wit kastpaneel in het model dat dwars door een rek liep
   ],
 
