@@ -23,7 +23,7 @@ Een laag kiezen in de browser: `index.html?laag=50-jaar`. Zonder keuze start de 
 | `bronmateriaal/fotos` | Foto's per verdieping. Zet de verdieping in de bestandsnaam, bv. `gelijkvloers_balie.jpg` |
 | `game/gebouw` | **Het gebouw.** `gebouw-data.js` (vloer, rekken, ramen, grenzen), `model/bib.glb`, en de code om te wandelen |
 | `game/lagen` | **De spellen.** `lijst.js` is het overzicht van de lagen |
-| `game/lagen/50-jaar` | Laag 1: `opdrachten.js` (alle teksten en vragen), `img` (foto's), `boek-e` (het personage), `laag.js` (de code) |
+| `game/lagen/50-jaar` | Laag 1: `fiches` (de acht fiches, elk een tekstbestand), `opdrachten.js` (intro, einde, foto's), `img` (foto's), `boek-e` (het personage), `laag.js` (de code) |
 | `game/lagen/_sjabloon` | Een lege laag om een nieuwe mee te beginnen |
 
 ## Samenwerken: GitHub
@@ -69,5 +69,5 @@ Open de map `bib-spel` in Claude (Cowork of Claude Code). Claude leest dan autom
 1. Zet het model als `game/gebouw/model/bib.glb`. Staat het er niet, dan toont het gebouw een tijdelijke zaal.
 2. Geef in SketchUp (voor het exporteren) aan waar dingen liggen: een kleine groep of component met de naam `start` (waar je begint), en per spel eigen punten, zoals `fiche-1` … `fiche-8` voor de fiches of `plek-<naam>` voor iets anders. Het gebouw leest die namen uit het model en geeft ze aan de lagen.
 3. Staat het model in inch of centimeter? Pas dan `schaal` aan in `game/gebouw/gebouw-data.js`.
-4. Teksten en vragen van laag 50-jaar aanpassen: `game/lagen/50-jaar/opdrachten.js` (gewone tekst, geen programmeerkennis nodig).
+4. Teksten en vragen van laag 50-jaar aanpassen: open het bestand van de fiche in Kladblok, bv. `game/lagen/50-jaar/fiches/fiche-3.txt`. Uitleg in `game/lagen/50-jaar/fiches/HANDLEIDING.md`. Bekijken kan met `start-spel.bat`.
 5. Test: start `game/lokale-server.ps1` en ga naar http://localhost:8765/ (dat brengt je naar `game/index.html`). Met `?test` achter het adres kun je in de console `bibTest.ga(3)` typen om naar fiche 3 te springen.

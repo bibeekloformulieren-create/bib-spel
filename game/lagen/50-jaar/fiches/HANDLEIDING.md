@@ -8,7 +8,7 @@ Je past ze aan in **Kladblok**. Je hebt daar geen Claude en geen programmeerkenn
 1. Ga in Verkenner naar `C:\Projecten\bib-spel\game\lagen\50-jaar\fiches`.
 2. Rechtermuisknop op bijvoorbeeld `fiche-3.txt` > **Openen met** > **Kladblok**. (Niet Word.)
 3. Pas de tekst aan. Bewaar met **Ctrl + S**.
-4. Wil je het meteen zien? Dubbelklik in de hoofdmap op **`start-spel.bat`**. Het spel opent in je browser. Na elke wijziging druk je op **F5** in de browser.
+4. Wil je het meteen zien? Dubbelklik in de hoofdmap op **`start-spel.bat`**. Er opent een zwart venster (de server: laat het open) en het spel opent in je browser. Na elke wijziging druk je op **F5** in de browser.
 5. Tevreden? Dubbelklik op **`deel.bat`** en typ als beschrijving iets als `Lagen: tekst van fiche 3 aangepast`. Je collega krijgt het dan.
 
 **Klopt er iets niet?** Dan zie je bovenaan het spel een **rood vak** dat zegt in welk bestand en op welke regel het misgaat. Verbeter het, bewaar, en druk op F5.

@@ -1,6 +1,4 @@
 @echo off
-rem Start het spel op je eigen computer en opent het in je browser.
-rem Het zwarte/blauwe venster dat opent is de server: laat het open zolang je het spel gebruikt, sluit het daarna.
-start "Spel-server (laat open)" powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0game\lokale-server.ps1"
-timeout /t 2 /nobreak >nul
-start "" http://localhost:8765/
+echo Het spel start. Sluit dit venster om te stoppen.
+start "" /min powershell -NoProfile -Command "Start-Sleep 2; Start-Process 'http://localhost:8765/game/index.html?laag=50-jaar&test'"
+powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0game\lokale-server.ps1"

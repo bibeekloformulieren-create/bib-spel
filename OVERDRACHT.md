@@ -56,7 +56,7 @@ Houd je aan je eigen map. Heb je iets nodig van de ander? Zet het in je logboek 
 - **Doelgroep van laag 50-jaar:** kinderen en hun ouders. Eenvoudige taal, korte zinnen, geen straf bij een fout antwoord.
 - **Beatrijs Hollebosch** is in de praktijk de bibliothecaris van Eeklo, officiële titel: **directeur cultuur**. Ze schreef het voorwoord van de brochure. In Boek-E's dialoog gewoon "Beatrijs" (of "onze bibliothecaris"); in een colofon of credits de officiële titel. **Haar toestemming om haar naam in het spel te gebruiken is nog niet bevestigd.** De naam staat op één plek (`directeur` bovenaan `game/lagen/50-jaar/opdrachten.js`), zodat ze snel te vervangen is.
 - **Geen verzonnen citaten.** Alleen wat iemand zelf schreef of zei, uit de brochure, de panelen of de gesprekken.
-- **De teksten komen uit de eigen bronnen:** de brochure 50 jaar bib, de tentoonstellingspanelen en gesprekken (bijvoorbeeld met Willy Bultynck over de bouw). Bij elke fiche staat in `opdrachten.js` onder `bron` waar het vandaan komt.
+- **De teksten komen uit de eigen bronnen:** de brochure 50 jaar bib, de tentoonstellingspanelen en gesprekken (bijvoorbeeld met Willy Bultynck over de bouw). Bij elke fiche staat in het tekstbestand (`game/lagen/50-jaar/fiches/fiche-N.txt`) onder `bron:` waar het vandaan komt.
 - **Boek-E** is een oranje archiefpoppetje met een vest en een naamkaartje "BOEK-E". Het karakterblad staat in `game/lagen/50-jaar/boek-e/karakterblad.html`.
 - **Voortgang** wordt alleen op het toestel van de speler bewaard (`localStorage`). Er wordt niets verstuurd.
 
@@ -83,7 +83,8 @@ Nog open voor de lagen (`game/lagen`):
 
 | Ik zoek… | Dan kijk ik in |
 |---|---|
-| de teksten en vragen van de fiches | `game/lagen/50-jaar/opdrachten.js` |
+| de teksten en vragen van de fiches (één tekstbestand per fiche, zelf aan te passen) | `game/lagen/50-jaar/fiches/` (uitleg: `HANDLEIDING.md`) |
+| intro, einde, oude foto's en plekken van de fiches | `game/lagen/50-jaar/opdrachten.js` |
 | kleur en plek van vloer, rekken, ramen | `game/gebouw/gebouw-data.js` |
 | het 3D-model | `game/gebouw/model/bib.glb` (bron: `bronmateriaal/sketchup`) |
 | wat er veranderd is en wanneer | `logboek/gebouw.md`, `logboek/lagen.md` (en `logboek/geschiedenis.md` voor vroeger) |

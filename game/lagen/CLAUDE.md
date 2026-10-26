@@ -14,11 +14,11 @@ Elke map hier is een eigen spel of activiteit bovenop het gebouw (`../gebouw`). 
 1. Kopieer `_sjabloon` naar een nieuwe map met een korte naam (bv. `anderstalig`).
 2. Zet de laag in `lijst.js`.
 3. Open `http://localhost:8765/game/index.html?laag=<naam>`.
-4. Houd teksten en vragen in een apart bestand met gewone tekst (zoals `50-jaar/opdrachten.js`), zodat ze zonder programmeerkennis aan te passen zijn.
+4. Houd teksten en vragen in aparte tekstbestanden (zoals `50-jaar/fiches/*.txt` met `fiches-laden.js`), zodat ze zonder programmeerkennis aan te passen zijn.
 5. Logboek bijwerken in `logboek/lagen.md`.
 
 ## Wat is er al
 | Laag | Wat |
 |---|---|
-| `50-jaar` | Boek-E, acht fiches (kijk, raad, leer), oude foto's. Opdrachten in `opdrachten.js`. |
+| `50-jaar` | Boek-E, acht fiches (kijk, raad, leer), oude foto's. Elke fiche is een eigen tekstbestand in `50-jaar/fiches/` (uitleg: `fiches/HANDLEIDING.md`), ingelezen door `fiches-laden.js`. Intro, einde en foto's in `opdrachten.js`. |
 | `_sjabloon` | Leeg: alleen wandelen. Beginpunt voor een nieuwe laag. |
