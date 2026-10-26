@@ -32,7 +32,7 @@ window.GEBOUWDATA = {
   look: {
     vloerTegel:    "#5f5753",   // de kleine donkere tegels (gang naar de veranda)
     vloerVoeg:     "#c4beb5",   // de voegen ertussen
-    vloerGlad:     "#8d8f93",   // de gladde grijze vloer (inkom, balie)
+    vloerGlad:     "#8f867d",   // de gladde vloer, nu zacht licht taupe (was grijs #8d8f93)
     vloerTegelLicht: "#a8857a", tapijt: "#7a9680", // roze-bruine tegels (o.a. bij het digipunt)
     vloerVoegLicht:  "#7f8a8c",
     plafondLat:    "#d7c6a0",   // houten latten
@@ -40,9 +40,9 @@ window.GEBOUWDATA = {
     /* Vloerzones. Overal is de vloer glad grijs, behalve in deze vakken.
        type: "tegel-donker", "tegel-licht", "tapijt" of "glad".  x: [van, tot]  z: [van, tot] */
     zones: [
-      { naam: "dvd-gang", type: "tegel-klein", x: [-11.0, -7.0], z: [-27.0, -21.6] },
-      { naam: "loper naar de glazen zaal", type: "loper", x: [-9.8, -8.5], z: [-26.8, -21.6] },
-      { naam: "digipunt", type: "tegel-licht",  x: [-8.5, -3.5],  z: [-31.5, -27.0] },
+      { naam: "dvd-gang", type: "glad" /* was tegel-klein */, x: [-11.0, -7.0], z: [-27.0, -21.6] },
+      { naam: "loper naar de glazen zaal", type: "glad" /* was loper */, x: [-9.8, -8.5], z: [-26.8, -21.6] },
+      { naam: "digipunt", type: "glad" /* was tegel-licht (roze tegels) */, x: [-8.5, -3.5],  z: [-31.5, -27.0] },
       { naam: "tijdschriftenhoek", type: "tapijt", x: [-5.8, -1.85], z: [-37.4, -31.8] },
       /* kleuterhoek: de vloer loopt tot onder de muren (west: muur ligt noordelijk op x -3,6; oost: de schuine oranje muur) */
       { naam: "kleuterhoek 1", type: "parket", x: [-3.45, 0.05], z: [-31.8, -27.0] },
@@ -51,7 +51,7 @@ window.GEBOUWDATA = {
       { naam: "kleuterhoek 4", type: "parket", x: [-3.45, 0.2],  z: [-23.0, -21.5] },
       { naam: "kleuterhoek 5", type: "parket", x: [-3.45, 0.27], z: [-21.5, -20.0] },
       { naam: "kleuterhoek 6", type: "parket", x: [-3.45, 0.36], z: [-20.0, -18.1] },
-      { naam: "glazen zaal", type: "tegel-groot", x: [-12.2, -6.0], z: [-21.6, -15.6] }
+      { naam: "glazen zaal", type: "glad" /* was tegel-groot */, x: [-12.2, -6.0], z: [-21.6, -15.6] }
     ]
   },
 

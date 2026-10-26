@@ -51,3 +51,4 @@ Heb je iets nodig van de lagen, of verander je iets aan `window.Gebouw` waar een
 | 26-10-2026 | Claude | Lijst van balie verwerkt: nieuwe plekken (kapstok, kopieermachine, kast met klok, bureaustoelen, pc's, ramen, uitpasbordje), pilaar, folderrek en mandjes weg, balie 0,3 m verschoven, extra dvd-rek en bureaustoel. |
 | 26-10-2026 | Claude | Vloer: het groene tapijt zit nu alleen nog in de tijdschriftenhoek (x -5,8 tot -1,85, z -37,4 tot -31,8); zone heet nu 'tijdschriftenhoek'. |
 | 26-10-2026 | Claude | Laminaat kinderhoek: vloer loopt nu tot onder de muren (west en schuine oranje muur oost), in 6 stukken. |
+| 26-10-2026 | Claude | Vloer: alle overige vloer (inkom, balie, dvd-gang, loper, digipunt, glazen zaal) is nu effen zacht licht taupe (#8f867d). Groen tapijt en laminaat blijven. De oude tegeltypes staan als commentaar bij de zones. |
