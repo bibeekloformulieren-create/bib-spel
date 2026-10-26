@@ -90,7 +90,7 @@ window.GEBOUWDATA = {
     { naam: "dvd-rek oost",     soort: "rek", textuur: "dvd", x: -7.9, z: -25.25, lengte: 1.4, hoogte: 1.85, kijkt: "west" },
     { naam: "dvd-rek oost kopie 2",     soort: "rek", textuur: "dvd", x: -7.9, z: -26.6, lengte: 1.4, hoogte: 1.85, kijkt: "west" },
     { naam: "dvd-rek oost kopie 3",     soort: "rek", textuur: "dvd", x: -7.9, z: -28.0, lengte: 1.4, hoogte: 1.85, kijkt: "west" },
-    { naam: "dvd-rek oost kopie 1",     soort: "rek", textuur: "dvd", x: -7.75, z: -29.40, lengte: 0.60, hoogte: 1.85, kijkt: "noord"},
+    { naam: "dvd-rek oost kopie 1",     soort: "rek", textuur: "dvd", x: -7.8, z: -29.45, lengte: 0.60, hoogte: 1.85, kijkt: "noord"},
     { naam: "rode toren",        soort: "rodetoren", x: -9.5, z: -28.5, kijkt: "noord" },
     { naam: "hoge kast west",  soort: "rek", textuur: "boeken", x: -10.8, z: -25.95, lengte: 1, hoogte: 2.1, kijkt: "oost" },
     { naam: "hoge kast west kopie 2",  soort: "rek", textuur: "boeken", x: -10.8, z: -26.8, lengte: 1, hoogte: 2.1, kijkt: "oost" },
@@ -133,9 +133,10 @@ window.GEBOUWDATA = {
     /* tijdschriftenhoek: ronde houten tafel voor de ramen met 4 roze schaalstoelen */
     { naam: "kubuskast koffiehoek 1", soort: "kubuskast", x: -2.45, z: -36.45, lengte: 1.7, hoogte: 1.7, kijkt: "west", tijdschriften: true },
     { naam: "kubuskast koffiehoek 2", soort: "kubuskast", x: -2.45, z: -34.95, lengte: 1.3, hoogte: 1.7, kijkt: "west", tijdschriften: true },
-    { naam: "kubuskast tijdschriften west", soort: "kubuskast", x: -5.5, z: -36.15, lengte: 3.4, hoogte: 1.7, kijkt: "oost", tijdschriften: true },
+    { naam: "kubuskast tijdschriften west", soort: "kubuskast", x: -5.45, z: -36.45, lengte: 3.4, hoogte: 1.7, kijkt: "oost", tijdschriften: true },
     /* uitleen en balie: details op de witte blokken uit het model (y = hoogte van het blad) */
     { naam: "uitleentoog", soort: "toog", x: -8.65, z: -33.00, lengte: 1.25, diep: 0.82, hoogte: 1.0, kijkt: "zuid"},
+    { naam: "uitleentoog kopie 2", soort: "toog", x: -6.05, z: -35.95, lengte: 2.75, diep: 0.82, hoogte: 1.0, kijkt: "west"},
     { naam: "uitleentoog kopie 1", soort: "toog", x: -8.65, z: -32.20, lengte: 1.25, diep: 0.82, hoogte: 1.0, kijkt: "zuid"},
     { naam: "pc uitleen 1", soort: "pcplek", x: -8.65, z: -32.25, y: 1.0, kijkt: "zuid"},
     { naam: "pc uitleen 2", soort: "pcplek", x: -8.60, z: -32.85, y: 1.0, kijkt: "noord"},
@@ -206,7 +207,7 @@ window.GEBOUWDATA = {
     { onderdeel: "onderdeel@-6.9,-27.9", weg: true },   // bureaugroep digipunt (wordt nagebouwd)
     { onderdeel: "Kast_Balie@-6.1,-36.2", weg: true },   // tijdschriftenhoek wordt nagebouwd
     { onderdeel: "Component#101@-4.5,-35.6", weg: true },
-    { onderdeel: "Geom3D_5@-3.7,-33.4", dx: -1.05, dz: -0.55 },
+    { onderdeel: "Geom3D_5@-3.7,-33.4", dx: 0.2, dz: 0.1 },
     { onderdeel: "Geom3D_10@-11.7,-34.0", weg: true }   // glaswandje vlak voor de ingang: stond in de weg bij het binnenkomen
     // eerste: dun wit kastpaneel in het model dat dwars door een rek liep
   ],

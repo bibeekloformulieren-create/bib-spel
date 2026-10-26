@@ -94,8 +94,12 @@
   function zetFiche(f, x, z) { f.pos.x = x; f.pos.z = z; f.groep.position.x = x; f.groep.position.z = z; }
 
   /* ---------- tussen spel en tentoonstelling wisselen ---------- */
-  let modus = 'spel';
+  let modus = 'spel', terugPlek = null;
   function zetModus(m) {
+    if (m === 'tentoonstelling' && modus === 'spel' && objecten.length) {      // je staat meteen bij het eerste paneel
+      terugPlek = { x: G.speler.x, z: G.speler.z, yaw: G.speler.yaw };
+      const o = objecten[0]; G.zet(o.pos.x + Math.sin(o.r) * 2.4, o.pos.z + Math.cos(o.r) * 2.4, o.r);
+    } else if (m === 'spel' && modus === 'tentoonstelling' && terugPlek) { G.zet(terugPlek.x, terugPlek.z, terugPlek.yaw); terugPlek = null; }
     modus = L.modus = m;
     document.body.classList.toggle('tt-modus', m === 'tentoonstelling');
     L.ververs();
@@ -124,7 +128,6 @@
     const hit = straal(e).intersectObjects(wortels, true).find(h => { for (let p = h.object; p; p = p.parent) if (p.visible === false && !wortels.includes(p)) return false; return true; });
     return hit ? itemVan(hit.object) : null;
   }
-  L.fiches.forEach(f => { f.groep.userData.item = f; f.soort = 'fiche'; f.sleutel = 'fiche-' + f.data.id; });
   const paneelIndex = o => objecten.indexOf(o);
 
   let down = null;
@@ -307,6 +310,7 @@
   /* ---------- start ---------- */
   bouwLijst();
   L.klaar.then(() => {
+    L.fiches.forEach(f => { f.groep.userData.item = f; f.soort = 'fiche'; f.sleutel = 'fiche-' + f.data.id; });
     plaats();
     if (window.bibTest) window.bibTest.paneel = i => { zetModus('tentoonstelling'); openPaneel(i - 1); };
   });
