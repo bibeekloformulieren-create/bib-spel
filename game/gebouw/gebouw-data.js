@@ -81,9 +81,10 @@ window.GEBOUWDATA = {
     { naam: "poef 3", soort: "poef", x: -10.45, z: -20.5 },
     /* gang naar de glazen zaal (dvd-gang): dvd-rekken aan de oostkant, hoge kasten aan de westkant, rode toren, raamnissen met radiatoren.
        Plekken door de gebruiker zelf gezet met &bewerk. */
-    { naam: "dvd-rek oost",     soort: "rek", textuur: "dvd", x: -7.85, z: -25.6, lengte: 1.7, hoogte: 1.85, kijkt: "west" },
-    { naam: "dvd-rek oost kopie 2",     soort: "rek", textuur: "dvd", x: -7.85, z: -27.3, lengte: 1.7, hoogte: 1.85, kijkt: "west" },
-    { naam: "rode toren",        soort: "rodetoren", x: -9.4, z: -27.95, kijkt: "noord" },
+    { naam: "dvd-rek oost",     soort: "rek", textuur: "dvd", x: -7.9, z: -25.2, lengte: 1.4, hoogte: 1.85, kijkt: "west" },
+    { naam: "dvd-rek oost kopie 2",     soort: "rek", textuur: "dvd", x: -7.9, z: -26.6, lengte: 1.4, hoogte: 1.85, kijkt: "west" },
+    { naam: "dvd-rek oost kopie 3",     soort: "rek", textuur: "dvd", x: -7.9, z: -28.0, lengte: 1.4, hoogte: 1.85, kijkt: "west" },
+    { naam: "rode toren",        soort: "rodetoren", x: -9.5, z: -28.5, kijkt: "noord" },
     { naam: "hoge kast west",  soort: "rek", textuur: "boeken", x: -10.8, z: -25.95, lengte: 1, hoogte: 2.1, kijkt: "oost" },
     { naam: "hoge kast west kopie 2",  soort: "rek", textuur: "boeken", x: -10.8, z: -26.95, lengte: 1, hoogte: 2.1, kijkt: "oost" },
     { naam: "hoge kast west kopie 1",  soort: "rek", textuur: "boeken", x: -10.8, z: -24.95, lengte: 1, hoogte: 2.1, kijkt: "oost" },
