@@ -96,10 +96,8 @@
   /* ---------- tussen spel en tentoonstelling wisselen ---------- */
   let modus = 'spel', terugPlek = null;
   function zetModus(m) {
-    if (m === 'tentoonstelling' && modus === 'spel' && objecten.length) {      // je staat meteen bij het eerste paneel
-      terugPlek = { x: G.speler.x, z: G.speler.z, yaw: G.speler.yaw };
-      const o = objecten[0]; G.zet(o.pos.x + Math.sin(o.r) * 2.4, o.pos.z + Math.cos(o.r) * 2.4, o.r);
-    } else if (m === 'spel' && modus === 'tentoonstelling' && terugPlek) { G.zet(terugPlek.x, terugPlek.z, terugPlek.yaw); terugPlek = null; }
+    if (m === 'spel' && modus === 'tentoonstelling' && terugPlek) { G.zet(terugPlek.x, terugPlek.z, terugPlek.yaw); terugPlek = null; }
+    if (m === 'tentoonstelling' && modus === 'spel') terugPlek = { x: G.speler.x, z: G.speler.z, yaw: G.speler.yaw };
     modus = L.modus = m;
     document.body.classList.toggle('tt-modus', m === 'tentoonstelling');
     L.ververs();

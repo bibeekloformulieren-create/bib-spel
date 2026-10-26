@@ -16,3 +16,4 @@ Heb je iets nodig van het gebouw? Zet het hier, dik gedrukt, zodat de gebouw-bou
 | 26-10-2026 | 50-jaar | Claude | Nieuwe plekken van fiche 1, 2, 3, 4, 6, 7 en 8 (via "Kopieer plekken") gezet in `fichePlekken` in `opdrachten.js`. Fiche 5 is gelijk gebleven. |
 | 26-10-2026 | 50-jaar | Claude | Plekken van de 9 panelen vastgezet in `tentoonstelling/panelen.js` (veld `plek`: x, z, draaiing). |
 | 26-10-2026 | 50-jaar | Claude | Paneel 6 stond buiten het gebouw (x 2,2): verplaatst naar x -2,5 / z -28 (bereikbaar gecontroleerd). |
+| 26-10-2026 | 50-jaar | Claude | Camera springt niet meer bij klikken op "Tentoonstelling bekijken": de teleport naar paneel 1 is verwijderd, de speler loopt zelf naar de panelen. |
