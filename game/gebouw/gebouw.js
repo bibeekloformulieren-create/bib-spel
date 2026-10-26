@@ -421,6 +421,15 @@
         for (let i = 0; i < n; i++) glasje(x0 + i * 0.11, bord[0], zk, 0.12);
         return { g, box: [L, 0.95, D] };
       },
+      /* Witte kubuskast (met of zonder tijdschriften); voorkant naar +z. Zelfde uiterlijk als de kasten bij "rekken". */
+      kubuskast(m, mt) {
+        const L = mt.lengte || 1.7, H = mt.hoogte || 1.7, D = 0.4, g = new THREE.Group();
+        const hout = new THREE.MeshLambertMaterial({ color: 0xd9b57c }), wit = new THREE.MeshLambertMaterial({ color: 0xf4f1ea });
+        const voor = new THREE.MeshLambertMaterial({ map: kubusTextuur(Math.max(1, Math.round(L / 0.42)), Math.max(1, Math.round(H / 0.42)), mt.tijdschriften) });
+        const k = new THREE.Mesh(new THREE.BoxGeometry(L, H, D), [wit, wit, mt.tijdschriften ? wit : hout, hout, voor, wit]);
+        k.position.y = H / 2; g.add(k);
+        return { g, box: [L, H, D] };
+      },
       /* Ronde cafetafel: houten blad op een zwarte middenpoot met ronde voet, met een plantje. Kijkt naar +z. */
       cafetafel(m, mt) {
         const g = new THREE.Group(), r = (mt.breed || 0.9) / 2, hout = mat(mt.kleur || 0xdcb27c);
@@ -657,7 +666,7 @@
       if (nieuw) { kies({ it: nieuw }); bewaar(); meld(nieuw.mt.naam + ' gemaakt: sleep hem naar de juiste plek.'); }
     };
     knop('Kopieer (K)', kopieer);
-    const LENGTES = { rek: 2, 'tafel-hoog': 2.4, tafel: 1.6, tijdschriftrek: 1.3, radiator: 1.0 };   // meubels die je korter of langer kunt maken
+    const LENGTES = { kubuskast: 1.7, rek: 2, 'tafel-hoog': 2.4, tafel: 1.6, tijdschriftrek: 1.3, radiator: 1.0 };   // meubels die je korter of langer kunt maken
     const lengte = delta => {
       if (!gekozen || !gekozen.it) { meld('Klik eerst een rek of tafel aan.'); return; }
       const mt = gekozen.it.mt; if (!LENGTES[mt.soort]) { meld('Dit meubel kun je niet korter of langer maken.'); return; }

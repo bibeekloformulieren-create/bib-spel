@@ -55,9 +55,7 @@ window.GEBOUWDATA = {
      lengte: in meter.  x en z: het midden.  hoogte: in meter (niet verplicht).
      De koffiehoek is nagebouwd uit de render en de plek van de witte kast bij de balie. */
   rekken: [
-    { naam: "kubuskast koffiehoek 1", soort: "kubus", x: -2.45, z: -36.45, lengte: 1.7, hoogte: 1.7, kijkt: "west", tijdschriften: true },
-    { naam: "kubuskast koffiehoek 2", soort: "kubus", x: -2.45, z: -34.95, lengte: 1.3, hoogte: 1.7, kijkt: "west", tijdschriften: true },
-    { naam: "kubuskast tijdschriften west", soort: "kubus", x: -7.35, z: -35.5, lengte: 3.4, hoogte: 1.7, kijkt: "oost", tijdschriften: true }
+    /* de kubuskasten van de tijdschriftenhoek staan nu bij "meubels" (soort "kubuskast"), zodat je ze kunt verplaatsen */
   ],
 
   /* Meubels (stoelen, tafels, planten). soort: "rek" (textuur dvd/boeken/spel), "rodetoren", "tijdschriftrek", "radiator", "vuilbak", "fauteuil", "poef", "tafel-rond", "tafel-hoog", "tafel" (werktafel), "stoel", "kruk" of "plant".
@@ -126,6 +124,9 @@ window.GEBOUWDATA = {
     { naam: "muur koffiehoek rechts", soort: "paneel", x: -1.86, z: -29.45, lengte: 1.2, hoogte: 2.6, kijkt: "west", kleur: 0xa07555 },
     { naam: "muur koffiehoek zuid", soort: "paneel", x: -1.08, z: -28.95, lengte: 1.5, hoogte: 2.6, kijkt: "zuid", kleur: 0xe8960c },
     /* tijdschriftenhoek: ronde houten tafel voor de ramen met 4 roze schaalstoelen */
+    { naam: "kubuskast koffiehoek 1", soort: "kubuskast", x: -2.45, z: -36.45, lengte: 1.7, hoogte: 1.7, kijkt: "west", tijdschriften: true },
+    { naam: "kubuskast koffiehoek 2", soort: "kubuskast", x: -2.45, z: -34.95, lengte: 1.3, hoogte: 1.7, kijkt: "west", tijdschriften: true },
+    { naam: "kubuskast tijdschriften west", soort: "kubuskast", x: -7.35, z: -35.5, lengte: 3.4, hoogte: 1.7, kijkt: "oost", tijdschriften: true },
     { naam: "cafetafel", soort: "cafetafel", x: -4.2, z: -36.15, breed: 0.9, hoek: 62.5 },
     { naam: "schaalstoel nw", soort: "schaalstoel", x: -4.75, z: -36.65, hoek: 64.5 },
     { naam: "schaalstoel no", soort: "schaalstoel", x: -3.55, z: -36.65, hoek: 315 },
