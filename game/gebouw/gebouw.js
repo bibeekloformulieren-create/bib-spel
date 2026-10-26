@@ -449,7 +449,7 @@
         doos(g, 0.02, 1.4, 0.42, 0, 0.82, 0, glas);
         [-0.21, 0.21].forEach(z => doos(g, 0.035, 1.4, 0.02, 0, 0.82, z, zwart));
         doos(g, 0.04, 0.04, 0.1, 0, 1.52, 0, mat(0xc0392b));
-        return { g, box: [0.12, 1.5, 0.46] };
+        return { g, box: [0.02, 0.02, 0.02] };   // geen botsblok: de poortjes staan bij de ingang en mogen niemand tegenhouden
       },
       /* Lage witte kast met twee deurtjes, een klok en brievenbakjes bovenop. Voorkant naar +z. */
       lagekast(m, mt) {
@@ -527,7 +527,7 @@
         cyl(g, 0.018, 1.75, 0, 0.875, 0, st);
         for (let i = 0; i < 3; i++) { const a = i * Math.PI * 2 / 3 + 0.5; lat(g, 0, 0.35, 0, Math.sin(a) * 0.3, 0.012, Math.cos(a) * 0.3, 0.012, st); }
         for (let i = 0; i < 6; i++) { const a = i * Math.PI / 3; lat(g, 0, 1.68, 0, Math.sin(a) * 0.24, 1.78, Math.cos(a) * 0.24, 0.01, st); lat(g, Math.sin(a) * 0.24, 1.78, Math.cos(a) * 0.24, Math.sin(a) * 0.24, 1.86, Math.cos(a) * 0.24, 0.01, st); }
-        return { g, box: [0.3, 1.9, 0.3] };
+        return { g, box: [0.1, 1.9, 0.1] };   // alleen de paal botst, de pootjes niet (anders versperrt hij de ingang)
       },
       /* Stapel rode winkelmandjes. */
       mandjes(m, mt) {
@@ -1184,9 +1184,23 @@
       loopt = false;
       if (vx || vz) {
         if (!geblokkeerd(vx, vz)) { speler.x += vx; speler.z += vz; loopt = true; }
-        else if (!geblokkeerd(vx, 0)) { speler.x += vx; loopt = true; }
-        else if (!geblokkeerd(0, vz)) { speler.z += vz; loopt = true; }
-        else if (ziel) { ziel = null; doel.visible = false; }
+        else {
+          /* Tegen iets aan: schuif er langs. Probeer de looprichting een beetje naar links of rechts gedraaid (steeds iets meer),
+             zodat je ook langs schuine muren en ronde dingen glijdt in plaats van vast te staan. */
+          let geschoven = false;
+          /* eerst langs de assen (zoals voorheen: altijd minstens even goed), daarna schuin langs schuine muren */
+          if (!geblokkeerd(vx, 0) && Math.abs(vx) > Math.abs(vz) * 0.3) { speler.x += vx; loopt = true; geschoven = true; }
+          else if (!geblokkeerd(0, vz) && Math.abs(vz) > Math.abs(vx) * 0.3) { speler.z += vz; loopt = true; geschoven = true; }
+          if (!geschoven) for (const hoek of [0.25, 0.5, 0.8, 1.1, 1.4]) {
+            for (const kant of [1, -1]) {
+              const c = Math.cos(hoek * kant), sn = Math.sin(hoek * kant), f = Math.max(0.55, c);
+              const rx = (vx * c - vz * sn) * f, rz = (vx * sn + vz * c) * f;
+              if (!geblokkeerd(rx, rz)) { speler.x += rx; speler.z += rz; loopt = true; geschoven = true; break; }
+            }
+            if (geschoven) break;
+          }
+          if (!geschoven && ziel) { ziel = null; doel.visible = false; }
+        }
       }
     } else { loopt = false; vel.x = vel.z = 0; }
 
@@ -1211,20 +1225,15 @@
       const richtingVoor = a => { const ca = Math.cos(a); return new THREE.Vector3(Math.sin(speler.yaw) * ca, Math.sin(a), Math.cos(speler.yaw) * ca); };
       const vrij = (a, afst) => {
         straal.set(kop, richtingVoor(a)); straal.far = afst + 0.5;
-        const h = straal.intersectObjects(nabij, false)[0];
+        const h = straal.intersectObjects(nabij, false).filter(x => !(x.object.material && x.object.material.transparent && x.object.material.opacity < 0.9))[0];   // glas telt niet mee
         return h ? h.distance - 0.75 * PS : afst;                     // hoeveel ruimte is er achter hem?
       };
-      let aKies = speler.hoogte, afstKies = speler.afstand, gevonden = false;
-      for (const extra of [0, 0.15, 0.3, 0.45, 0.6, 0.8, 1.0]) {
-        const a = Math.min(1.3, speler.hoogte + extra);
-        if (vrij(a, speler.afstand) >= speler.afstand) { aKies = a; gevonden = true; break; }
-      }
-      if (!gevonden) {                                           // overal iets: hoog, en zo ver als het kan
-        aKies = 1.3; afstKies = Math.max(2.25 * PS, vrij(aKies, speler.afstand));
-      }
-      // vloeiend: omhoog gaat snel (anders staat er even een zuil voor), terug naar beneden langzaam
-      aGlad += (aKies - aGlad) * Math.min(1, dt * (aKies > aGlad ? 10 : 2));
-      if (afstKies < afstGlad) afstGlad = afstKies; else afstGlad += (afstKies - afstGlad) * Math.min(1, dt * 3);
+      /* De camerahoek blijft altijd hetzelfde (dat wisselen van hoogte maakte misselijk). Staat er iets tussen,
+         dan komt de camera alleen een beetje dichterbij, rustig en nooit dichterbij dan nodig. */
+      const aKies = speler.hoogte;
+      const afstKies = Math.max(2.25 * PS, Math.min(speler.afstand, vrij(aKies, speler.afstand)));
+      aGlad = aKies;
+      afstGlad += (afstKies - afstGlad) * Math.min(1, dt * (afstKies < afstGlad ? 5 : 1.5));
       camera.position.copy(kop).addScaledVector(richtingVoor(aGlad), afstGlad);
       camera.lookAt(kop.x, kop.y - 0.05, kop.z);
     } else {

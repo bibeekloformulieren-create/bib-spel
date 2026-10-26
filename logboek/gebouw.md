@@ -57,3 +57,5 @@ Heb je iets nodig van de lagen, of verander je iets aan `window.Gebouw` waar een
 | 26-10-2026 | Claude | Schaal teruggezet: spelerSchaal weer 0,8 (de proef met 0,4 beviel niet). Het zachtere licht blijft. |
 | 26-10-2026 | Claude | Proefknop: &schaal=0.6 achter het adres zet tijdelijk een andere spelerSchaal (zonder iets aan te passen). |
 | 26-10-2026 | Claude | spelerSchaal vast op 0,65 (jouw keuze na de proef). |
+| 26-10-2026 | Claude | Rondlopen: tegen iets aan schuif je er nu langs (ook langs schuine muren en ronde dingen); de camera houdt altijd dezelfde hoek (geen hoogtewissels meer), alleen bij een obstakel komt hij rustig iets dichterbij. |
+| 26-10-2026 | Claude | Binnenkomen hersteld: glaswandje Geom3D_10 vlak voor de ingang weggehaald (stond in de weg), poortje en kapstok blokkeren de ingang niet meer, en bij het rondlopen schuif je eerst langs de muur voor je draait; de camera kijkt door glas heen en blijft op vaste hoogte. |

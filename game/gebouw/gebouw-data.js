@@ -206,7 +206,8 @@ window.GEBOUWDATA = {
     { onderdeel: "onderdeel@-6.9,-27.9", weg: true },   // bureaugroep digipunt (wordt nagebouwd)
     { onderdeel: "Kast_Balie@-6.1,-36.2", weg: true },   // tijdschriftenhoek wordt nagebouwd
     { onderdeel: "Component#101@-4.5,-35.6", weg: true },
-    { onderdeel: "Geom3D_5@-3.7,-33.4", dx: -1.05, dz: -0.55 }
+    { onderdeel: "Geom3D_5@-3.7,-33.4", dx: -1.05, dz: -0.55 },
+    { onderdeel: "Geom3D_10@-11.7,-34.0", weg: true }   // glaswandje vlak voor de ingang: stond in de weg bij het binnenkomen
     // eerste: dun wit kastpaneel in het model dat dwars door een rek liep
   ],
 
