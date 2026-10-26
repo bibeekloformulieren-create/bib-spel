@@ -29,8 +29,7 @@ window.SPELDATA = {
   /* Waar de fiches liggen in het echte model: [x, z] in meters (zoals op de plattegrond met raster).
      Staat er in het model een punt met de naam fiche-1 ... fiche-8, dan wint dat punt. */
   fichePlekken: {
-    1: [-9, -31], 2: [-4.5, -31], 3: [-11.4, -31.2], 4: [-9.5, -34.3],
-    5: [-1.9, -22], 6: [-6.5, -30], 7: [-13, -28], 8: [-8.4, -25]
+    1: [-7.95, -31.6], 2: [-3.2, -34.15], 3: [-6.45, -17.25], 4: [-11.6, -36.15], 5: [-1.9, -22.0], 6: [-1.05, -26.6], 7: [-11.25, -29.65], 8: [-8.3, -24.2]
   },
 
   /* Staat op "true": bij elke fiche staat een paneel met een foto in de zaal. Staat uit: de foto's
