@@ -341,7 +341,8 @@
       /* Gekleurd wandpaneel (bv. oranje muur). lengte = breedte langs de muur. Kijkt naar +z. */
       paneel(m, mt) {
         const g = new THREE.Group(), L = mt.lengte || 2, H = mt.hoogte || 2.7;
-        const v = new THREE.Mesh(new THREE.PlaneGeometry(L, H), new THREE.MeshStandardMaterial({ color: mt.kleur || 0xe8960c, roughness: 0.9 })); v.position.y = H / 2; g.add(v);   // maar 1 kant: van buiten zie je niets
+        const steen = mt.steen ? canvasTexture(c => { c.fillStyle = '#7d6049'; c.fillRect(0, 0, 128, 128); for (let r = 0; r < 8; r++) { const v0 = r * 16, ver = (r % 2) * 32; for (let k = -1; k < 3; k++) { c.fillStyle = ['#b08764', '#a67b5b', '#b8946f', '#9c7152'][(r * 3 + k + 8) % 4]; c.fillRect(k * 64 + ver + 2, v0 + 2, 60, 12); } } }, L / 0.43, H / 0.5) : null;
+        const v = new THREE.Mesh(new THREE.PlaneGeometry(L, H), new THREE.MeshStandardMaterial(steen ? { map: steen, roughness: 0.95 } : { color: mt.kleur || 0xe8960c, roughness: 0.9 })); v.position.y = H / 2; g.add(v);   // maar 1 kant: van buiten zie je niets
         return { g, box: [0.02, 0.02, 0.02] };      // geen botsing: het paneel ligt tegen de muur
       },
       /* Groen blad aan het plafond (hangt aan de muur, wijst naar +z). hoogte = ophanghoogte. */
@@ -386,6 +387,33 @@
         doos(g, L, H, D, 0, H / 2, 0, wit);
         for (let r = 0; r < 6; r++) doos(g, L - 0.06, 0.012, 0.03, 0, 0.35 + r * 0.24, D / 2 + 0.01, mat([0x2b2b2b, 0xd9d4c8, 0x8a8f98][r % 3]));
         return { g, box: [L, H, D] };
+      },
+      /* Koffiehoek: zwarte onderkast met laden en deuren, houten blad, twee zwarte planken, koffiemachine en waterkoker. Achterkant tegen de muur, voorkant naar +z. */
+      koffiebalie(m, mt) {
+        const g = new THREE.Group(), L = mt.lengte || 1.7, D = 0.6, Hk = 0.86, kast = new THREE.MeshStandardMaterial({ color: 0x1b1c1f, roughness: 0.85 }), lijn = mat(0x050506), hout = mat(0xc99a5e);
+        doos(g, L, Hk - 0.06, D - 0.04, 0, (Hk - 0.06) / 2 + 0.06, -0.02, kast);                    // onderkast (met een kleine voet)
+        doos(g, L - 0.04, 0.06, D - 0.12, 0, 0.03, -0.04, lijn);
+        doos(g, L + 0.04, 0.04, D + 0.03, 0, Hk + 0.02, 0.005, hout);                                // houten blad
+        const gl = 0.35 * L;                                                                          // links 3 laden, rechts 2 deuren
+        [0.31, 0.58].forEach(y => doos(g, gl - 0.02, 0.006, 0.01, -L / 2 + gl / 2 + 0.01, y, D / 2 - 0.015, lijn));
+        doos(g, 0.006, Hk - 0.08, 0.01, -L / 2 + gl + 0.01, 0.06 + (Hk - 0.08) / 2, D / 2 - 0.015, lijn);
+        doos(g, 0.006, Hk - 0.08, 0.01, -L / 2 + gl + (L - gl) / 2, 0.06 + (Hk - 0.08) / 2, D / 2 - 0.015, lijn);
+        [1.5, 1.95].forEach((y, i) => doos(g, L * (i ? 0.93 : 1.0), 0.05, 0.27, 0, y, -D / 2 + 0.15, mat(0x151517)));   // zwevende planken
+        const mx = L * 0.22, zw = new THREE.MeshStandardMaterial({ color: 0x141416, roughness: 0.4, metalness: 0.3 });
+        doos(g, 0.32, 0.5, 0.5, mx, Hk + 0.04 + 0.25, -0.05, zw);                                    // koffiemachine
+        doos(g, 0.025, 0.46, 0.04, mx - 0.16, Hk + 0.04 + 0.25, 0.2, new THREE.MeshStandardMaterial({ color: 0xcfd3d8, roughness: 0.3, metalness: 0.7 }));
+        doos(g, 0.15, 0.22, 0.02, mx - 0.03, Hk + 0.04 + 0.34, 0.205, mat(0x2a2d33));
+        cyl(g, 0.075, 0.2, mx + 0.38, Hk + 0.04 + 0.1, -0.12, mat(0xf1efe8));                              // waterkoker
+        /* koffietassen en glazen op de twee planken */
+        const bord = [1.525, 1.975], wit = mat(0xf4f2ee), grijs = mat(0x6e737a), zwartTas = mat(0x1d1e21), terra = mat(0xc8704a);
+        const glas = new THREE.MeshStandardMaterial({ color: 0xdcecf2, roughness: 0.08, metalness: 0.0, transparent: true, opacity: 0.4 });
+        const tas = (x, y, z, m) => { cyl(g, 0.04, 0.085, x, y + 0.0425, z, m, 0.045); doos(g, 0.02, 0.05, 0.012, x + 0.058, y + 0.045, z, m); };   // kop met oor
+        const glasje = (x, y, z, h) => cyl(g, 0.03, h, x, y + h / 2, z, glas, 0.038);
+        const zk = -D / 2 + 0.15;
+        for (let i = 0; i < 9; i++) { const x = -L * 0.46 + i * 0.105; if (x > L * 0.08 && x < L * 0.16) continue; tas(x, bord[0], zk + (i % 2 ? 0.03 : -0.03), [wit, wit, grijs, zwartTas, wit, terra, wit, grijs, wit][i]); }
+        for (let i = 0; i < 6; i++) glasje(L * 0.17 + i * 0.075, bord[0], zk - 0.02, 0.12);
+        for (let i = 0; i < 8; i++) { const x = -L * 0.44 + i * 0.1; if (i < 5) glasje(x, bord[1], zk + (i % 2 ? 0.03 : -0.03), 0.11 + (i % 3) * 0.015); else tas(x, bord[1], zk, i % 2 ? wit : grijs); }
+        return { g, box: [L, 0.95, D] };
       },
       /* Witte stroomzuil tussen de bureaus (digipunt). */
       zuil(m, mt) {
