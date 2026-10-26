@@ -430,6 +430,55 @@
         k.position.y = H / 2; g.add(k);
         return { g, box: [L, H, D] };
       },
+      /* Pc-plek op een balie: flatscreen met voet, toetsenbord en muis. Scherm kijkt naar +z (zet y = hoogte van de balie). */
+      pcplek(m, mt) {
+        const g = new THREE.Group(), zw = mat(0x16171a), gr = mat(0xdadbdd);
+        doos(g, 0.2, 0.015, 0.16, 0, 0.0075, -0.04, gr); doos(g, 0.04, 0.2, 0.03, 0, 0.11, -0.05, zw);
+        doos(g, 0.52, 0.31, 0.03, 0, 0.35, -0.05, zw); doos(g, 0.49, 0.28, 0.004, 0, 0.35, -0.033, mat(0x203040));
+        doos(g, 0.42, 0.015, 0.14, 0, 0.0075, 0.17, gr); doos(g, 0.06, 0.02, 0.09, 0.3, 0.01, 0.17, zw);
+        return { g, box: [0.02, 0.02, 0.02] };
+      },
+      /* Stapel kinderboeken. */
+      boekenstapel(m, mt) {
+        const g = new THREE.Group(), kl = [0xc0392b, 0xe8b339, 0x3b7a8c, 0x7d5ba6, 0x4d8f5a, 0xe07b2b, 0x3e6fb0, 0xd98aa8];
+        for (let i = 0; i < (mt.aantal || 8); i++) doos(g, 0.26 - (i % 3) * 0.02, 0.03, 0.2 - (i % 2) * 0.02, ((i * 7) % 5 - 2) * 0.004, 0.015 + i * 0.031, ((i * 3) % 5 - 2) * 0.004, mat(kl[i % 8]));
+        return { g, box: [0.02, 0.02, 0.02] };
+      },
+      /* Witte rolkast (op wieltjes) met een doorzichtige folderhouder bovenop. Kijkt naar +z. */
+      rolkast(m, mt) {
+        const g = new THREE.Group(), wit = mat(0xf3f1ec), plex = new THREE.MeshStandardMaterial({ color: 0xdfeef2, transparent: true, opacity: 0.3, roughness: 0.1 });
+        doos(g, 0.5, 0.86, 0.5, 0, 0.5, 0, wit); doos(g, 0.54, 0.03, 0.54, 0, 0.945, 0, wit);
+        [[-1, -1], [1, -1], [-1, 1], [1, 1]].forEach(([a, b]) => cyl(g, 0.03, 0.06, a * 0.21, 0.03, b * 0.21, zwart));
+        doos(g, 0.38, 0.5, 0.01, 0, 1.2, -0.12, plex); doos(g, 0.38, 0.14, 0.01, 0, 1.02, 0.1, plex);
+        [[-0.12, 0xd8352a], [0.04, 0x3a78c9], [0.16, 0x2fa6a0]].forEach(([x, c]) => doos(g, 0.12, 0.32, 0.012, x, 1.15, -0.09, mat(c)));
+        return { g, box: [0.54, 1.0, 0.54] };
+      },
+      /* Kapstok van staal: paal met drie pootjes en haken. */
+      kapstok(m, mt) {
+        const g = new THREE.Group(), st = new THREE.MeshStandardMaterial({ color: 0xc9cdd2, metalness: 0.8, roughness: 0.3 });
+        cyl(g, 0.018, 1.75, 0, 0.875, 0, st);
+        for (let i = 0; i < 3; i++) { const a = i * Math.PI * 2 / 3 + 0.5; lat(g, 0, 0.35, 0, Math.sin(a) * 0.3, 0.012, Math.cos(a) * 0.3, 0.012, st); }
+        for (let i = 0; i < 6; i++) { const a = i * Math.PI / 3; lat(g, 0, 1.68, 0, Math.sin(a) * 0.24, 1.78, Math.cos(a) * 0.24, 0.01, st); lat(g, Math.sin(a) * 0.24, 1.78, Math.cos(a) * 0.24, Math.sin(a) * 0.24, 1.86, Math.cos(a) * 0.24, 0.01, st); }
+        return { g, box: [0.3, 1.9, 0.3] };
+      },
+      /* Stapel rode winkelmandjes. */
+      mandjes(m, mt) {
+        const g = new THREE.Group(), rood = new THREE.MeshStandardMaterial({ color: 0xc8261f, roughness: 0.6 });
+        for (let k = 0; k < (mt.aantal || 3); k++) {
+          const y = k * 0.09; doos(g, 0.42, 0.015, 0.3, 0, y + 0.01, 0, rood);
+          doos(g, 0.42, 0.2, 0.012, 0, y + 0.11, 0.15, rood); doos(g, 0.42, 0.2, 0.012, 0, y + 0.11, -0.15, rood);
+          doos(g, 0.012, 0.2, 0.3, 0.21, y + 0.11, 0, rood); doos(g, 0.012, 0.2, 0.3, -0.21, y + 0.11, 0, rood);
+        }
+        return { g, box: [0.44, 0.4, 0.32] };
+      },
+      /* Tv aan het plafond (scherm naar +z), hangt op ongeveer 2,2 m. */
+      tvhangend(m, mt) {
+        const g = new THREE.Group(), zw = mat(0x101113);
+        cyl(g, 0.015, 0.6, 0, 2.75, 0, zw); doos(g, 0.22, 0.03, 0.12, 0, 2.43, 0, zw);
+        const tv = new THREE.Group(); tv.position.set(0, 2.2, 0); tv.rotation.x = 0.28; g.add(tv);
+        doos(tv, 1.0, 0.58, 0.04, 0, 0, 0, zw); doos(tv, 0.96, 0.54, 0.004, 0, 0, 0.022, mat(0x1a2530));
+        return { g, box: [0.02, 0.02, 0.02] };
+      },
       /* Ronde cafetafel: houten blad op een zwarte middenpoot met ronde voet, met een plantje. Kijkt naar +z. */
       cafetafel(m, mt) {
         const g = new THREE.Group(), r = (mt.breed || 0.9) / 2, hout = mat(mt.kleur || 0xdcb27c);
@@ -582,10 +631,10 @@
     /* zet groep en botsingsblok op de plek en richting van het meubel */
     function zetItem(it) {
       const mt = it.mt, rot = mt.hoek != null ? mt.hoek * Math.PI / 180 : (draai[mt.kijkt || 'zuid'] || 0);
-      it.rot = rot; it.g.rotation.y = rot; it.g.position.set(mt.x, 0, mt.z);
+      it.rot = rot; it.g.rotation.y = rot; it.g.position.set(mt.x, mt.y || 0, mt.z);
       let [bx, by, bz] = it.box; const c = Math.abs(Math.cos(rot)), sn = Math.abs(Math.sin(rot)); [bx, bz] = [bx * c + bz * sn, bx * sn + bz * c];   // gedraaid: het botsingsblok wordt breder of dieper
       it.bot.geometry.dispose(); it.bot.geometry = new THREE.BoxGeometry(bx, by, bz);
-      it.bot.position.set(mt.x, by / 2, mt.z);
+      it.bot.position.set(mt.x, by / 2 + (mt.y || 0), mt.z);
       it.bot.userData.bb = null; meubelCache = null; nabij = []; nabijX = 1e9;     // botsingsgegevens opnieuw berekenen
     }
     const verwijderd = new Set(Object.keys(bewaard).filter(n => bewaard[n] && bewaard[n].weg));
