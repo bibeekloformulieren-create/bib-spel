@@ -17,6 +17,7 @@
 
   const BASIS = (document.currentScript && document.currentScript.src || '').replace(/[^/]*$/, '');
   const C = window.GEBOUWDATA;
+  { const sp = /[?&]schaal=([\d.]+)/.exec(location.search); if (sp && parseFloat(sp[1]) > 0.2) C.spelerSchaal = parseFloat(sp[1]); }   // proef: voeg &schaal=0.6 aan het adres toe
   const MODEL = { url: BASIS + C.model.url, schaal: C.model.schaal || 1, grens: C.grens, deur: C.deur,
                   start: C.start, startRichting: C.startRichting || 0 };
   const $ = id => document.getElementById(id);
@@ -35,7 +36,7 @@
   const scene = new THREE.Scene();
   scene.background = new THREE.Color(0xe9e2d4);
   scene.fog = new THREE.Fog(0xe9e2d4, 16, 46);
-  const camera = new THREE.PerspectiveCamera(72, 1, 0.05, 140);
+  const camera = new THREE.PerspectiveCamera(72, 1, 0.03, 140);
   camera.rotation.order = 'YXZ';
   /* Licht: zacht licht van boven en van opzij, met echte schaduwen rond het poppetje. Dat geeft diepte aan het gebouw en de meubels. */
   renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
@@ -47,7 +48,7 @@
   scene.add(zon, zon.target);
 
   const colliders = [];
-  const speler = { x: 0, y: 1.6, z: 7.8, yaw: 0, pitch: 0, hoogte: 0.6, afstand: 5.2 * (C.spelerSchaal || 1) };   // y = oogpunt; hoogte = camerahoek achter de speler
+  const speler = { x: 0, y: 1.6, z: 7.8, yaw: 0, pitch: 0, hoogte: 0.6 + (0.8 - (C.spelerSchaal || 1)) * 0.9, afstand: 5.2 * (C.spelerSchaal || 1) * (1 + (0.8 - (C.spelerSchaal || 1)) * 0.8) };   // kleiner poppetje: camera steiler en iets verder, zodat je over de meubels heen kijkt   // y = oogpunt; hoogte = camerahoek achter de speler
 
   /* De speler als poppetje in de zaal. Het uiterlijk (3 loopbeeldjes) komt van de laag: Gebouw.zetAvatar. */
   let weergave = 'derde';                  // 'derde' = je ziet het poppetje, 'eerste' = door zijn ogen
@@ -1114,7 +1115,7 @@
   /* Zou een stap (dx, dz) vanaf punt (x, z) tegen iets aan botsen? Gebruikt door het gebouw en door de bereikbaarheidstest. */
   function blokkeertOp(x, z, dx, dz, lijst) {
     const l = Math.hypot(dx, dz); if (!l) return false;
-    const R = 0.2, nx = x + dx, nz = z + dz;
+    const R = 0.25 * PS, nx = x + dx, nz = z + dz;
     for (const b of meubelDozen()) {
       const binnen = (px, pz) => px > b.min.x - R && px < b.max.x + R && pz > b.min.z - R && pz < b.max.z + R;
       if (binnen(nx, nz) && !binnen(x, z)) return true;
@@ -1145,7 +1146,7 @@
   }
 
   /* ---------- wandelen en camera ---------- */
-  let loopt = false, afstGlad = 5.2 * (C.spelerSchaal || 1), aGlad = 0.6;
+  let loopt = false, afstGlad = speler.afstand, aGlad = speler.hoogte;
   const vel = { x: 0, z: 0 };
   const klok = new THREE.Clock();
   function lus() {
@@ -1211,7 +1212,7 @@
       const vrij = (a, afst) => {
         straal.set(kop, richtingVoor(a)); straal.far = afst + 0.5;
         const h = straal.intersectObjects(nabij, false)[0];
-        return h ? h.distance - 0.6 : afst;                     // hoeveel ruimte is er achter hem?
+        return h ? h.distance - 0.75 * PS : afst;                     // hoeveel ruimte is er achter hem?
       };
       let aKies = speler.hoogte, afstKies = speler.afstand, gevonden = false;
       for (const extra of [0, 0.15, 0.3, 0.45, 0.6, 0.8, 1.0]) {
@@ -1219,7 +1220,7 @@
         if (vrij(a, speler.afstand) >= speler.afstand) { aKies = a; gevonden = true; break; }
       }
       if (!gevonden) {                                           // overal iets: hoog, en zo ver als het kan
-        aKies = 1.3; afstKies = Math.max(1.8, vrij(aKies, speler.afstand));
+        aKies = 1.3; afstKies = Math.max(2.25 * PS, vrij(aKies, speler.afstand));
       }
       // vloeiend: omhoog gaat snel (anders staat er even een zuil voor), terug naar beneden langzaam
       aGlad += (aKies - aGlad) * Math.min(1, dt * (aKies > aGlad ? 10 : 2));

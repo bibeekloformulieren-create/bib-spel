@@ -53,3 +53,7 @@ Heb je iets nodig van de lagen, of verander je iets aan `window.Gebouw` waar een
 | 26-10-2026 | Claude | Laminaat kinderhoek: vloer loopt nu tot onder de muren (west en schuine oranje muur oost), in 6 stukken. |
 | 26-10-2026 | Claude | Vloer: alle overige vloer (inkom, balie, dvd-gang, loper, digipunt, glazen zaal) is nu effen zacht licht taupe (#8f867d). Groen tapijt en laminaat blijven. De oude tegeltypes staan als commentaar bij de zones. |
 | 26-10-2026 | Claude | Licht zachter en warmer (hemelslicht 0,62 naar 0,54, zon 0,72 naar 0,6, warmere tint). Schaal: spelerSchaal 0,8 naar 0,4, het gebouw voelt twee keer zo groot (het gebouw en de plaatsen zelf zijn niet veranderd). |
+| 26-10-2026 | Claude | Camera aangepast bij kleine spelerSchaal: steiler en iets verder, botsradius en cameramarges schalen mee, zodat je over de meubels heen kijkt. Gebouw en plaatsen ongewijzigd (fiches bereikbaar). |
+| 26-10-2026 | Claude | Schaal teruggezet: spelerSchaal weer 0,8 (de proef met 0,4 beviel niet). Het zachtere licht blijft. |
+| 26-10-2026 | Claude | Proefknop: &schaal=0.6 achter het adres zet tijdelijk een andere spelerSchaal (zonder iets aan te passen). |
+| 26-10-2026 | Claude | spelerSchaal vast op 0,65 (jouw keuze na de proef). |

@@ -12,7 +12,7 @@ window.GEBOUWDATA = {
 
   /* Hoe groot de speler is ten opzichte van het gebouw. 1 = echte menselijke maat; kleiner (bv. 0.8) laat het gebouw groter voelen.
      Past poppetje, wandelsnelheid, oogpunt en cameraafstand aan; het gebouw zelf en alle plaatsen blijven ongewijzigd. */
-  spelerSchaal: 0.4,   // was 0.8: het gebouw voelt nu twee keer zo groot
+  spelerSchaal: 0.65,   // was 0.8; 0,65 voelt ruimer en blijft goed in verhouding (0,4 was te klein)
 
   /* Alles buiten dit vak (losse voorwerpen) wordt verborgen, en je kunt er niet buiten wandelen. */
   grens: { xmin: -15.6, xmax: 1.2, zmin: -38.2, zmax: -13.4 },
