@@ -38,3 +38,4 @@ Heb je iets nodig van de lagen, of verander je iets aan `window.Gebouw` waar een
 | 26-10-2026 | Claude | Koffiehoek: baksteenmuur cappuccinobruin; koffietassen en glazen op de twee planken; twee witte muurvlakken naast de koffiehoek oranje (zelfde oranje als de kleuterhoek). |
 | 26-10-2026 | Claude | Koffiehoek: alle drie de muurvlakken effen cappuccinobruin (geen bakstenen, geen oranje). |
 | 26-10-2026 | Claude | Muurvlakken zelf kleuren: knop 'Muur verven' + kleurkiezer in bewerkmodus. Koffiehoek zuidmuur oranje en extra oranje muur in kleuterhoek uit jouw lijst verwerkt. |
+| 26-10-2026 | Claude | Koffiehoek: bovenste plank alleen gelijke witte tassen, onderste plank alleen gelijke glazen, netjes in een rij. |

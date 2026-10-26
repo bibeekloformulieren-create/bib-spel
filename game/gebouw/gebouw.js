@@ -410,9 +410,10 @@
         const tas = (x, y, z, m) => { cyl(g, 0.04, 0.085, x, y + 0.0425, z, m, 0.045); doos(g, 0.02, 0.05, 0.012, x + 0.058, y + 0.045, z, m); };   // kop met oor
         const glasje = (x, y, z, h) => cyl(g, 0.03, h, x, y + h / 2, z, glas, 0.038);
         const zk = -D / 2 + 0.15;
-        for (let i = 0; i < 9; i++) { const x = -L * 0.46 + i * 0.105; if (x > L * 0.08 && x < L * 0.16) continue; tas(x, bord[0], zk + (i % 2 ? 0.03 : -0.03), [wit, wit, grijs, zwartTas, wit, terra, wit, grijs, wit][i]); }
-        for (let i = 0; i < 6; i++) glasje(L * 0.17 + i * 0.075, bord[0], zk - 0.02, 0.12);
-        for (let i = 0; i < 8; i++) { const x = -L * 0.44 + i * 0.1; if (i < 5) glasje(x, bord[1], zk + (i % 2 ? 0.03 : -0.03), 0.11 + (i % 3) * 0.015); else tas(x, bord[1], zk, i % 2 ? wit : grijs); }
+        /* netjes gesorteerd: bovenste plank enkel witte koffietassen, onderste plank enkel dezelfde glazen, in een rechte rij */
+        const n = Math.floor((L * 0.88) / 0.11), x0 = -((n - 1) * 0.11) / 2;
+        for (let i = 0; i < n; i++) tas(x0 + i * 0.11, bord[1], zk, wit);
+        for (let i = 0; i < n; i++) glasje(x0 + i * 0.11, bord[0], zk, 0.12);
         return { g, box: [L, 0.95, D] };
       },
       /* Witte stroomzuil tussen de bureaus (digipunt). */
