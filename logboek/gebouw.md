@@ -26,3 +26,4 @@ Heb je iets nodig van de lagen, of verander je iets aan `window.Gebouw` waar een
 | 26-10-2026 | Claude | Gang: dvd-rekken ingekort tot 1,4 m en een derde rek erbij (z -28,0), rode toren naar z -28,5, zoals de gebruiker ze zette. Kastpaneel stond al weg. |
 | 26-10-2026 | Claude | Digipunt: vloer nu roze-bruine tegels op de punt met grijze voegen, zoals op de foto. |
 | 26-10-2026 | Claude | Digipunt: de twee bureaugroepen zijn uit het model gehaald (modelAanpassingen) en nagebouwd als meubels: witte bureaus rond een stroomzuil, roze stoelen, laptops. Nieuwe meubeltypes `zuil` en `laptop` in gebouw.js. Vloerkleur digipunt aangepast. `window.Gebouw` niet gewijzigd. |
+| 26-10-2026 | Claude | Digipunt: bureaus, stoelen en laptops zoals de gebruiker ze verplaatst en verwijderd heeft (groep 1 behalve twee stoelen weg, groep 2 aangepast, zuilen weg). |
