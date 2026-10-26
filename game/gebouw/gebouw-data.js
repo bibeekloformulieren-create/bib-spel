@@ -33,8 +33,8 @@ window.GEBOUWDATA = {
     vloerTegel:    "#5f5753",   // de kleine donkere tegels (gang naar de veranda)
     vloerVoeg:     "#c4beb5",   // de voegen ertussen
     vloerGlad:     "#8d8f93",   // de gladde grijze vloer (inkom, balie)
-    vloerTegelLicht: "#d9cabd", // lichte beige tegels (o.a. bij het digipunt)
-    vloerVoegLicht:  "#b9aea3",
+    vloerTegelLicht: "#a8857a", // roze-bruine tegels (o.a. bij het digipunt)
+    vloerVoegLicht:  "#7f8a8c",
     plafondLat:    "#d7c6a0",   // houten latten
     plafondSpleet: "#4a4338",
     /* Vloerzones. Overal is de vloer glad grijs, behalve in deze vakken.
@@ -103,7 +103,34 @@ window.GEBOUWDATA = {
     { naam: "stoel o2", soort: "stoel", x: -6.6, z: -19.25, kijkt: "west" },
     { naam: "stoel o3", soort: "stoel", x: -7.1, z: -17.85, kijkt: "noord" },
     { naam: "stoel n1", soort: "stoel", x: -8, z: -20.65, kijkt: "zuid" },
-    { naam: "stoel n2", soort: "stoel", x: -7.15, z: -20.7, kijkt: "zuid" }
+    { naam: "stoel n2", soort: "stoel", x: -7.15, z: -20.7, kijkt: "zuid" },
+    /* digipunt: twee groepen van vier witte bureaus rond een stroomzuil, roze stoelen, laptops (naar foto) */
+    { naam: "digipunt 1 zuil", soort: "zuil", x: -6.9, z: -28.2 },
+    { naam: "digipunt 1 bureau w1", soort: "tafel", x: -7.18, z: -28.7, lengte: 1.0, breed: 0.5, kleur: 0xf4f2ee, kijkt: "oost" },
+    { naam: "digipunt 1 stoel w1", soort: "stoel", x: -7.6, z: -28.7, kleur: 0xd9aaa4, kijkt: "oost" },
+    { naam: "digipunt 1 laptop w1", soort: "laptop", x: -7.21, z: -28.7, kijkt: "west", hoogte: 0.75 },
+    { naam: "digipunt 1 bureau o1", soort: "tafel", x: -6.62, z: -28.7, lengte: 1.0, breed: 0.5, kleur: 0xf4f2ee, kijkt: "west" },
+    { naam: "digipunt 1 stoel o1", soort: "stoel", x: -6.2, z: -28.7, kleur: 0xd9aaa4, kijkt: "west" },
+    { naam: "digipunt 1 laptop o1", soort: "laptop", x: -6.59, z: -28.7, kijkt: "oost", hoogte: 0.75 },
+    { naam: "digipunt 1 bureau w2", soort: "tafel", x: -7.18, z: -27.7, lengte: 1.0, breed: 0.5, kleur: 0xf4f2ee, kijkt: "oost" },
+    { naam: "digipunt 1 stoel w2", soort: "stoel", x: -7.6, z: -27.7, kleur: 0xd9aaa4, kijkt: "oost" },
+    { naam: "digipunt 1 laptop w2", soort: "laptop", x: -7.21, z: -27.7, kijkt: "west", hoogte: 0.75 },
+    { naam: "digipunt 1 bureau o2", soort: "tafel", x: -6.62, z: -27.7, lengte: 1.0, breed: 0.5, kleur: 0xf4f2ee, kijkt: "west" },
+    { naam: "digipunt 1 stoel o2", soort: "stoel", x: -6.2, z: -27.7, kleur: 0xd9aaa4, kijkt: "west" },
+    { naam: "digipunt 1 laptop o2", soort: "laptop", x: -6.59, z: -27.7, kijkt: "oost", hoogte: 0.75 },
+    { naam: "digipunt 2 zuil", soort: "zuil", x: -5.2, z: -28.2 },
+    { naam: "digipunt 2 bureau w1", soort: "tafel", x: -5.48, z: -28.7, lengte: 1.0, breed: 0.5, kleur: 0xf4f2ee, kijkt: "oost" },
+    { naam: "digipunt 2 stoel w1", soort: "stoel", x: -5.9, z: -28.7, kleur: 0xd9aaa4, kijkt: "oost" },
+    { naam: "digipunt 2 laptop w1", soort: "laptop", x: -5.51, z: -28.7, kijkt: "west", hoogte: 0.75 },
+    { naam: "digipunt 2 bureau o1", soort: "tafel", x: -4.92, z: -28.7, lengte: 1.0, breed: 0.5, kleur: 0xf4f2ee, kijkt: "west" },
+    { naam: "digipunt 2 stoel o1", soort: "stoel", x: -4.5, z: -28.7, kleur: 0xd9aaa4, kijkt: "west" },
+    { naam: "digipunt 2 laptop o1", soort: "laptop", x: -4.89, z: -28.7, kijkt: "oost", hoogte: 0.75 },
+    { naam: "digipunt 2 bureau w2", soort: "tafel", x: -5.48, z: -27.7, lengte: 1.0, breed: 0.5, kleur: 0xf4f2ee, kijkt: "oost" },
+    { naam: "digipunt 2 stoel w2", soort: "stoel", x: -5.9, z: -27.7, kleur: 0xd9aaa4, kijkt: "oost" },
+    { naam: "digipunt 2 laptop w2", soort: "laptop", x: -5.51, z: -27.7, kijkt: "west", hoogte: 0.75 },
+    { naam: "digipunt 2 bureau o2", soort: "tafel", x: -4.92, z: -27.7, lengte: 1.0, breed: 0.5, kleur: 0xf4f2ee, kijkt: "west" },
+    { naam: "digipunt 2 stoel o2", soort: "stoel", x: -4.5, z: -27.7, kleur: 0xd9aaa4, kijkt: "west" },
+    { naam: "digipunt 2 laptop o2", soort: "laptop", x: -4.89, z: -27.7, kijkt: "oost", hoogte: 0.75 }
   ],
 
 
@@ -112,7 +139,10 @@ window.GEBOUWDATA = {
      Voorbeelden:  { onderdeel: "Dvd_Kast_(Jaan)@-8.1,-26.6", weg: true }   of   { onderdeel: "naam@x,z", dx: 0.3, dz: -0.1 }
      De naam met plek krijg je van "Kopieer lijst voor Claude" in de verplaatsmodus (&bewerk). */
   modelAanpassingen: [
-    { onderdeel: "Dvd_Kast_(Jaan)@-8.1,-26.6", weg: true }   // dun wit kastpaneel in het model dat dwars door een rek liep
+    { onderdeel: "Dvd_Kast_(Jaan)@-8.1,-26.6", weg: true },
+    { onderdeel: "onderdeel@-5.2,-27.9", weg: true },   // bureaugroep digipunt (wordt nagebouwd)
+    { onderdeel: "onderdeel@-6.9,-27.9", weg: true }   // bureaugroep digipunt (wordt nagebouwd)
+    // eerste: dun wit kastpaneel in het model dat dwars door een rek liep
   ],
 
   /* Ramen in de gevel (het model heeft geen ramen). onder = hoogte van de vensterbank. */

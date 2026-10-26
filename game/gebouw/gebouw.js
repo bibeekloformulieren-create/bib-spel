@@ -120,7 +120,7 @@
 
   /* Vloer en plafond: het model heeft ze niet. Kleuren staan in gebouw-data.js bij "look". */
   const LOOK = Object.assign({
-    vloerTegel: '#5f5753', vloerVoeg: '#c4beb5', vloerGlad: '#8d8f93', vloerTegelLicht: '#d9cabd', vloerVoegLicht: '#b9aea3', tapijt: '#9a9ca1', vloerTegelGroot: '#4f4d4e', vloerVoegGroot: '#2b2a2a', vloerTegelKlein: '#9a8a84', vloerVoegKlein: '#463f3c', vloerLoper: '#5d6166',
+    vloerTegel: '#5f5753', vloerVoeg: '#c4beb5', vloerGlad: '#8d8f93', vloerTegelLicht: '#a8857a', vloerVoegLicht: '#7f8a8c', tapijt: '#9a9ca1', vloerTegelGroot: '#4f4d4e', vloerVoegGroot: '#2b2a2a', vloerTegelKlein: '#9a8a84', vloerVoegKlein: '#463f3c', vloerLoper: '#5d6166',
     plafondLat: '#d7c6a0', plafondSpleet: '#4a4338'
   }, C.look || {});
   let plafondMesh = null;
@@ -336,6 +336,21 @@
         boog(g, 0.25, 0.3, 0, 0.67, -0.05, Math.PI, Math.PI * 0.8, schaal);                     // gebogen rug
         [[-1, -1], [1, -1], [-1, 1], [1, 1]].forEach(([a, b]) => lat(g, a * 0.13, 0.45, b * 0.12, a * 0.2, 0.0, b * 0.2, 0.018, hout));
         return { g, box: [0.5, 0.9, 0.5] };
+      },
+      /* Witte stroomzuil tussen de bureaus (digipunt). */
+      zuil(m, mt) {
+        const g = new THREE.Group(), H = mt.hoogte || 1.9, wit = mat(0xf3f1ec);
+        doos(g, 0.1, H, 0.1, 0, H / 2, 0, wit);
+        doos(g, 0.02, 0.1, 0.11, 0, 0.9, 0, mat(0x2a2a2a));                                     // stopcontact
+        return { g, box: [0.12, H, 0.12] };
+      },
+      /* Open laptop op een bureau. Scherm kijkt naar +z. */
+      laptop(m, mt) {
+        const g0 = new THREE.Group(), g = new THREE.Group(), grijs = mat(0x8e949b), donker = mat(0x23262b); g.position.y = 0.75; g0.add(g);
+        doos(g, 0.33, 0.02, 0.23, 0, 0.01, 0, grijs);
+        const sc = new THREE.Group(); sc.position.set(0, 0.02, -0.11); sc.rotation.x = -0.35; g.add(sc);
+        doos(sc, 0.33, 0.22, 0.012, 0, 0.11, 0, grijs); doos(sc, 0.3, 0.19, 0.005, 0, 0.11, 0.007, donker);
+        return { g: g0, box: [0.33, 0.25, 0.25] };
       },
       /* Hoge zwarte kruk: plastic schaal, draadframe met voetensteun. Kijkt naar +z. */
       kruk(m, mt) {
