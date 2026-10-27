@@ -14,10 +14,10 @@ window.SPELDATA = {
   directeur: "Beatrijs",
 
   intro: [
-    "Hoi. Ik ben Boek-E. Ik werk in de bib van Eeklo. De bib bestaat 50 jaar.",
-    "{directeur}, de directeur van de bib, vroeg me het archief op orde te brengen. Toen werd het gelijkvloers verbouwd en vielen mijn fiches uit de kast.",
-    "Er zijn er acht. De blauwgroene gaan over het gebouw en de oranje over hoe de bib werkt. Zoek ze, bekijk ze, los de vraag op en leer iets bij.",
-    "Fout? Probeer opnieuw, er is geen straf. Een tip nodig? Tik op Tip. Ouders mogen meehelpen."
+    "De bib van Eeklo viert haar 50ste verjaardag!",
+    "{directeur}, onze directeur, vroeg mij om het archief op orde te brengen. Maar door de verbouwing van het gelijkvloers ligt alles door elkaar en zijn al mijn fiches uit de kast gevallen.",
+    "Help jij me zoeken? Ga op pad, los de vragen op en ontdek het verhaal van onze bib!",
+    "Foutje? Geen probleem, probeer gewoon opnieuw. Heb je hulp nodig? Tik op 'Tip'. Ouders mogen natuurlijk meehelpen!"
   ],
 
   einde: {
