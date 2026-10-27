@@ -60,3 +60,4 @@ Heb je iets nodig van de lagen, of verander je iets aan `window.Gebouw` waar een
 | 26-10-2026 | Claude | Rondlopen: tegen iets aan schuif je er nu langs (ook langs schuine muren en ronde dingen); de camera houdt altijd dezelfde hoek (geen hoogtewissels meer), alleen bij een obstakel komt hij rustig iets dichterbij. |
 | 26-10-2026 | Claude | Binnenkomen hersteld: glaswandje Geom3D_10 vlak voor de ingang weggehaald (stond in de weg), poortje en kapstok blokkeren de ingang niet meer, en bij het rondlopen schuif je eerst langs de muur voor je draait; de camera kijkt door glas heen en blijft op vaste hoogte. |
 | 26-10-2026 | Claude | Jouw nieuwe lijst verwerkt: kubuskast tijdschriften west, dvd-rek kopie 1, Geom3D_5 en een extra uitleentoog (kopie 2) op hun nieuwe plek. |
+| 27-10-2026 | Claude | Achtergrondmensjes: code volledig verwijderd (veroorzaakte zwart scherm in Chrome). |

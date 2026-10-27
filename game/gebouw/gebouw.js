@@ -923,6 +923,7 @@
     });
   }
 
+  /* Achtergrondmensjes: 2D-sprites op vaste plekken in de bib, die zachtjes leven. */
   /* Het model laden. Geeft een belofte terug die klaar is als het gebouw er staat (echt model of tijdelijke zaal). */
   let modelGeladen = false;
   function laadModel() {
@@ -1241,6 +1242,7 @@
       camera.rotation.set(speler.pitch, speler.yaw, 0);
     }
     zon.target.position.set(speler.x, 0, speler.z); zon.position.set(speler.x + 5, 11, speler.z + 3.5);   // de schaduwen volgen het poppetje
+
     haken.frame.forEach(f => f(dt, t));
   }
 
