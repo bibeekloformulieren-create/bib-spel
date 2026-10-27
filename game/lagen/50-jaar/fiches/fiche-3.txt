@@ -1,37 +1,36 @@
-# FICHE 3: De rode draad
+# FICHE 3: Een nieuw huis
 # Uitleg om dit bestand aan te passen: zie HANDLEIDING.md in deze map. Regels die met # beginnen worden genegeerd.
 
 nummer: 3
 categorie: gebouw
 soort: keuze
-titel: De rode draad
-waar: Op een plek waar je de ruitvorm ziet: schuine vloertegels of onder de vide.
+titel: Een nieuw huis
+waar: Bij de ingang van de bib.
 plek: -4, -6
-bron: Paneel "Gebouwd voor boeken", gesprek Willy Bultynck
-zoek-opdracht: Speur als een detective: zoek in de bib minstens twee plekken waar je die vorm terugziet. Kijk naar beneden én omhoog.
-tip: Een vierkant dat op een hoek staat, als een diamant.
-boeke-goed: Een ruit! Willy verstopte hem overal. Zoek maar eens verder...
-boeke-fout: Nee. Denk aan een vierkant dat op een hoek staat, als een diamant.
+bron: Brochure 50 jaar bib, Paneel "Een nieuw huis", De Bond 28 oktober 1988
+tip: Kijk naar waar de balie staat. Stond ze vroeger op dezelfde plek?
+boeke-goed: Goed! In 1988 stond de balie midden in de zaal. Vandaag staat ze aan de zijkant.
+boeke-fout: Nee. Kijk naar de balie. Staat die nu aan de zijkant of in het midden?
 
 [kijkpunten]
-- Er zit een geheim in dit gebouw. Één vorm keert overal terug: in de vloer, het plafond, de vide en zelfs de gedenkplaat.
-- De man die dit gebouw verbouwde, Willy Bultynck, verstopte die vorm bewust overal. Hij noemt het zijn rode draad.
-- Kun jij hem vinden? Kijk goed naar de vloertegels onder je voeten.
+- Op zaterdag 20 februari 1988 gingen de deuren van de nieuwe bibliotheek open. Wie er die eerste weken binnenstapte, keek zijn ogen uit. Geen smalle gangetjes meer, geen krakende trappen. Een open, lichte ruimte met rekken netjes op een rij.
+- De balie stond in 1988 midden in de zaal, en alles draaide om het boek: kaartjes, stempels en een vertrouwd gezicht. Vandaag staat de balie aan de zijkant. Je leent zelf uit, dus de medewerkers hebben meer tijd voor een vraag of een tip.
+- In 1995, amper zeven jaar na de opening, kwamen er drie nieuwe verdiepingen bij naast het gebouw. Eerst stonden de rekken leeg. Even later waren ze tot de nok gevuld.
 
 [beelden]
-img/bekisting-ruit.jpg | De vide in aanbouw: de vorm is al zichtbaar.
-img/vide-plafond.jpg | Het schuine plafond rond de vide.
+img/balie-1988.jpg | De balie midden in de zaal, 1988.
+img/lege-rekken.jpg | De nieuwe rekken in 1995: leeg, klaar voor de boeken.
 
 [vraag]
-Welke vorm is de rode draad?
+In 1988 stond de balie midden in de grote zaal. Waar staat ze vandaag?
 
 [antwoorden]
-- Een cirkel
-* Een ruit
-- Een driehoek
-- Een ster
+* Aan de zijkant
+- Nog altijd in het midden
+- Vlak bij de ingang
+- Op de eerste verdieping
 
 [leer]
-- De vloertegels liggen onder 45 graden. De plafonds hebben ook schuine lijnen.
-- Willy noemt die 45 graden de rode draad: je vindt ze in de vloer, het plafond, de vide en de gedenkplaat.
-- "Aan de details ken je de vakmensen." Dat zei de bouwkundige tekenaar over het werk van Willy.
+- In oktober 1988 stonden sommige kinderen al om half zes te wachten voor de bib, terwijl die pas om half acht sloot. Ze kwamen voor de nieuwe strips. Zo raakten ze soms toch aan het lezen.
+- "Kinderen moeten in de bibliotheek telkens hetzelfde gezicht terugvinden." Dat schreef een krant in 1988. De medewerkers kenden de bezoekers bij naam.
+- In 2006 kwamen er zetels en een glazen veranda in de binnentuin. Die veranda heeft een echt groendak: levende planten bovenop het dak.

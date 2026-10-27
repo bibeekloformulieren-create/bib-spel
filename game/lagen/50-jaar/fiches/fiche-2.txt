@@ -1,38 +1,36 @@
-# FICHE 2: Verborgen plekken
+# FICHE 2: Het boekenhuis
 # Uitleg om dit bestand aan te passen: zie HANDLEIDING.md in deze map. Regels die met # beginnen worden genegeerd.
 
 nummer: 2
 categorie: gebouw
 soort: keuze
-titel: Verborgen plekken
-waar: Bij de trap of de lift.
+titel: Het boekenhuis
+waar: Bij de balie, onder de vide.
 plek: -9.5, 5.5
-bron: Gesprek Willy Bultynck, Paneel "Gebouwd voor boeken"
-zoek-opdracht: Neem de lift. Op hoeveel verdiepingen stopt hij?
-tip: De naam zegt hoe je erin moet: je moet kruipen.
-boeke-goed: Een kruipkelder! Onder je voeten. En niemand komt er nog in.
-boeke-fout: Nee. Denk aan iets onder de grond waar je op handen en voeten door moet.
+bron: Brochure 50 jaar bib, Paneel "Gebouwd voor boeken", gesprek Willy Bultynck
+tip: Het antwoord staat op de muurplaat bij de ingang. Of reken: een vierkante meter, vol boeken.
+boeke-goed: Klopt! 500 kilogram per vierkante meter. De vloeren zijn zo gebouwd dat ze nooit zullen doorzakken, ook al stapel je er duizenden boeken op.
+boeke-fout: Niet helemaal. De vloeren zijn veel sterker dan in een gewoon huis. Denk aan het gewicht van al die rekken samen.
 
 [kijkpunten]
-- Onder dit gebouw zit een geheime ruimte waar niemand meer bij kan.
-- Tijdens de verbouwing ging de bibliothecaris eens kijken in het nieuwe gebouw. Hij nam de nieuwe lift. En... de lift blokkeerde. Geroepen, maar niemand hoorde hem!
-- Gelukkig werd hij toch gemist. Gered, en veilig en hongerig naar huis.
+- In 1986 begon de grote verbouwing van het herenhuis huis Van Brabandt. Van binnen werd bijna alles eruit gehaald: de houten vloeren, de binnenmuren, de trappen. Vanop de benedenverdieping kon je recht naar het dak kijken.
+- De nieuwe vloeren moesten zware boekenrekken kunnen dragen. Stalen balken, gewelven en een nieuwe betonnen fundering onder elke kolom. Elke vierkante meter kan 500 kilogram dragen. Dat is het gewicht van vier volwassenen op één tegel.
+- Midden in het gebouw, boven de balie, zit een grote opening in de vloer: de vide. Wie beneden staat, ziet de verdieping erboven. Wie boven staat, kijkt neer op de balie. Willy Bultynck heeft hem helemaal zelf gebouwd.
 
 [beelden]
 img/gestript.jpg | Het huis tijdens de verbouwing: bijna alles eruit.
-img/trap-tussenverdiep.jpg | De trap in de bib van vandaag.
+img/vide-reling.jpg | De vide, klaar, met leuning en planten.
 
 [vraag]
-Onder het gelijkvloers is een ruimte waar niemand meer bij kan. Wat is het?
+De vloeren van de bib moesten heel zware boekenrekken kunnen dragen. Hoeveel kilogram kan één vierkante meter vloer aan?
 
 [antwoorden]
-* Een kruipkelder
-- Een geheime lift
-- Een kamer achter de balie
-- Een zwembad
+* 500 kilogram
+- 50 kilogram
+- 5.000 kilogram
+- 150 kilogram
 
 [leer]
-- Onder het gelijkvloers ligt een kruipkelder. Je kunt er niet meer in.
-- Op de derde verdieping staat een valse wand. Erachter zie je nog de oude dakstructuur.
-- De buitenmuren staan niet symmetrisch. Extra muurtjes verbergen dat, en de stukadoor moest op sommige plekken heel dik pleisteren.
-- De sleutel om mensen te bevrijden uit de lift hangt "werkloos aan zijn haak". Hij is maar één keer nodig geweest.
+- Er loopt een onzichtbare lijn van 45 graden door het hele gebouw. Die lijn bepaalt waar de balie staat, hoe de trap loopt en waar de ingang is. Als je weet waar je moet kijken, zie je hem overal terug.
+- Onder het gelijkvloers zit een kruipkelder die dichtgemetseld is tijdens de verbouwing van 1986. Niemand kan er nog bij.
+- De buitenmuren van het gebouw staan niet recht tegenover elkaar: ze zijn niet symmetrisch. Op de eerste verdieping werden kleine muurtjes bijgebouwd om dat te verbergen. Op sommige plekken moest de stukadoor heel dik pleisteren.
