@@ -19,7 +19,6 @@
   /* ---------- het scherm van deze laag ---------- */
   $('laag').innerHTML = `
     <button class="hud" id="teller">Fiches <b id="aantal">0</b> / <span id="totaal">8</span><span class="o">· overzicht</span></button>
-    <div class="hud" id="legende">${Object.values(D.categorieen).map(c => `<span style="--c:${c.kleur}">${c.naam}</span>`).join('')}</div>
     <div class="hud" id="pijl" title="Richting van de volgende fiche">
       <svg viewBox="0 0 24 24"><path d="M12 2 L20 20 L12 15 L4 20 Z" fill="#d9601f"/></svg>
     </div>
@@ -89,7 +88,7 @@
     FICHES.forEach(f => {
       const p = plek(f);
       const groep = new THREE.Group();
-      const kleur = f.categorie === 'gebouw' ? '#0b5d68' : '#d9601f';
+      const kleur = '#0b5d68';
 
       /* Canvas: bibliotheekkaart-stijl */
       const cv = document.createElement('canvas'); cv.width = 192; cv.height = 300;
