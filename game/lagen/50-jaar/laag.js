@@ -73,7 +73,7 @@
   }
 
   /* ---------- fiches in de zaal ---------- */
-  const ficheObj = [];                     // { data, groep, pos, kaart, straal }
+  const ficheObj = [];                     // { data, groep, pos, kaart }
   /* Aanhaakpunt voor de tentoonstelling (map tentoonstelling): modus 'spel' of 'tentoonstelling'. In de tentoonstelling zijn de fiches weg. */
   const Laag50 = window.Laag50 = { modus: 'spel', fiches: ficheObj, ververs() { ficheObj.forEach(zetUiterlijk); }, klaar: null };
 
@@ -89,25 +89,35 @@
     FICHES.forEach(f => {
       const p = plek(f);
       const groep = new THREE.Group();
-      const kaart = new THREE.Mesh(new THREE.BoxGeometry(0.46, 0.64, 0.04),
-        new THREE.MeshLambertMaterial({ color: f.categorie === 'gebouw' ? 0x0b5d68 : 0xd9601f, emissive: f.categorie === 'gebouw' ? 0x04282d : 0x7a2d08 }));
-      const nr = document.createElement('canvas'); nr.width = nr.height = 128;
-      const x = nr.getContext('2d'); x.fillStyle = '#fbf7ef'; x.fillRect(0, 0, 128, 128);
-      x.fillStyle = f.categorie === 'gebouw' ? '#0b5d68' : '#d9601f'; x.font = 'bold 84px system-ui'; x.textAlign = 'center'; x.textBaseline = 'middle';
-      x.fillText(String(f.id), 64, 70);
-      const vlak = new THREE.Mesh(new THREE.PlaneGeometry(0.34, 0.34),
-        new THREE.MeshBasicMaterial({ map: new THREE.CanvasTexture(nr) }));
-      vlak.position.z = 0.025;
-      const vlak2 = vlak.clone(); vlak2.rotation.y = Math.PI; vlak2.position.z = -0.025;
-      kaart.add(vlak, vlak2);
-      kaart.position.y = 1.15;
-      const straal = new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.03, 2.8, 8),
-        new THREE.MeshBasicMaterial({ color: f.categorie === 'gebouw' ? 0x0b5d68 : 0xd9601f, transparent: true, opacity: 0.18 }));
-      straal.position.y = 1.4;
-      groep.add(kaart, straal);
+      const kleur = f.categorie === 'gebouw' ? '#0b5d68' : '#d9601f';
+
+      /* Canvas: bibliotheekkaart-stijl */
+      const cv = document.createElement('canvas'); cv.width = 192; cv.height = 300;
+      const ctx = cv.getContext('2d');
+      ctx.fillStyle = '#f5efe0';
+      ctx.fillRect(0, 0, 192, 300);
+      ctx.strokeStyle = '#c8ba9a'; ctx.lineWidth = 2;
+      ctx.strokeRect(1, 1, 190, 298);
+      ctx.fillStyle = kleur;
+      ctx.fillRect(0, 0, 192, 44);
+      ctx.fillStyle = 'rgba(255,255,255,0.85)'; ctx.font = 'bold 12px system-ui'; ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
+      ctx.fillText('BIB EEKLO', 10, 22);
+      ctx.textAlign = 'right'; ctx.font = 'bold 16px system-ui';
+      ctx.fillText(String(f.id), 182, 22);
+      ctx.strokeStyle = '#d5c9b0'; ctx.lineWidth = 1;
+      [72, 96, 120, 144, 168, 192, 216, 240].forEach(y => { ctx.beginPath(); ctx.moveTo(14, y); ctx.lineTo(178, y); ctx.stroke(); });
+      ctx.fillStyle = kleur; ctx.font = 'bold 80px Georgia, serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.fillText(String(f.id), 96, 152);
+      ctx.fillStyle = '#e8ddc8'; ctx.beginPath(); ctx.arc(96, 278, 7, 0, Math.PI * 2); ctx.fill();
+      ctx.strokeStyle = '#b8a888'; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.arc(96, 278, 7, 0, Math.PI * 2); ctx.stroke();
+
+      const mat = new THREE.MeshBasicMaterial({ map: new THREE.CanvasTexture(cv), side: THREE.DoubleSide });
+      const kaart = new THREE.Mesh(new THREE.PlaneGeometry(0.22, 0.34), mat);
+      kaart.position.y = 1.0;
+      groep.add(kaart);
       groep.position.set(p.x, p.y, p.z);
       G.scene.add(groep);
-      const o = { data: f, groep, kaart, straal, pos: new THREE.Vector3(p.x, p.y, p.z) };
+      const o = { data: f, groep, kaart, pos: new THREE.Vector3(p.x, p.y, p.z) };
       ficheObj.push(o); zetUiterlijk(o);
     });
   }
@@ -418,7 +428,9 @@
       <div class="intro-body">
         <p>${tekst(D.intro[0])}</p>
         <p>${tekst(D.intro[1])}</p>
-        <button class="groot" id="volgende" style="width:100%;margin-top:6px">Start ›</button>
+        <p>${tekst(D.intro[2])}</p>
+        <p class="klein">${tekst(D.intro[3])}</p>
+        <button class="groot" id="volgende" style="width:100%;margin-top:12px">Start ›</button>
       </div>`;
     sch.hidden = false;
     $('volgende').onclick = () => { sch.hidden = true; startAutolopen(); };
@@ -449,8 +461,6 @@
     const stappen = [
       { zin: 'Loop met de pijltjes of de joystick op het scherm. Tik ergens op de vloer om daarheen te lopen.', uitdr: 'neutraal', pose: 'wijzen' },
       { zin: 'Kijk rond door op het scherm te slepen.', uitdr: 'neutraal', pose: 'lezen' },
-      { zin: tekst(D.intro[2]), uitdr: 'blij', pose: 'wijzen' },
-      { zin: tekst(D.intro[3]), uitdr: 'knipoog', pose: 'lezen' },
     ];
     let i = 0;
     const dots = n => stappen.map((_, j) => `<span${j === n ? ' class="actief"' : ''}></span>`).join('');
