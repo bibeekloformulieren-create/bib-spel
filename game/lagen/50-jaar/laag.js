@@ -409,12 +409,17 @@
   /* ---------- begin en einde ---------- */
   function toonIntro() {
     const sch = $('schermIntro'), kaart = $('kaartIntro');
+    kaart.className = 'kaart intro';
     kaart.innerHTML = `
-      <div style="width:min(220px,60%);margin:0 auto">${BoekE.svg('blij', { pose: 'zwaaien' })}</div>
-      <h2 style="text-align:center">Hoi! Ik ben Boek-E.</h2>
-      <p style="font-size:1.1rem;text-align:center">${tekst(D.intro[0])}</p>
-      <p style="font-size:1.1rem;text-align:center">${tekst(D.intro[1])}</p>
-      <button class="knop groot" id="volgende" style="width:100%;margin-top:12px">Start</button>`;
+      <div class="intro-hoofd">
+        <div class="boeke-svg">${BoekE.svg('blij', { pose: 'zwaaien' })}</div>
+        <h2>Hoi! Ik ben Boek-E.</h2>
+      </div>
+      <div class="intro-body">
+        <p>${tekst(D.intro[0])}</p>
+        <p>${tekst(D.intro[1])}</p>
+        <button class="groot" id="volgende" style="width:100%;margin-top:6px">Start ›</button>
+      </div>`;
     sch.hidden = false;
     $('volgende').onclick = () => { sch.hidden = true; startAutolopen(); };
   }
@@ -448,12 +453,19 @@
       { zin: tekst(D.intro[3]), uitdr: 'knipoog', pose: 'lezen' },
     ];
     let i = 0;
+    const dots = n => stappen.map((_, j) => `<span${j === n ? ' class="actief"' : ''}></span>`).join('');
     const toon = () => {
       const s = stappen[i];
+      kaart.className = 'kaart intro';
       kaart.innerHTML = `
-        <div style="width:min(180px,50%);margin:0 auto">${BoekE.svg(s.uitdr, { pose: s.pose })}</div>
-        <p style="font-size:1.1rem;text-align:center">${esc(s.zin)}</p>
-        <button class="knop groot" id="uitlegVolgende" style="width:100%">${i === stappen.length - 1 ? 'Spelen!' : 'Verder'}</button>`;
+        <div class="intro-hoofd">
+          <div class="boeke-svg">${BoekE.svg(s.uitdr, { pose: s.pose })}</div>
+        </div>
+        <div class="intro-body">
+          <div class="intro-dots">${dots(i)}</div>
+          <p>${esc(s.zin)}</p>
+          <button class="groot" id="uitlegVolgende" style="width:100%;margin-top:6px">${i === stappen.length - 1 ? 'Spelen! ›' : 'Verder ›'}</button>
+        </div>`;
       $('uitlegVolgende').onclick = () => {
         if (i < stappen.length - 1) { i++; toon(); }
         else { sch.hidden = true; boeke.stil(); G.pauze = false; }
