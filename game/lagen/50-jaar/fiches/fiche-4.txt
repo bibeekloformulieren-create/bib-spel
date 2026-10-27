@@ -8,16 +8,14 @@ titel: Zonder kraan
 waar: Onder of bij de vide.
 plek: 5, -5.8
 bron: Gesprek Willy Bultynck, Paneel "Gebouwd voor boeken"
-zoek-opdracht: Zoek de vide. Kijk omhoog door de opening. Die stalen balken werden zonder kraan naar boven gehesen.
 tip: Trek 950 af van 1.300.
 boeke-goed: 350 kilo méér dan mocht! Zo zwaar als vijf volwassenen. Zonder kraan.
 boeke-fout: Niet helemaal. De takel mocht 950 kilo. Ze hesen 1.300 kilo. Wat is het verschil?
-uniek: nee
 
 [kijkpunten]
 - Aan dit gebouw kon geen kraan. Alles moest met de hand, met een kleine takel die eigenlijk voor auto's bedoeld was.
 - Die takel mocht officieel maar 950 kilo dragen. Maar het zwaarste stuk woog 1.300 kilo. Ze hesen het toch.
-- Hoeveel kilo méér dan de takel mocht? Dat is jouw berekening.
+- Kijk naar de trap naast de vide. Die is volledig op maat getekend en met de hand gemaakt. Elk stuk van de leuning heeft een andere ronding. Dat kun je niet in een fabriek bestellen.
 
 [beelden]
 img/staalskelet.jpg | Het stalen skelet van de vide in aanbouw.
@@ -32,5 +30,4 @@ Hoeveel kilo méér dan mocht? | 350
 [leer]
 - Het zwaarste stuk woog 1.300 kilo: zo zwaar als een kleine auto.
 - Voor stenen en mortel gebruikten ze een fietswiel met een ketting, als een zelfgemaakt liftje.
-- De vloeren zijn berekend op 500 kilo per vierkante meter. Boeken zijn namelijk heel zwaar.
-- Halverwege bleek dat sommige muren te zwak waren. De planning moest meteen omgegooid worden.
+- Halverwege bleek dat sommige muren te zwak waren. De planning moest meteen omgegooid worden. De lift stond ook niet in het budget, maar het bestuur vond hem toch noodzakelijk: voor lezers met een beperking en voor het vervoer van boeken.
