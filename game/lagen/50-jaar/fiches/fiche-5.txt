@@ -30,7 +30,7 @@ Bereken de boete! In 1983 kostte een boete 5 frank per boek per week. Je hebt 4 
 Hoeveel frank? | 60
 
 [leer]
-- In mei 1976 belde een politieagent aan bij een lener — voor twee boeken die zoekgeraakt waren bij de verhuizing.
+- In mei 1976 belde een politieagent aan bij een lener. Twee boeken waren zoekgeraakt bij de verhuizing.
 - Een politiebezoek kostte in 1983 bovenop de boete nog eens 300 frank extra.
 - Wie een boek niet op tijd terugbracht, kon na vier weken de politie aan de deur verwachten.
 - Sinds 27 februari 2024 zijn er helemaal geen boetes meer. Je krijgt gewoon een herinnering.

@@ -208,6 +208,7 @@
     teken();
   }
   function sluitFiche() {
+    if (open && open.sleepGeest) { open.sleepGeest.remove(); open.sleepGeest = null; }
     $('schermFiche').hidden = true; open = null; G.pauze = false; boeke.toon('neutraal');
     if (gevonden.size === FICHES.length && !eindeGetoond) toonEinde();
   }
@@ -226,8 +227,9 @@
 
   function teken() {
     const { f, stap } = open, klaar = gevonden.has(f.id);
-    const knoppen = [['kijk', '1 Kijk'], ['raad', '2 Raad'], ['leer', '3 Leer']].map(([s, t]) =>
-      `<button class="stap ${stap === s ? 'actief' : ''}" data-s="${s}" ${s === 'leer' && !klaar ? 'disabled' : ''}>${t}</button>`).join('');
+    if (open.sleepGeest) { open.sleepGeest.remove(); open.sleepGeest = null; }
+    const knoppen = [['kijk', '1 Kijk'], ['raad', '2 Raad'], ['leer', 'Wist-je-datjes']].map(([s, t]) =>
+      `<button class="stap ${stap === s ? 'actief' : ''}" data-s="${s}">${t}</button>`).join('');
     $('kaartFiche').innerHTML =
       `<div class="balk"><div class="stappen">${knoppen}</div><button class="sluit" id="fSluit" aria-label="Sluiten">×</button></div>
        <div class="inhoud" id="fInhoud"></div><div class="voet" id="fVoet"></div>`;
@@ -249,20 +251,24 @@
   }
 
   function tekenLeer() {
-    const f = open.f;
-    const tijdlijn = f.jaren ? `<ol class="tijdlijn">${f.items.map((t, i) => `<li><b>${esc(f.jaren[i])}</b><span>${esc(t)}</span></li>`).join('')}</ol>` : '';
+    const f = open.f, klaar = gevonden.has(f.id);
+    const tijdlijn = (klaar && f.jaren) ? `<ol class="tijdlijn">${f.items.map((t, i) => `<li><b>${esc(f.jaren[i])}</b><span>${esc(t)}</span></li>`).join('')}</ol>` : '';
     $('fInhoud').innerHTML = kop(f) +
-      `<div class="goedbanner">${esc(tekst(f.boekeGoed))}</div>` +
-      boekRegel('Dit mag je onthouden.', 'blij', { pose: 'lezen', knik: true }) +
-      tijdlijn +
-      `<div class="vraag">Wist je dat?</div><ul class="punten leer">${f.leer.map(p => `<li>${esc(tekst(p))}</li>`).join('')}</ul>`;
-    voet(`<button class="licht" id="vTerug">Nog even kijken</button><button class="groot" id="vKlaar">Fiche terug in de kast</button>`);
+      (klaar ? `<div class="goedbanner">${esc(tekst(f.boekeGoed))}</div>` + boekRegel('Dit mag je onthouden.', 'blij', { pose: 'lezen', knik: true }) + tijdlijn : '') +
+      `<ul class="punten leer">${f.leer.map(p => `<li>${esc(tekst(p))}</li>`).join('')}</ul>`;
+    voet(klaar
+      ? `<button class="licht" id="vTerug">Nog even kijken</button><button class="groot" id="vKlaar">Fiche terug in de kast</button>`
+      : `<button class="licht" id="vTerug">Nog even kijken</button><button class="groot" id="vNaarRaad">Naar de vraag</button>`);
     $('vTerug').onclick = () => naar('kijk');
-    $('vKlaar').onclick = () => {
-      const rest = FICHES.length - gevonden.size;
-      sluitFiche();
-      if (rest > 0) boeke.zeg(`Goed. Nog ${rest} te gaan.`, 'blij', { pose: 'zwaaien' }, 6000);
-    };
+    if (klaar) {
+      $('vKlaar').onclick = () => {
+        const rest = FICHES.length - gevonden.size;
+        sluitFiche();
+        if (rest > 0) boeke.zeg(`Goed. Nog ${rest} te gaan.`, 'blij', { pose: 'zwaaien' }, 6000);
+      };
+    } else {
+      $('vNaarRaad').onclick = () => naar('raad');
+    }
   }
 
   function tekenRaad() {
@@ -345,30 +351,57 @@
         open.volgorde = schud(f.items);
         if (open.volgorde.every((v, i) => v === i)) open.volgorde.reverse();
       }
+      const tip = document.createElement('p'); tip.className = 'sleep-tip';
+      tip.textContent = 'Versleep de kaartjes van oud naar nieuw.'; antw.appendChild(tip);
+      const lijst = document.createElement('ul'); lijst.className = 'sleep-lijst'; antw.appendChild(lijst);
+      let sleepIdx = null;
       const tekenLijst = () => {
-        antw.innerHTML = '';
-        open.volgorde.forEach(idx => {
-          const pos = open.gekozen.indexOf(idx);
-          const b = document.createElement('button'); b.className = 'knop' + (pos >= 0 ? ' gekozen' : '');
-          b.innerHTML = (pos >= 0 ? `<span class="nr">${pos + 1}</span>` : '') + esc(f.items[idx]);
-          b.onclick = () => {
-            if (pos >= 0 || gevonden.has(f.id)) return;
-            open.gekozen.push(idx);
-            if (open.gekozen.length === f.items.length) {
-              if (open.gekozen.every((v, i) => v === i)) { tekenLijst(); goed(); return; }
-              fout('Niet in de juiste volgorde. Begin opnieuw.');
-              open.gekozen = [];
-            }
-            tekenLijst();
-          };
-          antw.appendChild(b);
+        lijst.innerHTML = '';
+        open.volgorde.forEach((idx, pos) => {
+          const li = document.createElement('li'); li.className = 'sleep-item'; li.dataset.pos = String(pos);
+          const jaar = f.jaren ? `<b>${esc(f.jaren[idx])}</b> ` : '';
+          li.innerHTML = `<span class="grip">&#x2807;</span>${jaar}${esc(f.items[idx])}`;
+          lijst.appendChild(li);
         });
-        if (!gevonden.has(f.id)) {
-          const w = document.createElement('button'); w.className = 'licht'; w.style.width = '100%'; w.textContent = 'Opnieuw beginnen';
-          w.onclick = () => { open.gekozen = []; tekenLijst(); }; antw.appendChild(w);
-        }
       };
       tekenLijst();
+      if (!gevonden.has(f.id)) {
+        lijst.addEventListener('pointerdown', e => {
+          const item = e.target.closest('.sleep-item'); if (!item) return;
+          e.preventDefault(); lijst.setPointerCapture(e.pointerId);
+          sleepIdx = parseInt(item.dataset.pos); item.classList.add('sleept');
+          const geest = document.createElement('div'); geest.className = 'sleep-geest';
+          geest.textContent = item.textContent.trim();
+          geest.style.left = (e.clientX - 10) + 'px'; geest.style.top = (e.clientY - 22) + 'px';
+          document.body.appendChild(geest); open.sleepGeest = geest;
+        });
+        lijst.addEventListener('pointermove', e => {
+          if (sleepIdx === null) return; e.preventDefault();
+          if (open.sleepGeest) { open.sleepGeest.style.left = (e.clientX - 10) + 'px'; open.sleepGeest.style.top = (e.clientY - 22) + 'px'; }
+          lijst.querySelectorAll('.sleep-item').forEach(el => el.classList.remove('over'));
+          const el = document.elementFromPoint(e.clientX, e.clientY)?.closest?.('.sleep-item');
+          if (el && parseInt(el.dataset.pos) !== sleepIdx) el.classList.add('over');
+        });
+        const loslaten = e => {
+          if (sleepIdx === null) return;
+          if (open.sleepGeest) { open.sleepGeest.remove(); open.sleepGeest = null; }
+          const el = document.elementFromPoint(e.clientX, e.clientY)?.closest?.('.sleep-item');
+          if (el) {
+            const doel = parseInt(el.dataset.pos);
+            if (doel !== sleepIdx) { const arr = [...open.volgorde]; const [verplaatst] = arr.splice(sleepIdx, 1); arr.splice(doel, 0, verplaatst); open.volgorde = arr; }
+          }
+          sleepIdx = null; tekenLijst();
+        };
+        lijst.addEventListener('pointerup', loslaten);
+        lijst.addEventListener('pointercancel', () => {
+          if (open.sleepGeest) { open.sleepGeest.remove(); open.sleepGeest = null; }
+          sleepIdx = null; tekenLijst();
+        });
+        const c = document.createElement('button'); c.className = 'groot'; c.style.cssText = 'width:100%;margin-top:12px';
+        c.textContent = 'Controleer volgorde';
+        c.onclick = () => { if (open.volgorde.every((v, i) => v === i)) goed(); else fout('Niet in de juiste volgorde. Versleep de kaartjes opnieuw.'); };
+        antw.appendChild(c);
+      }
     }
 
     if (f.soort === 'invul') {

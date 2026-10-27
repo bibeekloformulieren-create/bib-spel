@@ -9,7 +9,7 @@ waar: Op een plek waar je de ruitvorm ziet: schuine vloertegels of onder de vide
 plek: -4, -6
 bron: Paneel "Gebouwd voor boeken", gesprek Willy Bultynck
 zoek-opdracht: Speur als een detective: zoek in de bib minstens twee plekken waar je die vorm terugziet. Kijk naar beneden én omhoog.
-tip: Een vierkant dat op een hoek staat — als een diamant.
+tip: Een vierkant dat op een hoek staat, als een diamant.
 boeke-goed: Een ruit! Willy verstopte hem overal. Zoek maar eens verder...
 boeke-fout: Nee. Denk aan een vierkant dat op een hoek staat, als een diamant.
 

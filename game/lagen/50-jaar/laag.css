@@ -104,6 +104,16 @@ label.veld { display:block; margin-top:10px; font-weight:600; }
 .melding { margin-top:10px; padding:10px 12px; border-radius:10px; font-weight:600; }
 .melding.fout { background:#fbe9e7; color:#8e2a1f; } .melding.tip { background:#e5f1f2; color:#0b4a53; }
 
+/* volgorde: slepen */
+.sleep-tip { text-align:center; font-size:.9rem; color:#6d6354; margin:6px 0 4px; }
+.sleep-lijst { list-style:none; padding:0; margin:8px 0; touch-action:none; }
+.sleep-item { display:flex; align-items:center; gap:10px; background:var(--papier); border:2px solid var(--lijn); border-radius:12px; padding:12px 14px; margin:7px 0; font-size:1rem; cursor:grab; user-select:none; touch-action:none; }
+.sleep-item .grip { color:#c4b89e; font-size:1.3rem; flex-shrink:0; line-height:1; }
+.sleep-item b { flex-shrink:0; background:var(--petrol); color:#fff; border-radius:999px; padding:2px 9px; font-size:.85rem; }
+.sleep-item.sleept { opacity:.35; }
+.sleep-item.over { border-color:var(--oranje); background:#fff3e8; }
+.sleep-geest { position:fixed; pointer-events:none; z-index:9999; background:var(--oranje); color:#fff; border-radius:12px; padding:10px 14px; font-size:.9rem; max-width:80vw; box-shadow:0 4px 16px #0005; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+
 /* overzicht */
 .raster { display:grid; grid-template-columns:repeat(2, 1fr); gap:10px; margin:14px 0; }
 .tegel { text-align:left; border:2px solid var(--lijn); background:#fff; border-radius:14px; padding:10px 12px; min-height:92px; position:relative; }

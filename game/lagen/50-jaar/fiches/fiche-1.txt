@@ -8,30 +8,30 @@ titel: Vonkjes en gekraak
 waar: Bij de voorgevel / ingang van de bib.
 plek: 0, 4
 bron: Brochure 50 jaar bib, Paneel "Gezelligheid troef"
-tip: Begin bij het kleinste pand. Het nieuwste staat het laatst: dat is dit jaar.
-boeke-goed: Klopt! De bib groeide steeds verder — van een kleine woonkamer tot dit huis.
-boeke-fout: Bijna. Begin bij het allerkleinste pand en eindig bij dit jaar.
+tip: Begin bij de allerkleinste bib: die paste in één smal huis. Het allerlaatste is dit jaar.
+boeke-goed: Klopt! Zo groeide de bib: van een smal huis met vonkjes en krakende trappen tot dit grote boekenhuis.
+boeke-fout: Nog niet helemaal. Begin bij de allerkleinste bib: één smal huis in de Molenstraat in 1976. Het laatste is dit jaar.
 
 [kijkpunten]
-- In 1976 opende de eerste bib in een leegstaand woonhuis in de Molenstraat. Op winterse dagen sprongen er vonkjes van de metalen rekken.
-- In 1988 verhuisde ze naar een verbouwd herenhuis iets verderop: huis Van Brabandt. In 1995 kwamen er drie verdiepingen bij.
-- In 2006 werd er een glazen veranda gebouwd in de binnentuin. En in 2026 wordt het gelijkvloers helemaal opnieuw ingericht.
+- In het voorjaar van 1976 opende de eerste bib van Eeklo in een leegstaand huis in de Molenstraat. Smal, lang, en van bij de start al te klein. Op winterse dagen sprongen er vonkjes van de metalen boekenrekken. Lange lezers stootten hun hoofd aan het trapgat.
+- De trap naar de leeszaal kraakte zo hard dat bezoekers vreesden erdoor te zakken. En toch kwamen ze elke dag terug. Voor het eerst in Eeklo kon je zelf je boeken kiezen, gewoon tussen de rekken, zonder iemand te vragen.
+- Na twaalf jaar verhuisde de bib naar een verbouwd herenhuis verderop: huis Van Brabandt. In 1995 kwamen er drie verdiepingen bij. In 2006 een glazen veranda. En in 2026 wordt het gelijkvloers helemaal opnieuw ingericht.
 
 [beelden]
-img/molenstraat.jpg | De Molenstraat in de beginjaren: fietsen tegen de gevel.
+img/molenstraat.jpg | De Molenstraat in de beginjaren: fietsen tegen de gevel, nieuwe boeken in de etalage.
 img/voorgevel.jpg | De voorgevel van de bib zoals die er nu uitziet.
 
 [vraag]
-Jij bent de archivaris. Zet de uitbreidingen in de juiste volgorde.
+Jij bent de archivaris. Zet de vijf grote momenten van de bib in de juiste volgorde, van oud naar nieuw.
 
 [antwoorden]
-1976 | De bib opent in een leegstaand pand in de Molenstraat
+1976 | De bib opent in een smal huis in de Molenstraat
 1988 | Verhuizing naar het verbouwde huis Van Brabandt
 1995 | Drie nieuwe verdiepingen erbij
 2006 | Een glazen veranda in de binnentuin
 2026 | Het gelijkvloers wordt heringericht
 
 [leer]
-- Het dak van de eerste bib lekte. Net boven de rekken met schrijvers op de letter M. De detectives van Martin Mons hebben het niet overleefd.
-- Op zaterdag 20 februari 1988 gingen de deuren van het nieuwe gebouw open. Het was een verbouwd herenhuis: huis Van Brabandt.
-- De veranda kreeg een groendak. Dat was in 2006 een heel nieuw idee.
+- Als het hard regende, lekte het dak van de eerste bib. Net boven de rekken met schrijvers op de letter M. De detectives van Martin Mons hebben het niet overleefd.
+- Tijdens de verbouwing in 1987 zat een vrijwilliger vast in de nieuwe lift. Ze werden gered door iemand die hun geroep hoorde. De sleutel om mensen te bevrijden hing daarna "werkloos aan zijn haak": het was de enige keer dat de lift hapertte.
+- De winter van 1987 was bitterkoud op de werf. Op een dag verscheen de schepen. Hij bracht twee flessen jenever mee. "Het was nu eenmaal de gewoonte dat nieuwe bezoekers op de werf moesten trakteren."

@@ -25,10 +25,10 @@ img/wegzetten.jpg | Boeken terugzetten na uitleen.
 Zet deze mensen op alfabet, zoals hun boeken in het rek staan.
 
 [antwoorden]
-Bultynck | Willy Bultynck — bouwde de vide zonder kraan
-Himschoot | Kenneth Himschoot — eerste webmaster van Eeklo
-Minne | Brigitte Minne — vertelde griezelverhalen in de bib
-Verstraete | Roger Verstraete — de allereerste bibliothecaris
+Bultynck | Willy Bultynck: bouwde de vide zonder kraan
+Himschoot | Kenneth Himschoot: eerste webmaster van Eeklo
+Minne | Brigitte Minne: vertelde griezelverhalen in de bib
+Verstraete | Roger Verstraete: de allereerste bibliothecaris
 
 [leer]
 - Op de jeugdafdeling ligt een doos met wijsneuzen. Neem je een boek, zet dan een wijsneus op de plek.
