@@ -15,7 +15,7 @@ window.SPELDATA = {
 
   intro: [
     "De bib van Eeklo viert haar 50ste verjaardag!",
-    "{directeur}, onze directeur, vroeg mij om het archief op orde te brengen. Maar door de verbouwing van het gelijkvloers ligt alles door elkaar en zijn al mijn fiches uit de kast gevallen.",
+    "{directeur}, onze directeur, vroeg mij om het archief op orde te brengen. Maar tijdens de verbouwing van het gelijkvloers zijn al mijn fiches uit de kast gevallen.",
     "Help jij me zoeken? Ga op pad, los de vragen op en ontdek het verhaal van onze bib!",
     "Foutje? Geen probleem, probeer gewoon opnieuw. Heb je hulp nodig? Tik op 'Tip'. Ouders mogen natuurlijk meehelpen!"
   ],
