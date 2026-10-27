@@ -19,7 +19,7 @@ boeke-fout: Nee. Kijk naar de balie. Staat die nu aan de zijkant of in het midde
 
 [beelden]
 img/balie-1988.jpg | De balie midden in de zaal, 1988.
-img/lege-rekken.jpg | De nieuwe rekken in 1995: leeg, klaar voor de boeken.
+img/gevulde-rekken.jpg | De rekken na de uitbreiding van 1995: tot de nok gevuld.
 
 [vraag]
 In 1988 stond de balie midden in de grote zaal. Waar staat ze vandaag?
@@ -31,6 +31,6 @@ In 1988 stond de balie midden in de grote zaal. Waar staat ze vandaag?
 - Op de eerste verdieping
 
 [leer]
-- In oktober 1988 stonden sommige kinderen al om half zes te wachten voor de bib, terwijl die pas om half acht sloot. Ze kwamen voor de nieuwe strips. Zo raakten ze soms toch aan het lezen.
-- "Kinderen moeten in de bibliotheek telkens hetzelfde gezicht terugvinden." Dat schreef een krant in 1988. De medewerkers kenden de bezoekers bij naam.
-- In 2006 kwamen er zetels en een glazen veranda in de binnentuin. Die veranda heeft een echt groendak: levende planten bovenop het dak.
+- Er waren kinderen die al om half zes voor de bib kwamen en wachtten tot half acht om als eersten de nieuwe strips te pakken te krijgen.
+- In 1995 kwamen er drie nieuwe verdiepingen bij naast het gebouw. Een jaar later opende de cd-afdeling: opeens kon je ook cd's, video's en cd-roms lenen.
+- In 2000 kwamen er computers in de bib. Voor het eerst kon iedereen er het internet op. Je kon er ook boeken opzoeken en reserveren.
