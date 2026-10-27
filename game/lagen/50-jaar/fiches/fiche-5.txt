@@ -8,11 +8,9 @@ titel: De politie aan de deur
 waar: Bij de balie of de zelfuitleenbalie.
 plek: -7, 0.3
 bron: Paneel "Zo werkt de bibliotheek", brochure 50 jaar bib
-zoek-opdracht: Zoek de inleverbus. Hier gooi je boeken in als de bib dicht is. Vroeger liep de boete gewoon door.
 tip: Vermenigvuldig: boeken × weken × prijs per week.
 boeke-goed: 60 frank! En dan nog eens 300 frank als de politie moest langskomen.
 boeke-fout: Bijna. Bereken: 4 boeken × 3 weken × 5 frank per week.
-uniek: nee
 
 [kijkpunten]
 - Vroeger betaalde je een boete als je een boek te laat terugbracht: 5 frank per boek per week. Hoe meer boeken, hoe hoger de boete.
@@ -21,7 +19,7 @@ uniek: nee
 
 [beelden]
 img/balie-1988.jpg | De balie van de bib in 1988: stempels, kaartjes, een vertrouwd gezicht.
-img/afhaalpunt.jpg | Boeken ophalen aan de nooddeur, tijdens corona.
+img/zelfuitleen-nu.jpg | Vandaag leen je zelf uit aan het toestel. Geen stempels, geen wachtrij.
 
 [vraag]
 Bereken de boete! In 1983 kostte een boete 5 frank per boek per week. Je hebt 4 boeken geleend en brengt ze 3 weken te laat terug. Hoeveel frank betaal je?
@@ -32,5 +30,4 @@ Hoeveel frank? | 60
 [leer]
 - In mei 1976 belde een politieagent aan bij een lener. Twee boeken waren zoekgeraakt bij de verhuizing.
 - Een politiebezoek kostte in 1983 bovenop de boete nog eens 300 frank extra.
-- Wie een boek niet op tijd terugbracht, kon na vier weken de politie aan de deur verwachten.
-- Sinds 27 februari 2024 zijn er helemaal geen boetes meer. Je krijgt gewoon een herinnering.
+- In 1980 was de bib maar een paar avonden per week open: op maandag, dinsdag en donderdag van half zes tot half negen, en op zaterdagmorgen. Je had dus maar een paar kansen per week om je boeken terug te brengen.
