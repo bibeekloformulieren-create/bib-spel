@@ -1,33 +1,36 @@
-# FICHE 4: Zonder kraan
+# FICHE 4: Van fichekast naar beeldscherm
 # Uitleg om dit bestand aan te passen: zie HANDLEIDING.md in deze map. Regels die met # beginnen worden genegeerd.
 
 nummer: 4
-categorie: gebouw
-soort: invul
-titel: Zonder kraan
-waar: Onder of bij de vide.
+categorie: werking
+soort: keuze
+titel: Van fichekast naar beeldscherm
+waar: Bij de computers of de zoekkiosk.
 plek: 5, -5.8
-bron: Gesprek Willy Bultynck, Paneel "Gebouwd voor boeken"
-tip: Trek 950 af van 1.300.
-boeke-goed: 350 kilo méér dan mocht! Zo zwaar als vijf volwassenen. Zonder kraan.
-boeke-fout: Niet helemaal. De takel mocht 950 kilo. Ze hesen 1.300 kilo. Wat is het verschil?
+bron: Brochure 50 jaar bib, Paneel "Van fichekast naar beeldscherm"
+tip: Kijk naar het eerste kijkpunt.
+boeke-goed: Klopt! De fichekast vol kleine kaartjes op alfabet. Elk boek had zijn eigen kaartje, en je moest zelf zoeken.
+boeke-fout: In 1990 had de bib nog geen computer. Je moest het zelf uitzoeken in de fichekast.
 
 [kijkpunten]
-- Aan dit gebouw kon geen kraan. Alles moest met de hand, met een kleine takel die eigenlijk voor auto's bedoeld was.
-- Die takel mocht officieel maar 950 kilo dragen. Maar het zwaarste stuk woog 1.300 kilo. Ze hesen het toch.
-- Kijk naar de trap naast de vide. Die is volledig op maat getekend en met de hand gemaakt. Elk stuk van de leuning heeft een andere ronding. Dat kun je niet in een fabriek bestellen.
+- In 1988 stond de nieuwe bib open, maar een computer was er nog niet. Wie een boek wilde zoeken, moest bladeren door de fichekast: een grote kast vol kleine kaartjes, op alfabet, één kaartje per boek.
+- In 1990 koos de bib voor een computersysteem. Elk boek kreeg een unieke barcode. Vrijwilligers tikten alle boeken één voor één in het systeem. Dat was een titanenwerk.
+- Op 15 oktober 1993 startte de geautomatiseerde uitleen. Elke lener kreeg een eigen pasje. Voor het eerst kon je een naam of titel intikken op een scherm en meteen zien of het boek beschikbaar was.
 
 [beelden]
-img/staalskelet.jpg | Het stalen skelet van de vide in aanbouw.
-img/vide-reling.jpg | De vide, klaar.
+img/catalogus-1990.jpg | De catalogus in 1990: nog net voor de computer.
+img/balie-computer.jpg | Aan de balie met computer.
 
 [vraag]
-De takel mocht officieel 950 kilo. Het zwaarste stuk woog 1.300 kilo. Hoeveel kilo méér dan mocht?
+Je wilt weten of een bepaald boek in de bib staat. Hoe deed je dat in 1990?
 
-[velden]
-Hoeveel kilo méér dan mocht? | 350
+[antwoorden]
+* Je bladerde door de fichekast: kleine kaartjes op alfabet
+- Je vroeg het aan een medewerker, er was geen andere manier
+- Je zocht op de website van de bib
+- Je keek op het scherm van de computer aan de balie
 
 [leer]
-- Het zwaarste stuk woog 1.300 kilo: zo zwaar als een kleine auto.
-- Voor stenen en mortel gebruikten ze een fietswiel met een ketting, als een zelfgemaakt liftje.
-- Halverwege bleek dat sommige muren te zwak waren. De planning moest meteen omgegooid worden. De lift stond ook niet in het budget, maar het bestuur vond hem toch noodzakelijk: voor lezers met een beperking en voor het vervoer van boeken.
+- Per boek werden vroeger drie soorten kaartjes getypt: één op de naam van de schrijver, één op de titel, en bij wetenschappelijke boeken ook één op onderwerp. Al die kaartjes op alfabet sorteren was urenlang werk.
+- In 1989 begon de bib al te investeren in automatisering, amper een jaar na de opening. Het duurde toch nog tot 1993 voor het systeem echt liep.
+- Wie een boek wou dat Eeklo niet had, kon het aanvragen bij een andere bib. Dat boek werd dan per post verstuurd.
