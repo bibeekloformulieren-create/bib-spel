@@ -14,11 +14,11 @@ boeke-fout: In 1990 had de bib nog geen computer. Je moest het zelf uitzoeken in
 
 [kijkpunten]
 - In 1988 stond de nieuwe bib open, maar een computer was er nog niet. Wie een boek wilde zoeken, moest bladeren door de fichekast: een grote kast vol kleine kaartjes, op alfabet, één kaartje per boek.
-- In 1990 koos de bib voor een computersysteem. Elk boek kreeg een unieke barcode. Vrijwilligers tikten alle boeken één voor één in het systeem. Dat was een titanenwerk.
-- Op 15 oktober 1993 startte de geautomatiseerde uitleen. Elke lener kreeg een eigen pasje. Voor het eerst kon je een naam of titel intikken op een scherm en meteen zien of het boek beschikbaar was.
+- In 1990 kozen ze een computerprogramma voor de bib. Elk boek kreeg een eigen barcode. Vrijwilligers tikten alle boeken één voor één in. Duizenden boeken. Dat nam maanden in beslag.
+- Op 15 oktober 1993 was het zover: leners konden voor het eerst met een eigen pasje uitlenen. Je tikte een naam of titel in op het scherm en zag meteen of het boek er was.
 
 [beelden]
-img/catalogus-1990.jpg | De catalogus in 1990: nog net voor de computer.
+img/catalogus-1990.jpg | Zo zag het scherm van de computercatalogus er vroeger uit.
 img/balie-computer.jpg | Aan de balie met computer.
 
 [vraag]
@@ -32,5 +32,5 @@ Je wilt weten of een bepaald boek in de bib staat. Hoe deed je dat in 1990?
 
 [leer]
 - Per boek werden vroeger drie soorten kaartjes getypt: één op de naam van de schrijver, één op de titel, en bij wetenschappelijke boeken ook één op onderwerp. Al die kaartjes op alfabet sorteren was urenlang werk.
-- In 1989 begon de bib al te investeren in automatisering, amper een jaar na de opening. Het duurde toch nog tot 1993 voor het systeem echt liep.
-- Wie een boek wou dat Eeklo niet had, kon het aanvragen bij een andere bib. Dat boek werd dan per post verstuurd.
+- Al in 1985 wilden ze een computer in de bib. Het duurde nog tot 1993 voor iedereen echt met een eigen pasje kon lenen.
+- Vroeger had elk boek een eigen kaartje in een papieren zakje. Op dat zakje stond jouw naam. Bracht je een boek te laat terug, dan kreeg je een rode stip op je zakje.
