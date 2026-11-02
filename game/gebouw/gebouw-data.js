@@ -154,6 +154,7 @@ window.GEBOUWDATA = {
     /* ramen (verplaatsbaar): lengte = breedte, hoog = hoogte, onder = hoogte van de vensterbank */
     { naam: "raam gang links", soort: "raam", x: -10.07, z: -22.50, lengte: 1.30, hoog: 1.5, onder: 0.9, kijkt: "oost"},
     { naam: "raam gang rechts", soort: "raam", x: -8.28, z: -22.50, lengte: 1.30, hoog: 1.5, onder: 0.9, kijkt: "west"},
+    { naam: "raam digipunt", soort: "raam", x: -7.20, z: -27.05, lengte: 1.30, hoog: 1.5, onder: 0.9, kijkt: "noord"},
     { naam: "raam tijdschriften 1", soort: "raam", x: -6.70, z: -37.38, lengte: 1.80, hoog: 2.2, onder: 0.9, kijkt: "zuid"},
     { naam: "raam tijdschriften 2", soort: "raam", x: -4.30, z: -37.38, lengte: 1.80, hoog: 2.2, onder: 0.9, kijkt: "zuid"},
     { naam: "raam balie 1", soort: "raam", x: -10.00, z: -37.38, lengte: 1.30, hoog: 2.2, onder: 0.9, kijkt: "zuid"},
