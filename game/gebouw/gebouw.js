@@ -233,7 +233,7 @@
     c.fillStyle = '#2b2e34'; c.fillRect(0, 0, W, H);                          // donker kozijn (zoals echte ramen)
     const g = c.createLinearGradient(0, 0, 0, H); g.addColorStop(0, '#c8dce6'); g.addColorStop(1, '#8faab8');
     c.fillStyle = g; c.fillRect(8, 8, W - 16, H - 16);                        // glas
-    c.fillStyle = 'rgba(220,215,200,0.55)'; c.fillRect(8, 8, W - 16, (H - 16) * 0.55);  // half-doorzichtig gordijn
+    c.fillStyle = 'rgba(130,135,140,0.75)'; c.fillRect(8, 8, W - 16, (H - 16) * 0.55);  // rolgordijn (grijs-blauw, niet wit)
     c.fillStyle = '#2b2e34'; c.fillRect(W / 2 - 4, 8, 8, H - 16);            // middenstijl
     return new THREE.CanvasTexture(cv);
   }
