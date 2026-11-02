@@ -147,6 +147,8 @@ window.GEBOUWDATA = {
     { naam: "tv balie", soort: "tvhangend", x: -7.00, z: -34.30, kijkt: "west"},
     /* balie: kopieermachine, poortjes bij de ingang, lage kast met klok, folderrek en bureaustoel */
     { naam: "kopieermachine", soort: "kopieermachine", x: -12.25, z: -35.25, kijkt: "oost", hoek: 93 },
+    { naam: "poortje 1", soort: "poortje", x: -11.15, z: -34.70, kijkt: "oost"},
+    { naam: "poortje 2", soort: "poortje", x: -11.15, z: -33.80, kijkt: "oost"},
     { naam: "lage kast klok", soort: "lagekast", x: -12.20, z: -36.65, lengte: 0.95, kijkt: "oost"},
     { naam: "bureaustoel balie", soort: "bureaustoel", x: -8.65, z: -36.70, kijkt: "zuid"},
     { naam: "bureaustoel balie kopie 1", soort: "bureaustoel", x: -9.60, z: -36.60, kijkt: "zuid"},
