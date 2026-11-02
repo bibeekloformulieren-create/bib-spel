@@ -165,6 +165,7 @@ window.GEBOUWDATA = {
     { naam: "schaalstoel no", soort: "schaalstoel", x: -3.55, z: -36.65, hoek: 315 },
     { naam: "schaalstoel zw", soort: "schaalstoel", x: -4.75, z: -35.75, hoek: 135 },
     { naam: "schaalstoel zo", soort: "schaalstoel", x: -3.6, z: -35.75, hoek: 210 },
+    { naam: "deur personeelsruimte", soort: "paneel", x: -8.50, z: -30.20, lengte: 0.90, hoogte: 2.10, kijkt: "noord", kleur: 0xf1eee8 },
     { naam: "koffiebalie", soort: "koffiebalie", x: -2.55, z: -29.7, lengte: 1.7, kijkt: "zuid" },
     /* kleuterhoek: lange smalle zaal in het oosten. Oranje muur links (oost), ramen rechts (west), houten vloer, groene bladeren, lage rekken op wieltjes, witte boekenbakken */
     { naam: "oranje muur oost", soort: "paneel", x: 0.05, z: -22.65, lengte: 8.4, hoogte: 2.8, kijkt: "west", kleur: 0xe8960c, hoek: 273.5 },
