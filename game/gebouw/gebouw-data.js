@@ -166,7 +166,7 @@ window.GEBOUWDATA = {
     { naam: "schaalstoel zw", soort: "schaalstoel", x: -4.75, z: -35.75, hoek: 135 },
     { naam: "schaalstoel zo", soort: "schaalstoel", x: -3.6, z: -35.75, hoek: 210 },
     { naam: "inleverkast", soort: "inleverkast", x: -11.0, z: -34.5, kijkt: "oost" },
-    { naam: "displayrek", soort: "displayrek", x: -10.0, z: -34.5, kijkt: "oost" },
+    { naam: "displayrek balie", soort: "displayrek", x: -10.0, z: -34.5, kijkt: "oost" },
     { naam: "infozuil", soort: "infozuil", x: -11.35, z: -30.50, kijkt: "oost" },
     { naam: "deur personeelsruimte", soort: "paneel", x: -11.05, z: -27.90, lengte: 0.90, hoogte: 2.10, kijkt: "oost", kleur: 0xf1eee8 },
     { naam: "koffiebalie", soort: "koffiebalie", x: -2.55, z: -29.7, lengte: 1.7, kijkt: "zuid" },

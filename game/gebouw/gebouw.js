@@ -690,21 +690,25 @@
         }
         return { g, box: [0.55, h, 0.55] };
       },
-      /* Rood open rasterrek: dunne rode staven vormen een grid van vakjes (3 kolommen × 5 rijen), op twee schuine poten. kijkt naar +z. */
+      /* Rode displaykast op metalen klapstandaard: rode kast met 3×3 vakjes, op zilveren X-poten. kijkt naar +z = voorkant. */
       displayrek(m, mt) {
-        const g = new THREE.Group(), rood = mat(0xcc1f1f), d = 0.022;
-        const L = mt.lengte || 0.80, H = 1.70, kol = 3, rij = 5;
-        const cw = L / kol, ch = (H - 0.1) / rij;   // cel breedte / hoogte
-        // horizontale staven
-        for (let r = 0; r <= rij; r++) doos(g, L + d, d, d, 0, 0.05 + r * ch, 0, rood);
-        // verticale staven
-        for (let k = 0; k <= kol; k++) doos(g, d, H - 0.08, d, -L / 2 + k * cw, 0.05 + (H - 0.08) / 2, 0, rood);
-        // twee schuine poten onderaan: smal buisje schuin naar buiten
-        [-1, 1].forEach(kant => {
-          const p = doos(g, d * 1.5, 0.38, d * 1.5, kant * (L / 2 - 0.04), 0.19, kant * 0.12, rood);
-          p.rotation.x = kant * 0.32;
+        const g = new THREE.Group(), rood = mat(0xcc1f1f), metaal = mat(0x8a8e94), t = 0.022;
+        const L = mt.lengte || 0.90, D = 0.30, kol = 3, rij = 3;
+        const kH = 0.28, kW = L / kol, kastH = rij * kH + (rij + 1) * t, kastY = 0.75;
+        // achterwand
+        doos(g, L, kastH, t, 0, kastY + kastH / 2, -D / 2 + t / 2, rood);
+        // horizontale planken
+        for (let r = 0; r <= rij; r++) doos(g, L, t, D, 0, kastY + r * (kH + t) + t / 2, 0, rood);
+        // verticale schotten
+        for (let k = 0; k <= kol; k++) doos(g, t, kastH, D, -L / 2 + k * kW + t / 2, kastY + kastH / 2, 0, rood);
+        // X-standaard: vier buizen, twee aan elke kant
+        [[-L / 2 + 0.08, L / 2 - 0.08]].flat().forEach(px => {
+          // voor-poot schuin naar voren-onder
+          const p1 = doos(g, t * 1.4, 0.92, t * 1.4, px, kastY * 0.5, 0.15, metaal); p1.rotation.x = -0.42;
+          // achter-poot schuin naar achteren-onder
+          const p2 = doos(g, t * 1.4, 0.92, t * 1.4, px, kastY * 0.5, -0.12, metaal); p2.rotation.x = 0.38;
         });
-        return { g, box: [L + 0.05, H, 0.12] };
+        return { g, box: [L, kastY + kastH, D] };
       },
       /* Rode infozuil: rode sokkel met plat scherm, voor een zelfbedieningsterminal */
       infozuil(m, mt) {
