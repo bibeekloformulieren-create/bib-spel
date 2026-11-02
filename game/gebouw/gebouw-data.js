@@ -90,7 +90,7 @@ window.GEBOUWDATA = {
     { naam: "dvd-rek oost",     soort: "rek", textuur: "dvd", x: -7.9, z: -25.25, lengte: 1.4, hoogte: 1.85, kijkt: "west" },
     { naam: "dvd-rek oost kopie 2",     soort: "rek", textuur: "dvd", x: -7.9, z: -26.6, lengte: 1.4, hoogte: 1.85, kijkt: "west" },
     { naam: "dvd-rek oost kopie 3",     soort: "rek", textuur: "dvd", x: -7.9, z: -28.0, lengte: 1.4, hoogte: 1.85, kijkt: "west" },
-    { naam: "dvd-rek oost kopie 1",     soort: "rek", textuur: "dvd", x: -7.8, z: -29.45, lengte: 0.60, hoogte: 1.85, kijkt: "noord"},
+    { naam: "dvd-rek oost kopie 1",     soort: "rek", textuur: "dvd", x: -7.9, z: -29.50, lengte: 0.60, hoogte: 1.85, kijkt: "noord"},
     { naam: "rode toren",        soort: "rodetoren", x: -9.5, z: -28.5, kijkt: "noord" },
     { naam: "hoge kast west",  soort: "rek", textuur: "boeken", x: -10.8, z: -25.95, lengte: 1, hoogte: 2.1, kijkt: "oost" },
     { naam: "hoge kast west kopie 2",  soort: "rek", textuur: "boeken", x: -10.8, z: -26.8, lengte: 1, hoogte: 2.1, kijkt: "oost" },
@@ -133,18 +133,18 @@ window.GEBOUWDATA = {
     /* tijdschriftenhoek: ronde houten tafel voor de ramen met 4 roze schaalstoelen */
     { naam: "kubuskast koffiehoek 1", soort: "kubuskast", x: -2.45, z: -36.45, lengte: 1.7, hoogte: 1.7, kijkt: "west", tijdschriften: true },
     { naam: "kubuskast koffiehoek 2", soort: "kubuskast", x: -2.45, z: -34.95, lengte: 1.3, hoogte: 1.7, kijkt: "west", tijdschriften: true },
-    { naam: "kubuskast tijdschriften west", soort: "kubuskast", x: -5.45, z: -36.45, lengte: 3.4, hoogte: 1.7, kijkt: "oost", tijdschriften: true },
+    { naam: "kubuskast tijdschriften west", soort: "kubuskast", x: -5.45, z: -36.45, y: -0.30, lengte: 3.4, hoogte: 1.7, kijkt: "oost", tijdschriften: true },
     /* uitleen en balie: details op de witte blokken uit het model (y = hoogte van het blad) */
-    { naam: "uitleentoog", soort: "toog", x: -8.65, z: -33.00, lengte: 1.25, diep: 0.82, hoogte: 1.0, kijkt: "zuid"},
+    { naam: "uitleentoog", soort: "toog", x: -8.65, z: -33.00, y: -0.20, lengte: 1.25, diep: 0.82, hoogte: 1.0, kijkt: "zuid"},
     { naam: "uitleentoog kopie 2", soort: "toog", x: -6.05, z: -35.95, lengte: 2.75, diep: 0.82, hoogte: 1.0, kijkt: "west"},
-    { naam: "uitleentoog kopie 1", soort: "toog", x: -8.65, z: -32.20, lengte: 1.25, diep: 0.82, hoogte: 1.0, kijkt: "zuid"},
-    { naam: "pc uitleen 1", soort: "pcplek", x: -8.65, z: -32.25, y: 1.0, kijkt: "zuid"},
-    { naam: "pc uitleen 2", soort: "pcplek", x: -8.60, z: -32.85, y: 1.0, kijkt: "noord"},
-    { naam: "pc balie 1", soort: "pcplek", x: -9.60, z: -35.75, y: 1.2, kijkt: "noord"},
-    { naam: "pc balie 2", soort: "pcplek", x: -8.60, z: -35.75, y: 1.2, kijkt: "noord"},
-    { naam: "rolkast folders", soort: "rolkast", x: -7.75, z: -32.60, kijkt: "west"},
+    { naam: "uitleentoog kopie 1", soort: "toog", x: -8.65, z: -32.20, y: -0.20, lengte: 1.25, diep: 0.82, hoogte: 1.0, kijkt: "zuid"},
+    { naam: "pc uitleen 1", soort: "pcplek", x: -8.65, z: -32.25, y: 0.80, kijkt: "zuid"},
+    { naam: "pc uitleen 2", soort: "pcplek", x: -8.60, z: -32.85, y: 0.80, kijkt: "noord"},
+    { naam: "pc balie 1", soort: "pcplek", x: -9.45, z: -35.65, y: 1.2, kijkt: "noord"},
+    { naam: "pc balie 2", soort: "pcplek", x: -8.55, z: -35.70, y: 1.2, kijkt: "noord"},
+    { naam: "rolkast folders", soort: "rolkast", x: -7.75, z: -32.60, y: -0.20, kijkt: "west"},
     { naam: "kapstok", soort: "kapstok", x: -11.95, z: -31.30},
-    { naam: "tv balie", soort: "tvhangend", x: -7.00, z: -34.30, kijkt: "zuid"},
+    { naam: "tv balie", soort: "tvhangend", x: -7.00, z: -34.30, kijkt: "west"},
     /* balie: kopieermachine, poortjes bij de ingang, lage kast met klok, folderrek en bureaustoel */
     { naam: "kopieermachine", soort: "kopieermachine", x: -12.25, z: -35.25, kijkt: "oost", hoek: 93 },
     { naam: "poortje 1", soort: "poortje", x: -11.15, z: -34.70, kijkt: "oost"},
@@ -159,7 +159,7 @@ window.GEBOUWDATA = {
     { naam: "raam tijdschriften 2", soort: "raam", x: -4.30, z: -37.38, lengte: 1.80, hoog: 2.2, onder: 0.9, kijkt: "zuid"},
     { naam: "raam balie 1", soort: "raam", x: -10.00, z: -37.38, lengte: 1.30, hoog: 2.2, onder: 0.9, kijkt: "zuid"},
     { naam: "raam balie 2", soort: "raam", x: -8.40, z: -37.38, lengte: 1.30, hoog: 2.2, onder: 0.9, kijkt: "zuid"},
-    { naam: "uitpasbordje", soort: "uitpasbordje", x: -10.4, z: -35.8, y: 1.2, kijkt: "zuid", hoek: 329.5 },
+    { naam: "uitpasbordje", soort: "uitpasbordje", x: -10.15, z: -35.75, y: 1.2, kijkt: "zuid", hoek: 329.5 },
     { naam: "cafetafel", soort: "cafetafel", x: -4.2, z: -36.15, breed: 0.9, hoek: 62.5 },
     { naam: "schaalstoel nw", soort: "schaalstoel", x: -4.75, z: -36.65, hoek: 64.5 },
     { naam: "schaalstoel no", soort: "schaalstoel", x: -3.55, z: -36.65, hoek: 315 },
@@ -201,15 +201,17 @@ window.GEBOUWDATA = {
      Voorbeelden:  { onderdeel: "Dvd_Kast_(Jaan)@-8.1,-26.6", weg: true }   of   { onderdeel: "naam@x,z", dx: 0.3, dz: -0.1 }
      De naam met plek krijg je van "Kopieer lijst voor Claude" in de verplaatsmodus (&bewerk). */
   modelAanpassingen: [
-    { onderdeel: "Balie@-9.5,-35.9", dx: 0.3, dz: -0.05 },
+    { onderdeel: "Balie@-9.5,-35.9", dx: 0.55, dz: -0.05 },
     { onderdeel: "Dvd_Kast_(Jaan)@-8.1,-26.6", weg: true },
     { onderdeel: "onderdeel@-5.2,-27.9", weg: true },   // bureaugroep digipunt (wordt nagebouwd)
     { onderdeel: "onderdeel@-6.9,-27.9", weg: true },   // bureaugroep digipunt (wordt nagebouwd)
     { onderdeel: "Kast_Balie@-6.1,-36.2", weg: true },   // tijdschriftenhoek wordt nagebouwd
     { onderdeel: "Component#101@-4.5,-35.6", weg: true },
     { onderdeel: "Geom3D_5@-3.7,-33.4", dx: 0.2, dz: 0.1 },
-    { onderdeel: "Geom3D_10@-11.7,-34.0", weg: true }   // glaswandje vlak voor de ingang: stond in de weg bij het binnenkomen
-    // eerste: dun wit kastpaneel in het model dat dwars door een rek liep
+    { onderdeel: "Geom3D_10@-11.7,-34.0", weg: true },   // glaswandje vlak voor de ingang: stond in de weg bij het binnenkomen
+    { onderdeel: "Geom3D_17@-11.7,-32.3", dx: 0.00, dz: 0.15 },
+    { onderdeel: "Geom3D_8@-12.3,-35.0", dx: 0.05, dz: 0.35 },
+    { onderdeel: "Geom3D_12@-11.4,-33.2", dx: 0.00, dz: -0.05 }
   ],
 
   /* Stukken uit een groot model-onderdeel knippen, om ze daarna als meubel na te bouwen (alle driehoeken helemaal binnen het vak). */
