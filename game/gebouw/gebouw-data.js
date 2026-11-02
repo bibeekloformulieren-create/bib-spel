@@ -136,7 +136,7 @@ window.GEBOUWDATA = {
     /* uitleen en balie: details op de witte blokken uit het model (y = hoogte van het blad) */
     { naam: "uitleentoog", soort: "toog", x: -8.65, z: -33.00, y: -0.20, lengte: 1.25, diep: 0.82, hoogte: 1.0, kijkt: "zuid"},
     { naam: "uitleentoog kopie 2", soort: "toog", x: -6.05, z: -35.95, lengte: 2.75, diep: 0.82, hoogte: 1.0, kijkt: "west"},
-    { naam: "uitleentoog kopie 1", soort: "toog", x: -8.65, z: -32.20, y: -0.20, lengte: 1.25, diep: 0.82, hoogte: 1.0, kijkt: "zuid"},
+    { naam: "uitleentoog kopie 1", soort: "toog", x: -8.65, z: -32.40, y: -0.20, lengte: 1.25, diep: 0.82, hoogte: 1.0, kijkt: "zuid"},
     { naam: "pc uitleen 1", soort: "pcplek", x: -8.65, z: -32.25, y: 0.80, kijkt: "zuid"},
     { naam: "pc uitleen 2", soort: "pcplek", x: -8.60, z: -32.85, y: 0.80, kijkt: "noord"},
     { naam: "pc balie 1", soort: "pcplek", x: -9.45, z: -35.65, y: 1.2, kijkt: "noord"},
@@ -154,7 +154,7 @@ window.GEBOUWDATA = {
     /* ramen (verplaatsbaar): lengte = breedte, hoog = hoogte, onder = hoogte van de vensterbank */
     { naam: "raam gang links", soort: "raam", x: -10.07, z: -22.50, lengte: 1.30, hoog: 1.5, onder: 0.9, kijkt: "oost"},
     { naam: "raam gang rechts", soort: "raam", x: -8.28, z: -22.50, lengte: 1.30, hoog: 1.5, onder: 0.9, kijkt: "west"},
-    { naam: "raam digipunt", soort: "raam", x: -7.20, z: -27.05, lengte: 1.30, hoog: 1.5, onder: 0.9, kijkt: "noord"},
+    { naam: "raam digipunt", soort: "raam", x: -6.35, z: -26.95, lengte: 1.30, hoog: 1.5, onder: 0.9, kijkt: "noord"},
     { naam: "raam tijdschriften 1", soort: "raam", x: -6.70, z: -37.38, lengte: 1.80, hoog: 2.2, onder: 0.9, kijkt: "zuid"},
     { naam: "raam tijdschriften 2", soort: "raam", x: -4.30, z: -37.38, lengte: 1.80, hoog: 2.2, onder: 0.9, kijkt: "zuid"},
     { naam: "raam balie 1", soort: "raam", x: -10.00, z: -37.38, lengte: 1.30, hoog: 2.2, onder: 0.9, kijkt: "zuid"},
@@ -165,10 +165,8 @@ window.GEBOUWDATA = {
     { naam: "schaalstoel no", soort: "schaalstoel", x: -3.55, z: -36.65, hoek: 315 },
     { naam: "schaalstoel zw", soort: "schaalstoel", x: -4.75, z: -35.75, hoek: 135 },
     { naam: "schaalstoel zo", soort: "schaalstoel", x: -3.6, z: -35.75, hoek: 210 },
-    { naam: "inleverkast", soort: "inleverkast", x: -11.0, z: -34.0, kijkt: "oost" },
-    { naam: "displayrek", soort: "displayrek", x: -11.5, z: -33.0, kijkt: "oost" },
-    { naam: "infozuil", soort: "infozuil", x: -10.5, z: -33.0, kijkt: "oost" },
-    { naam: "deur personeelsruimte", soort: "paneel", x: -8.50, z: -30.20, lengte: 0.90, hoogte: 2.10, kijkt: "noord", kleur: 0xf1eee8 },
+    { naam: "infozuil", soort: "infozuil", x: -11.35, z: -30.50, kijkt: "oost" },
+    { naam: "deur personeelsruimte", soort: "paneel", x: -11.05, z: -27.90, lengte: 0.90, hoogte: 2.10, kijkt: "oost", kleur: 0xf1eee8 },
     { naam: "koffiebalie", soort: "koffiebalie", x: -2.55, z: -29.7, lengte: 1.7, kijkt: "zuid" },
     /* kleuterhoek: lange smalle zaal in het oosten. Oranje muur links (oost), ramen rechts (west), houten vloer, groene bladeren, lage rekken op wieltjes, witte boekenbakken */
     { naam: "oranje muur oost", soort: "paneel", x: 0.05, z: -22.65, lengte: 8.4, hoogte: 2.8, kijkt: "west", kleur: 0xe8960c, hoek: 273.5 },
