@@ -690,21 +690,21 @@
         }
         return { g, box: [0.55, h, 0.55] };
       },
-      /* Rood A-frame displayrek: twee schuine vlakken met een raster van vakjes, op poten. kijkt naar +z = voorkant. */
+      /* Rood open rasterrek: dunne rode staven vormen een grid van vakjes (3 kolommen × 5 rijen), op twee schuine poten. kijkt naar +z. */
       displayrek(m, mt) {
-        const g = new THREE.Group(), rood = mat(0xcc1f1f), zwart = mat(0x1a1a1a);
-        const L = mt.lengte || 0.85, H = 1.75, diep = 0.55, hoek = 0.22;
+        const g = new THREE.Group(), rood = mat(0xcc1f1f), d = 0.022;
+        const L = mt.lengte || 0.80, H = 1.70, kol = 3, rij = 5;
+        const cw = L / kol, ch = (H - 0.1) / rij;   // cel breedte / hoogte
+        // horizontale staven
+        for (let r = 0; r <= rij; r++) doos(g, L + d, d, d, 0, 0.05 + r * ch, 0, rood);
+        // verticale staven
+        for (let k = 0; k <= kol; k++) doos(g, d, H - 0.08, d, -L / 2 + k * cw, 0.05 + (H - 0.08) / 2, 0, rood);
+        // twee schuine poten onderaan: smal buisje schuin naar buiten
         [-1, 1].forEach(kant => {
-          const zijg = new THREE.Group(); zijg.rotation.x = kant * hoek; zijg.position.z = kant * diep / 2 * Math.cos(hoek); zijg.position.y = kant * diep / 2 * Math.sin(hoek) * -1;
-          doos(zijg, L, H, 0.035, 0, H / 2, 0, rood);
-          const rijen = 4, kol = Math.round(L / 0.22);
-          for (let r = 0; r < rijen; r++) for (let k = 0; k < kol; k++) {
-            doos(zijg, 0.175, 0.28, 0.04, -L / 2 + 0.11 + k * (L / kol), 0.22 + r * 0.38, 0.025, mat(0xaa0000));
-          }
-          g.add(zijg);
+          const p = doos(g, d * 1.5, 0.38, d * 1.5, kant * (L / 2 - 0.04), 0.19, kant * 0.12, rood);
+          p.rotation.x = kant * 0.32;
         });
-        [-1, 1].forEach(k => { const p = new THREE.Mesh(new THREE.CylinderGeometry(0.02, 0.02, 1.1, 8), zwart); p.position.set(k * (L / 2 - 0.06), 0.55, 0); g.add(p); });
-        return { g, box: [L, H, diep + 0.1] };
+        return { g, box: [L + 0.05, H, 0.12] };
       },
       /* Rode infozuil: rode sokkel met plat scherm, voor een zelfbedieningsterminal */
       infozuil(m, mt) {
