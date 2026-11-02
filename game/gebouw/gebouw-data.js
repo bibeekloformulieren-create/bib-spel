@@ -70,6 +70,7 @@ window.GEBOUWDATA = {
   meubels: [
     /* hoge tafel over de hele breedte langs het zuidglas, 6 zwarte krukken op 1 m van elkaar */
     { naam: "hoge tafel", soort: "tafel-hoog", x: -9.0, z: -16.05, lengte: 5.9 },
+    { naam: "hoge tafel kopie 1", soort: "tafel-hoog", kopieVan: "hoge tafel", x: -7.20, z: -27.75, y: -0.40, lengte: 2.4, kijkt: "west", hoek: 271 },
     { naam: "kruk 1", soort: "kruk", x: -6.90, z: -16.5, kijkt: "zuid" },
     { naam: "kruk 2", soort: "kruk", x: -7.75, z: -16.5, kijkt: "zuid" },
     { naam: "kruk 3", soort: "kruk", x: -8.70, z: -16.5, kijkt: "zuid" },
@@ -95,8 +96,6 @@ window.GEBOUWDATA = {
     { naam: "hoge kast west",  soort: "rek", textuur: "boeken", x: -10.8, z: -25.95, lengte: 1, hoogte: 2.1, kijkt: "oost" },
     { naam: "hoge kast west kopie 2",  soort: "rek", textuur: "boeken", x: -10.8, z: -26.8, lengte: 1, hoogte: 2.1, kijkt: "oost" },
     { naam: "hoge kast west kopie 1",  soort: "rek", textuur: "boeken", x: -10.8, z: -24.95, lengte: 1, hoogte: 2.1, kijkt: "oost" },
-    { naam: "radiator links",    soort: "radiator", x: -10.02, z: -22.5, lengte: 1, kijkt: "oost" },
-    { naam: "radiator rechts",   soort: "radiator", x: -8.33,  z: -22.5, lengte: 1, kijkt: "west" },
     { naam: "vuilbak 1",         soort: "vuilbak", x: -8.5, z: -23.2 },
     { naam: "vuilbak 2",         soort: "vuilbak", x: -8.5, z: -22.8, kleur: 0x4aa6d8 },
     /* drie werktafels (1,6 x 0,8 m): twee met de lange kanten tegen elkaar (samen 1,6 x 1,6 m) en een derde dwars aan het uiteinde, met 8 witte stoelen */
@@ -112,8 +111,8 @@ window.GEBOUWDATA = {
     { naam: "stoel n1", soort: "stoel", x: -8, z: -20.65, kijkt: "zuid" },
     { naam: "stoel n2", soort: "stoel", x: -7.15, z: -20.7, kijkt: "zuid" },
     /* digipunt: twee groepen van vier witte bureaus rond een stroomzuil, roze stoelen, laptops (naar foto) */
-    { naam: "digipunt 1 stoel w1", soort: "stoel", x: -6.95, z: -28.15, kleur: 0xd9aaa4, kijkt: "oost" },
-    { naam: "digipunt 1 stoel w2", soort: "stoel", x: -7.0, z: -27.5, kleur: 0xd9aaa4, kijkt: "oost" },
+    { naam: "digipunt 1 stoel w1", soort: "stoel", x: -7.0, z: -28.40, kleur: 0xd9aaa4, kijkt: "west" },
+    { naam: "digipunt 1 stoel w2", soort: "stoel", x: -7.0, z: -27.25, kleur: 0xd9aaa4, kijkt: "west" },
     { naam: "digipunt 2 bureau w1", soort: "tafel", x: -5.95, z: -28.6, lengte: 0.9, breed: 0.5, kleur: 0xf4f2ee, kijkt: "zuid" },
     { naam: "digipunt 2 stoel w1", soort: "stoel", x: -5.95, z: -29.1, kleur: 0xd9aaa4, kijkt: "zuid" },
     { naam: "digipunt 2 laptop w1", soort: "laptop", x: -5.95, z: -28.65, kijkt: "noord", hoogte: 0.75 },
