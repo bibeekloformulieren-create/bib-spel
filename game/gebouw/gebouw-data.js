@@ -69,13 +69,13 @@ window.GEBOUWDATA = {
      Glazen zaal (veranda): nagebouwd naar een foto; zithoek rechts (west) als je de zaal in kijkt, hoge tafel over de hele breedte achteraan (zuid). */
   meubels: [
     /* hoge tafel over de hele breedte langs het zuidglas, 6 zwarte krukken op 1 m van elkaar */
-    { naam: "hoge tafel", soort: "tafel-hoog", x: -8.2, z: -15.95, lengte: 5.9 },
-    { naam: "kruk 1", soort: "kruk", x: -6.75, z: -16.5, kijkt: "zuid" },
-    { naam: "kruk 2", soort: "kruk", x: -7.41, z: -16.5, kijkt: "zuid" },
-    { naam: "kruk 3", soort: "kruk", x: -8.07, z: -16.5, kijkt: "zuid" },
-    { naam: "kruk 4", soort: "kruk", x: -8.73, z: -16.5, kijkt: "zuid" },
-    { naam: "kruk 5", soort: "kruk", x: -9.39, z: -16.5, kijkt: "zuid" },
-    { naam: "kruk 6", soort: "kruk", x: -10.05, z: -16.5, kijkt: "zuid" },
+    { naam: "hoge tafel", soort: "tafel-hoog", x: -9.0, z: -16.05, lengte: 5.9 },
+    { naam: "kruk 1", soort: "kruk", x: -6.90, z: -16.5, kijkt: "zuid" },
+    { naam: "kruk 2", soort: "kruk", x: -7.75, z: -16.5, kijkt: "zuid" },
+    { naam: "kruk 3", soort: "kruk", x: -8.70, z: -16.5, kijkt: "zuid" },
+    { naam: "kruk 4", soort: "kruk", x: -9.55, z: -16.55, kijkt: "zuid" },
+    { naam: "kruk 5", soort: "kruk", x: -10.35, z: -16.55, kijkt: "zuid" },
+    { naam: "kruk 6", soort: "kruk", x: -11.20, z: -16.55, kijkt: "zuid" },
     /* zithoek in de westhoek: blauwe fauteuil tegen het glas, ficus erachter */
     { naam: "fauteuil blauw", soort: "fauteuil", x: -11.2, z: -17.75, kijkt: "noord", kleur: 0x1f6f7a, hoek: 130 },
     { naam: "ficus",          soort: "plant",    x: -11.9, z: -18.3,  hoogte: 2.3 },
