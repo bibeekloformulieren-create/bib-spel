@@ -230,12 +230,11 @@
   function venster(breed, hoog) {
     const cv = document.createElement('canvas'); cv.width = 256; cv.height = Math.round(256 * hoog / breed);
     const c = cv.getContext('2d'), W = cv.width, H = cv.height;
-    c.fillStyle = '#e4e1da'; c.fillRect(0, 0, W, H);                          // kozijn
-    const g = c.createLinearGradient(0, 0, 0, H); g.addColorStop(0, '#dfe8ee'); g.addColorStop(1, '#a7b6bf');
-    c.fillStyle = g; c.fillRect(10, 10, W - 20, H - 20);                       // glas
-    c.fillStyle = '#c9bca9'; c.fillRect(10, 10, W - 20, (H - 20) * 0.68);     // rolgordijn
-    c.fillStyle = '#b3a591'; c.fillRect(10, 10 + (H - 20) * 0.68 - 6, W - 20, 6);
-    c.fillStyle = '#e4e1da'; c.fillRect(W / 2 - 3, 10, 6, H - 20);           // middenstijl
+    c.fillStyle = '#2b2e34'; c.fillRect(0, 0, W, H);                          // donker kozijn (zoals echte ramen)
+    const g = c.createLinearGradient(0, 0, 0, H); g.addColorStop(0, '#c8dce6'); g.addColorStop(1, '#8faab8');
+    c.fillStyle = g; c.fillRect(8, 8, W - 16, H - 16);                        // glas
+    c.fillStyle = 'rgba(220,215,200,0.55)'; c.fillRect(8, 8, W - 16, (H - 16) * 0.55);  // half-doorzichtig gordijn
+    c.fillStyle = '#2b2e34'; c.fillRect(W / 2 - 4, 8, 8, H - 16);            // middenstijl
     return new THREE.CanvasTexture(cv);
   }
 
