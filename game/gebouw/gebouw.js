@@ -690,6 +690,31 @@
         }
         return { g, box: [0.55, h, 0.55] };
       },
+      /* Rood A-frame displayrek: twee schuine vlakken met een raster van vakjes, op poten. kijkt naar +z = voorkant. */
+      displayrek(m, mt) {
+        const g = new THREE.Group(), rood = mat(0xcc1f1f), zwart = mat(0x1a1a1a);
+        const L = mt.lengte || 0.85, H = 1.75, diep = 0.55, hoek = 0.22;
+        [-1, 1].forEach(kant => {
+          const zijg = new THREE.Group(); zijg.rotation.x = kant * hoek; zijg.position.z = kant * diep / 2 * Math.cos(hoek); zijg.position.y = kant * diep / 2 * Math.sin(hoek) * -1;
+          doos(zijg, L, H, 0.035, 0, H / 2, 0, rood);
+          const rijen = 4, kol = Math.round(L / 0.22);
+          for (let r = 0; r < rijen; r++) for (let k = 0; k < kol; k++) {
+            doos(zijg, 0.175, 0.28, 0.04, -L / 2 + 0.11 + k * (L / kol), 0.22 + r * 0.38, 0.025, mat(0xaa0000));
+          }
+          g.add(zijg);
+        });
+        [-1, 1].forEach(k => { const p = new THREE.Mesh(new THREE.CylinderGeometry(0.02, 0.02, 1.1, 8), zwart); p.position.set(k * (L / 2 - 0.06), 0.55, 0); g.add(p); });
+        return { g, box: [L, H, diep + 0.1] };
+      },
+      /* Rode infozuil: rode sokkel met plat scherm, voor een zelfbedieningsterminal */
+      infozuil(m, mt) {
+        const g = new THREE.Group(), rood = mat(0xcc1f1f), zwart = mat(0x1a1a1a), scherm = mat(0x1a2030);
+        doos(g, 0.44, 0.08, 0.44, 0, 0.04, 0, rood);             // voet
+        doos(g, 0.44, 0.95, 0.38, 0, 0.04 + 0.475, 0.03, rood);  // sokkel
+        doos(g, 0.36, 0.28, 0.04, 0, 0.04 + 0.95 + 0.14, 0.18, scherm);  // scherm
+        doos(g, 0.30, 0.20, 0.005, 0, 0.04 + 0.95 + 0.14, 0.21, mat(0xd0e4f0));  // scherminhoud
+        return { g, box: [0.44, 1.33, 0.44] };
+      },
       /* Rode inleverkast: smalle hoge rode doos met een gleuf bovenaan */
       inleverkast(m, mt) {
         const g = new THREE.Group(), rood = mat(0xcc1f1f), zwart = mat(0x1a1a1a);
