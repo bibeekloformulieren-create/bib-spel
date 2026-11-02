@@ -34,7 +34,7 @@
 #actie[hidden] { display:none; }
 
 /* schermen */
-.scherm { position:fixed; inset:0; z-index:20; background:#1d1a16d9; display:grid; place-items:center; padding:12px; touch-action:pan-y; }
+.scherm { position:fixed; inset:0; z-index:80; background:#1d1a16d9; display:grid; place-items:center; padding:12px; touch-action:pan-y; }
 .scherm[hidden] { display:none; }
 .kaart { background:var(--papier); border-radius:18px; width:min(640px,100%); max-height:calc(100dvh - 24px); overflow:auto; padding:20px; box-shadow:0 10px 40px #0007; }
 .kaart h2 { margin:0 0 6px; font-size:1.35rem; color:var(--petrol); line-height:1.25; }

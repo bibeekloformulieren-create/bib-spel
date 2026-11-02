@@ -743,7 +743,7 @@
     meld('Klik een meubel of onderdeel van het gebouw en sleep het.');
     const ververs = () => { meubelCache = null; nabij = []; nabijX = 1e9; };
     const bewaar = () => { try {
-      const o = {}; items.forEach(it => { o[it.mt.naam] = (it.mt.kopieVan || it.mt.nieuw) ? Object.assign({}, it.mt) : Object.assign({ x: +it.mt.x.toFixed(2), z: +it.mt.z.toFixed(2), kijkt: it.mt.kijkt || 'zuid' }, it.mt.kleur != null ? { kleur: it.mt.kleur } : {}, it.mt.soort === 'paneel' ? { lengte: it.mt.lengte, hoogte: it.mt.hoogte } : {}, it.mt.hoek != null ? { hoek: it.mt.hoek } : {}, it.mt.lengte && it.mt.soort !== 'paneel' ? { lengte: +it.mt.lengte.toFixed(2) } : {}); });
+      const o = {}; items.forEach(it => { o[it.mt.naam] = (it.mt.kopieVan || it.mt.nieuw) ? Object.assign({}, it.mt) : Object.assign({ x: +it.mt.x.toFixed(2), z: +it.mt.z.toFixed(2), kijkt: it.mt.kijkt || 'zuid' }, it.mt.kleur != null ? { kleur: it.mt.kleur } : {}, it.mt.soort === 'paneel' ? { lengte: it.mt.lengte, hoogte: it.mt.hoogte } : {}, it.mt.hoek != null ? { hoek: it.mt.hoek } : {}, it.mt.lengte && it.mt.soort !== 'paneel' ? { lengte: +it.mt.lengte.toFixed(2) } : {}, it.mt.y ? { y: +it.mt.y.toFixed(2) } : {}); });
       verwijderd.forEach(n => { o[n] = { weg: true }; });
       localStorage.setItem('bibMeubelPlekken', JSON.stringify(o));
       localStorage.setItem('bibModelAanpassingen', JSON.stringify(modelStaat));
@@ -791,6 +791,13 @@
       herbouw(gekozen.it); kader.setFromObject(gekozen.it.g); zetKnop(); bewaar(); meld(mt.naam + ': ' + mt.lengte.toFixed(2) + ' m lang');
     };
     knop('Korter ([)', () => lengte(-0.1)); knop('Langer (])', () => lengte(0.1));
+    const hoogte = delta => {
+      if (!gekozen || !gekozen.it) { meld('Klik eerst een meubel aan.'); return; }
+      const mt = gekozen.it.mt;
+      mt.y = Math.round(((mt.y || 0) + delta) * 20) / 20;
+      zetItem(gekozen.it); kader.setFromObject(gekozen.it.g); bewaar(); meld(mt.naam + ': ' + (mt.y || 0).toFixed(2) + ' m hoogte');
+    };
+    knop('Omhoog (PgUp)', () => hoogte(0.1)); knop('Omlaag (PgDn)', () => hoogte(-0.1));
     const zetBoven = () => { testCam = boven ? { fov: 55, p: [speler.x, 11.5, speler.z + 0.7], t: [speler.x, 0, speler.z] } : null; };
     setInterval(() => { if (boven) zetBoven(); }, 100);   // het overzicht volgt het poppetje: loop naar een andere ruimte en je ziet die van boven
     const bovenKnop = knop('Van boven kijken', () => {
@@ -831,7 +838,7 @@
       if (nieuw) { kies({ it: nieuw }); bewaar(); meld('Muurvlak ' + nieuw.mt.naam + ' gemaakt (' + nieuw.mt.lengte.toFixed(1) + ' m breed). Kies een andere kleur met de kleurkiezer, of sleep/draai het vlak als het niet klopt.'); }
     };
     knop('Kopieer lijst voor Claude', () => {
-      const regels = items.map(it => it.mt.naam + ': x ' + it.mt.x.toFixed(2) + ', z ' + it.mt.z.toFixed(2) + ', kijkt ' + (it.mt.kijkt || 'zuid') + (it.mt.hoek != null ? ', hoek ' + it.mt.hoek : '') + (it.mt.lengte && (LENGTES[it.mt.soort] || it.mt.soort === 'paneel') ? ', lengte ' + it.mt.lengte.toFixed(2) : '') + (it.mt.soort === 'paneel' && it.mt.hoogte ? ', hoogte ' + it.mt.hoogte.toFixed(2) : '') + (it.mt.kleur != null ? ', kleur 0x' + (+it.mt.kleur).toString(16).padStart(6, '0') : '') + (it.mt.nieuw ? ' (nieuw muurvlak)' : '') + (it.mt.kopieVan ? ' (kopie van ' + it.mt.kopieVan + ')' : ''));
+      const regels = items.map(it => it.mt.naam + ': x ' + it.mt.x.toFixed(2) + ', z ' + it.mt.z.toFixed(2) + (it.mt.y ? ', y ' + it.mt.y.toFixed(2) : '') + ', kijkt ' + (it.mt.kijkt || 'zuid') + (it.mt.hoek != null ? ', hoek ' + it.mt.hoek : '') + (it.mt.lengte && (LENGTES[it.mt.soort] || it.mt.soort === 'paneel') ? ', lengte ' + it.mt.lengte.toFixed(2) : '') + (it.mt.soort === 'paneel' && it.mt.hoogte ? ', hoogte ' + it.mt.hoogte.toFixed(2) : '') + (it.mt.kleur != null ? ', kleur 0x' + (+it.mt.kleur).toString(16).padStart(6, '0') : '') + (it.mt.nieuw ? ' (nieuw muurvlak)' : '') + (it.mt.kopieVan ? ' (kopie van ' + it.mt.kopieVan + ')' : ''));
       verwijderd.forEach(n => regels.push(n + ': WEG'));
       Object.keys(modelStaat).forEach(k => { const st = modelStaat[k]; if (st.weg) regels.push('gebouw ' + k + ': WEG'); else if (st.dx || st.dz) regels.push('gebouw ' + k + ': dx ' + (st.dx || 0).toFixed(2) + ', dz ' + (st.dz || 0).toFixed(2)); });
       const uit = regels.join('\n');
@@ -841,7 +848,7 @@
     });
     knop('Alles terugzetten', () => { try { localStorage.removeItem('bibMeubelPlekken'); localStorage.removeItem('bibModelAanpassingen'); } catch (e) {} location.reload(); });
     document.body.appendChild(paneel);
-    window.addEventListener('keydown', e => { if (e.code === 'KeyR') draai(); if (e.code === 'Comma') fijn(-0.5); if (e.code === 'Period') fijn(0.5); if (e.code === 'Delete') verwijder(); if (e.code === 'KeyK') kopieer(); if (e.code === 'BracketLeft') lengte(-0.1); if (e.code === 'BracketRight') lengte(0.1); });
+    window.addEventListener('keydown', e => { if (e.code === 'KeyR') draai(); if (e.code === 'Comma') fijn(-0.5); if (e.code === 'Period') fijn(0.5); if (e.code === 'Delete') verwijder(); if (e.code === 'KeyK') kopieer(); if (e.code === 'BracketLeft') lengte(-0.1); if (e.code === 'BracketRight') lengte(0.1); if (e.code === 'PageUp') hoogte(0.1); if (e.code === 'PageDown') hoogte(-0.1); });
 
     const vlak = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0), pt = new THREE.Vector3(), ray = new THREE.Raycaster();
     const wijs = e => { const r = canvas.getBoundingClientRect(); ray.setFromCamera(new THREE.Vector2(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1), camera); return ray; };
