@@ -547,7 +547,7 @@
         doos(tv, 1.0, 0.58, 0.04, 0, 0, 0, zw);
         doos(tv, 0.96, 0.54, 0.004, 0, 0, 0.022, mat(0x1a2530));
         const tex = new THREE.TextureLoader().load('gebouw/afbeeldingen/bibfeest-logo.png');
-        const logo = new THREE.Mesh(new THREE.PlaneGeometry(0.44, 0.44), new THREE.MeshBasicMaterial({ map: tex, transparent: true }));
+        const logo = new THREE.Mesh(new THREE.PlaneGeometry(0.56, 0.56), new THREE.MeshBasicMaterial({ map: tex, transparent: true }));
         logo.position.set(0, 0, 0.026); tv.add(logo);
         return { g, box: [0.02, 0.02, 0.02] };
       },
