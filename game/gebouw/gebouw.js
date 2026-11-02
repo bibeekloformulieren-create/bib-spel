@@ -544,7 +544,11 @@
         const g = new THREE.Group(), zw = mat(0x101113);
         cyl(g, 0.015, 0.6, 0, 2.75, 0, zw); doos(g, 0.22, 0.03, 0.12, 0, 2.43, 0, zw);
         const tv = new THREE.Group(); tv.position.set(0, 2.2, 0); tv.rotation.x = 0.28; g.add(tv);
-        doos(tv, 1.0, 0.58, 0.04, 0, 0, 0, zw); doos(tv, 0.96, 0.54, 0.004, 0, 0, 0.022, mat(0x1a2530));
+        doos(tv, 1.0, 0.58, 0.04, 0, 0, 0, zw);
+        doos(tv, 0.96, 0.54, 0.004, 0, 0, 0.022, mat(0x1a2530));
+        const tex = new THREE.TextureLoader().load('gebouw/afbeeldingen/bibfeest-logo.png');
+        const logo = new THREE.Mesh(new THREE.PlaneGeometry(0.44, 0.44), new THREE.MeshBasicMaterial({ map: tex, transparent: true }));
+        logo.position.set(0, 0, 0.026); tv.add(logo);
         return { g, box: [0.02, 0.02, 0.02] };
       },
       /* Ronde cafetafel: houten blad op een zwarte middenpoot met ronde voet, met een plantje. Kijkt naar +z. */
