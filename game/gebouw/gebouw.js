@@ -689,6 +689,14 @@
           o.position.set(Math.cos(hoek) * br * (0.5 + rnd() * 0.7), h * t, Math.sin(hoek) * br * (0.5 + rnd() * 0.7)); g.add(o);
         }
         return { g, box: [0.55, h, 0.55] };
+      },
+      /* Rode inleverkast: smalle hoge rode doos met een gleuf bovenaan */
+      inleverkast(m, mt) {
+        const g = new THREE.Group(), rood = mat(0xcc1f1f), zwart = mat(0x1a1a1a);
+        const L = mt.lengte || 0.46, D = 0.44, H = mt.hoogte || 1.55;
+        doos(g, L, H, D, 0, H / 2, 0, rood);
+        doos(g, L * 0.55, 0.03, D * 0.15, 0, H - 0.12, D / 2 - 0.01, zwart);   // gleuf
+        return { g, box: [L, H, D] };
       }
     };
     const draai = { zuid: 0, noord: Math.PI, oost: Math.PI / 2, west: -Math.PI / 2 };
