@@ -1230,6 +1230,22 @@
       if (Math.hypot(vel.x, vel.z) < 0.04 && !vx && !vz) { vel.x = vel.z = 0; }
       vx = vel.x * dt; vz = vel.z * dt;
       loopt = false;
+      /* Zit de speler al vast in een obstakel (bijv. na een teleport)? Duw hem naar buiten. */
+      if (vx || vz) {
+        const stapje = 0.05 * PS;
+        const vastzit = geblokkeerd(0, 0) || (geblokkeerd(stapje, 0) && geblokkeerd(-stapje, 0) && geblokkeerd(0, stapje) && geblokkeerd(0, -stapje));
+        if (vastzit) {
+          for (let d = 0.1; d <= 1.5; d += 0.1) {
+            let vrij = false;
+            for (let a = 0; a < 16 && !vrij; a++) {
+              const angle = a / 16 * Math.PI * 2;
+              const ex = Math.cos(angle) * d, ez = Math.sin(angle) * d;
+              if (!geblokkeerd(ex, ez)) { speler.x += ex; speler.z += ez; vrij = true; }
+            }
+            if (vrij) break;
+          }
+        }
+      }
       if (vx || vz) {
         if (!geblokkeerd(vx, vz)) { speler.x += vx; speler.z += vz; loopt = true; }
         else {
