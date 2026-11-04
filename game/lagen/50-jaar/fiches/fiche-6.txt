@@ -8,7 +8,6 @@ titel: Chips in de zon
 waar: Bij het zelfuitleentoestel.
 plek: 7, 0.3
 bron: Paneel "Zo werkt de bibliotheek", brochure 50 jaar bib
-zoek-opdracht: Zoek het zelfuitleentoestel. Leg een boek erop en kijk hoe snel het scherm weet wat je hebt.
 tip: Er zit iets onzichtbaars in elk boek. Het werkt met radiogolven.
 boeke-goed: Een chip! Kleiner dan een postzegel, en toch weet het toestel meteen wat je meeneemt.
 boeke-fout: Nee. Er zit iets in het boek dat het toestel kan lezen, zonder dat je het ziet.
@@ -33,5 +32,5 @@ Hoe herkent het toestel je boek?
 
 [leer]
 - De chips werken met radiogolven. Zelfs door de kaft heen, zonder te openen.
-- Vroeger zat in elk boek een boekkaart in een papieren zakje met je naam. Wie te laat was, kreeg een rode stip.
+- Een oudere lener vond de zelfuitleen eerst moeilijk. Op een dag probeerde ze het toch zelf. Het duurde lang. Dan wenkte ze: "Er komt iets raars op het scherm." Wat stond er? "Windows wordt opnieuw gestart."
 - In februari 2013 begon de zelfuitleen. De medewerkers hebben sindsdien meer tijd om je te helpen.
