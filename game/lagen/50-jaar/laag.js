@@ -523,10 +523,10 @@
     let bewaard = ''; try { bewaard = localStorage.getItem('bib50-2076') || ''; } catch (e) {}
     kaart.innerHTML = `
       <div style="width:min(200px,55%);margin:0 auto">${BoekE.svg('blij', { pose: 'zwaaien' })}</div>
-      <h2 style="text-align:center">Acht van acht</h2>
+      <h2 style="text-align:center">Zes van zes</h2>
       <p style="text-align:center">${tekst(D.einde.zin)}</p>
       <p style="text-align:center;font-weight:700;font-size:1.15rem">${D.einde.vraag}</p>
-      <textarea id="antwoord2076" rows="3" placeholder="Schrijf of teken het samen met je kind…">${bewaard.replace(/</g, '&lt;')}</textarea>
+      <textarea id="antwoord2076" rows="3" placeholder="Schrijf het samen met je kind…">${bewaard.replace(/</g, '&lt;')}</textarea>
       <p class="klein">${D.einde.voet}</p>
       <div class="rij"><button class="knop licht" id="opnieuw" style="text-align:center">Opnieuw spelen</button>
       <button class="knop groot" id="rond" style="margin:8px 0">Verder rondkijken</button></div>`;
