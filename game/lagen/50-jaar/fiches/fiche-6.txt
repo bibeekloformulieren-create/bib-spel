@@ -4,7 +4,7 @@
 nummer: 6
 categorie: werking
 soort: keuze
-titel: Chips in de zon
+titel: Zelf uitlenen
 waar: Bij het zelfuitleentoestel.
 plek: 7, 0.3
 bron: Paneel "Zo werkt de bibliotheek", brochure 50 jaar bib
@@ -32,5 +32,5 @@ Hoe herkent het toestel je boek?
 
 [leer]
 - De chips werken met radiogolven. Zelfs door de kaft heen, zonder te openen.
-- Een oudere lener vond de zelfuitleen eerst moeilijk. Op een dag probeerde ze het toch zelf. Het duurde lang. Dan wenkte ze: "Er komt iets raars op het scherm." Wat stond er? "Windows wordt opnieuw gestart."
+- Dankzij de chips kun je boeken ook terugbrengen in de inleverkast, zelfs als de bib dicht is.
 - In februari 2013 begon de zelfuitleen. De medewerkers hebben sindsdien meer tijd om je te helpen.
