@@ -3,14 +3,20 @@
 :root { --petrol:#0b5d68; --oranje:#d9601f; --antraciet:#2e3033; --papier:#fbf7ef; --goed:#2f8f4e; --lijn:#e3dac8; }
 
 /* HUD */
-#teller { pointer-events:auto; top:max(12px, env(safe-area-inset-top)); left:12px; background:var(--papier); border:0; border-radius:999px;
-          padding:8px 16px; font-weight:700; box-shadow:0 2px 8px #0003; }
+#teller { pointer-events:auto; top:max(12px, env(safe-area-inset-top)); left:12px; background:var(--papier); color:var(--antraciet); border:0; border-radius:999px;
+          padding:8px 16px; font-weight:700; box-shadow:0 2px 8px #0003; white-space:nowrap; }
 #teller b { color:var(--oranje); }
 #teller span.o { font-weight:500; color:#6d6354; margin-left:6px; }
 #legende { top:max(58px, calc(env(safe-area-inset-top) + 46px)); left:12px; display:flex; flex-direction:column; gap:4px; }
 #legende span { background:var(--papier); border-radius:999px; padding:3px 12px 3px 8px; font-size:.78rem; font-weight:600; width:max-content; box-shadow:0 1px 4px #0003; }
 #legende span::before { content:""; display:inline-block; width:12px; height:12px; border-radius:50%; background:var(--c); margin-right:7px; vertical-align:-1px; }
 #pijl { top:max(12px, env(safe-area-inset-top)); left:50%; margin-left:-24px; width:48px; height:48px; border-radius:50%; background:var(--papier); display:grid; place-items:center; box-shadow:0 2px 8px #0003; }
+/* op smalle schermen: compactere teller en #actie-knop past volledig op het scherm */
+@media (max-width: 480px) {
+  #teller { font-size:.82rem; padding:6px 12px; }
+  #teller span.o { display:none; }
+  #actie { font-size:.92rem; padding:11px 16px; max-width:calc(100vw - 160px); }
+}
 #pijl svg { width:26px; height:26px; transition:transform .1s linear; }
 
 #boeke { position:fixed; right:8px; bottom:max(8px, env(safe-area-inset-bottom)); width:min(30vw,150px); z-index:6; }

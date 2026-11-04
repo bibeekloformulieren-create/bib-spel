@@ -13,9 +13,15 @@ button { font:inherit; color:inherit; cursor:pointer; }
 
 /* knoppen rechtsboven; een laag mag er zelf bij zetten met Gebouw.knop(...) */
 #knoppen { top:max(12px, env(safe-area-inset-top)); right:12px; display:flex; flex-direction:column; align-items:flex-end; gap:6px; }
-#knoppen button { pointer-events:auto; background:var(--papier, #fbf7ef); border:0; border-radius:999px; padding:8px 14px; font-weight:600; font-size:.9rem; box-shadow:0 2px 8px #0003; }
+#knoppen button { pointer-events:auto; background:var(--papier, #fbf7ef); color:var(--antraciet, #2e3033); border:0; border-radius:999px; padding:8px 14px; font-weight:600; font-size:.9rem; box-shadow:0 2px 8px #0003; white-space:nowrap; }
 .zoomrij { display:flex; gap:6px; }
 .zoomrij button { min-width:44px; font-size:1.2rem !important; }
+/* op smalle schermen: compactere knoppen zodat ze niet overlappen met de teller en de pijl */
+@media (max-width: 480px) {
+  #knoppen { gap:4px; }
+  #knoppen button { font-size:.78rem; padding:6px 10px; }
+  .zoomrij button { min-width:36px; font-size:1rem !important; }
+}
 
 /* de stick voor tablet en gsm */
 #stick { position:fixed; left:max(18px, env(safe-area-inset-left)); bottom:max(24px, env(safe-area-inset-bottom)); width:118px; height:118px; border-radius:50%;
