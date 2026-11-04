@@ -23,6 +23,7 @@
       <svg viewBox="0 0 24 24"><path d="M12 2 L20 20 L12 15 L4 20 Z" fill="#d9601f"/></svg>
     </div>
     <button id="actie" hidden></button>
+    <button id="brochure-knop" hidden>📖 Brochure</button>
     <div id="boeke">
       <div class="bel" id="bel" hidden></div>
       <div class="poppetje" id="poppetje"></div>
@@ -30,7 +31,25 @@
     <div class="scherm" id="schermIntro" hidden><div class="kaart" id="kaartIntro"></div></div>
     <div class="scherm" id="schermFiche" hidden><div class="kaart fiche" id="kaartFiche"></div></div>
     <div class="scherm" id="schermOverzicht" hidden><div class="kaart" id="kaartOverzicht"></div></div>
-    <div class="scherm" id="schermEinde" hidden><div class="kaart" id="kaartEinde"></div></div>`;
+    <div class="scherm" id="schermEinde" hidden><div class="kaart" id="kaartEinde"></div></div>
+    <div id="schermBrochure" class="brochure-ov" hidden>
+      <div class="brochure-venster">
+        <div class="brochure-balk">
+          <span>50 jaar Bibliotheek Eeklo</span>
+          <button id="sluitBrochure">✕</button>
+        </div>
+        <div class="brochure-inhoud">
+          <div class="brochure-cover">
+            <div class="brochure-jaar">50</div>
+            <div class="brochure-titel">JAAR<br>Bibliotheek Eeklo</div>
+            <div class="brochure-sub">1976 – 2026 · Een halve eeuw lezen, leren en ontmoeten</div>
+          </div>
+          <p class="brochure-tekst">In deze brochure vind je de volledige geschiedenis van onze bib.</p>
+          <a id="brochureLink" class="groot brochure-open" href="" target="_blank">📖 Open de brochure</a>
+          <p class="klein brochure-tip">De brochure opent in een nieuw venster of tabblad.</p>
+        </div>
+      </div>
+    </div>`;
 
   /* ---------- opslag: alleen op dit toestel ---------- */
   const SLEUTEL = 'bib50-gevonden';
@@ -42,6 +61,7 @@
   let gevonden = new Set(opslag.lees());
   let eindeGetoond = false;
   let dichtbij = null;
+  let balieDichtbij = false;
 
   /* ---------- Boek-E in de hoek ---------- */
   let belTimer = 0;
@@ -161,7 +181,7 @@
 
   /* ---------- de dichtstbijzijnde fiche: knop en pijl ---------- */
   function bijwerkenNabijheid() {
-    if (Laag50.modus !== 'spel') { dichtbij = null; $('actie').hidden = true; return; }
+    if (Laag50.modus !== 'spel') { dichtbij = null; balieDichtbij = false; $('actie').hidden = true; return; }
     const speler = G.speler;
     let dichtste = null, afstand = 1e9;
     ficheObj.forEach(o => {
@@ -189,6 +209,19 @@
       pijl.firstElementChild.setAttribute('fill', CAT[dichtste.data.categorie].kleur);
       $('pijl').style.visibility = 'visible';
     } else $('pijl').style.visibility = 'hidden';
+  }
+
+  function bijwerkenBalie() {
+    if (Laag50.modus !== 'spel' || G.pauze) { if (balieDichtbij) { balieDichtbij = false; $('brochure-knop').hidden = true; } return; }
+    const bp = D.baliePlek || [-8, -29];
+    const bd = Math.hypot(bp[0] - G.speler.x, bp[1] - G.speler.z);
+    if (bd < 2.5) {
+      if (!balieDichtbij) {
+        balieDichtbij = true;
+        $('brochure-knop').hidden = false;
+        boeke.zeg('Aan de balie ligt een brochure. Kijk maar eens!', 'blij', {}, 4000);
+      }
+    } else if (balieDichtbij) { balieDichtbij = false; $('brochure-knop').hidden = true; }
   }
 
   function telOp() { $('aantal').textContent = gevonden.size; $('totaal').textContent = FICHES.length; }
@@ -536,8 +569,17 @@
     $('opnieuw').onclick = () => { opslag.wis(); try { localStorage.removeItem('bib50-2076'); } catch (e) {} location.reload(); };
   }
 
+  /* ---------- brochure ---------- */
+  function toonBrochure() {
+    G.pauze = true;
+    $('brochureLink').href = bron('brochure/brochure.pdf');
+    $('schermBrochure').hidden = false;
+  }
+  $('sluitBrochure').onclick = () => { $('schermBrochure').hidden = true; G.pauze = false; };
+
   /* ---------- begin ---------- */
   $('actie').addEventListener('click', () => { if (dichtbij) openFiche(dichtbij.data); });
+  $('brochure-knop').addEventListener('click', toonBrochure);
   $('teller').addEventListener('click', () => { if (G.pauze) return; toonOverzicht(); });
   $('bel').addEventListener('click', () => boeke.stil());
   $('poppetje').addEventListener('click', () => {
@@ -559,6 +601,7 @@
   G.opFrame((dt, t) => {
     ficheObj.forEach(o => { if (o.groep.visible) { o.kaart.rotation.y = t * 1.4; o.kaart.position.y = 1.15 + Math.sin(t * 2 + o.data.id) * 0.06; } });
     bijwerkenNabijheid();
+    bijwerkenBalie();
   });
   G.zetAvatar(maakKaders());
 
