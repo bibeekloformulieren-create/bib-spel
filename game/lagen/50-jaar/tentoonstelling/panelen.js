@@ -36,7 +36,7 @@ window.TENTOONSTELLING = [
       {s:'b',x:0.5307,y:0.7223,b:0.1099,h:0.0716},
       {s:'b',x:0.5311,y:0.8188,b:0.1108,h:0.0716},
     ] },
-  { nr:2, plek:[-0.5, -27.3, 263], titel:"Gezelligheid troef", ondertitel:"De eerste bibliotheek: Molenstraat 1968-1988",
+  { nr:2, plek:[-2, -22, 270], titel:"Gezelligheid troef", ondertitel:"De eerste bibliotheek: Molenstraat 1968-1988",
     klein:'img/paneel-2-klein.jpg', groot:'img/paneel-2-groot.jpg',
     delen:[
       {s:'t',x:0.0637,y:0.1151,b:0.4897,h:0.0168},
@@ -195,7 +195,7 @@ window.TENTOONSTELLING = [
       {s:'b',x:0.2516,y:0.4231,b:0.1364,h:0.0491},
       {s:'b',x:0.2512,y:0.4796,b:0.1372,h:0.0487},
     ] },
-  { nr:7, plek:[-5.2, -31.45, 2], titel:"Het stond in de krant (1)", ondertitel:"De bib in de pers: 1979-2026",
+  { nr:7, plek:[-6, -31.45, 2], titel:"Het stond in de krant (1)", ondertitel:"De bib in de pers: 1979-2026",
     klein:'img/paneel-7-klein.jpg', groot:'img/paneel-7-groot.jpg',
     delen:[
       {s:'t',x:0.1299,y:0.0142,b:0.3566,h:0.091},
@@ -222,7 +222,7 @@ window.TENTOONSTELLING = [
       {s:'b',x:0.3678,y:0.4345,b:0.2731,h:0.1037},
       {s:'b',x:0.7079,y:0.4238,b:0.2068,h:0.1144},
     ] },
-  { nr:8, plek:[-4.25, -31.45, 1], titel:"Het stond in de krant (2)", ondertitel:"De bib in de pers: 1979-2026",
+  { nr:8, plek:[-3.5, -31.45, 1], titel:"Het stond in de krant (2)", ondertitel:"De bib in de pers: 1979-2026",
     klein:'img/paneel-8-klein.jpg', groot:'img/paneel-8-groot.jpg',
     delen:[
       {s:'t',x:0.1299,y:0.0142,b:0.3566,h:0.091},
