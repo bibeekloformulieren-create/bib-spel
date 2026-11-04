@@ -27,7 +27,7 @@ window.SPELDATA = {
   },
 
   /* Waar de balie staat: [x, z] — de speler kan daar de brochure bekijken. */
-  baliePlek: [-9, -28],
+  baliePlek: [-9, -32],
 
   /* Waar de fiches liggen in het echte model: [x, z] in meters (zoals op de plattegrond met raster).
      Staat er in het model een punt met de naam fiche-1 ... fiche-8, dan wint dat punt. */

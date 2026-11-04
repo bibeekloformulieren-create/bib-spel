@@ -620,9 +620,9 @@
   /* 3D brochure op de toonbank */
   let brochureMesh = null;
   function plaatsBrochure() {
-    /* Visuele plek van het 3D-boekje (toonbankrand); de triggerplek (baliePlek) staat in opdrachten.js.
+    /* Visuele plek van het 3D-boekje (rand van de uitleentoog); de triggerplek (baliePlek) staat in opdrachten.js.
        Met &bewerk kan de speler het boekje verslepen; de opgeslagen plek wint dan. */
-    let mx = -10, mz = -27;
+    let mx = -9.4, mz = -33.5;
     try { const op = JSON.parse(localStorage.getItem('bib50-plekken') || '{}'); if (op.brochure) { mx = op.brochure.x; mz = op.brochure.z; D.baliePlek = [mx, mz]; } } catch (e) {}
     const cv = document.createElement('canvas'); cv.width = 240; cv.height = 340;
     const ctx = cv.getContext('2d');
