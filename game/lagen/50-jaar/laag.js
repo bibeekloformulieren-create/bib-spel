@@ -35,18 +35,13 @@
     <div id="schermBrochure" class="brochure-ov" hidden>
       <div class="brochure-venster">
         <div class="brochure-balk">
-          <span>50 jaar Bibliotheek Eeklo</span>
-          <button id="sluitBrochure">✕</button>
+          <button id="brochurePrev" class="brochure-nav" disabled>‹</button>
+          <span id="brochurePagina">Laden…</span>
+          <button id="brochureNext" class="brochure-nav" disabled>›</button>
+          <button id="sluitBrochure" class="brochure-sluit">✕</button>
         </div>
-        <div class="brochure-inhoud">
-          <div class="brochure-cover">
-            <div class="brochure-jaar">50</div>
-            <div class="brochure-titel">JAAR<br>Bibliotheek Eeklo</div>
-            <div class="brochure-sub">1976 – 2026 · Een halve eeuw lezen, leren en ontmoeten</div>
-          </div>
-          <p class="brochure-tekst">In deze brochure vind je de volledige geschiedenis van onze bib.</p>
-          <a id="brochureLink" class="groot brochure-open" href="" target="_blank">📖 Open de brochure</a>
-          <p class="klein brochure-tip">De brochure opent in een nieuw venster of tabblad.</p>
+        <div class="brochure-canvas-wrap" id="brochureWrap">
+          <canvas id="brochureCanvas"></canvas>
         </div>
       </div>
     </div>`;
@@ -569,13 +564,81 @@
     $('opnieuw').onclick = () => { opslag.wis(); try { localStorage.removeItem('bib50-2076'); } catch (e) {} location.reload(); };
   }
 
-  /* ---------- brochure ---------- */
-  function toonBrochure() {
-    G.pauze = true;
-    $('brochureLink').href = bron('brochure/brochure.pdf');
-    $('schermBrochure').hidden = false;
+  /* ---------- brochure (PDF.js) ---------- */
+  let pdfDoc = null, paginaNr = 1, pdfLaadt = false;
+
+  function laadPdfScript(cb) {
+    if (window.pdfjsLib) { cb(); return; }
+    const s = document.createElement('script');
+    s.src = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js';
+    s.onload = cb;
+    document.head.appendChild(s);
   }
+
+  async function toonPaginaOp(nr) {
+    const wrap = $('brochureWrap'), canvas = $('brochureCanvas');
+    const page = await pdfDoc.getPage(nr);
+    const schaal = Math.min((wrap.clientWidth - 4) / page.getViewport({ scale: 1 }).width, (wrap.clientHeight - 4) / page.getViewport({ scale: 1 }).height);
+    const vp = page.getViewport({ scale: schaal });
+    canvas.width = vp.width; canvas.height = vp.height;
+    await page.render({ canvasContext: canvas.getContext('2d'), viewport: vp }).promise;
+    $('brochurePagina').textContent = `${nr} / ${pdfDoc.numPages}`;
+    $('brochurePrev').disabled = nr <= 1;
+    $('brochureNext').disabled = nr >= pdfDoc.numPages;
+  }
+
+  async function toonBrochure() {
+    G.pauze = true;
+    $('schermBrochure').hidden = false;
+    if (pdfLaadt) return;
+    pdfLaadt = true;
+    laadPdfScript(async () => {
+      try {
+        const lib = window.pdfjsLib;
+        lib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
+        pdfDoc = await lib.getDocument(bron('brochure/brochure.pdf')).promise;
+        await toonPaginaOp(paginaNr);
+      } catch (e) { $('brochurePagina').textContent = 'Fout bij laden'; }
+    });
+  }
+
   $('sluitBrochure').onclick = () => { $('schermBrochure').hidden = true; G.pauze = false; };
+  $('brochurePrev').onclick = async () => { if (paginaNr > 1) { paginaNr--; await toonPaginaOp(paginaNr); } };
+  $('brochureNext').onclick = async () => { if (pdfDoc && paginaNr < pdfDoc.numPages) { paginaNr++; await toonPaginaOp(paginaNr); } };
+
+  /* Swipe links/rechts op de canvas (touch) */
+  (() => {
+    let sx = 0;
+    const wrap = $('brochureWrap');
+    wrap.addEventListener('touchstart', e => { sx = e.touches[0].clientX; }, { passive: true });
+    wrap.addEventListener('touchend', e => {
+      const dx = e.changedTouches[0].clientX - sx;
+      if (Math.abs(dx) > 40) { if (dx < 0) $('brochureNext').click(); else $('brochurePrev').click(); }
+    }, { passive: true });
+  })();
+
+  /* 3D brochure op de toonbank */
+  let brochureMesh = null;
+  function plaatsBrochure() {
+    /* Vaste plek op de rand van de toonbank, zichtbaar vanuit het looppad. */
+    const mx = -9.5, mz = -27;
+    const cv = document.createElement('canvas'); cv.width = 240; cv.height = 340;
+    const ctx = cv.getContext('2d');
+    ctx.fillStyle = '#0b5d68'; ctx.fillRect(0, 0, 240, 340);
+    ctx.fillStyle = '#d9601f';
+    ctx.beginPath(); ctx.moveTo(170, 0); ctx.lineTo(240, 0); ctx.lineTo(240, 100); ctx.closePath(); ctx.fill();
+    ctx.fillStyle = '#fff'; ctx.font = 'bold 110px system-ui'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillText('50', 120, 130);
+    ctx.font = 'bold 28px system-ui'; ctx.fillText('JAAR', 120, 198);
+    ctx.fillStyle = '#5a2d8e'; ctx.fillRect(20, 220, 200, 44);
+    ctx.fillStyle = '#fff'; ctx.font = 'bold 17px system-ui'; ctx.fillText('Bibliotheek Eeklo', 120, 247);
+    ctx.font = '13px system-ui'; ctx.fillStyle = 'rgba(255,255,255,.7)'; ctx.fillText('1976 – 2026', 120, 305);
+    const mat = new THREE.MeshBasicMaterial({ map: new THREE.CanvasTexture(cv), side: THREE.DoubleSide });
+    brochureMesh = new THREE.Mesh(new THREE.PlaneGeometry(0.28, 0.40), mat);
+    brochureMesh.position.set(mx, 1.18, mz);
+    brochureMesh.rotation.y = -Math.PI / 4; /* Schuin richting looppad */
+    G.scene.add(brochureMesh);
+  }
 
   /* ---------- begin ---------- */
   $('actie').addEventListener('click', () => { if (dichtbij) openFiche(dichtbij.data); });
@@ -600,6 +663,7 @@
   G.opTikSpeler(hint);
   G.opFrame((dt, t) => {
     ficheObj.forEach(o => { if (o.groep.visible) { o.kaart.rotation.y = t * 1.4; o.kaart.position.y = 1.15 + Math.sin(t * 2 + o.data.id) * 0.06; } });
+    if (brochureMesh) { brochureMesh.position.y = 1.18 + Math.sin(t * 1.2) * 0.03; }
     bijwerkenNabijheid();
     bijwerkenBalie();
   });
@@ -616,6 +680,7 @@
   Laag50.klaar = G.start().then(() => {
     plaatsFiches();
     if (G.echt && D.panelenInZaal) plaatsPanelen();
+    plaatsBrochure();
     beginSpel();
   });
 })();
