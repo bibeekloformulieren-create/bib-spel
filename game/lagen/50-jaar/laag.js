@@ -620,8 +620,10 @@
   /* 3D brochure op de toonbank */
   let brochureMesh = null;
   function plaatsBrochure() {
-    /* Vaste plek op de rand van de toonbank, zichtbaar vanuit het looppad. */
-    const mx = -9.5, mz = -27;
+    /* Visuele plek van het 3D-boekje (toonbankrand); de triggerplek (baliePlek) staat in opdrachten.js.
+       Met &bewerk kan de speler het boekje verslepen; de opgeslagen plek wint dan. */
+    let mx = -10, mz = -27;
+    try { const op = JSON.parse(localStorage.getItem('bib50-plekken') || '{}'); if (op.brochure) { mx = op.brochure.x; mz = op.brochure.z; D.baliePlek = [mx, mz]; } } catch (e) {}
     const cv = document.createElement('canvas'); cv.width = 240; cv.height = 340;
     const ctx = cv.getContext('2d');
     ctx.fillStyle = '#0b5d68'; ctx.fillRect(0, 0, 240, 340);
@@ -638,6 +640,7 @@
     brochureMesh.position.set(mx, 1.18, mz);
     brochureMesh.rotation.y = -Math.PI / 4; /* Schuin richting looppad */
     G.scene.add(brochureMesh);
+    Laag50.brochureMesh = brochureMesh;
   }
 
   /* ---------- begin ---------- */

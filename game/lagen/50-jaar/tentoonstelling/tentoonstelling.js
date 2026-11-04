@@ -119,10 +119,13 @@
     return ray;
   }
   function itemVan(o) { for (let p = o; p; p = p.parent) if (p.userData && p.userData.item) return p.userData.item; return null; }
-  function raak(e) {                        // welk zichtbaar fiche of paneel zit onder de muis?
+  function raak(e) {                        // welk zichtbaar fiche, paneel of brochure zit onder de muis?
     const wortels = [];
     if (modus === 'tentoonstelling') objecten.forEach(o => wortels.push(o.mesh));
-    else L.fiches.forEach(f => { if (f.groep.visible || BEWERK) wortels.push(f.groep); });
+    else {
+      L.fiches.forEach(f => { if (f.groep.visible || BEWERK) wortels.push(f.groep); });
+      if (BEWERK && L.brochureMesh) wortels.push(L.brochureMesh);
+    }
     const hit = straal(e).intersectObjects(wortels, true).find(h => { for (let p = h.object; p; p = p.parent) if (p.visible === false && !wortels.includes(p)) return false; return true; });
     return hit ? itemVan(hit.object) : null;
   }
@@ -248,15 +251,21 @@
 
   /* ---------- fiches en panelen verplaatsen (alleen met &bewerk) ---------- */
   let editAan = false, gekozen = null, sleep = null, kader = null;
-  const wortelVan = it => it.soort === 'paneel' ? it.mesh : it.groep;
+  const wortelVan = it => (it.soort === 'paneel' || it.soort === 'brochure') ? it.mesh : it.groep;
   function select(it) {
     gekozen = it;
     if (kader) { G.scene.remove(kader); kader = null; }
     if (it) { kader = new THREE.BoxHelper(wortelVan(it), 0xffb300); G.scene.add(kader); }
-    if (paneelUI) { $('ttInfo').textContent = it ? (it.soort === 'paneel' ? 'Paneel ' + it.data.nr : 'Fiche ' + it.data.id) + ': sleep het naar een nieuwe plek.' : 'Klik een fiche of paneel aan en sleep het.'; $('ttDraaiL').disabled = $('ttDraaiR').disabled = !it || it.soort !== 'paneel'; }
+    if (paneelUI) {
+      const naam = it ? (it.soort === 'paneel' ? 'Paneel ' + it.data.nr : it.soort === 'brochure' ? 'Brochure' : 'Fiche ' + it.data.id) : null;
+      $('ttInfo').textContent = it ? naam + ': sleep het naar een nieuwe plek.' : 'Klik een fiche, paneel of brochure aan en sleep het.';
+      $('ttDraaiL').disabled = $('ttDraaiR').disabled = !it || it.soort !== 'paneel';
+    }
   }
   const zetItem = (it, x, z) => {
-    if (it.soort === 'paneel') { it.pos.x = x; it.pos.z = z; it.mesh.position.x = x; it.mesh.position.z = z; } else zetFiche(it, x, z);
+    if (it.soort === 'paneel') { it.pos.x = x; it.pos.z = z; it.mesh.position.x = x; it.mesh.position.z = z; }
+    else if (it.soort === 'brochure') { it.pos.x = x; it.pos.z = z; it.mesh.position.x = x; it.mesh.position.z = z; if (window.SPELDATA) window.SPELDATA.baliePlek = [x, z]; }
+    else zetFiche(it, x, z);
     if (kader) kader.update();
   };
   const sla = it => {
@@ -277,6 +286,7 @@
       const regels = [];
       L.fiches.forEach(f => { const l = lokaal['fiche-' + f.data.id]; if (l) regels.push('fiche ' + f.data.id + ': x ' + l.x.toFixed(2) + ', z ' + l.z.toFixed(2)); });
       objecten.forEach(o => { const l = lokaal[o.sleutel]; if (l) regels.push('paneel ' + o.data.nr + ': x ' + l.x.toFixed(2) + ', z ' + l.z.toFixed(2) + ', draaiing ' + Math.round(((l.r * 180 / Math.PI) % 360 + 360) % 360) + ' graden'); });
+      if (lokaal.brochure) regels.push('brochure: x ' + lokaal.brochure.x.toFixed(2) + ', z ' + lokaal.brochure.z.toFixed(2));
       const uit = regels.join('\n') || 'Nog niets verplaatst.';
       const klaar = () => { $('ttInfo').textContent = 'Gekopieerd! Plak het nu in het gesprek met Claude.'; };
       const val = () => { const t = document.createElement('textarea'); t.value = uit; t.style.cssText = 'width:100%;height:120px'; paneelUI.appendChild(t); t.select(); $('ttInfo').textContent = 'Kopieer deze tekst (Ctrl+C) en plak hem bij Claude.'; };
@@ -309,6 +319,11 @@
   bouwLijst();
   L.klaar.then(() => {
     L.fiches.forEach(f => { f.groep.userData.item = f; f.soort = 'fiche'; f.sleutel = 'fiche-' + f.data.id; });
+    if (L.brochureMesh) {
+      const bi = { data: { id: 'brochure' }, mesh: L.brochureMesh, pos: L.brochureMesh.position, soort: 'brochure', sleutel: 'brochure' };
+      L.brochureMesh.userData.item = bi;
+      if (BEWERK) { const l = lokaal.brochure; if (l) { bi.pos.x = l.x; bi.pos.z = l.z; L.brochureMesh.position.x = l.x; L.brochureMesh.position.z = l.z; if (window.SPELDATA) window.SPELDATA.baliePlek = [l.x, l.z]; } }
+    }
     plaats();
     if (window.bibTest) window.bibTest.paneel = i => { zetModus('tentoonstelling'); openPaneel(i - 1); };
   });
