@@ -21,7 +21,7 @@ window.SPELDATA = {
   ],
 
   einde: {
-    zin: "Alle acht terug, en jullie weten nu veel meer over de bib. {directeur} stelde me nog één vraag, en die geef ik door aan jullie.",
+    zin: "Alle zes terug, en jullie weten nu veel meer over de bib. {directeur} stelde me nog één vraag, en die geef ik door aan jullie.",
     vraag: "Hoe zal onze bibliotheek er in 2076 uitzien?",
     voet: "Dit blijft op je toestel. Er wordt niets verstuurd."
   },
