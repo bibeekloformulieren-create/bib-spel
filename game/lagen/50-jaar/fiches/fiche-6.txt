@@ -18,8 +18,8 @@ boeke-fout: Nee. Er zit iets in het boek dat het toestel kan lezen, zonder dat j
 - Sindsdien weet het zelfuitleentoestel meteen wat je meeneemt. Je legt je boeken neer en het scherm toont alles, zonder dat iemand iets inscant.
 
 [beelden]
-img/chips-etiketten.jpg | Een chip in een boek.
-img/afhaalpunt.jpg | Het afhaalpunt aan de nooddeur: je boeken ophalen zonder wachtrij.
+img/chip-boek.jpg | Een chip in een boek: kleiner dan een postzegel, maar het toestel leest hem feilloos.
+img/zelfuitleen-nu.jpg | Vandaag leen je zelf uit aan het toestel. Geen stempels, geen wachtrij.
 
 [vraag]
 Hoe herkent het toestel je boek?
