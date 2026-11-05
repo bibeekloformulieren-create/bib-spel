@@ -45,7 +45,7 @@
 
   /* ---------- plekken ---------- */
   let lokaal = {};
-  if (BEWERK) { try { lokaal = JSON.parse(localStorage.getItem(OPSLAG) || '{}'); } catch (e) { lokaal = {}; } }
+  try { lokaal = JSON.parse(localStorage.getItem(OPSLAG) || '{}'); } catch (e) { lokaal = {}; }
   const bewaar = () => { try { localStorage.setItem(OPSLAG, JSON.stringify(lokaal)); } catch (e) {} };
   const start = () => { const p = G.punten.start; const s = p ? [p.x, p.z] : ((G.config && G.config.start) || [0, 0]); return s; };
 
@@ -87,7 +87,7 @@
       objecten.push({ data: d, mesh, pos: { x: pl.x, y: pl.y, z: pl.z }, r: pl.r, soort: 'paneel', sleutel: 'paneel-' + d.nr });
       mesh.userData.item = objecten[objecten.length - 1];
     });
-    if (BEWERK) L.fiches.forEach(f => {                      // eigen plekken van fiches (alleen met &bewerk)
+    L.fiches.forEach(f => {                                   // opgeslagen plekken (via &bewerk) ook bij normaal spelen
       const l = lokaal['fiche-' + f.data.id]; if (l) zetFiche(f, l.x, l.z);
     });
   }
@@ -322,7 +322,7 @@
     if (L.brochureMesh) {
       const bi = { data: { id: 'brochure' }, mesh: L.brochureMesh, pos: L.brochureMesh.position, soort: 'brochure', sleutel: 'brochure' };
       L.brochureMesh.userData.item = bi;
-      if (BEWERK) { const l = lokaal.brochure; if (l) { bi.pos.x = l.x; bi.pos.z = l.z; L.brochureMesh.position.x = l.x; L.brochureMesh.position.z = l.z; if (window.SPELDATA) window.SPELDATA.baliePlek = [l.x, l.z]; } }
+      /* positie al gezet door laag.js; pos object wijst naar de live mesh.position */
     }
     plaats();
     if (window.bibTest) window.bibTest.paneel = i => { zetModus('tentoonstelling'); openPaneel(i - 1); };
