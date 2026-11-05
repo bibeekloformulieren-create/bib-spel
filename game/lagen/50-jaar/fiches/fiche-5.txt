@@ -18,8 +18,8 @@ boeke-fout: Bijna. Bereken: 4 boeken × 3 weken × 5 frank per week.
 - Vandaag bestaat de boete niet meer. Je krijgt gewoon een vriendelijk berichtje met de vraag om je boeken terug te brengen.
 
 [beelden]
-img/boekenbus.jpg | De Boekenbus: klassikaal boeken uitlenen, met stempel en kaartje.
-img/zelfuitleen-nu.jpg | Vandaag leen je zelf uit aan het toestel. Geen stempels, geen wachtrij.
+img/politiebrief.jpg | Mei 1976: een agent gaat langs bij een lener om naar twee boeken te vragen.
+img/bibreglement-1983.jpg | Uit het boetereglement van 26 mei 1983.
 
 [vraag]
 Bereken de boete! In 1983 kostte een boete 5 frank per boek per week. Je hebt 4 boeken geleend en brengt ze 3 weken te laat terug. Hoeveel frank betaal je?
