@@ -9,7 +9,7 @@ waar: Zo werkt de zelfuitleen.
 plek: 7, 0.3
 bron: Paneel "Zo werkt de bibliotheek", brochure 50 jaar bib
 tip: Er zit iets onzichtbaars in elk boek. Het werkt met radiogolven.
-boeke-goed: Een chip! Kleiner dan een postzegel, en toch weet het toestel meteen wat je meeneemt.
+boeke-goed: Een chip! Groter dan een postzegel, en toch weet het toestel meteen wat je meeneemt.
 boeke-fout: Nee. Er zit iets in het boek dat het toestel kan lezen, zonder dat je het ziet.
 
 [kijkpunten]
@@ -18,7 +18,7 @@ boeke-fout: Nee. Er zit iets in het boek dat het toestel kan lezen, zonder dat j
 - Sindsdien weet het zelfuitleentoestel meteen wat je meeneemt. Je legt je boeken neer en het scherm toont alles, zonder dat iemand iets inscant.
 
 [beelden]
-img/chip-boek.jpg | Een chip in een boek: kleiner dan een postzegel, maar het toestel leest hem feilloos.
+img/chip-boek.jpg | Een chip in een boek: groter dan een postzegel, maar het toestel leest hem feilloos.
 img/zelfuitleen-nu.jpg | Vandaag leen je zelf uit aan het toestel. Geen stempels, geen wachtrij.
 
 [vraag]
