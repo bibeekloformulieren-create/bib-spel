@@ -19,7 +19,7 @@ boeke-fout: Nog niet helemaal. Sleep de uitbreidingen om in de juiste volgorde t
 
 [beelden]
 img/molenstraat.jpg | De Molenstraat in de beginjaren: fietsen tegen de gevel, nieuwe boeken in de etalage.
-img/voorgevel.jpg | De voorgevel van de bib zoals die er nu uitziet.
+img/eerste-bib-binnen.jpg | Drukte van bij de start: bezoekers in de eerste bib in de Molenstraat.
 
 [vraag]
 Zet de vijf grote uitbreidingen van de bib in de juiste volgorde, van oud naar nieuw.
