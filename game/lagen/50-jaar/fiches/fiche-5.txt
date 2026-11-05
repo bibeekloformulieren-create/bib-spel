@@ -4,7 +4,7 @@
 nummer: 5
 categorie: werking
 soort: invul
-titel: De politie aan de deur
+titel: Boeken te laat terug brengen
 waar: Bij de balie of de zelfuitleenbalie.
 plek: -7, 0.3
 bron: Paneel "Zo werkt de bibliotheek", brochure 50 jaar bib
@@ -15,7 +15,7 @@ boeke-fout: Bijna. Bereken: 4 boeken × 3 weken × 5 frank per week.
 [kijkpunten]
 - Vroeger betaalde je een boete als je een boek te laat terugbracht: 5 frank per boek per week. Hoe meer boeken, hoe hoger de boete.
 - Betaalde je niet? Dan kreeg je een brief. Dan een aangetekende brief. Dan... de politie aan de deur. Echt!
-- Vandaag bestaat de boete niet meer. Je krijgt gewoon een vriendelijk berichtje.
+- Vandaag bestaat de boete niet meer. Je krijgt gewoon een vriendelijk berichtje met de vraag om je boeken terug te brengen.
 
 [beelden]
 img/boekenbus.jpg | De Boekenbus: klassikaal boeken uitlenen, met stempel en kaartje.
