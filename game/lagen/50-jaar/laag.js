@@ -91,6 +91,17 @@
   /* Aanhaakpunt voor de tentoonstelling (map tentoonstelling): modus 'spel' of 'tentoonstelling'. In de tentoonstelling zijn de fiches weg. */
   const Laag50 = window.Laag50 = { modus: 'spel', fiches: ficheObj, ververs() { ficheObj.forEach(zetUiterlijk); }, klaar: null };
 
+  /* Met &resetfiches in de URL worden alle fiche-plekken uit de cache gewist. */
+  if (/[?&]resetfiches/.test(location.search)) {
+    try {
+      const op = JSON.parse(localStorage.getItem('bib50-plekken') || '{}');
+      Object.keys(op).filter(k => k.startsWith('fiche-')).forEach(k => delete op[k]);
+      localStorage.setItem('bib50-plekken', JSON.stringify(op));
+    } catch (e) {}
+    const url = location.href.replace(/[?&]resetfiches/, '').replace(/\?&/, '?');
+    history.replaceState(null, '', url);
+  }
+
   /* Opgeslagen plekken uit localStorage (zelfde sleutel als &bewerk in tentoonstelling.js). */
   let bewaardeP = {};
   try { bewaardeP = JSON.parse(localStorage.getItem('bib50-plekken') || '{}'); } catch (e) {}
