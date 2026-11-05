@@ -586,7 +586,7 @@
       if (!tekst2076) { st.textContent = 'Schrijf eerst iets.'; st.style.color = '#c0392b'; return; }
       st.textContent = 'Bezig met versturen…'; st.style.color = '';
       $('verstuur2076').disabled = true;
-      fetch('https://formspree.io/f/JOUW_FORM_ID', {
+      fetch('https://formspree.io/f/xwllzqej', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify({ antwoord: tekst2076 })
