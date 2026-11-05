@@ -277,7 +277,7 @@
     paneelUI = document.createElement('div');
     paneelUI.className = 'tt-edit'; paneelUI.hidden = true;
     paneelUI.innerHTML = `<div id="ttInfo">Klik een fiche of paneel aan en sleep het.</div>
-      <div><button id="ttDraaiL">⟲ Draai</button><button id="ttDraaiR">⟳ Draai</button><button id="ttKopie">Kopieer plekken</button><button id="ttWisFiche">Zet geselecteerde terug</button><button id="ttReset">Wis alle opgeslagen plekken</button></div>`;
+      <div><button id="ttDraaiL">⟲ Draai</button><button id="ttDraaiR">⟳ Draai</button><button id="ttKopie">Kopieer plekken</button><button id="ttWisFiche">Zet geselecteerde terug</button><button id="ttWisFiches">Zet alle fiches terug</button><button id="ttReset">Wis alle opgeslagen plekken</button></div>`;
     document.body.appendChild(paneelUI);
     G.knop('Fiches en panelen verplaatsen', () => { editAan = !editAan; paneelUI.hidden = !editAan; if (!editAan) select(null); else select(null); }, 'ttEdit');
     const draai = d => { if (gekozen && gekozen.soort === 'paneel') { gekozen.r += d * Math.PI / 12; gekozen.mesh.rotation.y = gekozen.r; kader.update(); sla(gekozen); } };
@@ -291,6 +291,11 @@
       const klaar = () => { $('ttInfo').textContent = 'Gekopieerd! Plak het nu in het gesprek met Claude.'; };
       const val = () => { const t = document.createElement('textarea'); t.value = uit; t.style.cssText = 'width:100%;height:120px'; paneelUI.appendChild(t); t.select(); $('ttInfo').textContent = 'Kopieer deze tekst (Ctrl+C) en plak hem bij Claude.'; };
       if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(uit).then(klaar, val); else val();
+    };
+    $('ttWisFiches').onclick = () => {
+      Object.keys(lokaal).filter(k => k.startsWith('fiche-')).forEach(k => delete lokaal[k]);
+      try { localStorage.setItem(OPSLAG, JSON.stringify(lokaal)); } catch (e) {}
+      location.reload();
     };
     $('ttWisFiche').onclick = () => {
       if (!gekozen) { $('ttInfo').textContent = 'Selecteer eerst een fiche of paneel.'; return; }
