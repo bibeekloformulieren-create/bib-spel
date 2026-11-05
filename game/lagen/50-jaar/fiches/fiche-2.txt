@@ -4,18 +4,18 @@
 nummer: 2
 categorie: gebouw
 soort: keuze
-titel: Het boekenhuis
+titel: Een huis gebouwd voor boeken
 waar: Bij de balie, onder de vide.
 plek: -9.5, 5.5
 bron: Brochure 50 jaar bib, Paneel "Gebouwd voor boeken", gesprek Willy Bultynck
-tip: Het antwoord staat op de muurplaat bij de ingang. Of reken: een vierkante meter, vol boeken.
+tip: Lees nog eens goed alle info na. Het antwoord staat erin.
 boeke-goed: Klopt! 500 kilogram per vierkante meter. De vloeren zijn zo gebouwd dat ze nooit zullen doorzakken, ook al stapel je er duizenden boeken op.
 boeke-fout: Niet helemaal. De vloeren zijn veel sterker dan in een gewoon huis. Denk aan het gewicht van al die rekken samen.
 
 [kijkpunten]
 - In 1986 begon de grote verbouwing van het herenhuis huis Van Brabandt. Van binnen werd bijna alles eruit gehaald: de houten vloeren, de binnenmuren, de trappen. Vanop de benedenverdieping kon je recht naar het dak kijken.
-- De nieuwe vloeren moesten zware boekenrekken kunnen dragen. Stalen balken, gewelven en een nieuwe betonnen fundering onder elke kolom. Elke vierkante meter kan 500 kilogram dragen. Dat is het gewicht van vier volwassenen op één tegel.
-- Midden in het gebouw, boven de balie, zit een grote opening in de vloer: de vide. Wie beneden staat, ziet de verdieping erboven. Wie boven staat, kijkt neer op de balie. Willy Bultynck heeft hem helemaal zelf gebouwd.
+- De nieuwe vloeren moesten zware boekenrekken kunnen dragen. Stalen balken, gewelven en een nieuwe betonnen fundering onder elke kolom. Elke vierkante meter kan 500 kilogram dragen. Dat is het gewicht van vier tot acht volwassenen op één tegel.
+- Midden in het gebouw, boven de balie, zit een grote opening in de vloer: de vide. Wie beneden staat, ziet de verdieping erboven. Wie boven staat, kijkt neer op de balie. 
 
 [beelden]
 img/gestript.jpg | Het huis tijdens de verbouwing: bijna alles eruit.
@@ -31,6 +31,6 @@ De vloeren van de bib moesten heel zware boekenrekken kunnen dragen. Hoeveel kil
 - 150 kilogram
 
 [leer]
-- Er loopt een onzichtbare lijn van 45 graden door het hele gebouw. Die lijn bepaalt waar de balie staat, hoe de trap loopt en waar de ingang is. Als je weet waar je moet kijken, zie je hem overal terug.
-- Onder het gelijkvloers zit een kruipkelder die dichtgemetseld is tijdens de verbouwing van 1986. Niemand kan er nog bij.
+- Er loopt een onzichtbare lijn van 45 graden door het hele gebouw. Je ziet dat terug aan de herdenkplaat aan de ingang, de tegels op het gelijkvloers, hoe de latten van het plafond is gelegd, de vide, ...
+- Onder het gelijkvloers zit een kelder die dichtgemetseld is tijdens de verbouwing van 1986. Niemand kan er nog bij.
 - De buitenmuren van het gebouw staan niet recht tegenover elkaar: ze zijn niet symmetrisch. Op de eerste verdieping werden kleine muurtjes bijgebouwd om dat te verbergen. Op sommige plekken moest de stukadoor heel dik pleisteren.
