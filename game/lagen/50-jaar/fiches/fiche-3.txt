@@ -18,7 +18,7 @@ boeke-fout: Nee. Kijk naar de balie. Staat die nu aan de zijkant of in het midde
 - In 1995, amper zeven jaar na de opening, kwamen er drie nieuwe verdiepingen bij. Daar kwam een echte jeugdafdeling, de cd-afdeling en het auditorium.
 [beelden]
 img/balie-1988.jpg | De balie midden in de zaal, 1988.
-img/gevulde-rekken.jpg | De rekken na de uitbreiding van 1995: alle planken volledig gevuld.
+img/leeszaal-1988.jpg | De leeszaal in 1988, net na de opening. Vandaag is dit de jeugdafdeling.
 
 [vraag]
 In 1988 stond de balie midden in de grote zaal. Waar staat ze vandaag?
