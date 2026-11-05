@@ -572,11 +572,29 @@
       <p style="text-align:center">${tekst(D.einde.zin)}</p>
       <p style="text-align:center;font-weight:700;font-size:1.15rem">${D.einde.vraag}</p>
       <textarea id="antwoord2076" rows="3" placeholder="Schrijf het samen met je kind…">${bewaard.replace(/</g, '&lt;')}</textarea>
-      <p class="klein">${D.einde.voet}</p>
+      <div class="rij" style="margin:8px 0">
+        <button class="knop groot" id="verstuur2076" style="margin:0">Verstuur antwoord ›</button>
+      </div>
+      <p id="status2076" class="klein" style="text-align:center;min-height:1.2em"></p>
       <div class="rij"><button class="knop licht" id="opnieuw" style="text-align:center">Opnieuw spelen</button>
       <button class="knop groot" id="rond" style="margin:8px 0">Verder rondkijken</button></div>`;
     sch.hidden = false;
     $('antwoord2076').addEventListener('input', e => { try { localStorage.setItem('bib50-2076', e.target.value); } catch (er) {} });
+    $('verstuur2076').onclick = () => {
+      const tekst2076 = $('antwoord2076').value.trim();
+      const st = $('status2076');
+      if (!tekst2076) { st.textContent = 'Schrijf eerst iets.'; st.style.color = '#c0392b'; return; }
+      st.textContent = 'Bezig met versturen…'; st.style.color = '';
+      $('verstuur2076').disabled = true;
+      fetch('https://formspree.io/f/JOUW_FORM_ID', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ antwoord: tekst2076 })
+      }).then(r => r.json()).then(d => {
+        if (d.ok) { st.textContent = 'Verstuurd! Dank je wel.'; st.style.color = '#2e7d4f'; }
+        else { st.textContent = 'Niet gelukt. Probeer opnieuw.'; st.style.color = '#c0392b'; $('verstuur2076').disabled = false; }
+      }).catch(() => { st.textContent = 'Geen verbinding. Probeer opnieuw.'; st.style.color = '#c0392b'; $('verstuur2076').disabled = false; });
+    };
     $('rond').onclick = () => { sch.hidden = true; G.pauze = false; };
     $('opnieuw').onclick = () => { opslag.wis(); try { localStorage.removeItem('bib50-2076'); } catch (e) {} location.reload(); };
   }
