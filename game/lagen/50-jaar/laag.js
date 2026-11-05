@@ -91,8 +91,14 @@
   /* Aanhaakpunt voor de tentoonstelling (map tentoonstelling): modus 'spel' of 'tentoonstelling'. In de tentoonstelling zijn de fiches weg. */
   const Laag50 = window.Laag50 = { modus: 'spel', fiches: ficheObj, ververs() { ficheObj.forEach(zetUiterlijk); }, klaar: null };
 
-  /* Waar ligt fiche f? Een punt "fiche-N" in het model wint; anders de plekken uit opdrachten.js. */
+  /* Opgeslagen plekken uit localStorage (zelfde sleutel als &bewerk in tentoonstelling.js). */
+  let bewaardeP = {};
+  try { bewaardeP = JSON.parse(localStorage.getItem('bib50-plekken') || '{}'); } catch (e) {}
+
+  /* Waar ligt fiche f? Volgorde: localStorage (via &bewerk) > punt in model > fichePlekken. */
   function plek(f) {
+    const op = bewaardeP['fiche-' + f.id];
+    if (op) return { x: op.x, z: op.z, y: 0 };
     const p = G.punten['fiche-' + f.id];
     if (p) return p;
     const xz = (G.echt && D.fichePlekken && D.fichePlekken[f.id]) || f.plek;   // f.plek hoort bij de tijdelijke zaal
@@ -623,7 +629,7 @@
     /* Visuele plek van het 3D-boekje (rand van de uitleentoog); de triggerplek (baliePlek) staat in opdrachten.js.
        Met &bewerk kan de speler het boekje verslepen; de opgeslagen plek wint dan. */
     let mx = -9.4, mz = -33.5;
-    try { const op = JSON.parse(localStorage.getItem('bib50-plekken') || '{}'); if (op.brochure) { mx = op.brochure.x; mz = op.brochure.z; D.baliePlek = [mx, mz]; } } catch (e) {}
+    if (bewaardeP.brochure) { mx = bewaardeP.brochure.x; mz = bewaardeP.brochure.z; D.baliePlek = [mx, mz]; }
     const cv = document.createElement('canvas'); cv.width = 240; cv.height = 340;
     const ctx = cv.getContext('2d');
     ctx.fillStyle = '#0b5d68'; ctx.fillRect(0, 0, 240, 340);
