@@ -19,7 +19,7 @@ boeke-fout: Nee. Er zit iets in het boek dat het toestel kan lezen, zonder dat j
 
 [beelden]
 img/chips-etiketten.jpg | Een chip in een boek: kleiner dan een postzegel.
-img/zelfuitleen-nu.jpg | Zelf uitlenen, vandaag.
+img/afhaalpunt.jpg | Het afhaalpunt aan de nooddeur: je boeken ophalen zonder wachtrij.
 
 [vraag]
 Hoe herkent het toestel je boek?

@@ -18,7 +18,7 @@ boeke-fout: Bijna. Bereken: 4 boeken × 3 weken × 5 frank per week.
 - Vandaag bestaat de boete niet meer. Je krijgt gewoon een vriendelijk berichtje.
 
 [beelden]
-img/balie-1988.jpg | De balie van de bib in 1988: stempels, kaartjes, een vertrouwd gezicht.
+img/boekenbus.jpg | De Boekenbus: klassikaal boeken uitlenen, met stempel en kaartje.
 img/zelfuitleen-nu.jpg | Vandaag leen je zelf uit aan het toestel. Geen stempels, geen wachtrij.
 
 [vraag]
