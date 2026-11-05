@@ -94,10 +94,8 @@
   function zetFiche(f, x, z) { f.pos.x = x; f.pos.z = z; f.groep.position.x = x; f.groep.position.z = z; }
 
   /* ---------- tussen spel en tentoonstelling wisselen ---------- */
-  let modus = 'spel', terugPlek = null;
+  let modus = 'spel';
   function zetModus(m) {
-    if (m === 'spel' && modus === 'tentoonstelling' && terugPlek) { G.zet(terugPlek.x, terugPlek.z, terugPlek.yaw); terugPlek = null; }
-    if (m === 'tentoonstelling' && modus === 'spel') terugPlek = { x: G.speler.x, z: G.speler.z, yaw: G.speler.yaw };
     modus = L.modus = m;
     document.body.classList.toggle('tt-modus', m === 'tentoonstelling');
     L.ververs();
