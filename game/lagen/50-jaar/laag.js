@@ -628,7 +628,7 @@
   function plaatsBrochure() {
     /* Visuele plek van het 3D-boekje (rand van de uitleentoog); de triggerplek (baliePlek) staat in opdrachten.js.
        Met &bewerk kan de speler het boekje verslepen; de opgeslagen plek wint dan. */
-    let mx = -9.4, mz = -33.5;
+    let mx = -9.15, mz = -35.15;
     if (bewaardeP.brochure) { mx = bewaardeP.brochure.x; mz = bewaardeP.brochure.z; D.baliePlek = [mx, mz]; }
     const cv = document.createElement('canvas'); cv.width = 240; cv.height = 340;
     const ctx = cv.getContext('2d');

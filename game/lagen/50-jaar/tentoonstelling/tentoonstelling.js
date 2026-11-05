@@ -277,7 +277,7 @@
     paneelUI = document.createElement('div');
     paneelUI.className = 'tt-edit'; paneelUI.hidden = true;
     paneelUI.innerHTML = `<div id="ttInfo">Klik een fiche of paneel aan en sleep het.</div>
-      <div><button id="ttDraaiL">⟲ Draai</button><button id="ttDraaiR">⟳ Draai</button><button id="ttKopie">Kopieer plekken</button><button id="ttReset">Terugzetten</button></div>`;
+      <div><button id="ttDraaiL">⟲ Draai</button><button id="ttDraaiR">⟳ Draai</button><button id="ttKopie">Kopieer plekken</button><button id="ttWisFiche">Zet geselecteerde terug</button><button id="ttReset">Wis alle opgeslagen plekken</button></div>`;
     document.body.appendChild(paneelUI);
     G.knop('Fiches en panelen verplaatsen', () => { editAan = !editAan; paneelUI.hidden = !editAan; if (!editAan) select(null); else select(null); }, 'ttEdit');
     const draai = d => { if (gekozen && gekozen.soort === 'paneel') { gekozen.r += d * Math.PI / 12; gekozen.mesh.rotation.y = gekozen.r; kader.update(); sla(gekozen); } };
@@ -292,7 +292,13 @@
       const val = () => { const t = document.createElement('textarea'); t.value = uit; t.style.cssText = 'width:100%;height:120px'; paneelUI.appendChild(t); t.select(); $('ttInfo').textContent = 'Kopieer deze tekst (Ctrl+C) en plak hem bij Claude.'; };
       if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(uit).then(klaar, val); else val();
     };
-    $('ttReset').onclick = () => { try { localStorage.removeItem(OPSLAG); } catch (e) {} location.reload(); };
+    $('ttWisFiche').onclick = () => {
+      if (!gekozen) { $('ttInfo').textContent = 'Selecteer eerst een fiche of paneel.'; return; }
+      delete lokaal[gekozen.sleutel];
+      try { localStorage.setItem(OPSLAG, JSON.stringify(lokaal)); } catch (e) {}
+      $('ttInfo').textContent = (gekozen.sleutel || 'Item') + ' teruggeplaatst op de standaardplek. Herlaad de pagina om het te zien.';
+    };
+    $('ttReset').onclick = () => { if (!confirm('Dit wist alle opgeslagen plekken (fiches, panelen én brochure). Doorgaan?')) return; try { localStorage.removeItem(OPSLAG); } catch (e) {} location.reload(); };
 
     const plat = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0), pt = new THREE.Vector3();
     const opVloer = (e, y) => { plat.constant = -y; return straal(e).ray.intersectPlane(plat, pt) ? pt : null; };

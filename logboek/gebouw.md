@@ -3,6 +3,8 @@
 Wie aan het gebouw werkt, schrijft hier wat er veranderd is. Nieuwste onderaan.
 Heb je iets nodig van de lagen, of verander je iets aan `window.Gebouw` waar een laag mee werkt? Zet het hier, dik gedrukt.
 
+2026-11-05 (Kim): KiKo-logo toegevoegd rechtsonder in `game/index.html` — klein rond badge met de twee K's en "gemaakt door KiKo", zichtbaar in alle lagen.
+
 | Datum | Wie | Wat |
 |---|---|---|
 | 12-10-2026 | Claude | Start van dit logboek. De stand van het gebouw staat in `logboek/geschiedenis.md` (rond 11-10-2026: omgebouwd naar gebouw + lagen). |

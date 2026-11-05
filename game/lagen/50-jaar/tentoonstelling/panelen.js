@@ -1,7 +1,7 @@
 /* DE NEGEN PANELEN (gemaakt uit de pdf met de tentoonstellingspanelen, 94 x 200 cm)
    Titels en ondertitels zijn hier aan te passen. 'plek' = [x, z, draaiing in graden] (uit "Kopieer plekken"). 'delen' zijn de aanklikbare stukken (x, y, b, h: deel van het paneel, 0 tot 1). */
 window.TENTOONSTELLING = [
-  { nr:1, plek:[-10.8, -28.75, 86], titel:"Vier bibliotheken, één huis", ondertitel:"De administratieve oprichting van Bibliotheek Eeklo: 1975-1980",
+  { nr:1, plek:[-10.70, -29.00, 86], titel:"Vier bibliotheken, één huis", ondertitel:"De administratieve oprichting van Bibliotheek Eeklo: 1975-1980",
     klein:'img/paneel-1-klein.jpg', groot:'img/paneel-1-groot.jpg',
     delen:[
       {s:'t',x:0.1299,y:0.0142,b:0.5983,h:0.091},
@@ -36,7 +36,7 @@ window.TENTOONSTELLING = [
       {s:'b',x:0.5307,y:0.7223,b:0.1099,h:0.0716},
       {s:'b',x:0.5311,y:0.8188,b:0.1108,h:0.0716},
     ] },
-  { nr:2, plek:[-2, -22, 270], titel:"Gezelligheid troef", ondertitel:"De eerste bibliotheek: Molenstraat 1968-1988",
+  { nr:2, plek:[-0.50, -27.30, 263], titel:"Gezelligheid troef", ondertitel:"De eerste bibliotheek: Molenstraat 1968-1988",
     klein:'img/paneel-2-klein.jpg', groot:'img/paneel-2-groot.jpg',
     delen:[
       {s:'t',x:0.0637,y:0.1151,b:0.4897,h:0.0168},
@@ -106,7 +106,7 @@ window.TENTOONSTELLING = [
       {s:'b',x:0.7446,y:0.5463,b:0.1122,h:0.0744},
       {s:'b',x:0.3273,y:0.7381,b:0.1122,h:0.0746},
     ] },
-  { nr:4, plek:[-10.3, -24.0, 135], titel:"Een huis dat meegroeide", ondertitel:"Molenstraat 36: van 1988 tot nu",
+  { nr:4, plek:[-10.30, -24.00, 135], titel:"Een huis dat meegroeide", ondertitel:"Molenstraat 36: van 1988 tot nu",
     klein:'img/paneel-4-klein.jpg', groot:'img/paneel-4-groot.jpg',
     delen:[
       {s:'t',x:0.1299,y:0.0142,b:0.4053,h:0.091},
@@ -129,7 +129,7 @@ window.TENTOONSTELLING = [
       {s:'b',x:0.6739,y:0.5205,b:0.2739,h:0.1564},
       {s:'b',x:0.6739,y:0.7043,b:0.2739,h:0.1564},
     ] },
-  { nr:5, plek:[-11.5, -31.25, 98], titel:"Zo werkt de bibliotheek (1)", ondertitel:"Regels, boeken en boetes: toen en nu 1976-2026",
+  { nr:5, plek:[-11.35, -31.40, 98], titel:"Zo werkt de bibliotheek (1)", ondertitel:"Regels, boeken en boetes: toen en nu 1976-2026",
     klein:'img/paneel-5-klein.jpg', groot:'img/paneel-5-groot.jpg',
     delen:[
       {s:'t',x:0.1299,y:0.0142,b:0.4008,h:0.091},
@@ -156,7 +156,7 @@ window.TENTOONSTELLING = [
       {s:'b',x:0.5383,y:0.6795,b:0.1761,h:0.114},
       {s:'b',x:0.7455,y:0.6795,b:0.1765,h:0.114},
     ] },
-  { nr:6, plek:[-2.5, -28, 240], titel:"Zo werkt de bibliotheek (2)", ondertitel:"Regels, boeken en boetes: toen en nu 1976-2026",
+  { nr:6, plek:[2.20, -36.35, 87], titel:"Zo werkt de bibliotheek (2)", ondertitel:"Regels, boeken en boetes: toen en nu 1976-2026",
     klein:'img/paneel-6-klein.jpg', groot:'img/paneel-6-groot.jpg',
     delen:[
       {s:'t',x:0.1299,y:0.0142,b:0.4008,h:0.091},
@@ -195,7 +195,7 @@ window.TENTOONSTELLING = [
       {s:'b',x:0.2516,y:0.4231,b:0.1364,h:0.0491},
       {s:'b',x:0.2512,y:0.4796,b:0.1372,h:0.0487},
     ] },
-  { nr:7, plek:[-6, -31.45, 2], titel:"Het stond in de krant (1)", ondertitel:"De bib in de pers: 1979-2026",
+  { nr:7, plek:[-5.20, -31.45, 2], titel:"Het stond in de krant (1)", ondertitel:"De bib in de pers: 1979-2026",
     klein:'img/paneel-7-klein.jpg', groot:'img/paneel-7-groot.jpg',
     delen:[
       {s:'t',x:0.1299,y:0.0142,b:0.3566,h:0.091},
@@ -222,7 +222,7 @@ window.TENTOONSTELLING = [
       {s:'b',x:0.3678,y:0.4345,b:0.2731,h:0.1037},
       {s:'b',x:0.7079,y:0.4238,b:0.2068,h:0.1144},
     ] },
-  { nr:8, plek:[-3.5, -31.45, 1], titel:"Het stond in de krant (2)", ondertitel:"De bib in de pers: 1979-2026",
+  { nr:8, plek:[-4.25, -31.45, 1], titel:"Het stond in de krant (2)", ondertitel:"De bib in de pers: 1979-2026",
     klein:'img/paneel-8-klein.jpg', groot:'img/paneel-8-groot.jpg',
     delen:[
       {s:'t',x:0.1299,y:0.0142,b:0.3566,h:0.091},
