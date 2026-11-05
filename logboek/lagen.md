@@ -40,3 +40,4 @@ Heb je iets nodig van het gebouw? Zet het hier, dik gedrukt, zodat de gebouw-bou
 | 05-11-2026 | 50-jaar | Claude | Dubbele foto's verwijderd: fiche 5 foto 1 `balie-1988.jpg` → `boekenbus.jpg`; fiche 6 foto 2 `zelfuitleen-nu.jpg` → `afhaalpunt.jpg`. |
 | 05-11-2026 | 50-jaar | Claude | Eindscherm: "Verstuur antwoord"-knop toegevoegd via Formspree. Vereist nog: Formspree-formulier aanmaken en JOUW_FORM_ID invullen in `laag.js`. |
 | 05-11-2026 | 50-jaar | Claude | Fiches 2 en 3 op veilige plek bij zelfuitleen gezet (x≈-3/+0.5, z≈-25.5). Nieuwe knop "Zet geselecteerde terug" in &bewerk: wist de cache alleen voor het geselecteerde item. "Terugzetten" heet nu "Wis alle opgeslagen plekken" en vraagt om bevestiging. |
+| 05-11-2026 | 50-jaar | Claude | Nieuwe plekken panelen 1, 3, 4, 5 en 9 gezet in `tentoonstelling/panelen.js` (via "Kopieer plekken"). |
