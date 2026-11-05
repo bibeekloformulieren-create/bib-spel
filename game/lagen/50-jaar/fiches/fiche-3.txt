@@ -4,22 +4,21 @@
 nummer: 3
 categorie: gebouw
 soort: keuze
-titel: Een nieuw huis
+titel: Een nieuwe bibliotheek
 waar: Bij de ingang van de bib.
 plek: -4, -6
 bron: Brochure 50 jaar bib, Paneel "Een nieuw huis", De Bond 28 oktober 1988
 tip: Kijk naar waar de balie staat. Stond ze vroeger op dezelfde plek?
-boeke-goed: Goed! In 1988 stond de balie midden in de zaal. Vandaag staat ze aan de zijkant.
+boeke-goed: Goed! In 1988 stond de balie midden van de benedenverdieping. Vandaag staat ze aan de zijkant.
 boeke-fout: Nee. Kijk naar de balie. Staat die nu aan de zijkant of in het midden?
 
 [kijkpunten]
 - Op zaterdag 20 februari 1988 gingen de deuren van de nieuwe bibliotheek open. Wie er die eerste weken binnenstapte, keek zijn ogen uit. Geen smalle gangetjes meer, geen krakende trappen. Een open, lichte ruimte met rekken netjes op een rij.
-- De balie stond in 1988 midden in de zaal, en alles draaide om het boek: kaartjes, stempels en een vertrouwd gezicht. Vandaag staat de balie aan de zijkant. Je leent zelf uit, dus de medewerkers hebben meer tijd voor een vraag of een tip.
-- In 1995, amper zeven jaar na de opening, kwamen er drie nieuwe verdiepingen bij naast het gebouw. Eerst stonden de rekken leeg. Even later waren ze tot de nok gevuld.
-
+- De balie stond in 1988 midden in de zaal, en alles draaide om het boek: kaartjes, stempels en een medewerker die de boeken voor je uitleende. Vandaag staat de balie aan de zijkant. Je leent zelf uit, dus de medewerkers hebben meer tijd voor een vraag of boekentips.
+- In 1995, amper zeven jaar na de opening, kwamen er drie nieuwe verdiepingen bij. Daar kwam een echte jeugdafdeling, de cd-afdeling en het auditorium.
 [beelden]
 img/balie-1988.jpg | De balie midden in de zaal, 1988.
-img/gevulde-rekken.jpg | De rekken na de uitbreiding van 1995: tot de nok gevuld.
+img/gevulde-rekken.jpg | De rekken na de uitbreiding van 1995: alle planken volledig gevuld.
 
 [vraag]
 In 1988 stond de balie midden in de grote zaal. Waar staat ze vandaag?
@@ -31,6 +30,6 @@ In 1988 stond de balie midden in de grote zaal. Waar staat ze vandaag?
 - Op de eerste verdieping
 
 [leer]
-- Er waren kinderen die al om half zes voor de bib kwamen en wachtten tot half acht om als eersten de nieuwe strips te pakken te krijgen.
-- In 1995 kwamen er drie nieuwe verdiepingen bij naast het gebouw. Een jaar later opende de cd-afdeling: opeens kon je ook cd's, video's en cd-roms lenen.
-- In 2000 kwamen er computers in de bib. Voor het eerst kon iedereen er het internet op. Je kon er ook boeken opzoeken en reserveren.
+- Er waren kinderen die al lang voor openingstijd aan de deuren stonden te wachten, om als eersten de nieuwe strips te pakken te krijgen.
+- Op de cd-afdeling kon je niet alleen cd's, maar ook video's en cd-roms lenen.
+- In 2000 kwamen er internetcomputers in de bib. Voor het eerst kon iedereen er het internet op, want niet iedereen had toen al internet thuis.
