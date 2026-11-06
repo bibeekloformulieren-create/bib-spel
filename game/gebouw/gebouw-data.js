@@ -91,7 +91,6 @@ window.GEBOUWDATA = {
     { naam: "dvd-rek oost",     soort: "rek", textuur: "dvd", x: -7.9, z: -25.25, lengte: 1.4, hoogte: 1.85, kijkt: "west" },
     { naam: "dvd-rek oost kopie 2",     soort: "rek", textuur: "dvd", x: -7.9, z: -26.6, lengte: 1.4, hoogte: 1.85, kijkt: "west" },
     { naam: "dvd-rek oost kopie 3",     soort: "rek", textuur: "dvd", x: -7.9, z: -28.0, lengte: 1.4, hoogte: 1.85, kijkt: "west" },
-    { naam: "dvd-rek oost kopie 1",     soort: "rek", textuur: "dvd", x: -8.45, z: -14.75, lengte: 0.60, hoogte: 1.85, kijkt: "noord"},
     { naam: "rode toren",        soort: "rodetoren", x: -2.60, z: -43.25, kijkt: "noord" },
     { naam: "hoge kast west",  soort: "rek", textuur: "boeken", x: -10.8, z: -25.95, lengte: 1, hoogte: 2.1, kijkt: "oost" },
     { naam: "hoge kast west kopie 2",  soort: "rek", textuur: "boeken", x: -10.8, z: -26.8, lengte: 1, hoogte: 2.1, kijkt: "oost" },

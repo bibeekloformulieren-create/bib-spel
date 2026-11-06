@@ -73,3 +73,4 @@ Heb je iets nodig van de lagen, of verander je iets aan `window.Gebouw` waar een
 | 02-11-2026 | Claude | Vier raamvlakken op de zuidmuur verwijderd (`raam balie 1`, `raam balie 2`, `raam tijdschriften 1`, `raam tijdschriften 2`) — fout. Teruggeplaatst. De witte vlakken voor de ramen zijn iets anders (vermoedelijk SketchUp-geometrie). |
 | 04-11-2026 | Claude (lagen-bouwer) | `spelerSchaal` in `gebouw-data.js` van 0,65 naar 0,75: Boek-E een tikkeltje groter, gevraagd door de lagen-bouwer. |
 | 04-11-2026 | Claude (lagen-bouwer) | **Gebouw aangepast op vraag van lagen-bouwer**: push-out toegevoegd in `gebouw.js` (bewegingslus): als de speler vastzit in een obstakel (na teleport of door smalle doorgang), wordt hij automatisch naar de dichtstbijzijnde vrije plek geschoven. Het glijden langs muren (al aanwezig) is ongewijzigd. |
+| 06-11-2026 | Claude (lagen-bouwer) | `dvd-rek oost kopie 1` verwijderd uit `gebouw-data.js` (was WEG in de lijst van de gebruiker). |
