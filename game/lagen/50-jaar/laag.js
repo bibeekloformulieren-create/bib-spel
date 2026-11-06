@@ -645,7 +645,8 @@
     const wrap = $('brochureWrap'), canvas = $('brochureCanvas');
     const page = await pdfDoc.getPage(nr);
     const vp0 = page.getViewport({ scale: 1 });
-    const vp = page.getViewport({ scale: (wrap.clientWidth * 2) / vp0.width });
+    const dpr = Math.max(2, window.devicePixelRatio || 2);
+    const vp = page.getViewport({ scale: (wrap.clientWidth * dpr) / vp0.width });
     canvas.width = vp.width; canvas.height = vp.height;
     await page.render({ canvasContext: canvas.getContext('2d'), viewport: vp }).promise;
     updateBrochureNav();
