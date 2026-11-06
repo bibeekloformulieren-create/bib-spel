@@ -122,7 +122,7 @@
     if (modus === 'tentoonstelling') objecten.forEach(o => wortels.push(o.mesh));
     else {
       L.fiches.forEach(f => { if (f.groep.visible || BEWERK) wortels.push(f.groep); });
-      if (BEWERK && L.brochureMesh) wortels.push(L.brochureMesh);
+      if (L.brochureMesh) wortels.push(L.brochureMesh);
     }
     const hit = straal(e).intersectObjects(wortels, true).find(h => { for (let p = h.object; p; p = p.parent) if (p.visible === false && !wortels.includes(p)) return false; return true; });
     return hit ? itemVan(hit.object) : null;
@@ -132,14 +132,17 @@
   let down = null;
   G.canvas.addEventListener('pointerdown', e => { down = { x: e.clientX, y: e.clientY, t: performance.now() }; });
   G.canvas.addEventListener('pointerup', e => {
-    if (!down || G.pauze || modus !== 'tentoonstelling' || editAan) return;
+    if (!down || G.pauze || editAan) return;
     const kort = Math.hypot(e.clientX - down.x, e.clientY - down.y) < 8 && performance.now() - down.t < 500; down = null;
     if (!kort) return;
-    const it = raak(e); if (it && it.soort === 'paneel') openPaneel(paneelIndex(it));
+    const it = raak(e);
+    if (modus === 'tentoonstelling') { if (it && it.soort === 'paneel') openPaneel(paneelIndex(it)); }
+    else { if (it && it.soort === 'brochure' && L.toonBrochure) L.toonBrochure(); }
   });
   G.canvas.addEventListener('pointermove', e => {
-    if (G.pauze || e.pointerType === 'touch' || modus !== 'tentoonstelling' || editAan) return;
-    const it = raak(e); G.canvas.style.cursor = it ? 'zoom-in' : '';
+    if (G.pauze || e.pointerType === 'touch' || editAan) return;
+    const it = raak(e);
+    G.canvas.style.cursor = it ? (modus === 'tentoonstelling' ? 'zoom-in' : 'pointer') : '';
   });
 
   /* ---------- dichtbij: knop "Bekijk paneel" ---------- */

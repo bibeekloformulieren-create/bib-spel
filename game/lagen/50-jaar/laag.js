@@ -41,7 +41,7 @@
           <button id="sluitBrochure" class="brochure-sluit">✕</button>
         </div>
         <div class="brochure-canvas-wrap" id="brochureWrap">
-          <canvas id="brochureCanvas"></canvas>
+          <div id="brochureInner"><canvas id="brochureCanvas"></canvas></div>
         </div>
       </div>
     </div>`;
@@ -601,6 +601,20 @@
 
   /* ---------- brochure (PDF.js) ---------- */
   let pdfDoc = null, paginaNr = 1, pdfLaadt = false;
+  let bZoom = 1, bPanX = 0, bPanY = 0, bFitZoom = 1;
+
+  function bTransform() {
+    $('brochureInner').style.transform = `translate(${bPanX}px,${bPanY}px) scale(${bZoom})`;
+  }
+  function bResetView() {
+    const wrap = $('brochureWrap'), cv = $('brochureCanvas');
+    if (!wrap.clientWidth) return;
+    bFitZoom = Math.min(wrap.clientWidth / cv.width, wrap.clientHeight / cv.height);
+    bZoom = bFitZoom;
+    bPanX = (wrap.clientWidth - cv.width * bZoom) / 2;
+    bPanY = Math.max(4, (wrap.clientHeight - cv.height * bZoom) / 2);
+    bTransform();
+  }
 
   function laadPdfScript(cb) {
     if (window.pdfjsLib) { cb(); return; }
@@ -613,18 +627,21 @@
   async function toonPaginaOp(nr) {
     const wrap = $('brochureWrap'), canvas = $('brochureCanvas');
     const page = await pdfDoc.getPage(nr);
-    const schaal = Math.min((wrap.clientWidth - 4) / page.getViewport({ scale: 1 }).width, (wrap.clientHeight - 4) / page.getViewport({ scale: 1 }).height);
-    const vp = page.getViewport({ scale: schaal });
+    const vp0 = page.getViewport({ scale: 1 });
+    const vp = page.getViewport({ scale: (wrap.clientWidth * 2) / vp0.width });
     canvas.width = vp.width; canvas.height = vp.height;
     await page.render({ canvasContext: canvas.getContext('2d'), viewport: vp }).promise;
     $('brochurePagina').textContent = `${nr} / ${pdfDoc.numPages}`;
     $('brochurePrev').disabled = nr <= 1;
     $('brochureNext').disabled = nr >= pdfDoc.numPages;
+    bResetView();
   }
 
   async function toonBrochure() {
     G.pauze = true;
     $('schermBrochure').hidden = false;
+    await new Promise(r => requestAnimationFrame(r)); // wacht tot wrap een grootte heeft
+    if (pdfDoc) { await toonPaginaOp(paginaNr); return; }
     if (pdfLaadt) return;
     pdfLaadt = true;
     laadPdfScript(async () => {
@@ -633,23 +650,95 @@
         lib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
         pdfDoc = await lib.getDocument(bron('brochure/brochure.pdf')).promise;
         await toonPaginaOp(paginaNr);
-      } catch (e) { $('brochurePagina').textContent = 'Fout bij laden'; }
+      } catch (e) { $('brochurePagina').textContent = 'Fout bij laden'; pdfLaadt = false; }
     });
   }
+  Laag50.toonBrochure = toonBrochure;
 
   $('sluitBrochure').onclick = () => { $('schermBrochure').hidden = true; G.pauze = false; };
   $('brochurePrev').onclick = async () => { if (paginaNr > 1) { paginaNr--; await toonPaginaOp(paginaNr); } };
   $('brochureNext').onclick = async () => { if (pdfDoc && paginaNr < pdfDoc.numPages) { paginaNr++; await toonPaginaOp(paginaNr); } };
 
-  /* Swipe links/rechts op de canvas (touch) */
+  /* Zoom + slepen in de brochure-viewer */
   (() => {
-    let sx = 0;
     const wrap = $('brochureWrap');
-    wrap.addEventListener('touchstart', e => { sx = e.touches[0].clientX; }, { passive: true });
+    let pinching = false, pinchDist = 0, dragPos = null, swipeStart = null;
+
+    function zoomenOm(fx, fy, factor) {
+      const r = wrap.getBoundingClientRect();
+      const sx = fx - r.left, sy = fy - r.top;
+      const newZ = Math.max(bFitZoom * 0.9, Math.min(bFitZoom * 8, bZoom * factor));
+      const ff = newZ / bZoom;
+      bPanX = sx - (sx - bPanX) * ff;
+      bPanY = sy - (sy - bPanY) * ff;
+      bZoom = newZ; bTransform();
+    }
+
+    wrap.addEventListener('touchstart', e => {
+      if (e.touches.length === 2) {
+        pinching = true; swipeStart = null; dragPos = null;
+        pinchDist = Math.hypot(e.touches[1].clientX - e.touches[0].clientX, e.touches[1].clientY - e.touches[0].clientY);
+      } else if (e.touches.length === 1) {
+        pinching = false;
+        dragPos = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+        swipeStart = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+      }
+      e.preventDefault();
+    }, { passive: false });
+
+    wrap.addEventListener('touchmove', e => {
+      if (e.touches.length === 2 && pinching) {
+        const d = Math.hypot(e.touches[1].clientX - e.touches[0].clientX, e.touches[1].clientY - e.touches[0].clientY);
+        zoomenOm((e.touches[0].clientX + e.touches[1].clientX) / 2, (e.touches[0].clientY + e.touches[1].clientY) / 2, d / pinchDist);
+        pinchDist = d;
+      } else if (e.touches.length === 1 && !pinching && dragPos) {
+        bPanX += e.touches[0].clientX - dragPos.x; bPanY += e.touches[0].clientY - dragPos.y;
+        dragPos = { x: e.touches[0].clientX, y: e.touches[0].clientY }; bTransform();
+      }
+      e.preventDefault();
+    }, { passive: false });
+
     wrap.addEventListener('touchend', e => {
-      const dx = e.changedTouches[0].clientX - sx;
-      if (Math.abs(dx) > 40) { if (dx < 0) $('brochureNext').click(); else $('brochurePrev').click(); }
-    }, { passive: true });
+      if (e.touches.length < 2) pinching = false;
+      if (e.touches.length === 0) {
+        if (swipeStart && bZoom < bFitZoom * 1.3) {
+          const dx = e.changedTouches[0].clientX - swipeStart.x;
+          const dy = e.changedTouches[0].clientY - swipeStart.y;
+          if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+            if (dx < 0) $('brochureNext').click(); else $('brochurePrev').click();
+          }
+        }
+        dragPos = null; swipeStart = null;
+      }
+      e.preventDefault();
+    }, { passive: false });
+
+    /* muiswiel: zoomen */
+    wrap.addEventListener('wheel', e => { zoomenOm(e.clientX, e.clientY, e.deltaY < 0 ? 1.12 : 1 / 1.12); e.preventDefault(); }, { passive: false });
+
+    /* muissleep: pannen */
+    wrap.addEventListener('mousedown', e => { dragPos = { x: e.clientX, y: e.clientY }; wrap.style.cursor = 'grabbing'; });
+    wrap.addEventListener('mousemove', e => {
+      if (!dragPos) return;
+      bPanX += e.clientX - dragPos.x; bPanY += e.clientY - dragPos.y;
+      dragPos = { x: e.clientX, y: e.clientY }; bTransform();
+    });
+    wrap.addEventListener('mouseup',    () => { dragPos = null; wrap.style.cursor = 'grab'; });
+    wrap.addEventListener('mouseleave', () => { dragPos = null; wrap.style.cursor = 'grab'; });
+
+    /* dubbelklik: inzoomen of terugzetten */
+    wrap.addEventListener('dblclick', e => {
+      if (Math.abs(bZoom - bFitZoom) < bFitZoom * 0.15) zoomenOm(e.clientX, e.clientY, 2.5);
+      else bResetView();
+    });
+
+    /* pijltjestoetsen en Escape */
+    document.addEventListener('keydown', e => {
+      if ($('schermBrochure').hidden) return;
+      if (e.key === 'Escape') $('sluitBrochure').click();
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown')  $('brochureNext').click();
+      if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')    $('brochurePrev').click();
+    });
   })();
 
   /* 3D brochure op de toonbank */
@@ -674,6 +763,7 @@
     brochureMesh = new THREE.Mesh(new THREE.PlaneGeometry(0.28, 0.40), mat);
     brochureMesh.position.set(mx, 1.18, mz);
     brochureMesh.rotation.y = -Math.PI / 4; /* Schuin richting looppad */
+    brochureMesh.userData.item = { soort: 'brochure' };
     G.scene.add(brochureMesh);
     Laag50.brochureMesh = brochureMesh;
   }
