@@ -600,20 +600,36 @@
   }
 
   /* ---------- brochure (PDF.js) ---------- */
-  let pdfDoc = null, paginaNr = 1, pdfLaadt = false;
+  let pdfDoc = null, paginaNr = 1, helft = 0, pdfLaadt = false;
   let bZoom = 1, bPanX = 0, bPanY = 0, bFitZoom = 1;
 
   function bTransform() {
     $('brochureInner').style.transform = `translate(${bPanX}px,${bPanY}px) scale(${bZoom})`;
   }
+  function isSpreiding() { const cv = $('brochureCanvas'); return cv.width > cv.height * 1.3; }
   function bResetView() {
     const wrap = $('brochureWrap'), cv = $('brochureCanvas');
     if (!wrap.clientWidth) return;
-    bFitZoom = Math.min(wrap.clientWidth / cv.width, wrap.clientHeight / cv.height);
-    bZoom = bFitZoom;
-    bPanX = (wrap.clientWidth - cv.width * bZoom) / 2;
-    bPanY = Math.max(4, (wrap.clientHeight - cv.height * bZoom) / 2);
+    if (isSpreiding()) {
+      const hW = cv.width / 2;
+      bFitZoom = Math.min(wrap.clientWidth / hW, wrap.clientHeight / cv.height);
+      bZoom = bFitZoom;
+      bPanX = (wrap.clientWidth - hW * bZoom) / 2 - helft * hW * bZoom;
+      bPanY = Math.max(4, (wrap.clientHeight - cv.height * bZoom) / 2);
+      cv.style.clipPath = helft === 0 ? 'inset(0 50% 0 0)' : 'inset(0 0 0 50%)';
+    } else {
+      bFitZoom = Math.min(wrap.clientWidth / cv.width, wrap.clientHeight / cv.height);
+      bZoom = bFitZoom;
+      bPanX = (wrap.clientWidth - cv.width * bZoom) / 2;
+      bPanY = Math.max(4, (wrap.clientHeight - cv.height * bZoom) / 2);
+      cv.style.clipPath = '';
+    }
     bTransform();
+  }
+  function updateBrochureNav() {
+    $('brochurePrev').disabled = paginaNr <= 1 && helft === 0;
+    $('brochureNext').disabled = !pdfDoc || (paginaNr >= pdfDoc.numPages && (!isSpreiding() || helft === 1));
+    $('brochurePagina').textContent = `${paginaNr} / ${pdfDoc.numPages}`;
   }
 
   function laadPdfScript(cb) {
@@ -625,15 +641,14 @@
   }
 
   async function toonPaginaOp(nr) {
+    paginaNr = nr; helft = 0;
     const wrap = $('brochureWrap'), canvas = $('brochureCanvas');
     const page = await pdfDoc.getPage(nr);
     const vp0 = page.getViewport({ scale: 1 });
     const vp = page.getViewport({ scale: (wrap.clientWidth * 2) / vp0.width });
     canvas.width = vp.width; canvas.height = vp.height;
     await page.render({ canvasContext: canvas.getContext('2d'), viewport: vp }).promise;
-    $('brochurePagina').textContent = `${nr} / ${pdfDoc.numPages}`;
-    $('brochurePrev').disabled = nr <= 1;
-    $('brochureNext').disabled = nr >= pdfDoc.numPages;
+    updateBrochureNav();
     bResetView();
   }
 
@@ -641,7 +656,7 @@
     G.pauze = true;
     $('schermBrochure').hidden = false;
     await new Promise(r => requestAnimationFrame(r)); // wacht tot wrap een grootte heeft
-    if (pdfDoc) { await toonPaginaOp(paginaNr); return; }
+    if (pdfDoc) { bResetView(); return; }
     if (pdfLaadt) return;
     pdfLaadt = true;
     laadPdfScript(async () => {
@@ -656,8 +671,17 @@
   Laag50.toonBrochure = toonBrochure;
 
   $('sluitBrochure').onclick = () => { $('schermBrochure').hidden = true; G.pauze = false; };
-  $('brochurePrev').onclick = async () => { if (paginaNr > 1) { paginaNr--; await toonPaginaOp(paginaNr); } };
-  $('brochureNext').onclick = async () => { if (pdfDoc && paginaNr < pdfDoc.numPages) { paginaNr++; await toonPaginaOp(paginaNr); } };
+  $('brochurePrev').onclick = async () => {
+    if (isSpreiding() && helft === 1) { helft = 0; bResetView(); updateBrochureNav(); }
+    else if (paginaNr > 1) {
+      await toonPaginaOp(paginaNr - 1);
+      if (isSpreiding()) { helft = 1; bResetView(); updateBrochureNav(); }
+    }
+  };
+  $('brochureNext').onclick = async () => {
+    if (isSpreiding() && helft === 0) { helft = 1; bResetView(); updateBrochureNav(); }
+    else if (pdfDoc && paginaNr < pdfDoc.numPages) await toonPaginaOp(paginaNr + 1);
+  };
 
   /* Zoom + slepen in de brochure-viewer */
   (() => {
